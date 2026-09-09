@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;900&family=Inter:wght@500;600;700;800&display=swap');
+:root{
+--font-display:'Barlow Condensed',sans-serif;
+--font-display-weight:900;
+--font-body:'Inter',sans-serif;
+--font-body-weight:700;
+--text-headline:clamp(48px,9vw,110px);
+--text-subhead:clamp(28px,5vw,56px);
+--text-line:clamp(20px,3vw,32px);
+--tracking-display:.01em;
+--tracking-caps:.06em;
+}

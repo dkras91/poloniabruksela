@@ -1,0 +1,57 @@
+FC POLONIA BRUKSELA — STRONA INTERNETOWA
+=========================================
+
+JAK URUCHOMIC
+-------------
+Wgraj CALA zawartosc tego folderu na serwer (Netlify, OVH, dowolny hosting).
+Plikiem startowym jest index.html. Nic nie trzeba konfigurowac.
+
+Podglad lokalny: otworz index.html przez lokalny serwer, np. w terminalu
+w tym folderze:  python3 -m http.server 8000
+a potem w przegladarce: http://localhost:8000
+
+CO GDZIE JEST
+-------------
+index.html          cala strona (uklad, wszystkie podstrony)
+content.js          TRESCI: kadra, sztab, zarzad, newsy, sponsorzy, sezony,
+                    dane podmiotu do stopki prawnej
+live-data.js        terminarz, tabela, wyniki - warstwa danych na zywo
+i18n.js             tlumaczenia interfejsu (PL / FR / NL / EN)
+i18n-longform.js    tlumaczenia artykulu historii, polityki i regulaminu
+admin.js            panel redakcyjny (#/admin)
+cookies.js          zgoda na cookies
+assets/             herb, zdjecia zawodnikow, herby rywali, logo partnerow
+netlify/functions/  importer terminarza z RBFA (patrz nizej)
+
+TERMINARZ AUTOMATYCZNY
+----------------------
+W paczce jest gotowy importer: netlify/functions/rbfa-calendar.js
+Po wdrozeniu na Netlify terminarz, najblizszy mecz, ostatni wynik i tabela
+aktualizuja sie same z danych federacji (teamId 375016, matricule 09647).
+Bez wdrozenia strona pokazuje terminarz przekazany przez klub.
+
+PANEL REDAKCYJNY
+----------------
+Adres: /#/admin       Haslo startowe: polonia1986
+ZMIEN HASLO przy pierwszym logowaniu (przycisk w panelu).
+
+ZDJECIA WGRANE PRZEZ PANEL
+--------------------------
+Zdjecia dodane metoda przeciagnij-i-upusc (hero, kafel druzyny, zdjecia
+w artykulach) siedza w ukrytym pliku:
+
+  .image-slots.state.json
+
+WAZNE: to plik z kropka na poczatku - czesc programow do rozpakowywania
+i klientow FTP domyslnie GO NIE POKAZUJE i nie wysyla na serwer.
+Wgraj go razem z reszta, inaczej te zdjecia znikna.
+Musi lezec w tym samym katalogu co index.html.
+
+DO UZUPELNIENIA
+---------------
+1. Dane podmiotu w stopce prawnej sa TYMCZASOWE (nazwa ASBL, numer
+   przedsiebiorstwa, adres siedziby). Podmien w content.js, sekcja LEGAL.
+2. Polityke prywatnosci i regulamin - takze wersje FR i NL - warto dac
+   do sprawdzenia prawnikowi przed publikacja.
+3. Logo Aktualnosci.be: przeciagnij pliki na pola w naglowku i stopce
+   (nazwy plikow z nawiasami nie daly sie wczytac automatycznie).
