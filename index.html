@@ -6,6 +6,26 @@
 <script src="./support.js"></script>
 </head>
 <body>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     FORMULARZ DLA NETLIFY — NIE USUWAĆ.
+     Netlify wykrywa formularze, czytając statyczny HTML przy wdrożeniu.
+     Formularz kontaktowy rysuje React już w przeglądarce, więc Netlify nigdy
+     by go nie zobaczył. To ukryte pole jest jego odpowiednikiem: ma tę samą
+     nazwę i te same pola, dzięki czemu zgłoszenia z formularza na stronie
+     trafiają do zakładki Forms i na skrzynkę klubu. Zmieniasz pole w
+     formularzu na stronie kontaktu? Dopisz je również tutaj.
+     `bot-field` to pułapka na roboty — człowiek jej nie wypełni.
+     ══════════════════════════════════════════════════════════════════════ -->
+<form name="kontakt" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input type="text" name="name">
+  <input type="email" name="email">
+  <input type="text" name="topic">
+  <textarea name="message"></textarea>
+  <input type="text" name="lang">
+  <input type="text" name="bot-field">
+</form>
+
 <x-dc>
 <helmet>
 <title>FC Polonia Bruksela — oficjalna strona klubu | FC Polonia Bruxelles</title>
@@ -532,6 +552,10 @@ a:hover{color:#cbb96b}
     <sc-for list="{{ article.body }}" as="p" hint-placeholder-count="3">
       <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:17px;line-height:1.72;color:#e6e3db;margin:0 0 22px;text-wrap:pretty">{{ p }}</p>
     </sc-for>
+    <!-- Galeria wpisu pokazuje się tylko wtedy, gdy wpis ma zdjęcia w polu
+         `gallery` w content.js. Wpis bez zdjęć nie ma pokazywać trzech pustych
+         ramek — czytelnik widziałby wtedy dziurę zamiast treści. -->
+    <sc-if value="{{ article.hasGallery }}" hint-placeholder-val="{{ true }}">
     <div style="border-top:1px solid rgba(246,243,236,.14);margin-top:40px;padding-top:28px">
       <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.18em;color:#B7A85C">GALERIA WPISU</span>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-top:16px">
@@ -540,6 +564,7 @@ a:hover{color:#cbb96b}
         <div style="aspect-ratio:3/4"><image-slot id="{{ article.g3 }}" src="{{ article.gs3 }}" shape="rect" fit="cover" placeholder="Zdjęcie"></image-slot></div>
       </div>
     </div>
+    </sc-if>
     <sc-if value="{{ hasRelated }}" hint-placeholder-val="{{ false }}">
     <div style="border-top:1px solid rgba(246,243,236,.14);margin-top:40px;padding-top:28px">
       <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.18em;color:#B7A85C">POWIĄZANE ARTYKUŁY</span>
@@ -766,7 +791,7 @@ a:hover{color:#cbb96b}
       <img src="assets/kadra/team-2026.jpg" alt="Pierwsza drużyna FC Polonia Bruksela, sezon 2026/2027" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 42%;display:block">
     </div>
     <sc-for list="{{ positionGroups }}" as="g" hint-placeholder-count="4">
-      <div style="margin-bottom:44px">
+      <div data-reveal="1" style="margin-bottom:44px">
         <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px">
           <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(26px,3.4vw,40px);text-transform:uppercase;line-height:1;margin:0">{{ g.label }}</h2>
           <span style="flex:1;height:1px;background:rgba(246,243,236,.14)"></span>
@@ -775,7 +800,7 @@ a:hover{color:#cbb96b}
         <sc-if value="{{ g.hasPlayers }}" hint-placeholder-val="{{ false }}">
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax({{ playerMin }},1fr));gap:14px">
           <sc-for list="{{ g.players }}" as="p" hint-placeholder-count="0">
-            <div onMouseEnter="{{ p.onEnter }}" onMouseLeave="{{ p.onLeave }}" style="background:#1b1b21;border:1px solid rgba(246,243,236,.14);display:flex;flex-direction:column" style-hover="border:1px solid #B7A85C">
+            <div data-reveal-item="1" onMouseEnter="{{ p.onEnter }}" onMouseLeave="{{ p.onLeave }}" style="background:#1b1b21;border:1px solid rgba(246,243,236,.14);display:flex;flex-direction:column" style-hover="border:1px solid #B7A85C">
               <sc-if value="{{ p.hasPhoto }}" hint-placeholder-val="{{ false }}">
               <div style="position:relative;aspect-ratio:3/4;overflow:hidden;background:#F6F3EC">
                 <img src="{{ p.photo }}" alt="Bramkarz FC Polonia Bruksela" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:{{ p.stillOpacity }};transition:opacity .28s ease">
@@ -816,14 +841,14 @@ a:hover{color:#cbb96b}
     <div style="max-width:1280px;margin:0 auto;padding:{{ secPad }}">
 
       <!-- SZTAB SZKOLENIOWY -->
-      <div style="margin-bottom:{{ staffGap }}">
+      <div data-reveal="1" style="margin-bottom:{{ staffGap }}">
         <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.18em;color:#E2092F;display:block" style-before="content:'';display:block;width:34px;height:4px;background:#E2092F;margin-bottom:12px">PRZY DRUŻYNIE</span>
         <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:{{ h2Size }};text-transform:uppercase;line-height:.95;margin:10px 0 0;letter-spacing:.01em;color:#121216">Sztab szkoleniowy</h2>
         <div style="height:4px;width:96px;background:#B7A85C;margin:18px 0 24px"></div>
         <sc-if value="{{ hasStaff }}" hint-placeholder-val="{{ false }}">
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax({{ playerMin }},1fr));gap:14px">
           <sc-for list="{{ staffList }}" as="m" hint-placeholder-count="0">
-            <div onMouseEnter="{{ m.onEnter }}" onMouseLeave="{{ m.onLeave }}" style="background:#FFFFFF;border:1px solid rgba(18,18,22,.13);box-shadow:0 1px 3px rgba(18,18,22,.07);display:flex;flex-direction:column" style-hover="border:1px solid #E2092F;box-shadow:0 3px 10px rgba(18,18,22,.13)">
+            <div data-reveal-item="1" onMouseEnter="{{ m.onEnter }}" onMouseLeave="{{ m.onLeave }}" style="background:#FFFFFF;border:1px solid rgba(18,18,22,.13);box-shadow:0 1px 3px rgba(18,18,22,.07);display:flex;flex-direction:column" style-hover="border:1px solid #E2092F;box-shadow:0 3px 10px rgba(18,18,22,.13)">
               <div style="position:relative;aspect-ratio:3/4;overflow:hidden;background:#EBE7DC">
                 <img src="{{ m.photo }}" alt="{{ m.name }} — {{ m.role }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:{{ m.stillOpacity }};transition:opacity .28s ease">
                 <sc-if value="{{ m.hasAction }}" hint-placeholder-val="{{ false }}">
@@ -851,14 +876,14 @@ a:hover{color:#cbb96b}
       </div>
 
       <!-- ZARZĄD -->
-      <div>
+      <div data-reveal="1">
         <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.18em;color:#E2092F;display:block" style-before="content:'';display:block;width:34px;height:4px;background:#E2092F;margin-bottom:12px">KTO PROWADZI KLUB</span>
         <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:{{ h2Size }};text-transform:uppercase;line-height:.95;margin:10px 0 0;letter-spacing:.01em;color:#121216">Zarząd</h2>
         <div style="height:4px;width:96px;background:#B7A85C;margin:18px 0 24px"></div>
         <sc-if value="{{ hasBoard }}" hint-placeholder-val="{{ false }}">
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax({{ playerMin }},1fr));gap:14px">
           <sc-for list="{{ boardList }}" as="m" hint-placeholder-count="0">
-            <div onMouseEnter="{{ m.onEnter }}" onMouseLeave="{{ m.onLeave }}" style="background:#FFFFFF;border:1px solid rgba(18,18,22,.13);box-shadow:0 1px 3px rgba(18,18,22,.07);display:flex;flex-direction:column" style-hover="border:1px solid #E2092F;box-shadow:0 3px 10px rgba(18,18,22,.13)">
+            <div data-reveal-item="1" onMouseEnter="{{ m.onEnter }}" onMouseLeave="{{ m.onLeave }}" style="background:#FFFFFF;border:1px solid rgba(18,18,22,.13);box-shadow:0 1px 3px rgba(18,18,22,.07);display:flex;flex-direction:column" style-hover="border:1px solid #E2092F;box-shadow:0 3px 10px rgba(18,18,22,.13)">
               <div style="position:relative;aspect-ratio:3/4;overflow:hidden;background:#EBE7DC">
                 <img src="{{ m.photo }}" alt="{{ m.name }} — {{ m.role }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:{{ m.stillOpacity }};transition:opacity .28s ease">
                 <sc-if value="{{ m.hasAction }}" hint-placeholder-val="{{ false }}">
@@ -1138,9 +1163,6 @@ a:hover{color:#cbb96b}
             </sc-for>
           </div>
         </sc-if>
-        <sc-if value="{{ t.empty }}" hint-placeholder-val="{{ true }}">
-          <div style="border:1px dashed rgba(246,243,236,.22);padding:20px;font-family:'Inter',sans-serif;font-weight:600;font-size:14px;color:#c9c6bd">Miejsce wolne — logotypy i dane partnerów dodaje administracja klubu.</div>
-        </sc-if>
       </div>
     </sc-for>
     <div style="background:#1b1b21;border:1px solid rgba(246,243,236,.14);border-left:4px solid #E2092F;padding:{{ cardPad }};margin-top:12px">
@@ -1194,7 +1216,7 @@ a:hover{color:#cbb96b}
     <!-- FORMULARZ -->
     <div style="background:#1b1b21;border:1px solid rgba(246,243,236,.14);border-top:4px solid #E2092F;padding:{{ cardPad }};margin-top:clamp(16px,2.5vw,28px)">
       <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(24px,3.4vw,38px);text-transform:uppercase;margin:0 0 10px">Napisz do klubu</h2>
-      <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:15px;line-height:1.65;color:#c9c6bd;margin:0 0 24px;max-width:620px;text-wrap:pretty">Chcesz trenować z Polonią, wesprzeć klub albo przekazać materiały do archiwum? Wypełnij formularz — wiadomość trafi na <strong style="color:#F6F3EC;font-weight:700">polonia@live.be</strong>.</p>
+      <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:15px;line-height:1.65;color:#c9c6bd;margin:0 0 24px;max-width:620px;text-wrap:pretty">Chcesz trenować z Polonią, wesprzeć klub albo przekazać materiały do archiwum? Wypełnij formularz, a wiadomość pójdzie prosto na skrzynkę klubu.</p>
 
       <sc-if value="{{ ctNotSent }}" hint-placeholder-val="{{ true }}">
       <form onSubmit="{{ onCtSend }}" style="display:flex;flex-direction:column;gap:16px">
@@ -1223,18 +1245,41 @@ a:hover{color:#cbb96b}
         <sc-if value="{{ ctErr }}" hint-placeholder-val="{{ false }}">
           <div style="border-left:3px solid #E2092F;background:#121216;padding:13px 17px;font-family:'Inter',sans-serif;font-weight:600;font-size:14px;color:#e6e3db">{{ ctErr }}</div>
         </sc-if>
-        <button type="submit" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:21px;letter-spacing:.08em;text-transform:uppercase;background:#E2092F;color:#F6F3EC;border:0;padding:16px 30px;cursor:pointer;align-self:{{ btnAlign }};width:{{ btnW }};box-sizing:border-box" style-hover="background:#a80725">Wyślij wiadomość</button>
-        <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:12px;line-height:1.6;color:#8d8a83;margin:0;max-width:620px">Formularz otworzy Twój program pocztowy z gotową wiadomością — wystarczy ją wysłać. Wolisz napisać bezpośrednio? <a href="mailto:polonia@live.be">polonia@live.be</a></p>
+        <button type="submit" disabled="{{ ctSending }}" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:21px;letter-spacing:.08em;text-transform:uppercase;background:#E2092F;color:#F6F3EC;border:0;padding:16px 30px;cursor:pointer;align-self:{{ btnAlign }};width:{{ btnW }};box-sizing:border-box" style-hover="background:#a80725">{{ ctSendLabel }}</button>
+        <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:12px;line-height:1.6;color:#8d8a83;margin:0;max-width:620px">Wiadomość wysyłamy prosto ze strony — nie musisz mieć skonfigurowanej poczty. Wolisz napisać bezpośrednio? <a href="mailto:polonia@live.be">polonia@live.be</a></p>
       </form>
       </sc-if>
 
+      <!-- Potwierdzenie wysyłki. Każdy napis to osobny, pełny węzeł tekstu —
+           warstwa tłumacząca podmienia całe zdania, więc nie sklejamy ich tu
+           z fragmentów, bo w FR/NL/EN zostałyby po polsku. -->
       <sc-if value="{{ ctSent }}" hint-placeholder-val="{{ false }}">
-      <div style="display:flex;flex-direction:column;gap:16px;align-items:flex-start">
-        <div style="border-left:3px solid #B7A85C;background:#121216;padding:20px 24px;max-width:620px">
-          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:26px;text-transform:uppercase;display:block;margin-bottom:10px">Wiadomość przygotowana</span>
-          <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:15px;line-height:1.65;color:#e6e3db;margin:0;text-wrap:pretty">Otworzyliśmy Twój program pocztowy z gotową treścią — kliknij w nim „Wyślij”, żeby wiadomość dotarła do klubu. Jeśli nic się nie otworzyło, napisz na <a href="mailto:polonia@live.be">polonia@live.be</a>.</p>
+      <div style="background:#121216;border:1px solid rgba(183,168,92,.35);border-top:4px solid #B7A85C;padding:{{ cardPad }};max-width:660px;display:flex;flex-direction:column;gap:22px">
+        <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+          <span style="width:48px;height:48px;border-radius:999px;background:#17853F;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#F6F3EC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+          </span>
+          <div style="min-width:0">
+            <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.18em;color:#B7A85C;display:block;margin-bottom:6px">FC POLONIA BRUKSELA</span>
+            <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(26px,3.4vw,34px);text-transform:uppercase;line-height:1;display:block">Wiadomość wysłana</span>
+          </div>
         </div>
-        <button onClick="{{ onCtReset }}" style="font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.14em;background:transparent;color:#F6F3EC;border:1px solid rgba(246,243,236,.3);padding:11px 18px;cursor:pointer">NAPISZ KOLEJNĄ WIADOMOŚĆ</button>
+        <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:15px;line-height:1.7;color:#e6e3db;margin:0;text-wrap:pretty">Dziękujemy za kontakt. Twoja wiadomość trafiła na skrzynkę klubu i czeka już na osobę, która się nią zajmie. Zwykle odpowiadamy w ciągu dwóch, trzech dni — w klubie pracują wolontariusze, więc czasem trwa to dzień dłużej.</p>
+        <div style="border-top:1px solid rgba(246,243,236,.14);padding-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px">
+          <div style="display:flex;flex-direction:column;gap:5px;min-width:0">
+            <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.16em;color:#8d8a83">TEMAT</span>
+            <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:15px;color:#F6F3EC;overflow-wrap:anywhere">{{ ctSentTopic }}</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:5px;min-width:0">
+            <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.16em;color:#8d8a83">ODPOWIEMY NA ADRES</span>
+            <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:15px;color:#F6F3EC;overflow-wrap:anywhere">{{ ctSentEmail }}</span>
+          </div>
+        </div>
+        <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:13px;line-height:1.65;color:#8d8a83;margin:0;text-wrap:pretty">Sprawa pilna? Napisz wprost na polonia@live.be albo złap nas na Facebooku.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          <button onClick="{{ onCtReset }}" style="font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.14em;background:transparent;color:#F6F3EC;border:1px solid rgba(246,243,236,.3);padding:12px 18px;cursor:pointer" style-hover="border:1px solid #B7A85C;color:#B7A85C">NAPISZ KOLEJNĄ WIADOMOŚĆ</button>
+          <a href="#/" style="font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.14em;color:#F6F3EC;border:1px solid rgba(246,243,236,.3);padding:12px 18px;display:flex;align-items:center" style-hover="border:1px solid #B7A85C;color:#B7A85C">WRÓĆ NA STRONĘ GŁÓWNĄ</a>
+        </div>
       </div>
       </sc-if>
     </div>
@@ -1799,6 +1844,7 @@ class Component extends DCLogic {
     pwCur: '', pwNew: '', exportCode: '',
     sponsor: { name: '', url: '', tier: 'SPONSORZY' },
     ct: { name: '', email: '', topic: 'Chcę grać w Polonii', msg: '' }, ctErr: '', ctSent: false,
+    ctSending: false, ctSentEmail: '', ctSentTopic: '',
     cookieOpen: false, cookieDetails: false, cookieChoices: { functional: false, analytics: false, marketing: false },
     lang: 'pl',
     vw: typeof window !== 'undefined' ? window.innerWidth : 1280,
@@ -1818,6 +1864,53 @@ class Component extends DCLogic {
     window.addEventListener('keydown', this._onKey);
     this._route();
     this._loadModules();
+    this._setupReveal();
+  }
+
+  componentDidUpdate() {
+    this._setupReveal();
+  }
+
+  /* Pojawianie się sekcji przy przewijaniu: bramkarze, obrońcy, pomocnicy,
+     napastnicy, potem sztab i zarząd. Zasada jest taka, że treść jest w
+     dokumencie normalnie, a dopiero JavaScript ją chowa i pokazuje —
+     przy wyłączonym skrypcie, w wyszukiwarce i przy ustawieniu „ogranicz
+     animacje" strona po prostu wygląda jak zwykle, nic nie znika.
+     Karty wewnątrz sekcji wchodzą kaskadą, jedna po drugiej. */
+  _setupReveal() {
+    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) return;
+    try {
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    } catch (e) {}
+    const EASE = 'opacity .55s cubic-bezier(.22,.61,.36,1), transform .55s cubic-bezier(.22,.61,.36,1)';
+    if (!this._revealObs) {
+      this._revealObs = new IntersectionObserver((entries, obs) => {
+        entries.forEach((en) => {
+          if (!en.isIntersecting) return;
+          obs.unobserve(en.target);
+          const el = en.target;
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+          el.querySelectorAll('[data-reveal-item]').forEach((it, i) => {
+            it.style.transitionDelay = Math.min(i * 55, 420) + 'ms';
+            it.style.opacity = '1';
+            it.style.transform = 'none';
+          });
+        });
+      }, { threshold: 0.06, rootMargin: '0px 0px -10% 0px' });
+    }
+    document.querySelectorAll('[data-reveal]:not([data-reveal-on])').forEach((el) => {
+      el.setAttribute('data-reveal-on', '1');
+      el.style.transition = EASE;
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(18px)';
+      el.querySelectorAll('[data-reveal-item]').forEach((it) => {
+        it.style.transition = EASE;
+        it.style.opacity = '0';
+        it.style.transform = 'translateY(14px)';
+      });
+      this._revealObs.observe(el);
+    });
   }
 
   /* Import modułów danych. W pliku spakowanym do jednego HTML-a pierwszy
@@ -1867,6 +1960,7 @@ class Component extends DCLogic {
     window.removeEventListener('hashchange', this._onHash);
     window.removeEventListener('resize', this._onResize);
     window.removeEventListener('keydown', this._onKey);
+    if (this._revealObs) this._revealObs.disconnect();
     if (this._stop) this._stop();
   }
 
@@ -2158,7 +2252,8 @@ class Component extends DCLogic {
       // Kafelek wpisu ma stałe proporcje 16:9. Grafiki kwadratowe dostają
       // osobny plik `cardPhoto` w tym kadrze, żeby kadrowanie nie ucinało
       // im napisów; pozostałe wpisy pokazują na kafelku swoje zdjęcie główne.
-      cardSrc: n.cardPhoto || n.heroPhoto || '' });
+      cardSrc: n.cardPhoto || n.heroPhoto || '',
+      hasGallery: (n.gallery || []).length > 0 });
     const allNews = (this.A ? this.A.mergeNews(C.NEWS || []) : (C.NEWS || [])).map(newsVM);
     const newsList = s.newsCat === 'WSZYSTKIE' ? allNews : allNews.filter((n) => n.category === s.newsCat);
     const article = (route === 'aktualnosci' && s.param) ? (allNews.find((n) => n.slug === s.param) || null) : null;
@@ -2317,7 +2412,9 @@ class Component extends DCLogic {
         }, x.name || ''),
       }));
       return { label, items, hasItems: items.length > 0, empty: items.length === 0 };
-    });
+    // Kategorie bez partnerów w ogóle się nie pokazują — pusty nagłówek z
+    // dopiskiem „miejsce wolne" wyglądał jak niedokończona strona.
+    }).filter((t) => t.hasItems);
 
     /* Przed startem sezonu nie pokazujemy pozycji: przy komplecie zer numer
        miejsca jest przypadkowy, a „1 miejsce" wprowadzałoby w błąd. */
@@ -2644,29 +2741,45 @@ class Component extends DCLogic {
       onCookieWithdraw: () => { this.K.withdraw(); this.setState({ cookieOpen: true, cookieDetails: true, cookieChoices: { functional: false, analytics: false, marketing: false } }); },
       ctName: s.ct.name, ctEmail: s.ct.email, ctTopic: s.ct.topic, ctMsg: s.ct.msg,
       ctErr: s.ctErr, ctSent: s.ctSent, ctNotSent: !s.ctSent,
+      ctSending: s.ctSending, ctSendLabel: s.ctSending ? 'Wysyłanie…' : 'Wyślij wiadomość',
+      ctSentEmail: s.ctSentEmail, ctSentTopic: s.ctSentTopic,
       ctTopics: ['Chcę grać w Polonii', 'Współpraca i sponsoring', 'Media i wywiady', 'Archiwum i historia klubu', 'Inna sprawa'],
       onCtName: (e) => this.setState({ ct: { ...this.state.ct, name: e.target.value } }),
       onCtEmail: (e) => this.setState({ ct: { ...this.state.ct, email: e.target.value } }),
       onCtTopic: (e) => this.setState({ ct: { ...this.state.ct, topic: e.target.value } }),
       onCtMsg: (e) => this.setState({ ct: { ...this.state.ct, msg: e.target.value } }),
+      /* Wysyłka idzie przez formularze Netlify: POST na adres strony z
+         nagłówkiem formularza. Nie otwieramy programu pocztowego i nie
+         potrzebujemy żadnego zewnętrznego serwisu ani klucza API —
+         zgłoszenie ląduje w zakładce Forms i na skrzynce klubu.
+         Gdyby wysyłka padła (brak sieci, wyłączone formularze), pokazujemy
+         błąd z adresem klubu, żeby wiadomość nie przepadła. */
       onCtSend: (e) => {
         if (e && e.preventDefault) e.preventDefault();
+        if (this.state.ctSending) return;
         const { name, email, topic, msg } = this.state.ct;
         if (!name.trim()) return this.setState({ ctErr: 'Podaj imię i nazwisko.' });
         if (!/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(email.trim())) return this.setState({ ctErr: 'Podaj poprawny adres e-mail.' });
         if (msg.trim().length < 10) return this.setState({ ctErr: 'Napisz kilka słów więcej w wiadomości.' });
-        const body = 'Imię i nazwisko: ' + name.trim()
-          + '\nE-mail: ' + email.trim()
-          + '\nTemat: ' + topic
-          + '\n\n' + msg.trim()
-          + '\n\n— wiadomość z formularza na stronie FC Polonia Bruksela';
-        const href = 'mailto:polonia@live.be'
-          + '?subject=' + encodeURIComponent('[Strona] ' + topic + ' — ' + name.trim())
-          + '&body=' + encodeURIComponent(body);
-        window.location.href = href;
-        this.setState({ ctErr: '', ctSent: true });
+        const lang = (this.I && this.I.getLang && this.I.getLang()) || this.state.lang || 'pl';
+        const data = new URLSearchParams({
+          'form-name': 'kontakt',
+          'bot-field': '',
+          name: name.trim(), email: email.trim(), topic, message: msg.trim(), lang,
+        });
+        this.setState({ ctErr: '', ctSending: true });
+        fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: data.toString(),
+        }).then((r) => {
+          if (!r.ok) throw new Error('HTTP ' + r.status);
+          this.setState({ ctSending: false, ctSent: true, ctSentEmail: email.trim(), ctSentTopic: topic });
+        }).catch(() => {
+          this.setState({ ctSending: false, ctErr: 'Nie udało się wysłać wiadomości. Sprawdź połączenie albo napisz bezpośrednio na polonia@live.be.' });
+        });
       },
-      onCtReset: () => this.setState({ ct: { name: '', email: '', topic: 'Chcę grać w Polonii', msg: '' }, ctSent: false, ctErr: '' }),
+      onCtReset: () => this.setState({ ct: { name: '', email: '', topic: 'Chcę grać w Polonii', msg: '' }, ctSent: false, ctErr: '', ctSending: false }),
       sName: s.sponsor.name, sUrl: s.sponsor.url, sTier: s.sponsor.tier,
       onSName: (e) => this.setState({ sponsor: { ...this.state.sponsor, name: e.target.value } }),
       onSUrl: (e) => this.setState({ sponsor: { ...this.state.sponsor, url: e.target.value } }),

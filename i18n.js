@@ -137,6 +137,31 @@ const T = {
     'Speler van FC Polonia Brussel met clubsjaal op de tribune',
     'FC Polonia Brussels player holding the club scarf in the stands',
   ],
+  /* --- formularz kontaktowy: wysyłka i potwierdzenie --- */
+  'Wysyłanie…': ['Envoi en cours…', 'Verzenden…', 'Sending…'],
+  'Wiadomość wysłana': ['Message envoyé', 'Bericht verzonden', 'Message sent'],
+  'ODPOWIEMY NA ADRES': ['NOUS RÉPONDRONS À', 'WIJ ANTWOORDEN OP', 'WE WILL REPLY TO'],
+  'NAPISZ KOLEJNĄ WIADOMOŚĆ': ['ÉCRIRE UN AUTRE MESSAGE', 'NOG EEN BERICHT SCHRIJVEN', 'WRITE ANOTHER MESSAGE'],
+  'WRÓĆ NA STRONĘ GŁÓWNĄ': ['RETOUR À L’ACCUEIL', 'TERUG NAAR DE HOMEPAGE', 'BACK TO HOME'],
+  'Podaj imię i nazwisko.': ['Indiquez votre nom et prénom.', 'Vul je voor- en achternaam in.', 'Please enter your name.'],
+  'Podaj poprawny adres e-mail.': ['Indiquez une adresse e-mail valide.', 'Vul een geldig e-mailadres in.', 'Please enter a valid e-mail address.'],
+  'Napisz kilka słów więcej w wiadomości.': ['Écrivez quelques mots de plus.', 'Schrijf nog een paar woorden.', 'Please write a few more words.'],
+  'Nie udało się wysłać wiadomości. Sprawdź połączenie albo napisz bezpośrednio na polonia@live.be.': [
+    'L’envoi a échoué. Vérifiez votre connexion ou écrivez directement à polonia@live.be.',
+    'Verzenden is mislukt. Controleer je verbinding of mail rechtstreeks naar polonia@live.be.',
+    'Sending failed. Check your connection or write directly to polonia@live.be.'],
+  'Sprawa pilna? Napisz wprost na polonia@live.be albo złap nas na Facebooku.': [
+    'C’est urgent ? Écrivez directement à polonia@live.be ou contactez-nous sur Facebook.',
+    'Dringend? Mail rechtstreeks naar polonia@live.be of zoek ons op Facebook.',
+    'Urgent? Write straight to polonia@live.be or catch us on Facebook.'],
+  'Wiadomość wysyłamy prosto ze strony — nie musisz mieć skonfigurowanej poczty. Wolisz napisać bezpośrednio?': [
+    'Le message part directement du site — pas besoin de logiciel de messagerie. Vous préférez écrire directement ?',
+    'Het bericht wordt rechtstreeks vanaf de site verstuurd — je hebt geen mailprogramma nodig. Liever rechtstreeks schrijven?',
+    'The message is sent straight from the site — no mail app needed. Prefer to write directly?'],
+  'Dziękujemy za kontakt. Twoja wiadomość trafiła na skrzynkę klubu i czeka już na osobę, która się nią zajmie. Zwykle odpowiadamy w ciągu dwóch, trzech dni — w klubie pracują wolontariusze, więc czasem trwa to dzień dłużej.': [
+    'Merci de nous avoir écrit. Votre message est arrivé dans la boîte du club et attend la personne qui s’en occupera. Nous répondons en général sous deux ou trois jours — le club fonctionne grâce à des bénévoles, cela prend donc parfois un jour de plus.',
+    'Bedankt voor je bericht. Het is aangekomen in de mailbox van de club en wacht op de persoon die het oppakt. Meestal antwoorden we binnen twee of drie dagen — de club draait op vrijwilligers, dus soms duurt het een dag langer.',
+    'Thank you for writing. Your message has reached the club’s mailbox and is waiting for the person who will handle it. We usually reply within two or three days — the club runs on volunteers, so sometimes it takes a day longer.'],
   'ZAPISZ W KALENDARZU': ['AJOUTER AU CALENDRIER', 'IN AGENDA ZETTEN', 'ADD TO CALENDAR'],
   'DODAJ DO KALENDARZA': ['AJOUTER AU CALENDRIER', 'IN AGENDA ZETTEN', 'ADD TO CALENDAR'],
   'Zapisz mecz w kalendarzu telefonu — z przypomnieniem 5 godzin wcześniej': [
@@ -284,10 +309,11 @@ const T = {
     ['Nous utilisons la mémoire du navigateur pour que le site fonctionne correctement. Les fichiers non essentiels — fonctionnels, statistiques et marketing — ne sont activés qu\u2019avec votre consentement. Nous n\u2019avons ni outils d\u2019analyse ni publicité, et un refus ne bloque rien ici. Détails dans la politique de confidentialité.',
      'We gebruiken het geheugen van uw browser zodat de site correct werkt. Niet-noodzakelijke bestanden — functioneel, statistisch en marketing — activeren we alleen met uw toestemming. We hebben geen analyse-tools of reclame, en weigeren blokkeert hier niets. Details in het privacybeleid.',
      'We use browser storage so the site works properly. Non-essential files — functional, statistics and marketing — are enabled only with your consent. We have no analytics and no advertising, and refusing blocks nothing here. Details in the privacy policy.'],
-  'Chcesz trenować z Polonią, wesprzeć klub albo przekazać materiały do archiwum? Wypełnij formularz — wiadomość trafi na polonia@live.be.':
-    ['Vous voulez vous entraîner avec Polonia, soutenir le club ou nous confier des documents d\u2019archives ? Remplissez le formulaire — votre message arrivera à polonia@live.be.',
-     'Wilt u met Polonia trainen, de club steunen of archiefmateriaal bezorgen? Vul het formulier in — uw bericht komt aan op polonia@live.be.',
-     'Want to train with Polonia, support the club or share archive material? Fill in the form — your message goes to polonia@live.be.'],
+  'Chcesz trenować z Polonią, wesprzeć klub albo przekazać materiały do archiwum? Wypełnij formularz, a wiadomość pójdzie prosto na skrzynkę klubu.':
+    ['Vous voulez vous entraîner avec Polonia, soutenir le club ou nous confier des documents d\u2019archives ? Remplissez le formulaire, votre message arrivera directement dans la boîte du club.',
+     'Wilt u met Polonia trainen, de club steunen of archiefmateriaal bezorgen? Vul het formulier in, uw bericht komt rechtstreeks in de mailbox van de club.',
+     'Want to train with Polonia, support the club or share archive material? Fill in the form and your message goes straight to the club\u2019s mailbox.'],
+  'FC POLONIA BRUKSELA': ['FC POLONIA BRUXELLES', 'FC POLONIA BRUSSEL', 'FC POLONIA BRUSSELS'],
 };
 
 /* Budujemy mapy dla każdego języka: oryginał → tłumaczenie. */

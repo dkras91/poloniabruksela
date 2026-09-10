@@ -114,6 +114,46 @@ zdecydował, że na razie kartek nie dodajemy. Gdyby wracać do tematu:
 alternatywą jest ręczna tabelka w `content.js` aktualizowana po kolejce albo
 zwykły link do strony federacji.
 
+## Formularz kontaktowy
+
+Wysyłka idzie przez **formularze Netlify** — bez zewnętrznego serwisu, bez
+klucza API, bez otwierania poczty użytkownika. Działa to tak:
+
+- W `index.html`, tuż po `<body>`, siedzi ukryty statyczny formularz
+  `name="kontakt"` z atrybutem `data-netlify="true"`. Netlify wykrywa
+  formularze, czytając HTML przy wdrożeniu, a nasz formularz rysuje React
+  dopiero w przeglądarce — bez tej kopii Netlify nigdy by go nie zobaczył.
+  **Nie usuwaj go.** Dodajesz pole w formularzu na stronie kontaktu? Dopisz
+  je również tam, inaczej wartość nie dojdzie.
+- `onCtSend` w `index.html` wysyła `POST /` z nagłówkiem
+  `application/x-www-form-urlencoded` i polem `form-name=kontakt`. Pole
+  `lang` niesie język, w którym gość przeglądał stronę — po to, żeby klub
+  wiedział, w jakim języku odpisać.
+- `bot-field` to pułapka na roboty (honeypot). Zostaje pusta.
+- Po udanej wysyłce pokazujemy ekran potwierdzenia; jego napisy są w
+  `i18n.js`, więc gość widzi go w swoim języku. Gdy wysyłka padnie,
+  pokazujemy błąd z adresem `polonia@live.be`, żeby wiadomość nie przepadła.
+
+**Krok do wykonania raz, w panelu Netlify** (bez tego zgłoszenia nigdzie nie
+pójdą): Site configuration → Forms → włączyć wykrywanie formularzy, potem
+Forms → kontakt → Settings → Form notifications → Email notification na adres
+klubu. Netlify w darmowym planie przyjmuje 100 zgłoszeń miesięcznie.
+
+Nadawca NIE dostaje maila zwrotnego — formularze Netlify tego nie potrafią.
+Gdyby klub tego chciał, trzeba dołożyć funkcję Netlify z zewnętrznym nadawcą
+(np. Resend) i klucz w zmiennych środowiskowych.
+
+## Animacja pojawiania się sekcji
+
+Sekcje kadry (bramkarze, obrońcy, pomocnicy, napastnicy) oraz sztab i zarząd
+wjeżdżają przy przewijaniu. Mechanizm: `_setupReveal()` w `index.html` szuka
+elementów z atrybutem `data-reveal`, chowa je z poziomu JavaScriptu i pokazuje
+przez `IntersectionObserver`; karty w środku (`data-reveal-item`) wchodzą
+kaskadą. Kolejność jest odwrotna niż zwykle w takich rozwiązaniach i to jest
+celowe: **treść jest w HTML-u widoczna, chowa ją dopiero skrypt**. Dzięki temu
+przy wyłączonym JS, w wyszukiwarce i przy systemowym ustawieniu „ogranicz
+animacje" strona wygląda normalnie, zamiast pokazywać pustą stronę.
+
 ## Weryfikacja przed pushem
 
 - Podgląd lokalny: `python3 -m http.server 8000`, potem `localhost:8000`.
