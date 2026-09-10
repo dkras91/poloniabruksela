@@ -109,7 +109,7 @@ async function fetchRankingGraphql(seriesId) {
       if (!res.ok) { lastErr = new Error(`RBFA ranking HTTP ${res.status}`); continue; }
       const json = await res.json();
       if (json.errors) { lastErr = new Error(json.errors.map((e) => e.message).join(' · ')); continue; }
-      const rows = findRankingArray(json.data);
+      const rows = pickRanking(json.data) || findRankingArray(json.data);
       if (rows && rows.length) return rows;
       lastErr = new Error('RBFA ranking: pusta klasyfikacja w odpowiedzi');
     } catch (e) { lastErr = e; }
@@ -194,6 +194,26 @@ const teamName = (row) => {
 
 /** Szuka w dowolnym JSON-ie tablicy, której elementy mają nazwę drużyny
  *  i punkty — to wystarcza, by uznać ją za klasyfikację. */
+/* Federacja zwraca KILKA klasyfikacji naraz: ogolna plus osobne dla kazdej
+   „periody", a bywa i fair play. Te jeszcze nierozegrane maja same zera i
+   wszystkim wpisana pozycja 1 — branie pierwszej z brzegu dawalo tabele
+   wyzerowana. Wybieramy te z najwieksza liczba rozegranych meczow; przy
+   remisie wygrywa nazwana jako ogolna. */
+function pickRanking(data) {
+  const sets = data?.seriesRankings?.rankings;
+  if (!Array.isArray(sets) || !sets.length) return null;
+  const scored = sets
+    .filter((r) => Array.isArray(r?.teams) && r.teams.length)
+    .map((r) => ({
+      teams: r.teams,
+      played: r.teams.reduce((a, t) => a + (Number(t.matchesPlayed) || 0), 0),
+      ogolna: /total|general|algemeen|overall|classement/i.test(String(r.type || '')) ? 1 : 0,
+    }));
+  if (!scored.length) return null;
+  scored.sort((a, b) => b.played - a.played || b.ogolna - a.ogolna);
+  return scored[0].teams;
+}
+
 function findRankingArray(root) {
   const stack = [root];
   const seen = new Set();

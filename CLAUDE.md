@@ -79,11 +79,17 @@ więc zmiana serii czy sezonu nie wymaga poprawek w kodzie.
 Apollo po stronie RBFA odrzuca GET bez nagłówków `x-apollo-operation-name` i
 `apollo-require-preflight`. Nie usuwaj ich.
 
-Tabela ligowa wymaga zmiennej środowiskowej `RBFA_RANKING_HASH` w Netlify
-(hash operacji rankingu; RBFA zmienia go przy swoich wdrożeniach, dlatego
-świadomie nie ma go w kodzie). Opcjonalnie `RBFA_RANKING_OP`, gdy nazwa
-operacji jest inna niż `GetSeriesRanking`. Bez hasha funkcja próbuje
-awaryjnie wyciągnąć tabelę ze strony serii.
+Tabela ligowa NIE wymaga żadnej zmiennej środowiskowej. RBFA nie używa tu
+persisted queries — `rbfa-standings.js` wysyła pełną treść zapytania
+`GetSeriesRankings` (nazwa w liczbie mnogiej). `RBFA_RANKING_HASH` i
+`RBFA_RANKING_OP` są nadal obsługiwane, ale wyłącznie jako opcjonalne
+nadpisanie.
+
+Federacja zwraca w jednej odpowiedzi KILKA klasyfikacji: ogólną i osobne dla
+każdej „periody". Te nierozegrane mają same zera i wszystkim wpisaną pozycję
+1 — dlatego `pickRanking()` wybiera zestaw z największą liczbą rozegranych
+meczów, a nie pierwszy z brzegu. Pola nazywają się `matchesWon` /
+`matchesDrawn` / `matchesLost`, nie `won` / `drawn` / `lost`.
 
 ## Weryfikacja przed pushem
 

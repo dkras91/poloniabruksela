@@ -588,7 +588,17 @@ async function fetchText(url) {
 
 /* --------------------------------------------------------------- CACHE API */
 
-export const getCache = () => read(CACHE_KEY, null);
+export const getCache = () => {
+  const c = read(CACHE_KEY, null);
+  if (!c || !Array.isArray(c.fixtures)) return c;
+  // Snapshot w pamięci przeglądarki trzyma mecze JUŻ znormalizowane, więc
+  // poprawki w normalizacji nie docierały do nikogo, kto ma świeży cache —
+  // czekały, aż wygaśnie. Obiekt uzupełniamy przy odczycie: to jedyne pole
+  // wyliczane u nas, a nie pochodzące ze źródła.
+  return { ...c, fixtures: c.fixtures.map((f) => (
+    f && !f.venue ? { ...f, venue: venueFor(f.home, f.away) } : f
+  )) };
+};
 
 function saveSnapshot(snap) {
   const v = validateSnapshot(snap);
