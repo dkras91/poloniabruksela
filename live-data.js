@@ -954,9 +954,32 @@ export const form = (fixtures = [], n = 5) => poloniaFixtures(fixtures)
 
 /* -------------------------------------------------------------- FORMATTERY */
 
-const DNI = ['NIEDZIELA', 'PONIEDZIAŁEK', 'WTOREK', 'ŚRODA', 'CZWARTEK', 'PIĄTEK', 'SOBOTA'];
-const MIES = ['stycznia', 'lutego', 'marca', 'kwietnia', 'maja', 'czerwca', 'lipca', 'sierpnia', 'września', 'października', 'listopada', 'grudnia'];
+/* Nazwy dni i miesięcy w czterech językach. Data „13 września 2026" nie
+   przejdzie przez warstwę tłumaczącą DOM — powstaje w kodzie, a nie jako
+   gotowy napis ze słownika — więc język musi znać ta warstwa danych.
+   `setLocale()` woła index.html przy starcie i przy każdej zmianie języka. */
+const DNI_LANG = {
+  pl: ['NIEDZIELA', 'PONIEDZIAŁEK', 'WTOREK', 'ŚRODA', 'CZWARTEK', 'PIĄTEK', 'SOBOTA'],
+  fr: ['DIMANCHE', 'LUNDI', 'MARDI', 'MERCREDI', 'JEUDI', 'VENDREDI', 'SAMEDI'],
+  nl: ['ZONDAG', 'MAANDAG', 'DINSDAG', 'WOENSDAG', 'DONDERDAG', 'VRIJDAG', 'ZATERDAG'],
+  en: ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'],
+};
+const MIES_LANG = {
+  pl: ['stycznia', 'lutego', 'marca', 'kwietnia', 'maja', 'czerwca', 'lipca', 'sierpnia', 'września', 'października', 'listopada', 'grudnia'],
+  fr: ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'],
+  nl: ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'],
+  en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+};
 
+let LOCALE = 'pl';
+export function setLocale(lang) { LOCALE = DNI_LANG[lang] ? lang : 'pl'; }
+export function getLocale() { return LOCALE; }
+const DNI = new Proxy({}, { get: (_, k) => DNI_LANG[LOCALE][k] });
+const MIES = new Proxy({}, { get: (_, k) => MIES_LANG[LOCALE][k] });
+
+/* Kolejność „13 września 2026" pasuje do polskiego, francuskiego i
+   niderlandzkiego; po angielsku naturalne jest „13 September 2026" — ta sama
+   kolejność, więc jeden wzór wystarczy. */
 export const fmtDate = (iso) => { const d = new Date(iso); return `${d.getDate()} ${MIES[d.getMonth()]} ${d.getFullYear()}`; };
 export const fmtShort = (iso) => { const d = new Date(iso); return `${String(d.getDate()).padStart(2, '0')}.${String(d.getMonth() + 1).padStart(2, '0')}.${d.getFullYear()}`; };
 export const fmtDay = (iso) => DNI[new Date(iso).getDay()];

@@ -125,7 +125,11 @@ a:hover{color:#cbb96b}
 </style>
 </helmet>
 
-<div style="font-family:'Inter',sans-serif;font-weight:500;background:#121216;color:#F6F3EC;min-height:100vh;overflow-x:hidden;padding-bottom:{{ pageBottomPad }}">
+<!-- Bez globalnego `overflow-x:hidden`: szerokości są policzone tak, żeby nic
+     nie wystawało poza ekran. Ukrywanie przepełnienia tylko zamiatałoby błędy
+     układu pod dywan i utrudniało ich wykrycie. Tabele, które z natury są
+     szersze od telefonu, przewijają się we własnych kontenerach. -->
+<div style="font-family:'Inter',sans-serif;font-weight:500;background:#121216;color:#F6F3EC;min-height:100vh;padding-bottom:{{ pageBottomPad }}">
 
   <!-- ═══════════════════════════════════ PASEK PARTNERA MEDIALNEGO -->
   <div style="background:#F6F3EC;border-bottom:1px solid rgba(18,18,22,.12)">
@@ -139,8 +143,8 @@ a:hover{color:#cbb96b}
       </sc-if>
       <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:{{ topBarFs }};letter-spacing:{{ topBarLs }};color:#121216;text-transform:uppercase;white-space:nowrap;flex-shrink:0">{{ partnerLabel }}</span>
       <span style="width:1px;height:16px;background:rgba(18,18,22,.2);display:block;flex-shrink:0"></span>
-      <a href="https://aktualnosci.be/" target="_blank" rel="noopener" style="display:flex;align-items:center;flex-shrink:0" aria-label="Aktualności.be — prosto z Belgii">
-        <img src="assets/partners/aktualnosci-be-niebieski.png" alt="Aktualności.be — prosto z Belgii" style="width:{{ partnerLogoW }};height:auto;max-height:{{ partnerLogoH }};object-fit:contain;display:block;max-width:100%">
+      <a href="https://aktualnosci.be/" target="_blank" rel="noopener" style="display:flex;align-items:center;flex-shrink:0" aria-label="Aktualnosci.be — prosto z Belgii">
+        <img src="assets/partners/aktualnosci-be-niebieski.png" alt="Aktualnosci.be — prosto z Belgii" style="width:{{ partnerLogoW }};height:auto;max-height:{{ partnerLogoH }};object-fit:contain;display:block;max-width:100%">
       </a>
     </div>
   </div>
@@ -157,7 +161,7 @@ a:hover{color:#cbb96b}
 
   <!-- ══════════════════════════════════════════════════ NAV -->
   <div style="position:sticky;top:0;z-index:60;background:rgba(18,18,22,.94);backdrop-filter:blur(12px);border-bottom:1px solid rgba(246,243,236,.14)">
-    <div style="max-width:1280px;margin:0 auto;padding:{{ navPadY }} clamp(14px,3vw,32px);display:flex;align-items:center;gap:clamp(12px,2vw,28px)">
+    <div data-nav-row="1" style="position:relative;max-width:1280px;margin:0 auto;padding:{{ navPadY }} clamp(14px,3vw,32px);display:flex;align-items:center;gap:clamp(12px,2vw,28px)">
       <a href="#/" onClick="{{ onMenuClose }}" style="display:flex;align-items:center;gap:10px;flex-shrink:0;min-width:0">
         <img src="assets/crest.png" alt="Herb FC Polonia Bruksela" style="width:{{ crestSize }};height:{{ crestSize }};max-width:100%;object-fit:contain;display:block;max-width:100%">
         <span style="display:flex;flex-direction:column;line-height:.92;min-width:0">
@@ -166,7 +170,8 @@ a:hover{color:#cbb96b}
         </span>
       </a>
 
-      <!-- hamburger: telefon i tablet do 1024 px -->
+      <!-- hamburger: telefon, tablet i te szerokości, na których komplet
+           pozycji nie zmieściłby się w pasku (patrz miarka niżej) -->
       <sc-if value="{{ navBurger }}" hint-placeholder-val="{{ false }}">
       <button onClick="{{ onMenuToggle }}" aria-label="Menu" aria-expanded="{{ menuOpen }}" style="margin-left:auto;width:48px;height:48px;flex-shrink:0;background:transparent;border:1px solid rgba(246,243,236,.28);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;padding:0">
         <sc-if value="{{ menuClosed }}" hint-placeholder-val="{{ true }}">
@@ -181,11 +186,25 @@ a:hover{color:#cbb96b}
         </sc-if>
       </button>
       </sc-if>
-      <!-- pasek linków: desktop powyżej 1024 px -->
-      <sc-if value="{{ navBar }}" hint-placeholder-val="{{ true }}">
-      <div style="flex:1;min-width:0;display:flex;align-items:center;gap:2px;overflow-x:auto;justify-content:flex-end;scrollbar-width:none;-webkit-overflow-scrolling:touch">
+      <!-- Niewidoczna miarka: te same napisy, ta sama typografia, szerokość
+           naturalna. Po każdym renderze mierzymy, czy pasek linków MIEŚCI SIĘ
+           obok logo — jeśli nie, wraca hamburger. Dzięki temu próg nie zależy
+           od zgadywanej liczby pikseli i działa tak samo po polsku, francusku,
+           niderlandzku i angielsku, niezależnie od tego, jak system narysuje
+           czcionkę. Miarka nie zajmuje miejsca w układzie i jest ukryta przed
+           czytnikami ekranu. -->
+      <div aria-hidden="true" style="position:absolute;left:0;top:0;width:0;height:0;overflow:hidden;pointer-events:none">
+      <div data-nav-probe="1" style="width:max-content;display:flex;align-items:center;gap:2px">
         <sc-for list="{{ menuItems }}" as="m" hint-placeholder-count="11">
-          <a href="{{ m.href }}" style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:17px;letter-spacing:.09em;text-transform:uppercase;color:{{ m.fg }};padding:11px 10px;white-space:nowrap;flex-shrink:0;border-bottom:2px solid {{ m.bd }}" style-hover="color:#B7A85C;border-bottom:2px solid #E2092F">{{ m.label }}</a>
+          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase;padding:11px 6px;white-space:nowrap">{{ m.label }}</span>
+        </sc-for>
+      </div>
+      </div>
+      <!-- pasek linków: pełny ekran, gdy komplet pozycji faktycznie się mieści -->
+      <sc-if value="{{ navBar }}" hint-placeholder-val="{{ true }}">
+      <div data-nav-bar="1" style="flex:1;min-width:0;display:flex;align-items:center;gap:2px;justify-content:flex-end">
+        <sc-for list="{{ menuItems }}" as="m" hint-placeholder-count="11">
+          <a href="{{ m.href }}" aria-current="{{ m.ariaCurrent }}" style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:{{ m.fg }};padding:11px 6px;white-space:nowrap;flex-shrink:0;border-bottom:2px solid {{ m.bd }}" style-hover="color:#B7A85C;border-bottom:2px solid #E2092F">{{ m.label }}</a>
         </sc-for>
       </div>
       </sc-if>
@@ -289,10 +308,13 @@ a:hover{color:#cbb96b}
             <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(26px,3.4vw,38px);text-transform:uppercase;letter-spacing:.02em;line-height:1">Ostatni mecz</span>
             <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.16em;color:#6b6862">{{ lm.shortStr }}</span>
           </div>
-          <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:clamp(6px,2vw,20px);align-items:center">
-            <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:{{ lastName }};text-transform:uppercase;text-align:right;line-height:1.05;overflow-wrap:break-word;hyphens:none;min-width:min-content">{{ lm.homeName }}</span>
+          <!-- Na wąskim ekranie trzy kolumny nie mieszczą się: nazwy klubów
+               mają swoje minimum i wypychały kartę poza ekran. Poniżej 768 px
+               układamy je jedna pod drugą, wynik pośrodku. -->
+          <div style="display:grid;grid-template-columns:{{ lastCols }};gap:clamp(6px,2vw,20px);align-items:center;justify-items:{{ lastJustify }}">
+            <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:{{ lastName }};text-transform:uppercase;text-align:{{ lastAlignHome }};line-height:1.05;overflow-wrap:anywhere;hyphens:none;min-width:0;max-width:100%">{{ lm.homeName }}</span>
             <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:{{ scoreFs }};color:#121216;background:{{ lmScoreBg }};padding:{{ scorePad }};line-height:1;white-space:nowrap;flex-shrink:0">{{ lm.scoreStr }}</span>
-            <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:{{ lastName }};text-transform:uppercase;line-height:1.05;overflow-wrap:break-word;hyphens:none;min-width:min-content">{{ lm.awayName }}</span>
+            <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:{{ lastName }};text-transform:uppercase;text-align:{{ lastAlignAway }};line-height:1.05;overflow-wrap:anywhere;hyphens:none;min-width:0;max-width:100%">{{ lm.awayName }}</span>
           </div>
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax({{ statMin2 }},1fr));gap:14px;border-top:1px solid rgba(18,18,22,.13);padding-top:20px">
             <div style="display:flex;flex-direction:column;gap:5px"><span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.16em;color:#6b6862">ROZGRYWKI</span><span style="font-family:'Inter',sans-serif;font-weight:700;font-size:15px">{{ lm.compStr }}</span></div>
@@ -356,7 +378,7 @@ a:hover{color:#cbb96b}
           <a href="#/tabela" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:19px;letter-spacing:.08em;text-transform:uppercase;background:#E2092F;color:#F6F3EC;padding:14px 24px;align-self:{{ btnAlign }};width:{{ btnW }};box-sizing:border-box;text-align:center" style-hover="background:#a80725">Pełna tabela</a>
         </div>
         <div style="overflow-x:auto">
-          <div style="min-width:380px;background:#FFFFFF;border:1px solid rgba(18,18,22,.13)">
+          <div style="min-width:{{ miniMinW }};background:#FFFFFF;border:1px solid rgba(18,18,22,.13)">
             <div style="display:grid;grid-template-columns:{{ miniCols }};background:#F1EDE3;border-bottom:1px solid rgba(18,18,22,.13)">
               <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;color:#6b6862;padding:11px 8px">#</span>
               <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;color:#6b6862;padding:11px 8px">DRUŻYNA</span>
@@ -497,7 +519,25 @@ a:hover{color:#cbb96b}
     <div style="max-width:1280px;margin:0 auto;padding:{{ secPad }}">
       <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.18em;color:#E2092F;display:block" style-before="content:'';display:block;width:34px;height:4px;background:#E2092F;margin-bottom:12px">RAZEM Z NAMI</span>
       <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:{{ h2Size }};text-transform:uppercase;line-height:.94;margin:10px 0 24px;letter-spacing:.01em">Sponsorzy i partnerzy</h2>
-      <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:16px;line-height:1.6;color:#6b6862;margin:0 0 24px;max-width:640px;text-wrap:pretty">Logotypy i dane sponsorów wprowadza administracja klubu. Do momentu ich dodania strona nie prezentuje żadnych nazw ani znaków firmowych.</p>
+      <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:16px;line-height:1.6;color:#6b6862;margin:0 0 24px;max-width:640px;text-wrap:pretty">Klub gra dzięki firmom, które go wspierają. Poniżej partnerzy sezonu 2026/2027.</p>
+      <!-- Logotypy bierzemy z tego samego źródła co podstrona Sponsorzy
+           (SPONSORS w content.js), więc nie ma dwóch list do pilnowania. -->
+      <sc-if value="{{ hasHomeSponsors }}" hint-placeholder-val="{{ true }}">
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax({{ sponsorMin }},1fr));gap:12px;margin-bottom:28px">
+        <sc-for list="{{ homeSponsors }}" as="s" hint-placeholder-count="3">
+          <sc-if value="{{ s.hasUrl }}" hint-placeholder-val="{{ true }}">
+            <a href="{{ s.url }}" target="_blank" rel="noopener" title="{{ s.name }}" style="background:#FFFFFF;border:1px solid rgba(18,18,22,.13);aspect-ratio:3/2;display:flex;align-items:center;justify-content:center;padding:16px" style-hover="border:1px solid #E2092F">
+              {{ s.logoEl }}
+            </a>
+          </sc-if>
+          <sc-if value="{{ s.noUrl }}" hint-placeholder-val="{{ false }}">
+            <div title="{{ s.name }}" style="background:#FFFFFF;border:1px solid rgba(18,18,22,.13);aspect-ratio:3/2;display:flex;align-items:center;justify-content:center;padding:16px">
+              {{ s.logoEl }}
+            </div>
+          </sc-if>
+        </sc-for>
+      </div>
+      </sc-if>
       <a href="#/sponsorzy" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:19px;letter-spacing:.08em;text-transform:uppercase;border:2px solid rgba(18,18,22,.3);color:#121216;padding:13px 24px;display:inline-block" style-hover="border:2px solid #B7A85C;color:#9a8a3f">Zostań sponsorem</a>
     </div>
     </div>
@@ -690,9 +730,19 @@ a:hover{color:#cbb96b}
             </div>
             <sc-if value="{{ f.hasVenue }}" hint-placeholder-val="{{ false }}">
             <div onClick="{{ f.stopRow }}" style="display:flex;flex-direction:column;gap:10px;cursor:default">
+              <sc-if value="{{ f.mapAllowed }}" hint-placeholder-val="{{ false }}">
               <div style="height:clamp(200px,32vw,300px);border:1px solid rgba(246,243,236,.14);background:#23232a">
                 <iframe src="{{ f.mapEmbed }}" title="Mapa obiektu" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="width:100%;height:100%;border:0;display:block;filter:grayscale(.25) contrast(1.05)"></iframe>
               </div>
+              </sc-if>
+              <sc-if value="{{ f.mapBlocked }}" hint-placeholder-val="{{ true }}">
+              <div style="border:1px dashed rgba(246,243,236,.28);background:#121216;padding:18px;display:flex;flex-direction:column;gap:12px">
+                <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.16em;color:#B7A85C">MAPA DOJAZDU</span>
+                <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:15px;color:#F6F3EC;line-height:1.5">{{ f.venueStr }}</span>
+                <span style="font-family:'Inter',sans-serif;font-weight:500;font-size:13px;line-height:1.6;color:#c9c6bd;max-width:560px">Mapa pochodzi z serwerów Google, dlatego nie wczytujemy jej bez Twojej zgody. Kliknięcie „Wczytaj mapę" włącza kategorię „Mapy Google" — możesz ją wyłączyć w ustawieniach prywatności w stopce.</span>
+                <button onClick="{{ onAllowMaps }}" style="font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.14em;border:1px solid #B7A85C;background:transparent;color:#B7A85C;padding:10px 16px;cursor:pointer;align-self:flex-start" style-hover="background:#B7A85C;color:#121216">WCZYTAJ MAPĘ</button>
+              </div>
+              </sc-if>
               <div style="display:flex;flex-wrap:wrap;gap:10px">
                 <a href="{{ f.mapUrl }}" target="_blank" rel="noopener" style="font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.14em;border:1px solid rgba(246,243,236,.3);color:#F6F3EC;padding:10px 16px" style-hover="border:1px solid #B7A85C;color:#B7A85C">OTWÓRZ W MAPACH GOOGLE</a>
                 <sc-if value="{{ f.canAddToCal }}" hint-placeholder-val="{{ true }}">
@@ -732,7 +782,7 @@ a:hover{color:#cbb96b}
     </div>
     <sc-if value="{{ hasTable }}" hint-placeholder-val="{{ false }}">
     <div style="overflow-x:auto">
-      <div style="min-width:640px;background:#FFFFFF;border:1px solid rgba(18,18,22,.13)">
+      <div style="min-width:{{ fullTableMinW }};background:#FFFFFF;border:1px solid rgba(18,18,22,.13)">
         <div style="display:grid;grid-template-columns:48px 1fr 44px 44px 44px 44px 76px 56px 56px;background:#F1EDE3;border-bottom:1px solid rgba(18,18,22,.13)">
           <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;color:#6b6862;padding:12px 8px">#</span>
           <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;color:#6b6862;padding:12px 8px">DRUŻYNA</span>
@@ -792,8 +842,8 @@ a:hover{color:#cbb96b}
       <img src="assets/kadra/team-2026.jpg" alt="Pierwsza drużyna FC Polonia Bruksela, sezon 2026/2027" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 42%;display:block">
     </div>
     <sc-for list="{{ positionGroups }}" as="g" hint-placeholder-count="4">
-      <div data-reveal="1" style="margin-bottom:44px">
-        <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px">
+      <div style="margin-bottom:44px">
+        <div data-reveal-head="1" style="display:flex;align-items:center;gap:16px;margin-bottom:20px">
           <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(26px,3.4vw,40px);text-transform:uppercase;line-height:1;margin:0">{{ g.label }}</h2>
           <span style="flex:1;height:1px;background:rgba(246,243,236,.14)"></span>
           <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.16em;color:#c9c6bd">{{ g.countLabel }}</span>
@@ -804,14 +854,14 @@ a:hover{color:#cbb96b}
             <div data-reveal-item="1" onMouseEnter="{{ p.onEnter }}" onMouseLeave="{{ p.onLeave }}" style="background:#1b1b21;border:1px solid rgba(246,243,236,.14);display:flex;flex-direction:column" style-hover="border:1px solid #B7A85C">
               <sc-if value="{{ p.hasPhoto }}" hint-placeholder-val="{{ false }}">
               <div style="position:relative;aspect-ratio:3/4;overflow:hidden;background:#F6F3EC">
-                <img src="{{ p.photo }}" alt="Bramkarz FC Polonia Bruksela" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:{{ p.stillOpacity }};transition:opacity .28s ease">
+                <img src="{{ p.photo }}" alt="{{ p.photoAlt }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:{{ p.stillOpacity }};transition:opacity .28s ease">
                 <sc-if value="{{ p.hasAction }}" hint-placeholder-val="{{ false }}">
                   <img src="{{ p.photoAction }}" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:{{ p.actionOpacity }};transition:opacity .28s ease">
                 </sc-if>
               </div>
               </sc-if>
               <sc-if value="{{ p.noPhoto }}" hint-placeholder-val="{{ true }}">
-                <div style="position:relative;aspect-ratio:3/4"><image-slot id="{{ p.photoId }}" shape="rect" fit="cover" placeholder="Zdjęcie zawodnika"></image-slot></div>
+                <div style="position:relative;aspect-ratio:3/4"><image-slot id="{{ p.photoId }}" shape="rect" fit="cover" placeholder="{{ p.photoAlt }}"></image-slot></div>
               </sc-if>
               <div style="padding:14px;display:flex;flex-direction:column;gap:4px">
                 <sc-if value="{{ p.hasNumber }}" hint-placeholder-val="{{ false }}">
@@ -842,16 +892,18 @@ a:hover{color:#cbb96b}
     <div style="max-width:1280px;margin:0 auto;padding:{{ secPad }}">
 
       <!-- SZTAB SZKOLENIOWY -->
-      <div data-reveal="1" style="margin-bottom:{{ staffGap }}">
+      <div style="margin-bottom:{{ staffGap }}">
+        <div data-reveal-head="1">
         <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.18em;color:#E2092F;display:block" style-before="content:'';display:block;width:34px;height:4px;background:#E2092F;margin-bottom:12px">PRZY DRUŻYNIE</span>
         <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:{{ h2Size }};text-transform:uppercase;line-height:.95;margin:10px 0 0;letter-spacing:.01em;color:#121216">Sztab szkoleniowy</h2>
         <div style="height:4px;width:96px;background:#B7A85C;margin:18px 0 24px"></div>
+        </div>
         <sc-if value="{{ hasStaff }}" hint-placeholder-val="{{ false }}">
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax({{ playerMin }},1fr));gap:14px">
           <sc-for list="{{ staffList }}" as="m" hint-placeholder-count="0">
             <div data-reveal-item="1" onMouseEnter="{{ m.onEnter }}" onMouseLeave="{{ m.onLeave }}" style="background:#FFFFFF;border:1px solid rgba(18,18,22,.13);box-shadow:0 1px 3px rgba(18,18,22,.07);display:flex;flex-direction:column" style-hover="border:1px solid #E2092F;box-shadow:0 3px 10px rgba(18,18,22,.13)">
               <div style="position:relative;aspect-ratio:3/4;overflow:hidden;background:#EBE7DC">
-                <img src="{{ m.photo }}" alt="{{ m.name }} — {{ m.role }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:{{ m.stillOpacity }};transition:opacity .28s ease">
+                <img src="{{ m.photo }}" alt="{{ m.photoAlt }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:{{ m.stillOpacity }};transition:opacity .28s ease">
                 <sc-if value="{{ m.hasAction }}" hint-placeholder-val="{{ false }}">
                   <img src="{{ m.photoAction }}" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:{{ m.actionOpacity }};transition:opacity .28s ease">
                 </sc-if>
@@ -877,16 +929,18 @@ a:hover{color:#cbb96b}
       </div>
 
       <!-- ZARZĄD -->
-      <div data-reveal="1">
+      <div>
+        <div data-reveal-head="1">
         <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.18em;color:#E2092F;display:block" style-before="content:'';display:block;width:34px;height:4px;background:#E2092F;margin-bottom:12px">KTO PROWADZI KLUB</span>
         <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:{{ h2Size }};text-transform:uppercase;line-height:.95;margin:10px 0 0;letter-spacing:.01em;color:#121216">Zarząd</h2>
         <div style="height:4px;width:96px;background:#B7A85C;margin:18px 0 24px"></div>
+        </div>
         <sc-if value="{{ hasBoard }}" hint-placeholder-val="{{ false }}">
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax({{ playerMin }},1fr));gap:14px">
           <sc-for list="{{ boardList }}" as="m" hint-placeholder-count="0">
             <div data-reveal-item="1" onMouseEnter="{{ m.onEnter }}" onMouseLeave="{{ m.onLeave }}" style="background:#FFFFFF;border:1px solid rgba(18,18,22,.13);box-shadow:0 1px 3px rgba(18,18,22,.07);display:flex;flex-direction:column" style-hover="border:1px solid #E2092F;box-shadow:0 3px 10px rgba(18,18,22,.13)">
               <div style="position:relative;aspect-ratio:3/4;overflow:hidden;background:#EBE7DC">
-                <img src="{{ m.photo }}" alt="{{ m.name }} — {{ m.role }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:{{ m.stillOpacity }};transition:opacity .28s ease">
+                <img src="{{ m.photo }}" alt="{{ m.photoAlt }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:{{ m.stillOpacity }};transition:opacity .28s ease">
                 <sc-if value="{{ m.hasAction }}" hint-placeholder-val="{{ false }}">
                   <img src="{{ m.photoAction }}" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:{{ m.actionOpacity }};transition:opacity .28s ease">
                 </sc-if>
@@ -1158,9 +1212,18 @@ a:hover{color:#cbb96b}
         <sc-if value="{{ t.hasItems }}" hint-placeholder-val="{{ false }}">
           <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax({{ sponsorMin }},1fr));gap:12px">
             <sc-for list="{{ t.items }}" as="s" hint-placeholder-count="0">
-              <a href="{{ s.url }}" target="_blank" rel="noopener" style="background:#F6F3EC;border:1px solid rgba(246,243,236,.14);aspect-ratio:3/2;display:flex;align-items:center;justify-content:center;padding:18px">
-                {{ s.logoEl }}
-              </a>
+              <!-- Bez potwierdzonego adresu logo NIE jest odnośnikiem: pusty
+                   href otwierał stronę główną klubu w nowej karcie. -->
+              <sc-if value="{{ s.hasUrl }}" hint-placeholder-val="{{ true }}">
+                <a href="{{ s.url }}" target="_blank" rel="noopener" title="{{ s.name }}" style="background:#F6F3EC;border:1px solid rgba(246,243,236,.14);aspect-ratio:3/2;display:flex;align-items:center;justify-content:center;padding:18px">
+                  {{ s.logoEl }}
+                </a>
+              </sc-if>
+              <sc-if value="{{ s.noUrl }}" hint-placeholder-val="{{ false }}">
+                <div title="{{ s.name }}" style="background:#F6F3EC;border:1px solid rgba(246,243,236,.14);aspect-ratio:3/2;display:flex;align-items:center;justify-content:center;padding:18px">
+                  {{ s.logoEl }}
+                </div>
+              </sc-if>
             </sc-for>
           </div>
         </sc-if>
@@ -1586,7 +1649,7 @@ a:hover{color:#cbb96b}
     <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:32px">
       <div style="background:#1b1b21;border:1px solid rgba(246,243,236,.14);border-left:3px solid #E2092F;padding:18px 20px">
         <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:21px;text-transform:uppercase;display:block;margin-bottom:8px">Formularz kontaktowy</span>
-        <span style="font-family:'Inter',sans-serif;font-weight:500;font-size:14px;line-height:1.65;color:#e6e3db">Imię i nazwisko, adres e-mail, temat i treść wiadomości. Formularz otwiera Twój program pocztowy — wiadomość wysyłasz sam, a my otrzymujemy ją jako zwykłego e-maila na polonia@live.be. Strona nie zapisuje jej u siebie.</span>
+        <span style="font-family:'Inter',sans-serif;font-weight:500;font-size:14px;line-height:1.65;color:#e6e3db">Imię i nazwisko, adres e-mail, temat, treść wiadomości oraz język, w którym przeglądasz stronę. Formularz wysyła je bezpośrednio ze strony przez usługę formularzy naszego dostawcy hostingu (Netlify), która przekazuje zgłoszenie na skrzynkę klubu polonia@live.be i przechowuje jego kopię w panelu administracyjnym strony. Wiadomości usuwamy, gdy sprawa zostaje zamknięta, najpóźniej po dwóch latach.</span>
       </div>
       <div style="background:#1b1b21;border:1px solid rgba(246,243,236,.14);border-left:3px solid #E2092F;padding:18px 20px">
         <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:21px;text-transform:uppercase;display:block;margin-bottom:8px">Pamięć Twojej przeglądarki</span>
@@ -1634,7 +1697,7 @@ a:hover{color:#cbb96b}
     <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:16px;line-height:1.7;color:#e6e3db;margin:0 0 24px;text-wrap:pretty">Korespondencję e-mail przechowujemy tak długo, jak wymaga tego sprawa, której dotyczy, i usuwamy ją, gdy przestaje być potrzebna — najpóźniej po dwóch latach od ostatniego kontaktu, chyba że dotyczy spraw członkowskich lub rozliczeniowych objętych osobnymi terminami. Zapis zgody na cookies wygasa po dwunastu miesiącach, po czym pytamy ponownie. Pozostałe dane w pamięci przeglądarki możesz skasować w każdej chwili, czyszcząc dane strony w ustawieniach przeglądarki lub wycofując zgodę poniżej.</p>
 
     <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:{{ h2Art }};text-transform:uppercase;margin:0 0 14px">Komu przekazujemy dane</h2>
-    <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:16px;line-height:1.7;color:#e6e3db;margin:0 0 24px;text-wrap:pretty">Nie sprzedajemy danych i nie udostępniamy ich do celów marketingowych. Dostęp do nich mogą mieć wyłącznie: dostawca hostingu i poczty w zakresie technicznej obsługi oraz belgijska federacja piłkarska, jeśli zgłaszasz się jako zawodnik i przekazanie zgłoszenia jest konieczne. Ujawnienie danych organom publicznym nastąpi tylko wtedy, gdy wymaga tego prawo.</p>
+    <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:16px;line-height:1.7;color:#e6e3db;margin:0 0 24px;text-wrap:pretty">Nie sprzedajemy danych i nie udostępniamy ich do celów marketingowych. Dostęp do nich mogą mieć wyłącznie: dostawca hostingu i usługi formularzy (Netlify) oraz dostawca poczty w zakresie technicznej obsługi, a także belgijska federacja piłkarska, jeśli zgłaszasz się jako zawodnik i przekazanie zgłoszenia jest konieczne. Osobnym przypadkiem są mapy Google: wczytują się dopiero po Twojej zgodzie, a wtedy Google widzi adres IP Twojego urządzenia. Ujawnienie danych organom publicznym nastąpi tylko wtedy, gdy wymaga tego prawo.</p>
 
     <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:{{ h2Art }};text-transform:uppercase;margin:0 0 14px">Przekazywanie poza Europejski Obszar Gospodarczy</h2>
     <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:16px;line-height:1.7;color:#e6e3db;margin:0 0 24px;text-wrap:pretty">Nie przekazujemy danych celowo poza EOG. Jeśli usługa hostingu lub poczty korzysta z serwerów poza tym obszarem, odbywa się to na podstawie standardowych klauzul umownych zatwierdzonych przez Komisję Europejską lub decyzji stwierdzającej odpowiedni stopień ochrony.</p>
@@ -1744,8 +1807,8 @@ a:hover{color:#cbb96b}
           <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.2em;color:#B7A85C;text-transform:uppercase">Oficjalny partner medialny</span>
           <span style="font-family:'Inter',sans-serif;font-weight:500;font-size:12px;color:#8d8a83">Polskie wiadomości prosto z Belgii</span>
         </div>
-        <a href="https://aktualnosci.be/" target="_blank" rel="noopener" aria-label="Aktualności.be — prosto z Belgii" style="display:block">
-          <img src="assets/partners/aktualnosci-be-bialy.png" alt="Aktualności.be — prosto z Belgii" style="width:clamp(240px,32vw,340px);height:auto;max-height:72px;object-fit:contain;display:block;max-width:100%">
+        <a href="https://aktualnosci.be/" target="_blank" rel="noopener" aria-label="Aktualnosci.be — prosto z Belgii" style="display:block">
+          <img src="assets/partners/aktualnosci-be-bialy.png" alt="Aktualnosci.be — prosto z Belgii" style="width:clamp(240px,32vw,340px);height:auto;max-height:72px;object-fit:contain;display:block;max-width:100%">
         </a>
       </div>
     </div>
@@ -1869,11 +1932,13 @@ class Component extends DCLogic {
     sponsor: { name: '', url: '', tier: 'SPONSORZY' },
     ct: { name: '', email: '', topic: 'Chcę grać w Polonii', msg: '' }, ctErr: '', ctSent: false,
     ctSending: false, ctSentEmail: '', ctSentTopic: '',
-    cookieOpen: false, cookieDetails: false, cookieChoices: { functional: false, analytics: false, marketing: false },
+    cookieOpen: false, cookieDetails: false, cookieChoices: { functional: false, maps: false, analytics: false, marketing: false },
     lang: 'pl',
     vw: typeof window !== 'undefined' ? window.innerWidth : 1280,
     menuOpen: false, hoveredPlayer: null, lightbox: null,
     fbOpen: false,
+    // czy komplet pozycji menu mieści się w pasku (ustala pomiar po renderze)
+    navFits: true,
   };
 
   componentDidMount() {
@@ -1890,6 +1955,11 @@ class Component extends DCLogic {
     this._route();
     this._loadModules();
     this._setupReveal();
+    this._measureNav();
+    this._setTitle();
+    // czcionka Barlow Condensed dojeżdża po pierwszym malowaniu i zmienia
+    // szerokość napisów — mierzymy jeszcze raz, gdy będzie gotowa
+    try { document.fonts && document.fonts.ready.then(() => this._measureNav()); } catch (e) {}
     // Zachęta do Facebooka wjeżdża dopiero, gdy gość zdąży się rozejrzeć.
     this._fbTimer = setTimeout(() => {
       if (!this._fbMuted()) this.setState({ fbOpen: true });
@@ -1908,6 +1978,91 @@ class Component extends DCLogic {
 
   componentDidUpdate() {
     this._setupReveal();
+    this._measureNav();
+    this._setTitle();
+  }
+
+  /* Tytuł karty przeglądarki. Wcześniej każda podstrona miała ten sam napis,
+     więc kilka otwartych zakładek było nie do odróżnienia, a wyniki
+     wyszukiwania i zapisane zakładki nie mówiły, czego dotyczą.
+     Tytuł zmienia się razem z podstroną i z językiem; artykuł, album i sezon
+     biorą własną nazwę. */
+  /* Tytuły wpisów i nazwy albumów są w słowniku jak każdy inny napis, ale do
+     tytułu karty nie trafiają przez DOM — pytamy słownik wprost. */
+  _slownik(txt) {
+    try { return (this.I && this.I.translate) ? this.I.translate(txt, this.state.lang) : txt; }
+    catch (e) { return txt; }
+  }
+
+  _pageTitle() {
+    const s = this.state;
+    const route = s.route;
+    const klub = this._t('FC Polonia Bruksela', 'FC Polonia Bruxelles', 'FC Polonia Brussel', 'FC Polonia Brussels');
+    if (route === 'home') {
+      return this._t(
+        'FC Polonia Bruksela — oficjalna strona klubu',
+        'FC Polonia Bruxelles — site officiel du club',
+        'FC Polonia Brussel — officiële clubwebsite',
+        'FC Polonia Brussels — official club website');
+    }
+    // podstrony z własną nazwą w treści
+    if (route === 'aktualnosci' && s.param) {
+      const n = (this.C && this.C.NEWS || []).find((x) => x.slug === s.param);
+      if (n) return this._slownik(n.title) + ' — ' + klub;
+    }
+    if (route === 'galeria' && s.param) {
+      const g = (this.C && this.C.GALLERIES || []).find((x) => x.key === s.param);
+      if (g) return this._slownik(g.label) + ' — ' + this._t('Galeria', 'Galerie', 'Galerij', 'Gallery') + ' — ' + klub;
+    }
+    if (route === 'archiwum' && s.param) {
+      return this._t('Sezon', 'Saison', 'Seizoen', 'Season') + ' ' + s.param + ' — ' + klub;
+    }
+    const M = {
+      aktualnosci: ['Aktualności', 'Actualités', 'Nieuws', 'News'],
+      mecze: ['Mecze i wyniki', 'Matchs et résultats', 'Wedstrijden en uitslagen', 'Fixtures and results'],
+      tabela: ['Tabela', 'Classement', 'Klassement', 'Table'],
+      druzyna: ['Drużyna', 'Équipe', 'Ploeg', 'Squad'],
+      klub: ['Klub', 'Club', 'Club', 'Club'],
+      historia: ['Historia', 'Histoire', 'Geschiedenis', 'History'],
+      archiwum: ['Archiwum sezonów', 'Archives des saisons', 'Seizoensarchief', 'Season archive'],
+      galeria: ['Galeria', 'Galerie', 'Galerij', 'Gallery'],
+      sponsorzy: ['Sponsorzy i partnerzy', 'Sponsors et partenaires', 'Sponsors en partners', 'Sponsors and partners'],
+      kontakt: ['Kontakt', 'Contact', 'Contact', 'Contact'],
+      prywatnosc: ['Polityka prywatności', 'Politique de confidentialité', 'Privacybeleid', 'Privacy policy'],
+      regulamin: ['Regulamin', 'Conditions d’utilisation', 'Gebruiksvoorwaarden', 'Terms of use'],
+      admin: ['Panel redakcyjny', 'Panneau de rédaction', 'Redactiepaneel', 'Editorial panel'],
+    };
+    const v = M[route];
+    return v ? this._t(v[0], v[1], v[2], v[3]) + ' — ' + klub : klub;
+  }
+
+  _setTitle() {
+    try {
+      const t = this._pageTitle();
+      if (t && document.title !== t) document.title = t;
+    } catch (e) {}
+  }
+
+  /* Czy komplet pozycji menu mieści się w pasku? Mierzymy niewidoczną miarką
+     (`data-nav-probe`), a nie zgadujemy z szerokości okna: francuski i
+     niderlandzki mają dłuższe nazwy niż polski, a rysowanie czcionki różni się
+     między systemami. Gdy brakuje miejsca, wraca hamburger — żadna pozycja nie
+     może zniknąć poza kadrem. Stan zmieniamy tylko przy faktycznej zmianie,
+     inaczej wpadlibyśmy w pętlę renderów. */
+  _measureNav() {
+    const row = document.querySelector('[data-nav-row]');
+    const probe = document.querySelector('[data-nav-probe]');
+    if (!row || !probe) return;
+    const logo = row.querySelector('a[href="#/"]');
+    const cs = getComputedStyle(row);
+    const gap = parseFloat(cs.columnGap || cs.gap || '0') || 0;
+    const wolne = row.clientWidth
+      - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight)
+      - (logo ? logo.getBoundingClientRect().width : 0) - gap;
+    const potrzeba = probe.getBoundingClientRect().width;
+    if (!potrzeba || !wolne) return;
+    const fits = potrzeba <= wolne - 4;              // 4 px zapasu na zaokrąglenia
+    if (fits !== this.state.navFits) this.setState({ navFits: fits });
   }
 
   /* Pojawianie się sekcji przy przewijaniu: bramkarze, obrońcy, pomocnicy,
@@ -1917,39 +2072,92 @@ class Component extends DCLogic {
      animacje" strona po prostu wygląda jak zwykle, nic nie znika.
      Karty wewnątrz sekcji wchodzą kaskadą, jedna po drugiej. */
   _setupReveal() {
-    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) return;
+    if (typeof window === 'undefined') return;
+    // Bez IntersectionObserver i przy „ogranicz animacje" nie ruszamy niczego:
+    // treść zostaje po prostu widoczna. Nic nie chowamy, więc nie ma jak zniknąć.
+    if (!('IntersectionObserver' in window)) return;
     try {
       if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     } catch (e) {}
-    const EASE = 'opacity .55s cubic-bezier(.22,.61,.36,1), transform .55s cubic-bezier(.22,.61,.36,1)';
+
+    const CZAS = 560;          // czas jednej karty (ms) — spokojnie, bez efekciarstwa
+    const KROK = 80;           // odstęp między kolejnymi kartami (ms)
+    const MAX_OPOZNIENIE = 560;
+    const PRZESUNIECIE = '22px';
+    const EASE = `opacity ${CZAS}ms cubic-bezier(.22,.61,.36,1), transform ${CZAS}ms cubic-bezier(.22,.61,.36,1)`;
+
+    const pokaz = (el, opoznienie) => {
+      el.style.transitionDelay = opoznienie + 'ms';
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+      el.setAttribute('data-reveal-done', '1');
+    };
+
     if (!this._revealObs) {
       this._revealObs = new IntersectionObserver((entries, obs) => {
-        entries.forEach((en) => {
-          if (!en.isIntersecting) return;
-          obs.unobserve(en.target);
-          const el = en.target;
-          el.style.opacity = '1';
-          el.style.transform = 'none';
-          el.querySelectorAll('[data-reveal-item]').forEach((it, i) => {
-            it.style.transitionDelay = Math.min(i * 55, 420) + 'ms';
-            it.style.opacity = '1';
-            it.style.transform = 'none';
-          });
+        // Wszystko, co weszło w kadr w tym samym momencie, tworzy jedną falę:
+        // sortujemy po pozycji (najpierw wyżej, potem od lewej do prawej), więc
+        // nagłówek sekcji rusza pierwszy, a karty idą rzędami. Przy powolnym
+        // przewijaniu fala to jeden rząd, przy szybkim — cała sekcja naraz.
+        const weszly = entries.filter((en) => en.isIntersecting).map((en) => en.target);
+        if (!weszly.length) return;
+        weszly.forEach((el) => obs.unobserve(el));
+        weszly.sort((a, b) => {
+          const ra = a.getBoundingClientRect(), rb = b.getBoundingClientRect();
+          const dy = Math.round(ra.top / 24) - Math.round(rb.top / 24);   // ten sam rząd = ta sama „szuflada"
+          return dy !== 0 ? dy : ra.left - rb.left;
         });
-      }, { threshold: 0.06, rootMargin: '0px 0px -10% 0px' });
+        weszly.forEach((el, i) => pokaz(el, Math.min(i * KROK, MAX_OPOZNIENIE)));
+      }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
     }
-    document.querySelectorAll('[data-reveal]:not([data-reveal-on])').forEach((el) => {
-      el.setAttribute('data-reveal-on', '1');
-      el.style.transition = EASE;
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(18px)';
-      el.querySelectorAll('[data-reveal-item]').forEach((it) => {
-        it.style.transition = EASE;
-        it.style.opacity = '0';
-        it.style.transform = 'translateY(14px)';
-      });
-      this._revealObs.observe(el);
+
+    const doAnimacji = document.querySelectorAll('[data-reveal-head]:not([data-reveal-on]), [data-reveal-item]:not([data-reveal-on])');
+    doAnimacji.forEach((el) => {
+      try {
+        el.setAttribute('data-reveal-on', '1');
+        el.style.transition = EASE;
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(' + PRZESUNIECIE + ')';
+        this._revealObs.observe(el);
+      } catch (e) {
+        // gdyby cokolwiek zawiodło, element ma zostać widoczny
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+      }
     });
+
+    // Siatka bezpieczeństwa. Przy bardzo szybkim przewijaniu (albo skoku do
+    // kotwicy) obserwator potrafi nie zdążyć zgłosić elementu, który przemknął
+    // przez kadr. Dlatego po każdym przewinięciu i raz po chwili sprawdzamy, czy
+    // nie został gdzieś nad krawędzią ekranu ktoś niewidoczny — i pokazujemy go
+    // bez zwłoki. Lepiej pokazać kartę bez animacji niż zostawić pustą dziurę.
+    const dosprzataj = (takze_widoczne) => {
+      const h = window.innerHeight || 0;
+      document.querySelectorAll('[data-reveal-on]:not([data-reveal-done])').forEach((el) => {
+        const r = el.getBoundingClientRect();
+        // przy przewijaniu ratujemy tylko to, co JUŻ przelecialo nad kadrem;
+        // tego, co właśnie wchodzi, nie dotykamy — od tego jest obserwator
+        // i jego kaskada
+        const przelecialo = r.bottom < 0;
+        const wKadrze = r.top < h * 0.98 && r.bottom > 0;
+        if (przelecialo || (takze_widoczne && wKadrze)) {
+          if (this._revealObs) this._revealObs.unobserve(el);
+          pokaz(el, 0);
+        }
+      });
+    };
+    if (!this._revealSweepBound) {
+      this._revealSweepBound = () => {
+        if (this._revealRaf) return;
+        this._revealRaf = requestAnimationFrame(() => { this._revealRaf = 0; dosprzataj(false); });
+      };
+      window.addEventListener('scroll', this._revealSweepBound, { passive: true });
+      window.addEventListener('resize', this._revealSweepBound, { passive: true });
+    }
+    // po chwili domykamy też to, co siedzi w kadrze, a obserwator z jakiegoś
+    // powodu tego nie zgłosił — pusta karta jest gorsza niż brak animacji
+    clearTimeout(this._revealSweepTimer);
+    this._revealSweepTimer = setTimeout(() => dosprzataj(true), 1400);
   }
 
   /* Import modułów danych. W pliku spakowanym do jednego HTML-a pierwszy
@@ -1966,9 +2174,11 @@ class Component extends DCLogic {
       this.I = I;
       const lang = I.getLang();
       this.setState({ lang });
+      // Warstwa danych sama składa daty („13 września 2026") — musi znać język
+      L.setLocale(lang);
       setTimeout(() => I.applyLang(lang), 60);
       this.C = C; this.L = L; this.A = A; this.K = K;
-      this.setState({ cookieOpen: !K.hasDecided(), cookieChoices: { functional: false, analytics: false, marketing: false } });
+      this.setState({ cookieOpen: !K.hasDecided(), cookieChoices: { functional: false, maps: false, analytics: false, marketing: false } });
       this.setState({ logged: A.isLoggedIn() });
       this.setState({ ready: true, live: L.getState(), cfg: L.getConfig() });
       this._stop = L.startAutoSync((st, r) => this.setState({
@@ -1989,6 +2199,7 @@ class Component extends DCLogic {
   }
 
   _onKey = (e) => {
+    if (e.key === 'Escape' && this.state.menuOpen) this.setState({ menuOpen: false });
     if (!this.state.lightbox) return;
     if (e.key === 'Escape') this.setState({ lightbox: null });
     else if (e.key === 'ArrowRight') this._lbStep(1);
@@ -2000,6 +2211,11 @@ class Component extends DCLogic {
     window.removeEventListener('resize', this._onResize);
     window.removeEventListener('keydown', this._onKey);
     if (this._revealObs) this._revealObs.disconnect();
+    if (this._revealSweepBound) {
+      window.removeEventListener('scroll', this._revealSweepBound);
+      window.removeEventListener('resize', this._revealSweepBound);
+    }
+    clearTimeout(this._revealSweepTimer);
     if (this._fbTimer) clearTimeout(this._fbTimer);
     if (this._stop) this._stop();
   }
@@ -2045,6 +2261,12 @@ class Component extends DCLogic {
     }, init);
   }
 
+  /* Czy gość zgodził się na osadzone mapy Google? Czytamy zgodę przy każdym
+     renderze — po zmianie w ustawieniach mapa znika lub wraca od razu. */
+  _mapsAllowed() {
+    try { return Boolean(this.K && this.K.allowed('maps')); } catch (e) { return false; }
+  }
+
   _fixtureVM(f) {
     if (!f) return null;
     const L = this.L;
@@ -2086,6 +2308,27 @@ class Component extends DCLogic {
     };
   }
 
+  /* Napisy składane w kodzie (liczebniki, podsumowania) nie przechodzą przez
+     słownik — ten dopasowuje gotowe zdania. Dlatego wybór języka robimy tutaj. */
+  /* Nazwa pozycji w liczbie pojedynczej — do opisu alternatywnego zdjęcia.
+     POSITION_GROUPS trzyma formy mnogie („BRAMKARZE"), a w opisie zdjęcia
+     naturalna jest pojedyncza. */
+  _pozycjaLp(key) {
+    const M = {
+      GK: ['Bramkarz', 'Gardien de but', 'Doelman', 'Goalkeeper'],
+      DF: ['Obrońca', 'Défenseur', 'Verdediger', 'Defender'],
+      MF: ['Pomocnik', 'Milieu de terrain', 'Middenvelder', 'Midfielder'],
+      FW: ['Napastnik', 'Attaquant', 'Aanvaller', 'Forward'],
+    };
+    const v = M[key] || ['Zawodnik', 'Joueur', 'Speler', 'Player'];
+    return this._t(v[0], v[1], v[2], v[3]);
+  }
+
+  _t(pl, fr, nl, en) {
+    const l = this.state.lang;
+    return l === 'fr' ? fr : l === 'nl' ? nl : l === 'en' ? en : pl;
+  }
+
   _rowVM(r, preSeason) {
     return {
       ...r,
@@ -2112,20 +2355,26 @@ class Component extends DCLogic {
     return {
       isMob: mob, isSmall: small, isTablet: tab,
       isDesk: !mob,
-      /* Hamburger także na tablecie — jedenaście pozycji nie zmieści się
-         w pasku poniżej 1025 px, a poziomy scroll nawigacji jest niewygodny. */
-      navBurger: w <= 1024,
-      navBar: w > 1024,
+      /* O tym, czy pokazać pasek linków, nie decyduje sama szerokość okna,
+         tylko wynik pomiaru z `_measureNav()`: komplet jedenastu pozycji musi
+         zmieścić się obok logo BEZ ucinania. Poniżej 1280 px nie mieści się w
+         żadnym z czterech języków, więc tam od razu idzie hamburger — wyżej
+         rozstrzyga pomiar. Wcześniej pasek miał `overflow-x:auto` i wyrównanie
+         do prawej, przez co pierwsze pozycje („Start", „Aktualności") po prostu
+         znikały poza kadrem, i to na KAŻDEJ szerokości, bo wiersz nawigacji
+         jest węższy niż suma linków. */
+      navBurger: !(w >= 1280 && this.state.navFits),
+      navBar: w >= 1280 && this.state.navFits,
       menuOpen: this.state.menuOpen,
       menuClosed: !this.state.menuOpen,
-      mobileMenuVisible: w <= 1024 && this.state.menuOpen,
+      mobileMenuVisible: !(w >= 1280 && this.state.navFits) && this.state.menuOpen,
       onMenuToggle: () => this.setState({ menuOpen: !this.state.menuOpen }),
       onMenuClose: () => this.setState({ menuOpen: false }),
       /* nagłówek */
-      crestSize: mob ? (small ? '34px' : '38px') : '44px',
+      crestSize: mob ? (small ? '34px' : '38px') : (w < 1440 ? '38px' : '44px'),
       navPadY: mob ? '7px' : '10px',
       brandTop: mob ? '12px' : '15px',
-      brandMain: mob ? (small ? '17px' : '19px') : '23px',
+      brandMain: mob ? (small ? '17px' : '19px') : (w < 1440 ? '20px' : '23px'),
       /* hero */
       heroMinH: mob ? '380px' : 'clamp(460px,72vh,720px)',
       heroPad: mob ? '26px 18px 28px' : 'clamp(48px,9vw,96px) clamp(16px,4vw,48px)',
@@ -2219,10 +2468,23 @@ class Component extends DCLogic {
       statusFs: mob ? '12px' : '11px',
       statusIndent: mob ? '18px' : '0',
       /* skrócona tabela: telefon = #, drużyna, M, PKT */
-      miniFull: !mob,
-      miniCols: mob ? '32px minmax(0,1fr) 38px 46px' : '36px minmax(0,1fr) 34px 34px 34px 34px 56px 42px',
+      /* ostatni mecz: na telefonie kolumna, na desktopie klasyczne „u siebie
+         — wynik — gość" */
+      lastCols: mob ? '1fr' : '1fr auto 1fr',
+      lastJustify: mob ? 'center' : 'stretch',
+      lastAlignHome: mob ? 'center' : 'right',
+      lastAlignAway: mob ? 'center' : 'left',
+      /* Skrócona tabela na stronie głównej siedzi w wąskiej kolumnie siatki,
+         więc komplet ośmiu kolumn ma sens dopiero powyżej 1024 px. Niżej
+         zostają cztery: miejsce, drużyna, rozegrane mecze i punkty — i mieszczą
+         się bez przewijania nawet na ekranie 320 px. */
+      miniFull: w > 1024,
+      miniCols: w > 1024 ? '36px minmax(0,1fr) 34px 34px 34px 34px 56px 42px' : '32px minmax(0,1fr) 38px 46px',
       miniTeamFs: mob ? '13px' : '14px',
-      miniMinW: mob ? '0' : '440px',
+      miniMinW: w > 1024 ? '440px' : '0',
+      // Pełna klasyfikacja ma dziewięć kolumn i na telefonie musi się przewijać
+      // w swoim kontenerze — ale nie wolno jej rozpychać całej strony.
+      fullTableMinW: mob ? '560px' : '640px',
       badgeJustify: mob ? 'flex-start' : 'flex-end',
       badgeMt: mob ? '4px' : '0',
       staffGap: mob ? '34px' : '52px',
@@ -2366,7 +2628,13 @@ class Component extends DCLogic {
       }));
       return {
         ...g, preview,
-        countLabel: n ? (n + (n === 1 ? ' zdjęcie' : (n < 5 ? ' zdjęcia' : ' zdjęć'))) : 'w przygotowaniu',
+        countLabel: n
+          ? this._t(
+              n + (n === 1 ? ' zdjęcie' : (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? ' zdjęcia' : ' zdjęć')),
+              n + (n === 1 ? ' photo' : ' photos'),
+              n + (n === 1 ? ' foto' : " foto's"),
+              n + (n === 1 ? ' photo' : ' photos'))
+          : this._t('w przygotowaniu', 'en préparation', 'in voorbereiding', 'in preparation'),
       };
     });
     /* Miks na stronie głównej: po jednym kadrze z każdego albumu, w losowej
@@ -2410,6 +2678,14 @@ class Component extends DCLogic {
           noName: !nm2,
           hasNumber: Boolean(p.number),
           positionLabel: g.label,
+          /* Opis alternatywny budujemy z danych zawodnika. Wcześniej każde
+             zdjęcie — także obrońcy czy napastnika — miało wpisane na sztywno
+             „Bramkarz FC Polonia Bruksela", co dla czytnika ekranu jest
+             informacją nieprawdziwą. Gdy nazwisko nie jest jeszcze wpisane,
+             zostaje sama pozycja. */
+          photoAlt: nm2
+            ? nm2 + ' — ' + this._pozycjaLp(g.key) + ', FC Polonia Bruksela'
+            : this._pozycjaLp(g.key) + ' FC Polonia Bruksela',
           photoId: p.photoId || 'player-' + key,
           hasPhoto: Boolean(p.photo),
           noPhoto: !p.photo,
@@ -2420,7 +2696,13 @@ class Component extends DCLogic {
           onLeave: () => this.setState({ hoveredPlayer: null }),
         };
       });
-      return { ...g, players, hasPlayers: players.length > 0, empty: players.length === 0, countLabel: players.length + ' ZAWODNIKÓW' };
+      const n = players.length;
+      const countLabel = this._t(
+        n + (n === 1 ? ' ZAWODNIK' : ' ZAWODNIKÓW'),
+        n + (n === 1 ? ' JOUEUR' : ' JOUEURS'),
+        n + (n === 1 ? ' SPELER' : ' SPELERS'),
+        n + (n === 1 ? ' PLAYER' : ' PLAYERS'));
+      return { ...g, players, hasPlayers: n > 0, empty: n === 0, countLabel };
     });
 
     const people = (list, prefix) => (list || []).map((x, i) => {
@@ -2429,6 +2711,10 @@ class Component extends DCLogic {
       return {
         ...x,
         name: ((x.first || '') + ' ' + (x.last || '')).trim(),
+        // alt: „Imię Nazwisko — rola, FC Polonia Bruksela"; gdy brakuje
+        // którejś części, opis skraca się sam, zamiast zostawiać myślnik
+        photoAlt: [((x.first || '') + ' ' + (x.last || '')).trim(), x.role]
+          .filter(Boolean).join(' — ') + ', FC Polonia Bruksela',
         hasPhoto: Boolean(x.photo),
         noPhoto: !x.photo,
         hasAction: Boolean(x.photoAction),
@@ -2446,6 +2732,8 @@ class Component extends DCLogic {
     const sponsorTiers = (C.SPONSOR_TIERS || []).map((label) => {
       const items = sponsors.filter((x) => x.tier === label).map((x) => ({
         ...x,
+        hasUrl: Boolean(x.url && String(x.url).trim()),
+        noUrl: !(x.url && String(x.url).trim()),
         logoEl: x.logo ? React.createElement('img', {
           src: x.logo, alt: x.name || '', loading: 'lazy',
           style: { maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' },
@@ -2461,21 +2749,41 @@ class Component extends DCLogic {
     // Kategorie bez partnerów w ogóle się nie pokazują — pusty nagłówek z
     // dopiskiem „miejsce wolne" wyglądał jak niedokończona strona.
     }).filter((t) => t.hasItems);
+    // Strona główna pokazuje ten sam zestaw, w kolejności kategorii.
+    const homeSponsors = sponsorTiers.flatMap((t) => t.items);
 
     /* Przed startem sezonu nie pokazujemy pozycji: przy komplecie zer numer
        miejsca jest przypadkowy, a „1 miejsce" wprowadzałoby w błąd. */
     const preSeason = table.length > 0 && (table.every((r) => r.played === 0) || (pRow && pRow.played === 0));
     const firstMatch = pFix.find((f) => f.status !== 'played');
-    let posSummary = 'Pozycja przeliczana automatycznie z aktualnej klasyfikacji.';
+    let posSummary = this._t(
+      'Pozycja przeliczana automatycznie z aktualnej klasyfikacji.',
+      'La position est calculée automatiquement à partir du classement en cours.',
+      'De positie wordt automatisch berekend uit het huidige klassement.',
+      'The position is calculated automatically from the current standings.');
     if (preSeason) {
       posSummary = firstMatch
-        ? 'Sezon rozpoczynamy ' + L.fixtureDate(firstMatch) + '. Po pierwszym gwizdku tabela wypełni się sama.'
-        : 'Sezon jeszcze się nie rozpoczął. Po pierwszej kolejce tabela wypełni się sama.';
+        ? this._t(
+            'Sezon rozpoczynamy ' + L.fixtureDate(firstMatch) + '. Po pierwszym gwizdku tabela wypełni się sama.',
+            'La saison commence le ' + L.fixtureDate(firstMatch) + '. Le classement se remplira dès le premier coup de sifflet.',
+            'Het seizoen begint op ' + L.fixtureDate(firstMatch) + '. Na het eerste fluitsignaal vult het klassement zichzelf.',
+            'The season starts on ' + L.fixtureDate(firstMatch) + '. The table fills itself after the first whistle.')
+        : this._t(
+            'Sezon jeszcze się nie rozpoczął. Po pierwszej kolejce tabela wypełni się sama.',
+            'La saison n’a pas encore commencé. Le classement se remplira après la première journée.',
+            'Het seizoen is nog niet begonnen. Na de eerste speeldag vult het klassement zichzelf.',
+            'The season has not started yet. The table fills itself after the first matchday.');
     } else if (pRow) {
       // Odmiana po liczbie: 1 spotkaniu / 2 spotkaniach — polszczyzna nie
-      // wybacza „po 1 spotkaniach".
+      // wybacza „po 1 spotkaniach". Skróty Z/R/P też są językowe: po
+      // francusku V/N/D, po niderlandzku W/G/V, po angielsku W/D/L.
       const meczy = pRow.played === 1 ? 'spotkaniu' : 'spotkaniach';
-      posSummary = pRow.points + ' pkt po ' + pRow.played + ' ' + meczy + ' · ' + pRow.won + 'Z ' + pRow.drawn + 'R ' + pRow.lost + 'P · bramki ' + pRow.gf + ':' + pRow.ga + '.';
+      const bramki = pRow.gf + ':' + pRow.ga;
+      posSummary = this._t(
+        pRow.points + ' pkt po ' + pRow.played + ' ' + meczy + ' · ' + pRow.won + 'Z ' + pRow.drawn + 'R ' + pRow.lost + 'P · bramki ' + bramki + '.',
+        pRow.points + ' pts en ' + pRow.played + (pRow.played === 1 ? ' match' : ' matchs') + ' · ' + pRow.won + 'V ' + pRow.drawn + 'N ' + pRow.lost + 'D · buts ' + bramki + '.',
+        pRow.points + ' ptn na ' + pRow.played + (pRow.played === 1 ? ' wedstrijd' : ' wedstrijden') + ' · ' + pRow.won + 'W ' + pRow.drawn + 'G ' + pRow.lost + 'V · doelpunten ' + bramki + '.',
+        pRow.points + ' pts from ' + pRow.played + (pRow.played === 1 ? ' match' : ' matches') + ' · ' + pRow.won + 'W ' + pRow.drawn + 'D ' + pRow.lost + 'L · goals ' + bramki + '.');
     }
 
     return {
@@ -2572,6 +2880,7 @@ class Component extends DCLogic {
       matchList: list.map((f) => {
         const vm = this._fixtureVM(f);
         const open = s.openMatch === f.id;
+        const mapsOk = this._mapsAllowed();
         return {
           ...vm,
           isOpen: open,
@@ -2640,6 +2949,13 @@ class Component extends DCLogic {
           isUpcoming: !f.score,
           mapUrl: f.venue ? 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(f.venue) : '',
           mapEmbed: f.venue ? 'https://www.google.com/maps?q=' + encodeURIComponent(f.venue) + '&z=15&output=embed' : '',
+          /* Osadzona mapa to połączenie z serwerami Google — wczytujemy ją
+             DOPIERO po zgodzie na kategorię „Mapy Google". Bez zgody pokazujemy
+             adres obiektu, przycisk wczytania i zwykły odnośnik do map, więc
+             informacja o dojeździe pozostaje dostępna. Wycofanie zgody w
+             ustawieniach prywatności natychmiast chowa mapę z powrotem. */
+          mapAllowed: Boolean(f.venue) && mapsOk,
+          mapBlocked: Boolean(f.venue) && !mapsOk,
           // link nie może zwijać wiersza, w którym siedzi
           stopRow: (e) => e.stopPropagation(),
           kickoffFull: vm.dayStr + ', ' + vm.dateStr + ' · ' + vm.timeStr,
@@ -2720,6 +3036,7 @@ class Component extends DCLogic {
       ].map(([href, label, key]) => ({
         href, label,
         isCurrent: route === key,
+        ariaCurrent: route === key ? 'page' : undefined,
         fg: route === key ? '#B7A85C' : '#F6F3EC',
         bd: route === key ? '#E2092F' : 'transparent',
         onPick: () => this.setState({ menuOpen: false }),
@@ -2733,6 +3050,7 @@ class Component extends DCLogic {
         bd2: l.code === s.lang ? '#B7A85C' : 'rgba(246,243,236,.25)',
         onPick: () => {
           this.I.setLang(l.code);
+          if (this.L && this.L.setLocale) this.L.setLocale(l.code);
           this.setState({ lang: l.code });
           this.I.applyLang(l.code);
         },
@@ -2780,11 +3098,20 @@ class Component extends DCLogic {
         const c = this.K.getConsent();
         this.setState({
           cookieOpen: true, cookieDetails: true,
-          cookieChoices: c ? { functional: c.choices.functional, analytics: c.choices.analytics, marketing: c.choices.marketing }
+          cookieChoices: c ? { functional: c.choices.functional, maps: c.choices.maps, analytics: c.choices.analytics, marketing: c.choices.marketing }
                            : { functional: false, analytics: false, marketing: false },
         });
       },
-      onCookieWithdraw: () => { this.K.withdraw(); this.setState({ cookieOpen: true, cookieDetails: true, cookieChoices: { functional: false, analytics: false, marketing: false } }); },
+      /* „Wczytaj mapę" = świadoma zgoda na osadzone mapy Google. Zapisujemy ją
+         jak każdą inną decyzję (z datą i zakresem), zachowując wcześniejsze
+         wybory gościa; wycofać można ją w ustawieniach prywatności. */
+      onAllowMaps: () => {
+        const c = this.K ? this.K.getConsent() : null;
+        const wybory = c ? { ...c.choices, maps: true } : { functional: false, maps: true, analytics: false, marketing: false };
+        if (this.K) this.K.saveChoices(wybory);
+        this.setState({ cookieChoices: { functional: !!wybory.functional, maps: true, analytics: !!wybory.analytics, marketing: !!wybory.marketing } });
+      },
+      onCookieWithdraw: () => { this.K.withdraw(); this.setState({ cookieOpen: true, cookieDetails: true, cookieChoices: { functional: false, maps: false, analytics: false, marketing: false } }); },
       ctName: s.ct.name, ctEmail: s.ct.email, ctTopic: s.ct.topic, ctMsg: s.ct.msg,
       // Pływająca zachęta: nie wchodzi w drogę banerowi zgód ani podglądowi
       // zdjęć — te mają pierwszeństwo i własną warstwę.
@@ -2856,6 +3183,7 @@ class Component extends DCLogic {
       })),
       seasons, seasonDetail,
       galleries, albums, album, homeGallery, positionGroups, sponsorTiers,
+      homeSponsors, hasHomeSponsors: homeSponsors.length > 0,
       albumGap: s.vw <= 767 ? '26px' : '38px',
       albumTitleFs: s.vw <= 767 ? '26px' : 'clamp(24px,3.2vw,36px)',
       lb: (() => {

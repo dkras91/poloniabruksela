@@ -137,6 +137,131 @@ const T = {
     'Speler van FC Polonia Brussel met clubsjaal op de tribune',
     'FC Polonia Brussels player holding the club scarf in the stands',
   ],
+  /* --- mapa dojazdu i zgoda na mapy Google --- */
+  'MAPA DOJAZDU': ['PLAN D’ACCÈS', 'ROUTEKAART', 'HOW TO GET THERE'],
+  'WCZYTAJ MAPĘ': ['CHARGER LA CARTE', 'KAART LADEN', 'LOAD THE MAP'],
+  'Mapa pochodzi z serwerów Google, dlatego nie wczytujemy jej bez Twojej zgody. Kliknięcie „Wczytaj mapę" włącza kategorię „Mapy Google" — możesz ją wyłączyć w ustawieniach prywatności w stopce.': [
+    'La carte provient des serveurs de Google : nous ne la chargeons donc pas sans votre accord. Cliquer sur « Charger la carte » active la catégorie « Cartes Google » — vous pouvez la désactiver dans les paramètres de confidentialité, en bas de page.',
+    'De kaart komt van de servers van Google, daarom laden we ze niet zonder jouw toestemming. Klikken op „Kaart laden" schakelt de categorie „Google Maps" in — je kunt ze uitzetten in de privacy-instellingen onderaan de pagina.',
+    'The map comes from Google’s servers, so we do not load it without your consent. Clicking “Load the map” switches on the “Google Maps” category — you can turn it off in the privacy settings in the footer.'],
+  'Mapy Google': ['Cartes Google', 'Google Maps', 'Google Maps'],
+  'Pozwalają wczytać osadzoną mapę dojazdu na stadion. Mapa pochodzi z serwerów Google, które przy jej pobraniu widzą Twój adres IP i mogą zapisać własne pliki. Bez zgody pokazujemy sam adres obiektu i odnośnik do map — treść pozostaje dostępna.': [
+    'Elles permettent de charger la carte d’accès au stade. La carte provient des serveurs de Google, qui voient alors l’adresse IP de votre appareil et peuvent déposer leurs propres fichiers. Sans consentement, nous affichons uniquement l’adresse du stade et un lien vers les cartes — le contenu reste accessible.',
+    'Hiermee kan de ingesloten routekaart naar het stadion geladen worden. De kaart komt van de servers van Google, die daarbij je IP-adres zien en eigen bestanden kunnen plaatsen. Zonder toestemming tonen we alleen het adres van het terrein en een link naar de kaarten — de inhoud blijft beschikbaar.',
+    'These let the embedded map to the ground load. The map comes from Google’s servers, which then see your IP address and may store their own files. Without consent we show only the venue address and a link to the maps — the content stays available.'],
+  'Osadzone mapy Google w szczegółach meczu (wczytywane dopiero po zgodzie).': [
+    'Cartes Google intégrées dans le détail des matchs (chargées uniquement après consentement).',
+    'Ingesloten Google Maps-kaarten in de wedstrijddetails (pas geladen na toestemming).',
+    'Embedded Google Maps in the match details (loaded only after consent).'],
+
+  /* --- kategorie wpisów, nagłówki sekcji, etykiety --- */
+  'AKTUALNOŚCI': ['ACTUALITÉS', 'NIEUWS', 'NEWS'],
+  '← AKTUALNOŚCI': ['← ACTUALITÉS', '← NIEUWS', '← NEWS'],
+  'MECZ': ['MATCH', 'WEDSTRIJD', 'MATCH'],
+  'WYNIK': ['RÉSULTAT', 'UITSLAG', 'RESULT'],
+  'TRANSFER': ['TRANSFERT', 'TRANSFER', 'TRANSFER'],
+  'SPONSORZY': ['SPONSORS', 'SPONSORS', 'SPONSORS'],
+  'ARCHIWUM': ['ARCHIVES', 'ARCHIEF', 'ARCHIVE'],
+  'HISTORIA': ['HISTOIRE', 'GESCHIEDENIS', 'HISTORY'],
+  'KLUB': ['CLUB', 'CLUB', 'CLUB'],
+  'NAJBLIŻSZY MECZ ·': ['PROCHAIN MATCH ·', 'VOLGENDE WEDSTRIJD ·', 'NEXT MATCH ·'],
+  'PIERWSZY ZESPÓŁ · SEZON': ['ÉQUIPE PREMIÈRE · SAISON', 'EERSTE ELFTAL · SEIZOEN', 'FIRST TEAM · SEASON'],
+  'PRZY DRUŻYNIE': ['AUTOUR DE L’ÉQUIPE', 'ROND DE PLOEG', 'AROUND THE TEAM'],
+  'KTO PROWADZI KLUB': ['QUI DIRIGE LE CLUB', 'WIE LEIDT DE CLUB', 'WHO RUNS THE CLUB'],
+  'KIM JESTEŚMY': ['QUI SOMMES-NOUS', 'WIE WIJ ZIJN', 'WHO WE ARE'],
+  'DO WERYFIKACJI ARCHIWALNEJ': ['À VÉRIFIER DANS LES ARCHIVES', 'NOG TE VERIFIËREN IN HET ARCHIEF', 'TO BE VERIFIED IN THE ARCHIVES'],
+  'CZEGO JESZCZE NIE POTWIERDZILIŚMY': ['CE QUE NOUS N’AVONS PAS ENCORE CONFIRMÉ', 'WAT WE NOG NIET BEVESTIGD HEBBEN', 'WHAT WE HAVE NOT CONFIRMED YET'],
+  'ŹRÓDŁA I ARCHIWA': ['SOURCES ET ARCHIVES', 'BRONNEN EN ARCHIEVEN', 'SOURCES AND ARCHIVES'],
+  'NAPISZ DO NAS': ['ÉCRIVEZ-NOUS', 'SCHRIJF ONS', 'WRITE TO US'],
+  'Napisz do nas': ['Écrivez-nous', 'Schrijf ons', 'Write to us'],
+  'ZOBACZ GALERIĘ →': ['VOIR LA GALERIE →', 'BEKIJK DE GALERIJ →', 'VIEW GALLERY →'],
+  'Nr przedsiębiorstwa:': ['N° d’entreprise :', 'Ondernemingsnummer:', 'Company number:'],
+  'polityce prywatności': ['la politique de confidentialité', 'het privacybeleid', 'the privacy policy'],
+  'Społeczność': ['Communauté', 'Gemeenschap', 'Community'],
+  '— uzupełnimy archiwum.': ['— nous compléterons les archives.', '— we vullen het archief aan.', '— we will add it to the archive.'],
+
+  /* --- skróty kolumn tabeli i litery formy --- */
+  'Z': ['V', 'W', 'W'],
+  'R': ['N', 'G', 'D'],
+  'P': ['D', 'V', 'L'],
+
+  /* --- oś czasu na podstronie Historia --- */
+  'Klub z potrzeby wspólnoty': ['Un club né du besoin de communauté', 'Een club uit behoefte aan gemeenschap', 'A club born of a need for community'],
+  'Lata w federacji amatorskiej': ['Les années en fédération amateur', 'De jaren in de amateurbond', 'The years in the amateur federation'],
+  'Boitsfort: pierwsze sezony w federacji': ['Boitsfort : les premières saisons en fédération', 'Boitsfort: de eerste seizoenen in de bond', 'Boitsfort: the first seasons in the federation'],
+  'Nie tylko piłka': ['Pas seulement du football', 'Niet alleen voetbal', 'More than football'],
+  'Powrót Brukseli do nazwy': ['Le retour de Bruxelles dans le nom', 'Brussel keert terug in de naam', 'Brussels returns to the name'],
+  'Czterdzieści lat': ['Quarante ans', 'Veertig jaar', 'Forty years'],
+
+  /* --- krótkie opisy i teksty pomocnicze --- */
+  'Polonijny klub piłkarski w Brukseli od 1986 roku.': [
+    'Le club de football de la communauté polonaise à Bruxelles depuis 1986.',
+    'De voetbalclub van de Poolse gemeenschap in Brussel sinds 1986.',
+    'The Polish community football club in Brussels since 1986.'],
+  'Polskie wiadomości prosto z Belgii': ['L’actualité polonaise depuis la Belgique', 'Pools nieuws rechtstreeks uit België', 'Polish news straight from Belgium'],
+  'Archiwalne fotografie klubu z lat 1986–2015.': [
+    'Photographies d’archives du club, 1986–2015.',
+    'Archieffoto’s van de club, 1986–2015.',
+    'Archive photographs of the club, 1986–2015.'],
+  'Album zostanie wkrótce uzupełniony zdjęciami z archiwum klubu.': [
+    'Cet album sera bientôt complété par des photos issues des archives du club.',
+    'Dit album wordt binnenkort aangevuld met foto’s uit het clubarchief.',
+    'This album will soon be filled with photos from the club archive.'],
+  'Miejsce meczów domowych po wejściu klubu do rozgrywek federacji.': [
+    'Lieu des matchs à domicile après l’entrée du club dans les compétitions de la fédération.',
+    'Locatie van de thuiswedstrijden na de toetreding van de club tot de bondscompetities.',
+    'Home venue after the club joined the federation’s competitions.'],
+  'Boisko syntetyczne. Adres widniejący w rejestrze federacji przy matricule 09647.': [
+    'Terrain synthétique. Adresse figurant au registre de la fédération sous le matricule 09647.',
+    'Kunstgrasveld. Adres zoals vermeld in het bondsregister bij stamnummer 09647.',
+    'Synthetic pitch. The address listed in the federation register under matricule 09647.'],
+  'Klub gra dzięki firmom, które go wspierają. Poniżej partnerzy sezonu 2026/2027.': [
+    'Le club joue grâce aux entreprises qui le soutiennent. Voici les partenaires de la saison 2026/2027.',
+    'De club speelt dankzij de bedrijven die haar steunen. Hieronder de partners van het seizoen 2026/2027.',
+    'The club plays thanks to the companies behind it. Here are the partners for the 2026/2027 season.'],
+  'Od pierwszych spotkań polskiej emigracji w Brukseli, przez lata w federacji amatorskiej, po matricule 09647.': [
+    'Des premiers matchs de l’émigration polonaise à Bruxelles aux années en fédération amateur, jusqu’au matricule 09647.',
+    'Van de eerste wedstrijden van de Poolse emigratie in Brussel, via de jaren in de amateurbond, tot stamnummer 09647.',
+    'From the first matches of the Polish community in Brussels, through the amateur federation years, to matricule 09647.'],
+  'Amatorski klub polonijny utrzymuje się ze składek, wsparcia partnerów i pracy wolontariuszy. Każde wsparcie idzie na treningi, sprzęt, opłaty federacyjne i wyjazdy.': [
+    'Ce club amateur de la communauté polonaise vit des cotisations, du soutien de ses partenaires et du travail de bénévoles. Chaque soutien va aux entraînements, au matériel, aux frais de fédération et aux déplacements.',
+    'Deze amateurclub van de Poolse gemeenschap draait op lidgelden, de steun van partners en het werk van vrijwilligers. Elke steun gaat naar trainingen, materiaal, bondskosten en verplaatsingen.',
+    'This amateur Polish community club runs on membership fees, partner support and volunteer work. Every contribution goes to training, kit, federation fees and away trips.'],
+  'Współpraca może obejmować logo na koszulkach i bandach, obecność w grafikach meczowych klubu oraz wspólne wydarzenia dla polskiej społeczności w Brukseli.': [
+    'Le partenariat peut comprendre un logo sur les maillots et les panneaux, une présence dans les visuels de match du club et des événements communs pour la communauté polonaise de Bruxelles.',
+    'Een samenwerking kan een logo op shirts en boarding omvatten, aanwezigheid in de wedstrijdbeelden van de club en gezamenlijke evenementen voor de Poolse gemeenschap in Brussel.',
+    'A partnership can include a logo on shirts and pitch-side boards, a presence in the club’s matchday graphics, and joint events for the Polish community in Brussels.'],
+  'Każdy sezon ma własną podstronę. Tam, gdzie nie udało się potwierdzić końcowej tabeli w wiarygodnym źródle, sezon pozostaje oznaczony jako uzupełniany — nie publikujemy fikcyjnych wyników ani szacunków.': [
+    'Chaque saison a sa propre page. Lorsque le classement final n’a pas pu être confirmé par une source fiable, la saison reste marquée comme à compléter — nous ne publions ni résultats fictifs ni estimations.',
+    'Elk seizoen heeft een eigen pagina. Waar de eindstand niet met een betrouwbare bron bevestigd kon worden, blijft het seizoen aangeduid als aan te vullen — we publiceren geen verzonnen uitslagen of schattingen.',
+    'Each season has its own page. Where the final table could not be confirmed against a reliable source, the season stays marked as incomplete — we publish no invented results or estimates.'],
+  'FC Polonia Bruksela to polonijny klub piłkarski działający w Brukseli od 1986 roku. Od 2015 roku występuje w rozgrywkach belgijskiej federacji piłkarskiej.': [
+    'Le FC Polonia Bruxelles est le club de football de la communauté polonaise actif à Bruxelles depuis 1986. Depuis 2015, il évolue dans les compétitions de la fédération belge de football.',
+    'FC Polonia Brussel is de voetbalclub van de Poolse gemeenschap, actief in Brussel sinds 1986. Sinds 2015 speelt de club in de competities van de Belgische voetbalbond.',
+    'FC Polonia Brussels is the Polish community football club active in Brussels since 1986. Since 2015 it has played in the Belgian football federation’s competitions.'],
+
+  /* --- opisy alternatywne i podpowiedzi pól --- */
+  'Aktualnosci.be — prosto z Belgii': ['Aktualnosci.be — direct de Belgique', 'Aktualnosci.be — rechtstreeks uit België', 'Aktualnosci.be — straight from Belgium'],
+  'Zdjęcie zespołowe': ['Photo d’équipe', 'Ploegfoto', 'Team photo'],
+  'Zdjęcie': ['Photo', 'Foto', 'Photo'],
+  'Zdjęcie zawodnika': ['Photo du joueur', 'Foto van de speler', 'Player photo'],
+  'Pierwsza drużyna FC Polonia Bruksela, sezon 2026/2027': [
+    'L’équipe première du FC Polonia Bruxelles, saison 2026/2027',
+    'Het eerste elftal van FC Polonia Brussel, seizoen 2026/2027',
+    'FC Polonia Brussels first team, 2026/2027 season'],
+  'Jubileuszowy wieczór klubu — 40 lat FC Polonia Bruksela.': [
+    'La soirée anniversaire du club — 40 ans du FC Polonia Bruxelles.',
+    'De jubileumavond van de club — 40 jaar FC Polonia Brussel.',
+    'The club’s anniversary evening — 40 years of FC Polonia Brussels.'],
+  'Herb klubu i numer matricule 09647 nadany przez belgijską federację.': [
+    'Le blason du club et le matricule 09647 attribué par la fédération belge.',
+    'Het clubembleem en stamnummer 09647, toegekend door de Belgische bond.',
+    'The club crest and matricule 09647 granted by the Belgian federation.'],
+  'Jeśli chcesz grać — podaj rocznik, pozycję i doświadczenie boiskowe.': [
+    'Si vous voulez jouer — indiquez votre année de naissance, votre poste et votre expérience.',
+    'Wil je meespelen — vermeld je geboortejaar, je positie en je ervaring.',
+    'If you want to play — give your year of birth, position and playing experience.'],
+
   /* --- pływająca zachęta do Facebooka --- */
   'Obserwuj nas i oglądaj relacje z meczów!': [
     'Suivez-nous et vivez les matchs en direct !',
@@ -460,3 +585,13 @@ export function applyLang(code) {
 }
 
 export const currentLang = () => active;
+
+/** Tłumaczenie pojedynczego napisu POZA drzewem DOM — potrzebne tam, gdzie
+ *  tekst nie trafia na stronę jako węzeł (tytuł karty przeglądarki, atrybuty
+ *  składane w kodzie). Gdy nie ma go w słowniku, zwraca oryginał. */
+export function translate(text, lang) {
+  const code = lang || active;
+  const map = MAPS[code];
+  if (!map || !text) return text;
+  return map.get(String(text).trim()) || text;
+}

@@ -154,6 +154,44 @@ celowe: **treść jest w HTML-u widoczna, chowa ją dopiero skrypt**. Dzięki te
 przy wyłączonym JS, w wyszukiwarce i przy systemowym ustawieniu „ogranicz
 animacje" strona wygląda normalnie, zamiast pokazywać pustą stronę.
 
+## Nawigacja: próg hamburgera liczony, nie zgadywany
+
+W wierszu nawigacji siedzi niewidoczna miarka (`data-nav-probe`) z tymi samymi
+pozycjami i tą samą typografią co pasek linków. Po każdym renderze
+`_measureNav()` porównuje jej szerokość z miejscem obok logo i decyduje:
+pasek albo hamburger (`navFits` w stanie). Powód: pełne menu potrzebuje ok.
+940–980 px zależnie od języka (najdłuższy jest niderlandzki), a wcześniejszy
+próg 1024 px pokazywał pasek, który się nie mieścił — `overflow-x:auto`
+i wyrównanie do prawej ucinały wtedy „Start" i „Aktualności" na każdej
+szerokości. Zmieniasz pozycje menu albo typografię linków? Zmień to samo w
+miarce, inaczej pomiar skłamie.
+
+## Mapy Google tylko po zgodzie
+
+`cookies.js` ma osobną kategorię `maps`. Osadzona mapa w szczegółach meczu
+wczytuje się dopiero, gdy gość ją włączy — bez zgody pokazujemy adres obiektu,
+przycisk „Wczytaj mapę" i zwykły odnośnik do map. Przycisk zapisuje zgodę jak
+każdą inną (z datą i zakresem), a wycofanie jej w ustawieniach natychmiast
+chowa mapę. Nie wstawiaj `<iframe>` z Google poza tym mechanizmem.
+
+## Tytuły podstron
+
+`_pageTitle()` w `index.html` buduje tytuł karty przeglądarki z podstrony i
+języka; artykuł, album i sezon biorą własną nazwę (tłumaczoną przez
+`I.translate`). Dodajesz podstronę? Dopisz ją do mapy w tej metodzie.
+
+## Animacja wejścia sekcji
+
+`_setupReveal()` chowa nagłówki sekcji (`data-reveal-head`) i karty
+(`data-reveal-item`), a `IntersectionObserver` pokazuje je falami: elementy,
+które weszły w kadr razem, są sortowane po pozycji (rzędami, w rzędzie od
+lewej) i dostają narastające opóźnienie 80 ms; karta wjeżdża 22 px w górę w
+560 ms. Trzy zabezpieczenia, których nie wolno usuwać: (1) treść jest w HTML-u
+widoczna, chowa ją dopiero skrypt; (2) przy `prefers-reduced-motion` nic się
+nie chowa; (3) „dosprzątanie" po przewijaniu pokazuje elementy, które
+przeleciały nad kadrem, a po 1,4 s także te, które zostały w kadrze — pusta
+karta jest gorsza niż brak animacji.
+
 ## Weryfikacja przed pushem
 
 - Podgląd lokalny: `python3 -m http.server 8000`, potem `localhost:8000`.

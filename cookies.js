@@ -15,8 +15,9 @@
    8. Ponowne pytanie po 12 miesiącach (praktyka zalecana przez APD).
    9. Informacja o administratorze danych i celach — na stronie polityki.
 
-   STAN FAKTYCZNY TEJ STRONY: nie ma tu analityki ani reklam. Używamy wyłącznie
-   pamięci niezbędnej i funkcjonalnej (sesja panelu, zapis terminarza, zdjęcia).
+   STAN FAKTYCZNY TEJ STRONY: nie ma tu analityki ani reklam. Używamy pamięci
+   niezbędnej i funkcjonalnej (sesja panelu, zapis terminarza, zdjęcia) oraz —
+   wyłącznie po zgodzie — osadzonych map Google w szczegółach meczu.
    Kategorie „statystyka" i „marketing" są przygotowane na przyszłość i dopóki
    nic ich nie używa, pozostają puste — nie udajemy, że zbieramy więcej.
    ========================================================================== */
@@ -41,6 +42,13 @@ export const CATEGORIES = [
     used: 'Pamięć przeglądarki: kopia terminarza i klasyfikacji, ustawienia źródeł danych.',
   },
   {
+    id: 'maps',
+    label: 'Mapy Google',
+    required: false,
+    desc: 'Pozwalają wczytać osadzoną mapę dojazdu na stadion. Mapa pochodzi z serwerów Google, które przy jej pobraniu widzą Twój adres IP i mogą zapisać własne pliki. Bez zgody pokazujemy sam adres obiektu i odnośnik do map — treść pozostaje dostępna.',
+    used: 'Osadzone mapy Google w szczegółach meczu (wczytywane dopiero po zgodzie).',
+  },
+  {
     id: 'analytics',
     label: 'Statystyczne',
     required: false,
@@ -56,7 +64,7 @@ export const CATEGORIES = [
   },
 ];
 
-const EMPTY = { necessary: true, functional: false, analytics: false, marketing: false };
+const EMPTY = { necessary: true, functional: false, maps: false, analytics: false, marketing: false };
 
 const read = () => {
   try { return JSON.parse(localStorage.getItem(KEY) || 'null'); } catch { return null; }
@@ -97,8 +105,8 @@ export const allowed = (cat) => {
   return cat === 'necessary' ? true : Boolean(c && c.choices[cat]);
 };
 
-export const acceptAll = () => store({ functional: true, analytics: true, marketing: true }, 'all');
-export const rejectAll = () => store({ functional: false, analytics: false, marketing: false }, 'none');
+export const acceptAll = () => store({ functional: true, maps: true, analytics: true, marketing: true }, 'all');
+export const rejectAll = () => store({ functional: false, maps: false, analytics: false, marketing: false }, 'none');
 export const saveChoices = (choices) => store(choices, 'custom');
 export function withdraw() {
   try { localStorage.removeItem(KEY); } catch {}

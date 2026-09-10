@@ -162,10 +162,10 @@ export const LONGFORM = {
     'We verzamelen zo weinig mogelijk. Het louter bekijken van de site vraagt geen enkel gegeven en we maken geen accounts aan voor bezoekers.',
     'We collect as little as possible. Simply browsing the site requires no data at all, and we do not create accounts for visitors.',
   ],
-  'Imię i nazwisko, adres e-mail, temat i treść ': [
-    'Nom et prénom, adresse e-mail, sujet et contenu du message. Le formulaire ouvre votre logiciel de messagerie — vous envoyez le message vous-même et nous le recevons comme un e-mail ordinaire à polonia@live.be. Le site n’en conserve aucune copie.',
-    'Naam en voornaam, e-mailadres, onderwerp en inhoud van het bericht. Het formulier opent uw e-mailprogramma — u verstuurt het bericht zelf en wij ontvangen het als een gewone e-mail op polonia@live.be. De site bewaart er niets van.',
-    'Full name, email address, subject and message text. The form opens your own email program — you send the message yourself and we receive it as an ordinary email at polonia@live.be. The site stores no copy of it.',
+  'Imię i nazwisko, adres e-mail, temat, treść w': [
+    'Nom et prénom, adresse e-mail, sujet, contenu du message et la langue dans laquelle vous consultez le site. Le formulaire les envoie directement depuis le site via le service de formulaires de notre hébergeur (Netlify), qui transmet la demande à la boîte du club polonia@live.be et en conserve une copie dans le panneau d’administration du site. Nous supprimons les messages une fois le dossier clos, au plus tard après deux ans.',
+    'Naam en voornaam, e-mailadres, onderwerp, inhoud van het bericht en de taal waarin je de site bekijkt. Het formulier verstuurt ze rechtstreeks vanaf de site via de formulierendienst van onze hostingprovider (Netlify), die het bericht doorstuurt naar de mailbox van de club polonia@live.be en er een kopie van bewaart in het beheerpaneel van de site. We verwijderen berichten zodra de zaak is afgehandeld, uiterlijk na twee jaar.',
+    'Full name, email address, subject, message text and the language you are browsing the site in. The form sends them straight from the site through our hosting provider’s form service (Netlify), which forwards the submission to the club mailbox polonia@live.be and keeps a copy in the site’s admin panel. We delete messages once the matter is closed, at the latest after two years.',
   ],
   'Wybór w oknie zgody, kopia terminarza i klasy': [
     'Votre choix dans la fenêtre de consentement, une copie du calendrier et du classement, ainsi que la session du panneau de rédaction. Ces données restent sur votre appareil et ne nous sont pas transmises.',
@@ -218,9 +218,9 @@ export const LONGFORM = {
     'We keep email correspondence for as long as the matter requires and delete it once it is no longer needed — at the latest two years after the last contact, unless it concerns membership or accounting matters subject to separate retention periods. The cookie consent record expires after twelve months, after which we ask again. Other data held in your browser can be cleared at any time by clearing the site data or by withdrawing your consent below.',
   ],
   'Nie sprzedajemy danych i nie udostępniamy ich': [
-    'Nous ne vendons pas de données et ne les mettons pas à disposition à des fins de marketing. Seuls peuvent y accéder : l’hébergeur et le fournisseur de messagerie dans le cadre du support technique, ainsi que la fédération belge de football si vous vous présentez comme joueur et que la transmission de votre candidature est nécessaire. Une communication à des autorités publiques n’aura lieu que si la loi l’exige.',
-    'We verkopen geen gegevens en stellen ze niet ter beschikking voor marketing. Enkel deze partijen kunnen toegang hebben: de hosting- en e-mailprovider in het kader van technische ondersteuning, en de Belgische voetbalbond als u zich aanmeldt als speler en het doorsturen van die aanmelding nodig is. Gegevens worden alleen aan overheidsinstanties bezorgd wanneer de wet dat vereist.',
-    'We do not sell data and do not make it available for marketing purposes. Only the following may have access: the hosting and email provider for technical support, and the Belgian football federation if you apply as a player and forwarding your application is necessary. Data will be disclosed to public authorities only where the law requires it.',
+    'Nous ne vendons pas de données et ne les mettons pas à disposition à des fins de marketing. Seuls peuvent y accéder : l’hébergeur et le service de formulaires (Netlify) ainsi que le fournisseur de messagerie, dans le cadre du support technique, et la fédération belge de football si vous vous présentez comme joueur et que la transmission de votre candidature est nécessaire. Les cartes Google constituent un cas à part : elles ne se chargent qu’après votre consentement, et Google voit alors l’adresse IP de votre appareil. Une communication à des autorités publiques n’aura lieu que si la loi l’exige.',
+    'We verkopen geen gegevens en stellen ze niet ter beschikking voor marketing. Enkel deze partijen kunnen toegang hebben: de hosting- en formulierendienst (Netlify) en de e-mailprovider in het kader van technische ondersteuning, en de Belgische voetbalbond als je je aanmeldt als speler en het doorsturen van die aanmelding nodig is. Google Maps is een apart geval: kaarten laden pas na jouw toestemming, en dan ziet Google het IP-adres van je toestel. Gegevens worden alleen aan overheidsinstanties bezorgd wanneer de wet dat vereist.',
+    'We do not sell data and do not make it available for marketing purposes. Only the following may have access: the hosting and form service (Netlify) and the email provider for technical support, and the Belgian football federation if you apply as a player and forwarding your application is necessary. Google Maps is a separate case: maps load only after your consent, and Google then sees your device’s IP address. Data will be disclosed to public authorities only where the law requires it.',
   ],
   'Nie przekazujemy danych celowo poza EOG. Jeśl': [
     'Nous ne transférons pas délibérément de données hors de l’EEE. Si le service d’hébergement ou de messagerie utilise des serveurs situés en dehors de cet espace, cela repose sur les clauses contractuelles types approuvées par la Commission européenne ou sur une décision d’adéquation.',
@@ -294,5 +294,52 @@ export const LONGFORM = {
     'Les remarques concernant le fonctionnement du site ou son contenu peuvent être adressées à polonia@live.be — nous répondons dans un délai raisonnable. Pour tout ce qui n’est pas réglé ici, le droit belge s’applique et les tribunaux belges compétents sont seuls habilités à trancher les litiges.',
     'Opmerkingen over de werking of de inhoud van de site kunt u sturen naar polonia@live.be — we antwoorden binnen een redelijke termijn. Voor wat hier niet geregeld is, geldt het Belgisch recht en zijn de bevoegde Belgische rechtbanken bevoegd.',
     'Comments about the operation or content of the site can be sent to polonia@live.be — we reply within a reasonable time. In all matters not covered here, Belgian law applies and the competent Belgian courts have jurisdiction.',
+  ],
+
+  /* ═══════════════ uzupełnienia: artykuł, klub, historia, zgody ══ */
+  'Używamy pamięci przeglądarki, żeby strona dzi': [
+    'Nous utilisons la mémoire du navigateur pour que le site fonctionne correctement. Les fichiers non essentiels — fonctionnels, statistiques et marketing — ne sont activés qu’avec votre consentement. Nous n’avons ni outils d’analyse ni publicité, et un refus ne bloque rien ici. Détails dans',
+    'We gebruiken het geheugen van je browser zodat de site correct werkt. Niet-noodzakelijke bestanden — functioneel, statistisch en marketing — schakelen we alleen in met jouw toestemming. We hebben geen analytics en geen reclame, en weigeren blokkeert hier niets. Details in',
+    'We use browser storage so the site works properly. Non-essential files — functional, statistics and marketing — are switched on only with your consent. We have no analytics and no advertising, and refusing blocks nothing here. Details in',
+  ],
+  'Czterdzieści lat to w amatorskiej piłce dłuże': [
+    'Quarante ans, dans le football amateur, c’est plus longtemps que ne tiennent la plupart des clubs. Le FC Polonia Bruxelles est né en 1986 comme club de l’émigration polonaise en Belgique et, quatre décennies durant, il est resté la même chose : un lieu de rencontre, et pas seulement une équipe.',
+    'Veertig jaar is in het amateurvoetbal langer dan de meeste clubs volhouden. FC Polonia Brussel ontstond in 1986 als club van de Poolse emigratie in België en bleef vier decennia lang hetzelfde: een ontmoetingsplaats, en niet alleen een ploeg.',
+    'Forty years is longer than most clubs last in amateur football. FC Polonia Brussels was founded in 1986 as a club of the Polish community in Belgium and, across four decades, has remained the same thing: a meeting place, not just a team.',
+  ],
+  'Jubileusz 1986–2026 jest okazją do zebrania a': [
+    'Le jubilé 1986–2026 est l’occasion de rassembler les archives : photos, compositions, résultats et récits. Les documents provenant des collections privées de supporters et d’anciens joueurs comptent autant, pour le club, que les papiers de la fédération.',
+    'Het jubileum 1986–2026 is een gelegenheid om het archief samen te brengen: foto’s, opstellingen, uitslagen en verslagen. Materiaal uit privécollecties van supporters en oud-spelers is voor de club even waardevol als de documenten van de bond.',
+    'The 1986–2026 anniversary is a chance to gather the archive: photos, line-ups, results and reports. Material from the private collections of supporters and former players matters to the club as much as the federation’s paperwork.',
+  ],
+  'Pełną, chronologiczną historię klubu — od Sai': [
+    'L’histoire complète et chronologique du club — de Saint-Gilles et des années en fédération amateur, en passant par le matricule 09647, jusqu’au retour au nom FC Polonia Bruxelles — est publiée dans la rubrique HISTOIRE.',
+    'De volledige, chronologische geschiedenis van de club — van Sint-Gillis en de jaren in de amateurbond, via stamnummer 09647, tot de terugkeer naar de naam FC Polonia Brussel — staat in de rubriek GESCHIEDENIS.',
+    'The full, chronological history of the club — from Saint-Gilles and the amateur federation years, through matricule 09647, to the return of the name FC Polonia Brussels — is published in the HISTORY section.',
+  ],
+  'W dokumentach federacji i w serwisach wynikow': [
+    'Dans les documents de la fédération et sur les sites de résultats, le club est apparu sous différents noms : FC Polonia Boitsfort, FC Polonia Limelette et aujourd’hui FC Polonia Bruxelles. Sur ce site, nous utilisons systématiquement la forme',
+    'In de documenten van de bond en op uitslagensites verscheen de club onder verschillende namen: FC Polonia Boitsfort, FC Polonia Limelette en vandaag FC Polonia Bruxelles. Op deze site gebruiken we consequent de vorm',
+    'In federation documents and on results sites the club has appeared under different names: FC Polonia Boitsfort, FC Polonia Limelette and today FC Polonia Bruxelles. On this site we consistently use the form',
+  ],
+  '. Nazwy historyczne zachowujemy w działach HI': [
+    '. Les noms historiques sont conservés dans les rubriques HISTOIRE et ARCHIVES, et les noms des adversaires restent tels que la fédération les transmet.',
+    '. Historische namen bewaren we in de rubrieken GESCHIEDENIS en ARCHIEF, en de namen van tegenstanders laten we staan zoals de bond ze doorgeeft.',
+    '. Historical names are kept in the HISTORY and ARCHIVE sections, and opponents’ names are left exactly as the federation supplies them.',
+  ],
+  ', a w herbie miejsce Brukseli zajął Boitsfort': [
+    ', et sur le blason, Boitsfort a pris la place de Bruxelles. Les matchs à domicile ont été programmés le dimanche, aux alentours de quinze heures, au Parc Sportif des Trois Tilleuls, avenue Léopold Wiener 60 à Watermael-Boitsfort. Avant même le début de la nouvelle saison, le 20 mai 2015, Polonia y a disputé un match amical contre Coin du Balais, équipe de première division de l’ABSSA.',
+    ', en op het embleem nam Boitsfort de plaats van Brussel in. De thuiswedstrijden werden op zondag gepland, rond drie uur, op het Parc Sportif des Trois Tilleuls aan de Léopold Wienerlaan 60 in Watermaal-Bosvoorde. Nog voor de start van het nieuwe seizoen, op 20 mei 2015, speelde Polonia daar een oefenwedstrijd tegen Coin du Balais, een ploeg uit eerste klasse van de ABSSA.',
+    ', and on the crest Boitsfort took the place of Brussels. Home matches were scheduled for Sundays, around three in the afternoon, at Parc Sportif des Trois Tilleuls on Avenue Léopold Wiener 60 in Watermael-Boitsfort. Even before the new season began, on 20 May 2015, Polonia played a friendly there against Coin du Balais, a first-division side in the ABSSA.',
+  ],
+  '. Zmiana ta znalazła się na liście zmian nazw': [
+    '. Ce changement figure sur la liste des changements de noms de clubs publiée par la RBFA, avec effet au 1er juillet 2022.',
+    '. Die wijziging staat op de lijst van clubnaamswijzigingen die de KBVB publiceerde, met ingang van 1 juli 2022.',
+    '. The change appears on the list of club name changes published by the RBFA, effective 1 July 2022.',
+  ],
+  '. W komunikacji polskojęzycznej klub konsekwe': [
+    '. Dans sa communication en polonais, le club emploie systématiquement la forme FC Polonia Bruksela, et c’est le nom principal sur ce site. Le retour à l’identité bruxelloise a aussi une dimension très concrète : Polonia dispute aujourd’hui ses matchs à domicile au Stade Fallon, chaussée du Struykbeken à Woluwe-Saint-Lambert, donc de nouveau dans les limites de la Région de Bruxelles-Capitale.',
+    '. In haar Poolstalige communicatie gebruikt de club consequent de vorm FC Polonia Bruksela, en dat is ook de hoofdnaam op deze site. De terugkeer naar de Brusselse identiteit is ook heel praktisch: Polonia speelt haar thuiswedstrijden vandaag op Stade Fallon aan de Struykbeken in Sint-Lambrechts-Woluwe, dus opnieuw binnen het Brussels Hoofdstedelijk Gewest.',
+    '. In its Polish-language communication the club consistently uses the form FC Polonia Bruksela, and that is the primary name on this site. The return to a Brussels identity is also entirely practical: Polonia now plays its home matches at Stade Fallon on Chem. du Struykbeken in Woluwe-Saint-Lambert — once again inside the Brussels-Capital Region.',
   ],
 };

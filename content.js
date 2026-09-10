@@ -214,7 +214,7 @@ export const BOARD = [
 
 export const SPONSORS = [
   {
-    name: 'Aktualności.be',
+    name: 'Aktualnosci.be',
     tier: 'PARTNER MEDIALNY',
     url: 'https://aktualnosci.be/',
     // Logo wgrywane przez administratora w slocie o tym id (wersja niebieska
