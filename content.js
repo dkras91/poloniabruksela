@@ -102,6 +102,7 @@ export const NEWS = [
     photoCaption: 'Herb klubu i numer matricule 09647 nadany przez belgijską federację.',
     // Grafika kwadratowa — dlatego wpis podaje własne proporcje kadru.
     heroPhoto: 'assets/news/matricule-09647.jpg',
+    cardPhoto: 'assets/news/matricule-09647-card.jpg',
     heroRatio: '1/1',
     heroMaxW: '560px',
     body: [

@@ -415,7 +415,7 @@ a:hover{color:#cbb96b}
           <sc-for list="{{ homeNews }}" as="n" hint-placeholder-count="3">
             <a href="#/aktualnosci/{{ n.slug }}" style="background:#1b1b21;border:1px solid rgba(246,243,236,.14);display:flex;flex-direction:column;color:#F6F3EC" style-hover="border:1px solid #B7A85C">
               <div style="position:relative;aspect-ratio:{{ newsAspect }};background:#23232a">
-                <image-slot id="{{ n.photoId }}" shape="rect" fit="cover" placeholder="{{ n.photoCaption }}"></image-slot>
+                <image-slot id="{{ n.photoId }}" src="{{ n.cardSrc }}" shape="rect" fit="cover" placeholder="{{ n.photoCaption }}"></image-slot>
               </div>
               <div style="padding:20px;display:flex;flex-direction:column;gap:12px;flex:1">
                 <div style="display:flex;gap:12px;align-items:center">
@@ -435,7 +435,7 @@ a:hover{color:#cbb96b}
     <div style="background:#F6F3EC;color:#121216;border-top:1px solid rgba(18,18,22,.1);border-bottom:1px solid rgba(18,18,22,.1)">
     <div style="max-width:1280px;margin:0 auto;padding:{{ secPad }};display:grid;grid-template-columns:repeat(auto-fit,minmax({{ cardMin }},1fr));gap:clamp(16px,2.5vw,28px)">
       <a href="#/druzyna" style="position:relative;min-height:340px;display:flex;align-items:flex-end;overflow:hidden;border:1px solid rgba(18,18,22,.13);color:#F6F3EC" style-hover="border:1px solid #E2092F">
-        <div style="position:absolute;inset:0"><image-slot id="teaser-druzyna" shape="rect" fit="cover" placeholder="Zdjęcie zespołowe"></image-slot></div>
+        <div style="position:absolute;inset:0"><image-slot id="teaser-druzyna" src="assets/kadra/team-2026.jpg" shape="rect" fit="cover" placeholder="Zdjęcie zespołowe"></image-slot></div>
         <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(18,18,22,.96) 0%,rgba(18,18,22,.1) 70%);pointer-events:none"></div>
         <div style="position:relative;padding:{{ cardPad }};pointer-events:none">
           <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.18em;color:#B7A85C">PIERWSZY ZESPÓŁ</span>
@@ -497,7 +497,7 @@ a:hover{color:#cbb96b}
       <sc-for list="{{ newsList }}" as="n" hint-placeholder-count="3">
         <a href="#/aktualnosci/{{ n.slug }}" style="background:#1b1b21;border:1px solid rgba(246,243,236,.14);display:flex;flex-direction:column;color:#F6F3EC" style-hover="border:1px solid #B7A85C">
           <div style="position:relative;aspect-ratio:{{ newsAspect }};background:#23232a">
-            <image-slot id="{{ n.photoId }}" shape="rect" fit="cover" placeholder="{{ n.photoCaption }}"></image-slot>
+            <image-slot id="{{ n.photoId }}" src="{{ n.cardSrc }}" shape="rect" fit="cover" placeholder="{{ n.photoCaption }}"></image-slot>
           </div>
           <div style="padding:20px;display:flex;flex-direction:column;gap:12px;flex:1">
             <div style="display:flex;gap:12px;align-items:center">
@@ -1399,7 +1399,7 @@ a:hover{color:#cbb96b}
           <div style="display:flex;flex-direction:column;gap:10px;padding-top:16px;border-top:1px solid rgba(246,243,236,.08)">
             <a href="#/aktualnosci/{{ a.slug }}" style="font-family:'Inter',sans-serif;font-weight:700;font-size:14px;color:#F6F3EC" style-hover="color:#B7A85C">{{ a.title }}</a>
             <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:10px">
-              <div style="aspect-ratio:16/9;background:#121216"><image-slot id="{{ a.heroId }}" shape="rect" fit="cover" placeholder="Zdjęcie główne"></image-slot></div>
+              <div style="aspect-ratio:16/9;background:#121216"><image-slot id="{{ a.heroId }}" src="{{ a.heroSrc }}" shape="rect" fit="cover" placeholder="Zdjęcie główne"></image-slot></div>
               <div style="aspect-ratio:1;background:#121216"><image-slot id="{{ a.g1 }}" shape="rect" fit="cover" placeholder="Galeria 1"></image-slot></div>
               <div style="aspect-ratio:1;background:#121216"><image-slot id="{{ a.g2 }}" shape="rect" fit="cover" placeholder="Galeria 2"></image-slot></div>
               <div style="aspect-ratio:1;background:#121216"><image-slot id="{{ a.g3 }}" shape="rect" fit="cover" placeholder="Galeria 3"></image-slot></div>
@@ -2152,7 +2152,11 @@ class Component extends DCLogic {
       // Zdjęcie główne wpisu może być plikiem z repozytorium (heroPhoto) albo
       // uploadem z panelu (slot heroId). Kwadratowe grafiki podają własne
       // proporcje i szerokość, żeby kadr 16:9 nie obcinał im napisów.
-      heroSrc: n.heroPhoto || '', heroRatio: n.heroRatio || '16/9', heroMaxW: n.heroMaxW || '100%' });
+      heroSrc: n.heroPhoto || '', heroRatio: n.heroRatio || '16/9', heroMaxW: n.heroMaxW || '100%',
+      // Kafelek wpisu ma stałe proporcje 16:9. Grafiki kwadratowe dostają
+      // osobny plik `cardPhoto` w tym kadrze, żeby kadrowanie nie ucinało
+      // im napisów; pozostałe wpisy pokazują na kafelku swoje zdjęcie główne.
+      cardSrc: n.cardPhoto || n.heroPhoto || '' });
     const allNews = (this.A ? this.A.mergeNews(C.NEWS || []) : (C.NEWS || [])).map(newsVM);
     const newsList = s.newsCat === 'WSZYSTKIE' ? allNews : allNews.filter((n) => n.category === s.newsCat);
     const article = (route === 'aktualnosci' && s.param) ? (allNews.find((n) => n.slug === s.param) || null) : null;
@@ -2658,7 +2662,7 @@ class Component extends DCLogic {
       })),
       noAdminSponsors: (this.A ? this.A.getSponsors().length : 0) === 0,
       allArticleImages: allNews.map((n) => ({
-        slug: n.slug, title: n.title, heroId: n.heroId,
+        slug: n.slug, title: n.title, heroId: n.heroId, heroSrc: n.heroSrc,
         g1: n.g1, g2: n.g2, g3: n.g3,
       })),
       seasons, seasonDetail,

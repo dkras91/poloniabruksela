@@ -612,16 +612,27 @@ export const HIDDEN_MATCHES = [
 const isHidden = (f) => !!f && HIDDEN_MATCHES.some((k) =>
   String(f.id) === k || f.localDate === k || String(f.kickoff).slice(0, 10) === k);
 
+/** Kolejna numeracja 1…N na wierszach zapisanych wcześniej w migawce.
+ *  Tabela w cache jest JUŻ znormalizowana, więc bez tego stary snapshot
+ *  pokazywałby powtórzone numery federacji jeszcze przez cały TTL. */
+const renumber = (rows) => (Array.isArray(rows) && rows.some((r, i) => r && r.pos !== i + 1)
+  ? rows.map((r, i) => (r ? { ...r, posFed: r.posFed ?? r.pos, pos: i + 1 } : r))
+  : rows);
+
 export const getCache = () => {
   const c = read(CACHE_KEY, null);
-  if (!c || !Array.isArray(c.fixtures)) return c;
+  if (!c || !Array.isArray(c.fixtures)) return c ? { ...c, table: renumber(c.table) } : c;
   // Snapshot w pamięci przeglądarki trzyma mecze JUŻ znormalizowane, więc
   // poprawki w normalizacji nie docierały do nikogo, kto ma świeży cache —
   // czekały, aż wygaśnie. Obiekt uzupełniamy przy odczycie: to jedyne pole
   // wyliczane u nas, a nie pochodzące ze źródła.
-  return { ...c, fixtures: c.fixtures.filter((f) => !isHidden(f)).map((f) => (
-    f && !f.venue ? { ...f, venue: venueFor(f.home, f.away) } : f
-  )) };
+  return {
+    ...c,
+    table: renumber(c.table),
+    fixtures: c.fixtures.filter((f) => !isHidden(f)).map((f) => (
+      f && !f.venue ? { ...f, venue: venueFor(f.home, f.away) } : f
+    )),
+  };
 };
 
 function saveSnapshot(snap) {
