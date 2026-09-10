@@ -2366,10 +2366,13 @@ class Component extends DCLogic {
       // podstawia zagnieżdżonych ścieżek w atrybucie style poza pętlą.
       lmScoreBg: (lm && lm.resultBgLight) || '#23232a',
       hasForm: formArr.length > 0,
+      // Litery formy trzymają się tej samej logiki kolorów co plakietka
+      // wyniku: zielony = wygrana, złoty = remis, czerwony = porażka.
+      // Na złotym tle napis jest ciemny — jasny byłby nieczytelny.
       formList: formArr.map((x) => ({
         letter: x,
-        bg: x === 'Z' ? '#E2092F' : x === 'R' ? '#8f8248' : '#3a3a44',
-        fg: '#F6F3EC',
+        bg: x === 'Z' ? '#17853F' : x === 'R' ? '#B7A85C' : '#E2092F',
+        fg: x === 'R' ? '#121216' : '#F6F3EC',
       })),
       posNum: (pRow && !preSeason) ? pRow.pos : '—',
       showPosSuffix: !preSeason,
