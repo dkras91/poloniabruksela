@@ -121,6 +121,7 @@ a{color:#B7A85C;text-decoration:none}
 a:hover{color:#cbb96b}
 ::selection{background:#E2092F;color:#F6F3EC}
 @keyframes fcpspin{to{transform:rotate(360deg)}}
+@keyframes fcpfloat{from{opacity:0;transform:translateY(26px) scale(.96)}to{opacity:1;transform:none}}
 </style>
 </helmet>
 
@@ -1776,6 +1777,29 @@ a:hover{color:#cbb96b}
     </div>
   </div>
 
+  <!-- ═════════════════════════════════════ PŁYWAJĄCA ZACHĘTA: FACEBOOK -->
+  <!-- Pokazuje się kilka sekund po wejściu, nigdy jednocześnie z banerem
+       zgód ani z podglądem zdjęć. Krzyżyk chowa ją na dwa miesiące w tej
+       przeglądarce — decyzja gościa siedzi w localStorage, nie w cookie. -->
+  <sc-if value="{{ fbShow }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;z-index:150;left:{{ fbLeft }};right:{{ fbRight }};bottom:{{ fbBottom }};width:{{ fbWidth }};max-width:calc(100vw - 24px);background:#1b1b21;border:1px solid rgba(246,243,236,.16);border-left:4px solid #1877F2;box-shadow:0 14px 40px rgba(0,0,0,.45);animation:fcpfloat .5s cubic-bezier(.22,.61,.36,1) both">
+    <button onClick="{{ onFbClose }}" title="Zamknij" aria-label="Zamknij" style="position:absolute;top:6px;right:6px;width:30px;height:30px;background:transparent;border:0;color:#8d8a83;font-family:'Inter',sans-serif;font-weight:700;font-size:17px;line-height:1;cursor:pointer" style-hover="color:#F6F3EC">×</button>
+    <div style="padding:16px 18px;display:flex;align-items:center;gap:14px">
+      <span style="width:46px;height:46px;background:#121216;border:1px solid rgba(246,243,236,.14);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <img src="assets/crest.png" alt="" style="width:30px;height:30px;object-fit:contain;display:block">
+      </span>
+      <div style="min-width:0;display:flex;flex-direction:column;gap:3px">
+        <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.16em;color:#8d8a83">FACEBOOK</span>
+        <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:19px;line-height:1.1;text-transform:uppercase;color:#F6F3EC;text-wrap:balance">Obserwuj nas i oglądaj relacje z meczów!</span>
+      </div>
+    </div>
+    <div style="padding:0 18px 16px;display:flex;gap:10px;flex-wrap:wrap">
+      <a href="https://www.facebook.com/fcpolonia.bruksela/" target="_blank" rel="noopener" onClick="{{ onFbClose }}" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:17px;letter-spacing:.08em;text-transform:uppercase;background:#1877F2;color:#FFFFFF;padding:11px 22px;flex:1;text-align:center;min-width:120px" style-hover="background:#0f62d0">Obserwuj</a>
+      <button onClick="{{ onFbClose }}" style="font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.14em;background:transparent;color:#8d8a83;border:1px solid rgba(246,243,236,.22);padding:11px 16px;cursor:pointer" style-hover="color:#F6F3EC;border:1px solid rgba(246,243,236,.45)">NIE TERAZ</button>
+    </div>
+  </div>
+  </sc-if>
+
   <!-- ══════════════════════════════════════════════════ BANER COOKIES -->
   <sc-if value="{{ cookieOpen }}" hint-placeholder-val="{{ false }}">
   <div style="position:fixed;left:0;right:0;bottom:0;z-index:200;background:rgba(18,18,22,.97);backdrop-filter:blur(14px);border-top:4px solid #E2092F;max-height:92vh;overflow-y:auto">
@@ -1849,6 +1873,7 @@ class Component extends DCLogic {
     lang: 'pl',
     vw: typeof window !== 'undefined' ? window.innerWidth : 1280,
     menuOpen: false, hoveredPlayer: null, lightbox: null,
+    fbOpen: false,
   };
 
   componentDidMount() {
@@ -1865,6 +1890,20 @@ class Component extends DCLogic {
     this._route();
     this._loadModules();
     this._setupReveal();
+    // Zachęta do Facebooka wjeżdża dopiero, gdy gość zdąży się rozejrzeć.
+    this._fbTimer = setTimeout(() => {
+      if (!this._fbMuted()) this.setState({ fbOpen: true });
+    }, 6000);
+  }
+
+  /* Czy gość zamknął pływającą zachętę? Zapamiętujemy datę i milczymy przez
+     60 dni. localStorage, nie cookie — to wygoda przeglądania, nie śledzenie,
+     więc nie wymaga zgody i nie wychodzi poza tę przeglądarkę. */
+  _fbMuted() {
+    try {
+      const t = Number(localStorage.getItem('fcp.fb.muted.v1') || 0);
+      return t > 0 && (Date.now() - t) < 60 * 24 * 3600e3;
+    } catch (e) { return false; }
   }
 
   componentDidUpdate() {
@@ -1961,6 +2000,7 @@ class Component extends DCLogic {
     window.removeEventListener('resize', this._onResize);
     window.removeEventListener('keydown', this._onKey);
     if (this._revealObs) this._revealObs.disconnect();
+    if (this._fbTimer) clearTimeout(this._fbTimer);
     if (this._stop) this._stop();
   }
 
@@ -2099,6 +2139,12 @@ class Component extends DCLogic {
       heroBtnFs: mob ? '18px' : '20px',
       // na telefonie gradient pionowy — tekst siedzi nisko, nie z lewej
       // na telefonie kadr trzymamy przy prawym zawodniku, tekst siedzi niżej
+      /* pływająca zachęta: na telefonie pas na całą szerokość nad dolną
+         krawędzią, na dużym ekranie panel przy prawym dolnym rogu */
+      fbLeft: mob ? '12px' : 'auto',
+      fbRight: mob ? '12px' : '22px',
+      fbBottom: mob ? '12px' : '22px',
+      fbWidth: mob ? 'auto' : '340px',
       heroPos: mob ? '62% 50%' : 'center 35%',
       // Na szerokim ekranie tekst leży na lewym zawodniku — dlatego lewa
       // strona kadru dostaje własne przyciemnienie. Na telefonie niepotrzebne.
@@ -2740,6 +2786,13 @@ class Component extends DCLogic {
       },
       onCookieWithdraw: () => { this.K.withdraw(); this.setState({ cookieOpen: true, cookieDetails: true, cookieChoices: { functional: false, analytics: false, marketing: false } }); },
       ctName: s.ct.name, ctEmail: s.ct.email, ctTopic: s.ct.topic, ctMsg: s.ct.msg,
+      // Pływająca zachęta: nie wchodzi w drogę banerowi zgód ani podglądowi
+      // zdjęć — te mają pierwszeństwo i własną warstwę.
+      fbShow: s.fbOpen && !s.cookieOpen && !s.lightbox,
+      onFbClose: () => {
+        try { localStorage.setItem('fcp.fb.muted.v1', String(Date.now())); } catch (e) {}
+        this.setState({ fbOpen: false });
+      },
       ctErr: s.ctErr, ctSent: s.ctSent, ctNotSent: !s.ctSent,
       ctSending: s.ctSending, ctSendLabel: s.ctSending ? 'Wysyłanie…' : 'Wyślij wiadomość',
       ctSentEmail: s.ctSentEmail, ctSentTopic: s.ctSentTopic,

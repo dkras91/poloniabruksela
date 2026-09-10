@@ -137,6 +137,15 @@ const T = {
     'Speler van FC Polonia Brussel met clubsjaal op de tribune',
     'FC Polonia Brussels player holding the club scarf in the stands',
   ],
+  /* --- pływająca zachęta do Facebooka --- */
+  'Obserwuj nas i oglądaj relacje z meczów!': [
+    'Suivez-nous et vivez les matchs en direct !',
+    'Volg ons en bekijk de verslagen van de wedstrijden!',
+    'Follow us and watch the match coverage!'],
+  'Obserwuj': ['Suivre', 'Volgen', 'Follow'],
+  'NIE TERAZ': ['PAS MAINTENANT', 'NIET NU', 'NOT NOW'],
+  'Zamknij': ['Fermer', 'Sluiten', 'Close'],
+
   /* --- formularz kontaktowy: wysyłka i potwierdzenie --- */
   'Wysyłanie…': ['Envoi en cours…', 'Verzenden…', 'Sending…'],
   'Wiadomość wysłana': ['Message envoyé', 'Bericht verzonden', 'Message sent'],
