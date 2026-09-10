@@ -935,9 +935,10 @@ export function tableWindow(table = [], span = 2) {
   if (!table.length) return [];
   const i = table.findIndex((r) => r.isPolonia);
   if (i < 0) return table.slice(0, 5);
-  // Pozycje ex aequo: o czubku tabeli decyduje numer miejsca, nie indeks
-  // wiersza — przy czterech zespołach na miejscu 1. Polonia ma być w TOP5.
-  if (i <= span || (table[i].pos || i + 1) <= span + 1) return table.slice(0, 5);
+  // Gdy Polonia mieści się w pierwszej piątce, pokazujemy czubek tabeli od
+  // miejsca 1. Wycinek „dwa nad, dwa pod” zaczynałby się wtedy od miejsca 2
+  // i ucinał lidera, co wygląda jak błąd, a nie jak świadomy kadr.
+  if (i < 5) return table.slice(0, 5);
   if (i >= table.length - span - 1) return table.slice(-5);
   return table.slice(i - span, i + span + 1);
 }
