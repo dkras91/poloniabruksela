@@ -97,8 +97,10 @@ awaryjnie wyciągnąć tabelę ze strony serii.
 
 ## Sprawy otwarte
 
-- `content.js`, sekcja `LEGAL`: tymczasowy numer przedsiębiorstwa
-  `BE 0700.000.000`, nazwa ASBL i adres siedziby do podmiany na prawdziwe.
+- Terminarz z importera RBFA NIE zawiera obiektu. Adresy boisk gospodarzy
+  trzymamy w `OPPONENT_VENUES` w `live-data.js` i podstawiamy po nazwie
+  gospodarza. Przy zmianie rywali (nowy sezon, inna seria) trzeba tam dopisać
+  kolejne pozycje, inaczej wróci „Obiekt do potwierdzenia".
 - `admin.js`: domyślne hasło panelu leży jawnie w kodzie. Panel działa w
   całości w przeglądarce (`localStorage` + sha256), więc nie jest realnym
   zabezpieczeniem — wystarcza do publikowania treści, nie do ochrony danych.

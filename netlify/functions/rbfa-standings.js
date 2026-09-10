@@ -9,9 +9,9 @@
  * (rbfa-calendar.js), więc po zmianie ligi/sezonu nic nie trzeba poprawiać.
  *
  * Kolejność prób:
- *   1. GraphQL persisted query — tylko gdy w zmiennych środowiskowych jest
- *      RBFA_RANKING_HASH (hash operacji rankingu; RBFA zmienia go przy
- *      wdrożeniach, dlatego nie zapisujemy go w kodzie).
+ *   1. GraphQL z pełną treścią zapytania (GetSeriesRankings). RBFA nie używa
+ *      tu persisted queries, więc NIE trzeba żadnej zmiennej środowiskowej.
+ *      RBFA_RANKING_HASH pozostaje obsługiwany jako opcjonalna pierwsza próba.
  *   2. Strona serii/drużyny na rbfa.be — wyciągamy wbudowany JSON
  *      (__NEXT_DATA__ / stan Apollo) i szukamy w nim tablicy klasyfikacji.
  *
@@ -49,27 +49,73 @@ async function resolveSeries() {
 
 /* ─────────────────────────────────────────────────────── GraphQL ───────── */
 
+/* Pełna treść zapytania — wyjęta z kodu aplikacji rbfa.be (main.*.js, wrzesień
+   2026). RBFA NIE używa tu persisted queries: klient wysyła zapytanie w
+   całości, więc żaden hash ani zmienna środowiskowa nie są potrzebne.
+   Nazwa operacji to GetSeriesRankings — w liczbie mnogiej. */
+const RANKING_QUERY = `query GetSeriesRankings ($seriesId: ID!, $language: Language!) {
+  seriesRankings(seriesId: $seriesId, language: $language) {
+    id
+    name
+    rankings {
+      type
+      teams {
+        teamId
+        name
+        position
+        clubId
+        clubRegistrationNumber
+        points
+        matchesPlayed
+        matchesWon
+        matchesLost
+        matchesDrawn
+        goalsFor
+        goalsAgainst
+        goalDifference
+      }
+    }
+  }
+}`;
+
 async function fetchRankingGraphql(seriesId) {
+  if (!seriesId) return null;
+  // Apollo po stronie RBFA odrzuca GET bez tych dwóch nagłówków.
+  const opName = process.env.RBFA_RANKING_OP || 'GetSeriesRankings';
   const hash = process.env.RBFA_RANKING_HASH;
-  if (!hash || !seriesId) return null;
-  const opName = process.env.RBFA_RANKING_OP || 'GetSeriesRanking';
-  const params = new URLSearchParams({
+  const base = {
     operationName: opName,
     variables: JSON.stringify({ seriesId, language: RBFA_CONFIG.language }),
-    extensions: JSON.stringify({ persistedQuery: { version: 1, sha256Hash: hash } }),
-  });
-  const res = await fetch(`${RBFA_CONFIG.endpoint}?${params}`, {
-    headers: {
-      accept: 'application/json',
-      'x-apollo-operation-name': opName,
-      'apollo-require-preflight': 'true',
-      'user-agent': UA,
-    },
-  });
-  if (!res.ok) throw new Error(`RBFA ranking HTTP ${res.status}`);
-  const json = await res.json();
-  if (json.errors) throw new Error(json.errors.map((e) => e.message).join(' · '));
-  return findRankingArray(json.data);
+  };
+  // Gdy ktoś wpisze hash w zmiennych Netlify, próbujemy najpierw jego wersji;
+  // bez hasha (normalny przypadek) idzie pełna treść zapytania.
+  const attempts = [];
+  if (hash) {
+    attempts.push({ ...base, extensions: JSON.stringify({ persistedQuery: { version: 1, sha256Hash: hash } }) });
+  }
+  attempts.push({ ...base, query: RANKING_QUERY });
+
+  let lastErr = null;
+  for (const params of attempts) {
+    try {
+      const res = await fetch(`${RBFA_CONFIG.endpoint}?${new URLSearchParams(params)}`, {
+        headers: {
+          accept: 'application/json',
+          'x-apollo-operation-name': opName,
+          'apollo-require-preflight': 'true',
+          'user-agent': UA,
+        },
+      });
+      if (!res.ok) { lastErr = new Error(`RBFA ranking HTTP ${res.status}`); continue; }
+      const json = await res.json();
+      if (json.errors) { lastErr = new Error(json.errors.map((e) => e.message).join(' · ')); continue; }
+      const rows = findRankingArray(json.data);
+      if (rows && rows.length) return rows;
+      lastErr = new Error('RBFA ranking: pusta klasyfikacja w odpowiedzi');
+    } catch (e) { lastErr = e; }
+  }
+  if (lastErr) throw lastErr;
+  return null;
 }
 
 /* ──────────────────────────────────────────── strona rbfa.be jako źródło ── */
@@ -123,9 +169,11 @@ function* embeddedJson(html) {
 const KEY = {
   points: /^(points|punten|pts|point)$/i,
   played: /^(played|matchesplayed|gamesplayed|gespeeld|matches)$/i,
-  won: /^(won|wins|gewonnen)$/i,
-  drawn: /^(drawn|draws|gelijk|gelijkspel)$/i,
-  lost: /^(lost|losses|verloren)$/i,
+  // RBFA nazywa te pola matchesWon / matchesDrawn / matchesLost — bez nich
+  // kolumny Z, R, P wracaly puste.
+  won: /^(won|wins|gewonnen|matcheswon)$/i,
+  drawn: /^(drawn|draws|gelijk|gelijkspel|matchesdrawn)$/i,
+  lost: /^(lost|losses|verloren|matcheslost)$/i,
   gf: /^(goalsfor|goalsscored|doelpuntenvoor|scored)$/i,
   ga: /^(goalsagainst|goalsconceded|doelpuntentegen|conceded)$/i,
   pos: /^(position|rank|ranking|place|plaats)$/i,

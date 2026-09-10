@@ -155,6 +155,32 @@ export const OPPONENT_CRESTS = {
   'f e f anderlecht': 'assets/crests/fef-anderlecht.png',
 };
 
+/* ----------------------------------------------------- OBIEKTY RYWALI --- */
+/* Adresy boisk gospodarzy ze szczegółów meczów na rbfa.be (/nl/wedstrijd/<id>),
+   odczyt 09.09.2026. Importer terminarza RBFA NIE podaje obiektu — pole wraca
+   puste i strona pokazywała „Obiekt do potwierdzenia". Dlatego adres bierzemy
+   stąd, po nazwie gospodarza, niezależnie od tego, skąd przyszedł terminarz.
+   Klucz = slug nazwy z federacji. Dopisuj kolejne przy zmianie rywali. */
+
+export const OPPONENT_VENUES = {
+  'ol anderlecht': "Stade J. Rousseau / Terrein 1, Avenue d'Itterbeek 580, 1070 Anderlecht",
+  'fc anderlecht sport milan a': 'St.-Niklaasinstituut / Terrein 1, Bergensesteenweg 1421, 1070 Anderlecht',
+  'rofc stockel b': 'Club House / Terrein 1, Chaussée de Stockel 376, 1150 Woluwe-Saint-Pierre',
+  'bx brussels b': 'La Roue / Terrein 1, Rue Pierre Schlosser 31, 1070 Anderlecht',
+  'olympic wolves brussels': 'St.-Niklaasinstituut / Terrein 1, Bergensesteenweg 1421, 1070 Anderlecht',
+  'fc m uccle b': 'C.Sp. A. Deridder / Terrein 1, Rue des Griottes 26, 1180 Uccle',
+  'olympique club forestois b': "C.Sp. Bempt / Terrein 4, Bld. 2ème Armée Britannique 600, 1190 Forest",
+  'black star noh fc b': 'Croix De Guerre / Terrein 1, Av. des Croix de Guerre 3, 1120 Neder-Over-Heembeek',
+  'ru auderghem b': 'St. Communal Auderghem / Terrein 2, Chaussée de Wavre 1854, 1160 Auderghem',
+  'rrc boitsfort b': 'Stade Trois Tilleuls / Terrein 2, Avenue des Nymphes 1a, 1170 Watermael-Boitsfort',
+  'racing anderlecht': "Vogelenzang / Terrein 1, Rue du Chant d'Oiseaux 130, 1070 Anderlecht",
+  'f e f anderlecht': "Vogelenzang / Terrein 2, Rue du Chant d'Oiseaux 130, 1070 Anderlecht",
+};
+
+/** Obiekt meczu: nasz stadion u siebie, boisko gospodarza na wyjeździe. */
+export const venueFor = (home, away) =>
+  (isPolonia(home) ? 'Stade Fallon, ' + HOME_VENUE : (OPPONENT_VENUES[slug(home)] || ''));
+
 export const teamLogo = (name, url) => {
   if (isPolonia(name)) return 'assets/crest.png';
   const key = slug(name);
@@ -200,7 +226,7 @@ export function normalizeFixture(raw, i = 0) {
     awayLogoUrl: raw.awayLogoUrl || null,
     home, away,
     isHome: isPolonia(home, '', raw.homeTeamId),
-    venue: ovr.venue[id] || raw.venue || '',
+    venue: ovr.venue[id] || raw.venue || venueFor(home, away),
     competition: raw.competition || '',
     round: raw.round || '',
     status: raw.status || (played ? 'played' : 'scheduled'),
