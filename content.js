@@ -220,7 +220,7 @@ export const SPONSORS = [
     // Logo wgrywane przez administratora w slocie o tym id (wersja niebieska
     // na jasnym tle). Pliki źródłowe mają w nazwie nawiasy, których nie da się
     // wczytać automatycznie — po zmianie nazwy można podać ścieżkę wprost.
-    logo: 'assets/partners/aktualnosci-be-niebieski.png',
+    logo: 'assets/partners/aktualnosci-be-niebieski-kadr.png',
     note: 'Oficjalny partner medialny klubu. Polskie wiadomości prosto z Belgii.',
   },
   {

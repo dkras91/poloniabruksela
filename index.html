@@ -109,7 +109,7 @@
 <meta name="ext-resource-dependency" content="assets/crests/olympique-club-forestois.png">
 <meta name="ext-resource-dependency" content="assets/crests/racing-anderlecht.png">
 <meta name="ext-resource-dependency" content="assets/partners/aktualnosci-be-bialy.png">
-<meta name="ext-resource-dependency" content="assets/partners/aktualnosci-be-niebieski.png">
+<meta name="ext-resource-dependency" content="assets/partners/aktualnosci-be-niebieski-kadr.png">
 <!-- /zasoby -->
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SportsTeam","name":"FC Polonia Bruksela","alternateName":["FC Polonia Bruxelles","Polonia Bruksela","FC Polonia Limelette","FC Polonia Boitsfort"],"sport":"Association football","foundingDate":"1986","logo":"assets/crest.png","email":"polonia@live.be","location":{"@type":"Place","name":"Pôle Sportif de Limelette","address":{"@type":"PostalAddress","streetAddress":"Avenue des Sorbiers 120a","postalCode":"1342","addressLocality":"Limelette","addressCountry":"BE"}},"identifier":{"@type":"PropertyValue","name":"matricule","value":"09647"},"sameAs":["https://www.facebook.com/fcpolonia.bruksela/","https://www.tiktok.com/@poloniabruksela","https://www.foot24.be/fr/clubs/fc-polonia-limelette","https://www.rbfa.be/fr/club/6360/infos"]}
@@ -144,7 +144,7 @@ a:hover{color:#cbb96b}
       <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:{{ topBarFs }};letter-spacing:{{ topBarLs }};color:#121216;text-transform:uppercase;white-space:nowrap;flex-shrink:0">{{ partnerLabel }}</span>
       <span style="width:1px;height:16px;background:rgba(18,18,22,.2);display:block;flex-shrink:0"></span>
       <a href="https://aktualnosci.be/" target="_blank" rel="noopener" style="display:flex;align-items:center;flex-shrink:0" aria-label="Aktualnosci.be — prosto z Belgii">
-        <img src="assets/partners/aktualnosci-be-niebieski.png" alt="Aktualnosci.be — prosto z Belgii" style="width:{{ partnerLogoW }};height:auto;max-height:{{ partnerLogoH }};object-fit:contain;display:block;max-width:100%">
+        <img src="assets/partners/aktualnosci-be-niebieski-kadr.png" alt="Aktualnosci.be — prosto z Belgii" style="width:{{ partnerLogoW }};height:auto;max-height:{{ partnerLogoH }};object-fit:contain;display:block;max-width:100%">
       </a>
     </div>
   </div>
@@ -2450,12 +2450,17 @@ class Component extends DCLogic {
       /* górna belka partnera — na telefonie jedna niska linia */
       topBarPad: mob ? '5px 12px' : '8px clamp(12px,3vw,32px)',
       topBarGap: mob ? '8px' : 'clamp(10px,2vw,18px)',
-      topBarH: mob ? '34px' : '44px',
+      topBarH: mob ? '38px' : '54px',
       topBarFs: mob ? (small ? '8px' : '9px') : '10px',
       topBarLs: mob ? '.08em' : '.18em',
       partnerLabel: mob ? 'Partner medialny' : 'Oficjalny partner medialny',
-      partnerLogoW: mob ? (small ? '108px' : '124px') : 'clamp(190px,24vw,260px)',
-      partnerLogoH: mob ? '24px' : '52px',
+      // Logo partnera medialnego: na tyle duże, żeby dało się je przeczytać
+      // z odległości, ale nie przytłaczało herbu klubu w nawigacji niżej.
+      /* Plik logotypu ma przycięte marginesy, więc o wielkości znaku decyduje
+         sama wysokość — szerokość dobiera się proporcjonalnie i nie zostaje
+         puste pole obok. */
+      partnerLogoW: 'auto',
+      partnerLogoH: mob ? (small ? '24px' : '28px') : '46px',
       /* hero — ciaśniejsze odstępy, nagłówek bez zmian */
       heroBadgeMb: mob ? '12px' : '16px',
       heroBtnMt: mob ? '18px' : '24px',
