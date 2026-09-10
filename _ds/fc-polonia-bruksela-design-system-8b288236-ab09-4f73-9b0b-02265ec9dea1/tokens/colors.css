@@ -4,6 +4,11 @@
 --color-graphite:#121216;
 --color-cream:#F6F3EC;
 --color-red-dim:#a80725;
+/* Wynik meczu: zielony = wygrana, zloty = remis, czerwony = porazka.
+   Zielen dobrana tak, by miala te sama jasnosc co firmowa czerwien —
+   plakietka wyniku wazy wtedy tyle samo niezaleznie od rezultatu. */
+--color-green:#17853F;
+--color-green-dim:#116632;
 --color-gold-dim:#8f8248;
 --color-black-60:rgba(18,18,22,.6);
 --color-black-80:rgba(18,18,22,.85);

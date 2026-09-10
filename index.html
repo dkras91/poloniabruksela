@@ -268,7 +268,7 @@ a:hover{color:#cbb96b}
           </div>
           <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:clamp(6px,2vw,20px);align-items:center">
             <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:{{ lastName }};text-transform:uppercase;text-align:right;line-height:1.05;overflow-wrap:break-word;hyphens:none;min-width:min-content">{{ lm.homeName }}</span>
-            <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:{{ scoreFs }};color:#121216;background:#E2092F;padding:{{ scorePad }};line-height:1;white-space:nowrap;flex-shrink:0">{{ lm.scoreStr }}</span>
+            <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:{{ scoreFs }};color:#121216;background:{{ lmScoreBg }};padding:{{ scorePad }};line-height:1;white-space:nowrap;flex-shrink:0">{{ lm.scoreStr }}</span>
             <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:{{ lastName }};text-transform:uppercase;line-height:1.05;overflow-wrap:break-word;hyphens:none;min-width:min-content">{{ lm.awayName }}</span>
           </div>
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax({{ statMin2 }},1fr));gap:14px;border-top:1px solid rgba(18,18,22,.13);padding-top:20px">
@@ -1912,10 +1912,15 @@ class Component extends DCLogic {
     const L = this.L;
     const homeLogo = L.teamLogo(f.home, f.homeLogoUrl), awayLogo = L.teamLogo(f.away, f.awayLogoUrl);
     const isHome = f.isHome != null ? f.isHome : L.isPolonia(f.home);
-    let resultBg = '#23232a';
+    // Plakietka wyniku: zieleń = wygrana, złoto = remis, czerwień = porażka.
+    // Dwa warianty, bo plakietka pojawia się i na ciemnym tle (jasny tekst),
+    // i na białej karcie ostatniego meczu (ciemny tekst) — złoto musi być
+    // wtedy jaśniejsze, żeby kontrast nie spadł poniżej progu czytelności.
+    let resultBg = '#23232a', resultBgLight = '#23232a';
     if (f.score) {
       const us = isHome ? f.score.h : f.score.a, them = isHome ? f.score.a : f.score.h;
-      resultBg = us > them ? '#E2092F' : us === them ? '#8f8248' : '#3a3a44';
+      resultBg = us > them ? '#17853F' : us === them ? '#8f8248' : '#E2092F';
+      resultBgLight = us > them ? '#17853F' : us === them ? '#B7A85C' : '#E2092F';
     }
     return {
       ...f,
@@ -1939,6 +1944,7 @@ class Component extends DCLogic {
       // wariant na jasnym tle — złoto daje tam kontrast poniżej 3:1
       accentLight: isHome ? '#E2092F' : '#7a6a1e',
       resultBg,
+      resultBgLight,
     };
   }
 
@@ -2110,7 +2116,7 @@ class Component extends DCLogic {
     };
 
     if (!L || !C) {
-      return { ...base, season: '2026/2027', updatedAt: '—', sourceLabel: 'oczekuje na synchronizację', noLive: false, noSource: false, noFixtures: false, noTable: false, loadingFixtures: true, loadFailed: false, hasTable: false, hasFixtures: false, hasUpcoming: false, nm: null, lm: null, article: null, seasonDetail: null };
+      return { ...base, season: '2026/2027', updatedAt: '—', sourceLabel: 'oczekuje na synchronizację', noLive: false, noSource: false, noFixtures: false, noTable: false, loadingFixtures: true, loadFailed: false, hasTable: false, hasFixtures: false, hasUpcoming: false, nm: null, lm: null, lmScoreBg: '#23232a', article: null, seasonDetail: null };
     }
 
     const live = s.live || L.getState();
@@ -2356,6 +2362,9 @@ class Component extends DCLogic {
       hasUpcoming: pFix.some((f) => f.status !== 'played'),
       upcoming: pFix.filter((f) => f.status !== 'played').slice(0, 4).map((f) => this._fixtureVM(f)),
       nm, lm,
+      // Kolor plakietki wyniku podajemy osobno: warstwa szablonu nie
+      // podstawia zagnieżdżonych ścieżek w atrybucie style poza pętlą.
+      lmScoreBg: (lm && lm.resultBgLight) || '#23232a',
       hasForm: formArr.length > 0,
       formList: formArr.map((x) => ({
         letter: x,

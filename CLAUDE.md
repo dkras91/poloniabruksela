@@ -91,6 +91,29 @@ każdej „periody". Te nierozegrane mają same zera i wszystkim wpisaną pozycj
 meczów, a nie pierwszy z brzegu. Pola nazywają się `matchesWon` /
 `matchesDrawn` / `matchesLost`, nie `won` / `drawn` / `lost`.
 
+## Ukrywanie pojedynczych meczów
+
+`HIDDEN_MATCHES` w `live-data.js` to lista identyfikatorów RBFA albo dat
+(`RRRR-MM-DD`) spotkań, które nie mają się pokazywać nigdzie na stronie —
+w terminarzu, w kafelku ostatniego meczu ani w formie. Filtr działa w dwóch
+miejscach: raz na świeżych danych tuż przed zapisem migawki (`sync`) i raz
+przy odczycie starszych migawek (`getCache`), więc mecz nie wraca ani z
+importera RBFA, ani z iCal, ani z terminarza zapasowego, ani z cache w
+przeglądarce odwiedzającego. Obecnie ukryty jest mecz pucharowy z 02.08.2026
+(id 7522858). To nie jest sposób na ukrywanie porażek ligowych — służy do
+spotkań spoza rozgrywek, których klub nie pokazuje na stronie.
+
+## Kartki i zawieszenia — dlaczego ich nie ma
+
+Strona `rbfa.be/nl/club/6360/kaarten` nie ma odpowiednika w publicznym
+GraphQL federacji: dane idą przez persisted query, której hash RBFA zmienia
+przy każdym wdrożeniu swojego frontu. Zapytanie z wpisanym na sztywno hashem
+przestaje działać po ich najbliższej aktualizacji, a scrapowanie HTML tej
+podstrony wymaga JavaScriptu, więc funkcja Netlify go nie odczyta. Właściciel
+zdecydował, że na razie kartek nie dodajemy. Gdyby wracać do tematu:
+alternatywą jest ręczna tabelka w `content.js` aktualizowana po kolejce albo
+zwykły link do strony federacji.
+
 ## Weryfikacja przed pushem
 
 - Podgląd lokalny: `python3 -m http.server 8000`, potem `localhost:8000`.

@@ -588,6 +588,25 @@ async function fetchText(url) {
 
 /* --------------------------------------------------------------- CACHE API */
 
+/* ------------------------------------------------- MECZE UKRYTE --------- */
+/* Spotkania, których właściciel nie chce na stronie. Filtrujemy przy ODCZYCIE
+   (getCache), więc reguła działa też dla zestawów już zapisanych w pamięci
+   przeglądarki — nie trzeba czekać, aż wygasną.
+
+   7522858 / 2026-08-02 — Puchar BW-BXL z OTTIGNIES-LIMELETTE FC, przegrany
+   walkowerem 0:5. Mecz pucharowy, nie ligowy; psuł też kafelek FORMA.
+
+   UWAGA: to lista pojedynczych meczów, a NIE reguła „ukryj wszystkie puchary".
+   Kolejne spotkania pucharowe pojawią się normalnie. */
+
+export const HIDDEN_MATCHES = [
+  '7522858',
+  '2026-08-02',
+];
+
+const isHidden = (f) => !!f && HIDDEN_MATCHES.some((k) =>
+  String(f.id) === k || f.localDate === k || String(f.kickoff).slice(0, 10) === k);
+
 export const getCache = () => {
   const c = read(CACHE_KEY, null);
   if (!c || !Array.isArray(c.fixtures)) return c;
@@ -595,7 +614,7 @@ export const getCache = () => {
   // poprawki w normalizacji nie docierały do nikogo, kto ma świeży cache —
   // czekały, aż wygaśnie. Obiekt uzupełniamy przy odczycie: to jedyne pole
   // wyliczane u nas, a nie pochodzące ze źródła.
-  return { ...c, fixtures: c.fixtures.map((f) => (
+  return { ...c, fixtures: c.fixtures.filter((f) => !isHidden(f)).map((f) => (
     f && !f.venue ? { ...f, venue: venueFor(f.home, f.away) } : f
   )) };
 };
@@ -734,6 +753,10 @@ export async function sync({ force = false } = {}) {
   }
 
   if (!got) return { ok: false, problems, state: getState() };
+  // Mecze z HIDDEN_MATCHES odsiewamy raz, tuż przed zapisem migawki — dzięki
+  // temu nie wracają ani z importera RBFA, ani z iCal, ani z terminarza
+  // zapasowego. getCache() robi to samo dla migawek zapisanych wcześniej.
+  fixtures = fixtures.filter((f) => !isHidden(f));
   const saved = saveSnapshot({
     table, fixtures, sourceId, sourceLabel,
     tableDerived,
