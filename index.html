@@ -461,10 +461,12 @@ a:hover{color:#cbb96b}
           <a href="#/galeria" style="font-family:'Inter',sans-serif;font-weight:700;font-size:12px;letter-spacing:.16em">WSZYSTKIE ALBUMY →</a>
         </div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax({{ galMin }},1fr));gap:10px">
-          <div style="aspect-ratio:4/5"><image-slot id="home-gal-1" shape="rect" fit="cover" placeholder="Mecz"></image-slot></div>
-          <div style="aspect-ratio:4/5"><image-slot id="home-gal-2" shape="rect" fit="cover" placeholder="Trening"></image-slot></div>
-          <div style="aspect-ratio:4/5"><image-slot id="home-gal-3" shape="rect" fit="cover" placeholder="Kibice"></image-slot></div>
-          <div style="aspect-ratio:4/5"><image-slot id="home-gal-4" shape="rect" fit="cover" placeholder="Kulisy"></image-slot></div>
+          <sc-for list="{{ homeGallery }}" as="p" hint-placeholder-count="4">
+            <div onClick="{{ p.onOpen }}" style="position:relative;aspect-ratio:4/5;cursor:pointer;overflow:hidden;background:#1b1b21">
+              <img src="{{ p.src }}" alt="{{ p.alt }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:{{ p.tilePos }};display:block">
+              <span style="position:absolute;left:0;right:0;bottom:0;padding:30px 12px 12px;background:linear-gradient(0deg,rgba(18,18,22,.9) 0%,rgba(18,18,22,0) 100%);font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.14em;color:#F6F3EC;pointer-events:none">{{ p.label }}</span>
+            </div>
+          </sc-for>
         </div>
       </div>
     </div>
@@ -2226,6 +2228,27 @@ class Component extends DCLogic {
         countLabel: n ? (n + (n === 1 ? ' zdjęcie' : (n < 5 ? ' zdjęcia' : ' zdjęć'))) : 'w przygotowaniu',
       };
     });
+    /* Miks na stronie głównej: po jednym kadrze z każdego albumu, w losowej
+       kolejności. Losujemy RAZ na wejście na stronę i zapamiętujemy wybór na
+       instancji — inaczej zdjęcia przeskakiwałyby przy każdym renderze
+       (zmiana zakładki, odświeżenie danych z RBFA, zmiana szerokości okna).
+       Odświeżenie strony tworzy komponent od nowa, więc kadry się zmieniają. */
+    if (!this._homeGalPick) {
+      const withPhotos = galleries.filter((g) => g.photos.length);
+      const pick = withPhotos.map((g) => ({ key: g.key, i: Math.floor(Math.random() * g.photos.length) }));
+      for (let i = pick.length - 1; i > 0; i--) {            // tasowanie Fishera–Yatesa
+        const j = Math.floor(Math.random() * (i + 1));
+        [pick[i], pick[j]] = [pick[j], pick[i]];
+      }
+      this._homeGalPick = pick;
+    }
+    const homeGallery = this._homeGalPick.map(({ key, i }) => {
+      const g = galleries.find((x) => x.key === key);
+      if (!g || !g.photos.length) return null;
+      const photo = g.photos[Math.min(i, g.photos.length - 1)];
+      return { ...photo, label: g.label, tilePos: g.tilePos };
+    }).filter(Boolean);
+
     let album = null;
     if (route === 'galeria' && s.param) {
       const g = albums.find((x) => x.key === s.param);
@@ -2666,7 +2689,7 @@ class Component extends DCLogic {
         g1: n.g1, g2: n.g2, g3: n.g3,
       })),
       seasons, seasonDetail,
-      galleries, albums, album, positionGroups, sponsorTiers,
+      galleries, albums, album, homeGallery, positionGroups, sponsorTiers,
       albumGap: s.vw <= 767 ? '26px' : '38px',
       albumTitleFs: s.vw <= 767 ? '26px' : 'clamp(24px,3.2vw,36px)',
       lb: (() => {
