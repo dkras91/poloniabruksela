@@ -19,8 +19,10 @@
    (OPPONENT_CRESTS w live-data.js) i nazwy w terminarzu.
 
    AKTUALIZACJA: dopóki importer nie działa, po każdej kolejce trzeba tu wpisać
-   nowe liczby. Pozycje ex aequo zapisujemy tak jak federacja (kilka zespołów
-   z tym samym numerem).
+   nowe liczby. Pozycje ex aequo zapisujemy DOKŁADNIE tak jak federacja (kilka
+   zespołów z tym samym numerem) — kolejność wierszy też przepisujemy z rbfa.be.
+   Numery widoczne na stronie nadaje potem normalizeTable(): kolejno 1…13, bez
+   powtórzeń. Dlatego tutaj liczy się porządek wierszy, nie sam numer.
    ========================================================================== */
 
 export const SEED_TABLE = {

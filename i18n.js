@@ -132,8 +132,18 @@ const T = {
   'Do potwierdzenia': ['À confirmer', 'Te bevestigen', 'To be confirmed'],
   'Obiekt do potwierdzenia': ['Stade à confirmer', 'Terrein te bevestigen', 'Venue to be confirmed'],
   'OTWÓRZ W MAPACH GOOGLE': ['OUVRIR DANS GOOGLE MAPS', 'OPEN IN GOOGLE MAPS', 'OPEN IN GOOGLE MAPS'],
+  'Zawodnik FC Polonia Bruksela z klubowym szalikiem na trybunach stadionu': [
+    'Joueur du FC Polonia Bruxelles avec l\u2019écharpe du club dans les tribunes',
+    'Speler van FC Polonia Brussel met clubsjaal op de tribune',
+    'FC Polonia Brussels player holding the club scarf in the stands',
+  ],
   'ZAPISZ W KALENDARZU': ['AJOUTER AU CALENDRIER', 'IN AGENDA ZETTEN', 'ADD TO CALENDAR'],
   'DODAJ DO KALENDARZA': ['AJOUTER AU CALENDRIER', 'IN AGENDA ZETTEN', 'ADD TO CALENDAR'],
+  'Zapisz mecz w kalendarzu telefonu — z przypomnieniem 5 godzin wcześniej': [
+    'Enregistrer le match dans le calendrier du téléphone — rappel 5 heures avant',
+    'Zet de wedstrijd in de agenda van je telefoon — herinnering 5 uur vooraf',
+    'Save the match to your phone calendar — reminder 5 hours before',
+  ],
   'ODŚWIEŻ DANE': ['ACTUALISER', 'VERNIEUWEN', 'REFRESH DATA'],
   'SYNCHRONIZACJA…': ['SYNCHRONISATION…', 'SYNCHRONISEREN…', 'SYNCING…'],
   'PANEL DANYCH': ['PANNEAU DE DONNÉES', 'GEGEVENSPANEEL', 'DATA PANEL'],

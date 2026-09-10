@@ -255,7 +255,12 @@ export function normalizeTable(rows = []) {
     };
   }).filter(Boolean);
   out.sort((a, b) => a.pos - b.pos);
-  return out;
+  // Federacja przy równym dorobku daje kilku zespołom ten sam numer — po
+  // pierwszej kolejce cztery drużyny mają „1.”, a kolejne „5.”. Na stronie
+  // numerujemy kolejno, 1…13, zachowując porządek z klasyfikacji RBFA
+  // (sortowanie jest stabilne, więc remisy nie zmieniają kolejności wierszy).
+  // Oryginalny numer federacji zostaje w `posFed`, gdyby był kiedyś potrzebny.
+  return out.map((r, i) => ({ ...r, posFed: r.pos, pos: i + 1 }));
 }
 
 /* ------------------------------------------------- ADAPTER RBFA / VV ------ */
@@ -961,6 +966,122 @@ export const fixtureDay = (f) => {
   if (f.localDate) { const [y, m, d] = f.localDate.split('-').map(Number); return DNI[new Date(y, m - 1, d).getDay()]; }
   return fmtDay(f.kickoff);
 };
+
+/* ------------------------------------------------- ZAPIS W KALENDARZU --- */
+/* Plik .ics zamiast linku „dodaj do Kalendarza Google”. Powód: link
+   render?action=TEMPLATE nie potrafi ustawić przypomnienia — wydarzenie
+   dostaje domyślne powiadomienie z ustawień użytkownika. Wpis .ics niesie
+   własny alarm (VALARM), więc telefon przypomni o meczu 5 godzin wcześniej
+   bez grzebania w ustawieniach. Google Calendar na Androidzie, Kalendarz na
+   iPhonie i Outlook czytają ten sam plik.
+
+   Godziny trzymamy jako czas lokalny Belgii z TZID, nie w UTC — dzięki temu
+   15:00 zostaje 15:00 także dla kibica, który otworzy stronę w Polsce. */
+
+const icsEscape = (s = '') => String(s)
+  .replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,')
+  .replace(/\r?\n/g, '\\n');
+
+// RFC 5545: linia do 75 oktetów, kontynuacja zaczyna się spacją.
+const icsFold = (line) => {
+  if (line.length <= 73) return line;
+  // cięcie nie może rozdzielić pary zastępczej (emoji w nazwie drużyny)
+  const cut = (s, n) => {
+    const c = s.charCodeAt(n - 1);
+    return (c >= 0xd800 && c <= 0xdbff) ? n - 1 : n;
+  };
+  const first = cut(line, 73);
+  const out = [line.slice(0, first)];
+  let rest = line.slice(first);
+  while (rest.length > 72) {
+    const k = cut(rest, 72);
+    out.push(' ' + rest.slice(0, k));
+    rest = rest.slice(k);
+  }
+  if (rest) out.push(' ' + rest);
+  return out.join('\r\n');
+};
+
+const VTIMEZONE_BRUSSELS = [
+  'BEGIN:VTIMEZONE',
+  'TZID:Europe/Brussels',
+  'BEGIN:DAYLIGHT',
+  'TZOFFSETFROM:+0100', 'TZOFFSETTO:+0200', 'TZNAME:CEST',
+  'DTSTART:19700329T020000', 'RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU',
+  'END:DAYLIGHT',
+  'BEGIN:STANDARD',
+  'TZOFFSETFROM:+0200', 'TZOFFSETTO:+0100', 'TZNAME:CET',
+  'DTSTART:19701025T030000', 'RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU',
+  'END:STANDARD',
+  'END:VTIMEZONE',
+];
+
+/** Data i godzina spotkania rozłożone na części, w czasie lokalnym Belgii. */
+function fixtureParts(f) {
+  if (f.localDate) {
+    const [y, mo, d] = String(f.localDate).split('-').map(Number);
+    const [hh, mi] = String(f.localTime || '15:00').split(':').map(Number);
+    return { y, mo, d, hh, mi: mi || 0 };
+  }
+  const dt = new Date(f.kickoff);
+  return { y: dt.getFullYear(), mo: dt.getMonth() + 1, d: dt.getDate(), hh: dt.getHours(), mi: dt.getMinutes() };
+}
+
+/** Treść pliku .ics dla jednego spotkania, z alarmem `alarmHours` przed. */
+export function matchICS(f, { alarmHours = 5, durationHours = 2, pageUrl = '' } = {}) {
+  const pad = (n) => String(n).padStart(2, '0');
+  const p = fixtureParts(f);
+  const stamp = (addH) => {
+    const t = new Date(p.y, p.mo - 1, p.d, p.hh + addH, p.mi);
+    return `${t.getFullYear()}${pad(t.getMonth() + 1)}${pad(t.getDate())}T${pad(t.getHours())}${pad(t.getMinutes())}00`;
+  };
+  const nowUTC = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+  const home = displayTeam(f.home), away = displayTeam(f.away);
+  const uid = 'fcpb-' + (f.id || `${p.y}${pad(p.mo)}${pad(p.d)}`) + '@poloniabruksela';
+  const desc = [
+    (f.competition || 'Mecz FC Polonia Bruksela') + (f.round ? ' · kolejka ' + f.round : ''),
+    isPolonia(f.home) ? 'Mecz domowy' : 'Mecz wyjazdowy',
+    '',
+    'Terminarz: ' + (pageUrl || 'https://polonia.aktualnosci.be/#/mecze'),
+  ].join('\n');
+
+  const lines = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//FC Polonia Bruksela//Terminarz//PL',
+    'CALSCALE:GREGORIAN',
+    'METHOD:PUBLISH',
+    ...VTIMEZONE_BRUSSELS,
+    'BEGIN:VEVENT',
+    'UID:' + uid,
+    'DTSTAMP:' + nowUTC,
+    'DTSTART;TZID=Europe/Brussels:' + stamp(0),
+    'DTEND;TZID=Europe/Brussels:' + stamp(durationHours),
+    'SUMMARY:' + icsEscape(home + ' — ' + away),
+    'LOCATION:' + icsEscape(f.venue || 'Bruksela'),
+    'DESCRIPTION:' + icsEscape(desc),
+    'STATUS:CONFIRMED',
+    'TRANSP:OPAQUE',
+    'BEGIN:VALARM',
+    'ACTION:DISPLAY',
+    'TRIGGER:-PT' + alarmHours + 'H',
+    'DESCRIPTION:' + icsEscape(`Mecz ${home} — ${away} za ${alarmHours} godz.`),
+    'END:VALARM',
+    'END:VEVENT',
+    'END:VCALENDAR',
+  ];
+  return lines.map(icsFold).join('\r\n') + '\r\n';
+}
+
+/** Nazwa pliku: data i rywal, żeby w pobranych było widać, o co chodzi. */
+export function matchICSFilename(f) {
+  const p = fixtureParts(f);
+  const pad = (n) => String(n).padStart(2, '0');
+  const rival = displayTeam(isPolonia(f.home) ? f.away : f.home) || 'mecz';
+  const slugRival = rival.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 30);
+  return `polonia-${p.y}-${pad(p.mo)}-${pad(p.d)}-${slugRival || 'mecz'}.ics`;
+}
 
 /** Autostart: jedna próba synchronizacji po wejściu (respektuje TTL)
  *  + odświeżanie w tle co ttlMinutes, gdy karta pozostaje otwarta. */

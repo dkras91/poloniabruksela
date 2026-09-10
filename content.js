@@ -81,7 +81,8 @@ export const NEWS = [
     title: '40 lat FC Polonia Bruksela',
     lead: 'Rok 2026 zamyka czwartą dekadę istnienia polonijnego klubu z Brukseli. Herb nosi datę 1986 — i to od niej liczy się cała historia.',
     photoId: 'news-40lat',
-    photoCaption: 'Herb klubu z datą 1986.',
+    photoCaption: 'Jubileuszowy wieczór klubu — 40 lat FC Polonia Bruksela.',
+    heroPhoto: 'assets/news/40-lat-hero.jpg',
     // Galeria wpisu: prawdziwe pliki, nie sidecar z panelu. Kolejność = g1, g2, g3.
     gallery: ['assets/news/40-lat-polonii.jpg'],
     body: [
@@ -98,7 +99,11 @@ export const NEWS = [
     title: 'Matricule 09647 — jak Polonia weszła do struktur belgijskiej federacji',
     lead: 'W maju 2015 roku klub poinformował o otrzymaniu numeru matricule 09647 w belgijskiej federacji piłkarskiej. Był to pierwszy taki przypadek w historii polonijnej piłki w Belgii.',
     photoId: 'news-matricule',
-    photoCaption: 'Zdjęcie do uzupełnienia z archiwum klubu.',
+    photoCaption: 'Herb klubu i numer matricule 09647 nadany przez belgijską federację.',
+    // Grafika kwadratowa — dlatego wpis podaje własne proporcje kadru.
+    heroPhoto: 'assets/news/matricule-09647.jpg',
+    heroRatio: '1/1',
+    heroMaxW: '560px',
     body: [
       'Do 2015 roku Polonia grała w rozgrywkach federacji amatorskiej. Komunikat klubu z maja 2015 roku zapowiadał zmianę: przejście do URBSFA — oficjalnej belgijskiej federacji piłkarskiej — i przyznanie numeru matricule 09647.',
       'Wraz z wejściem do struktur federacji zmieniła się oficjalna nazwa: klub został zarejestrowany jako FC Polonia Boitsfort. W herbie miejsce Brukseli zajął Boitsfort. Mecze domowe zaplanowano na niedziele, w okolicach godziny piętnastej, na Parc Sportif des Trois Tilleuls przy Avenue Léopold Wiener 60 w Brukseli.',
@@ -217,6 +222,21 @@ export const SPONSORS = [
     logo: 'assets/partners/aktualnosci-be-niebieski.png',
     note: 'Oficjalny partner medialny klubu. Polskie wiadomości prosto z Belgii.',
   },
+  {
+    name: 'Rénovation Brachole SRL',
+    tier: 'SPONSORZY',
+    // Firma nie podała adresu strony — kafelek prowadzi na numer z logotypu.
+    url: 'tel:+32473526665',
+    logo: 'assets/partners/brachole-srl.jpg',
+    note: 'Entreprise générale — renowacje i prace ogólnobudowlane.',
+  },
+  {
+    name: 'AGPOL SRL Toiture',
+    tier: 'SPONSORZY',
+    url: '',
+    logo: 'assets/partners/agpol-srl-toiture.png',
+    note: 'Dekarstwo i pokrycia dachowe.',
+  },
 ];
 
 export const SPONSOR_TIERS = ['SPONSOR GŁÓWNY', 'SPONSORZY', 'PARTNERZY', 'PARTNER MEDIALNY'];
@@ -224,9 +244,8 @@ export const SPONSOR_TIERS = ['SPONSOR GŁÓWNY', 'SPONSORZY', 'PARTNERZY', 'PAR
 /* ------------------------------------------------------------------ GALERIA */
 
 export const GALLERIES = [
-  { key: 'barwy', label: 'NOSISZ NASZE BARWY', count: 3, tile: '3/4', photos: [
+  { key: 'barwy', label: 'NOSISZ NASZE BARWY', count: 3, tilePos: 'center 8%', photos: [
     'assets/gallery/barwy/barwy-01.jpg',
-    'assets/gallery/barwy/barwy-02.jpg',
     'assets/gallery/barwy/barwy-03.jpg',
     'assets/gallery/barwy/barwy-04.jpg',
     'assets/gallery/barwy/barwy-05.jpg',

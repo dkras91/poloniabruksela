@@ -197,8 +197,10 @@ a:hover{color:#cbb96b}
     <!-- HERO -->
     <div style="position:relative;min-height:{{ heroMinH }};display:flex;align-items:flex-end;overflow:hidden;border-bottom:4px solid #E2092F">
       <div style="position:absolute;inset:0;overflow:hidden">
-        <img src="assets/hero/hero-akcja-2026-wide.jpg" alt="Zawodnik FC Polonia Bruksela podczas meczu" style="width:100%;height:100%;object-fit:cover;object-position:{{ heroPos }};display:block">
+        <img src="assets/hero/hero-szalik-2026-wide.jpg" alt="Zawodnik FC Polonia Bruksela z klubowym szalikiem na trybunach stadionu" style="width:100%;height:100%;object-fit:cover;object-position:{{ heroPos }};display:block">
       </div>
+      <!-- przyciemnienie od lewej: pod napisami zdjęcie musi ustąpić tekstowi -->
+      <div style="position:absolute;inset:0;background:{{ heroSide }};pointer-events:none"></div>
       <div style="position:absolute;inset:0;background:{{ heroGrad }};pointer-events:none"></div>
       <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(18,18,22,.9) 0%,rgba(18,18,22,0) 45%);pointer-events:none"></div>
       <div style="position:relative;max-width:1280px;margin:0 auto;padding:{{ heroPad }};width:100%;pointer-events:none">
@@ -333,21 +335,21 @@ a:hover{color:#cbb96b}
           <a href="#/tabela" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:19px;letter-spacing:.08em;text-transform:uppercase;background:#E2092F;color:#F6F3EC;padding:14px 24px;align-self:{{ btnAlign }};width:{{ btnW }};box-sizing:border-box;text-align:center" style-hover="background:#a80725">Pełna tabela</a>
         </div>
         <div style="overflow-x:auto">
-          <div style="min-width:380px;border:1px solid rgba(246,243,236,.14)">
-            <div style="display:grid;grid-template-columns:{{ miniCols }};background:#1b1b21;border-bottom:1px solid rgba(246,243,236,.14)">
-              <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;color:#c9c6bd;padding:11px 8px">#</span>
-              <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;color:#c9c6bd;padding:11px 8px">DRUŻYNA</span>
-              <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;color:#c9c6bd;padding:11px 4px;text-align:center">M</span>
+          <div style="min-width:380px;background:#FFFFFF;border:1px solid rgba(18,18,22,.13)">
+            <div style="display:grid;grid-template-columns:{{ miniCols }};background:#F1EDE3;border-bottom:1px solid rgba(18,18,22,.13)">
+              <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;color:#6b6862;padding:11px 8px">#</span>
+              <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;color:#6b6862;padding:11px 8px">DRUŻYNA</span>
+              <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;color:#6b6862;padding:11px 4px;text-align:center">M</span>
               <sc-if value="{{ miniFull }}" hint-placeholder-val="{{ true }}">
-                <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;color:#c9c6bd;padding:11px 4px;text-align:center">Z</span>
-                <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;color:#c9c6bd;padding:11px 4px;text-align:center">R</span>
-                <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;color:#c9c6bd;padding:11px 4px;text-align:center">P</span>
-                <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;color:#c9c6bd;padding:11px 4px;text-align:center">BRAMKI</span>
+                <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;color:#6b6862;padding:11px 4px;text-align:center">Z</span>
+                <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;color:#6b6862;padding:11px 4px;text-align:center">R</span>
+                <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;color:#6b6862;padding:11px 4px;text-align:center">P</span>
+                <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;color:#6b6862;padding:11px 4px;text-align:center">BRAMKI</span>
               </sc-if>
-              <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;color:#c9c6bd;padding:11px 4px;text-align:center">PKT</span>
+              <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;color:#6b6862;padding:11px 4px;text-align:center">PKT</span>
             </div>
             <sc-for list="{{ miniTable }}" as="r" hint-placeholder-count="5">
-              <div style="display:grid;grid-template-columns:{{ miniCols }};border-bottom:1px solid rgba(246,243,236,.08);background:{{ r.bg }};align-items:center">
+              <div style="display:grid;grid-template-columns:{{ miniCols }};border-bottom:1px solid rgba(18,18,22,.09);background:{{ r.bg }};align-items:center">
                 <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:17px;padding:12px 8px;color:{{ r.dim }}">{{ r.pos }}</span>
                 <span style="font-family:'Inter',sans-serif;font-weight:{{ r.weight }};font-size:{{ miniTeamFs }};padding:12px 8px;color:{{ r.fg }};line-height:1.25;overflow-wrap:anywhere">{{ r.team }}</span>
                 <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:14px;padding:12px 4px;text-align:center;color:{{ r.fg }}">{{ r.played }}</span>
@@ -524,7 +526,7 @@ a:hover{color:#cbb96b}
     </div>
     <h1 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(34px,6vw,66px);text-transform:uppercase;line-height:.92;margin:0;letter-spacing:.01em;text-wrap:balance">{{ article.title }}</h1>
     <p style="font-family:'Inter',sans-serif;font-weight:700;font-size:clamp(17px,2vw,21px);line-height:1.5;color:#F6F3EC;margin:24px 0 0;text-wrap:pretty">{{ article.lead }}</p>
-    <div style="aspect-ratio:16/9;margin:32px 0;background:#23232a"><image-slot id="{{ article.heroId }}" shape="rect" fit="cover" placeholder="{{ article.photoCaption }}"></image-slot></div>
+    <div style="aspect-ratio:{{ article.heroRatio }};max-width:{{ article.heroMaxW }};margin:32px auto;background:#23232a"><image-slot id="{{ article.heroId }}" src="{{ article.heroSrc }}" shape="rect" fit="cover" placeholder="{{ article.photoCaption }}"></image-slot></div>
     <sc-for list="{{ article.body }}" as="p" hint-placeholder-count="3">
       <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:17px;line-height:1.72;color:#e6e3db;margin:0 0 22px;text-wrap:pretty">{{ p }}</p>
     </sc-for>
@@ -621,7 +623,7 @@ a:hover{color:#cbb96b}
             </sc-if>
             <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.14em;color:{{ f.accent }};border:1px solid {{ f.accent }};padding:5px 9px">{{ f.isHomeLabel }}</span>
             <sc-if value="{{ f.canAddToCal }}" hint-placeholder-val="{{ true }}">
-              <button onClick="{{ f.onAddToCal }}" title="Dodaj mecz do Kalendarza Google" aria-label="Dodaj mecz do Kalendarza Google" style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.14em;border:1px solid rgba(183,168,92,.5);background:transparent;color:#B7A85C;padding:5px 9px;cursor:pointer" style-hover="background:#B7A85C;color:#121216">ZAPISZ W KALENDARZU</button>
+              <button onClick="{{ f.onAddToCal }}" title="Zapisz mecz w kalendarzu telefonu — z przypomnieniem 5 godzin wcześniej" aria-label="Zapisz mecz w kalendarzu telefonu — z przypomnieniem 5 godzin wcześniej" style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.14em;border:1px solid rgba(183,168,92,.5);background:transparent;color:#B7A85C;padding:5px 9px;cursor:pointer" style-hover="background:#B7A85C;color:#121216">ZAPISZ W KALENDARZU</button>
             </sc-if>
             <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.14em;color:#8d8a83">{{ f.caret }}</span>
           </div>
@@ -666,7 +668,7 @@ a:hover{color:#cbb96b}
               <div style="display:flex;flex-wrap:wrap;gap:10px">
                 <a href="{{ f.mapUrl }}" target="_blank" rel="noopener" style="font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.14em;border:1px solid rgba(246,243,236,.3);color:#F6F3EC;padding:10px 16px" style-hover="border:1px solid #B7A85C;color:#B7A85C">OTWÓRZ W MAPACH GOOGLE</a>
                 <sc-if value="{{ f.canAddToCal }}" hint-placeholder-val="{{ true }}">
-                  <button onClick="{{ f.onAddToCal }}" style="font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.14em;border:1px solid #B7A85C;background:transparent;color:#B7A85C;padding:10px 16px;cursor:pointer" style-hover="background:#B7A85C;color:#121216">DODAJ DO KALENDARZA</button>
+                  <button onClick="{{ f.onAddToCal }}" title="Zapisz mecz w kalendarzu telefonu — z przypomnieniem 5 godzin wcześniej" style="font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.14em;border:1px solid #B7A85C;background:transparent;color:#B7A85C;padding:10px 16px;cursor:pointer" style-hover="background:#B7A85C;color:#121216">DODAJ DO KALENDARZA</button>
                 </sc-if>
               </div>
             </div>
@@ -702,20 +704,20 @@ a:hover{color:#cbb96b}
     </div>
     <sc-if value="{{ hasTable }}" hint-placeholder-val="{{ false }}">
     <div style="overflow-x:auto">
-      <div style="min-width:640px;border:1px solid rgba(246,243,236,.14)">
-        <div style="display:grid;grid-template-columns:48px 1fr 44px 44px 44px 44px 76px 56px 56px;background:#1b1b21;border-bottom:1px solid rgba(246,243,236,.14)">
-          <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;color:#c9c6bd;padding:12px 8px">#</span>
-          <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;color:#c9c6bd;padding:12px 8px">DRUŻYNA</span>
-          <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;color:#c9c6bd;padding:12px 4px;text-align:center">M</span>
-          <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;color:#c9c6bd;padding:12px 4px;text-align:center">Z</span>
-          <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;color:#c9c6bd;padding:12px 4px;text-align:center">R</span>
-          <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;color:#c9c6bd;padding:12px 4px;text-align:center">P</span>
-          <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;color:#c9c6bd;padding:12px 4px;text-align:center">BRAMKI</span>
-          <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;color:#c9c6bd;padding:12px 4px;text-align:center">+/-</span>
-          <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;color:#c9c6bd;padding:12px 4px;text-align:center">PKT</span>
+      <div style="min-width:640px;background:#FFFFFF;border:1px solid rgba(18,18,22,.13)">
+        <div style="display:grid;grid-template-columns:48px 1fr 44px 44px 44px 44px 76px 56px 56px;background:#F1EDE3;border-bottom:1px solid rgba(18,18,22,.13)">
+          <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;color:#6b6862;padding:12px 8px">#</span>
+          <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;color:#6b6862;padding:12px 8px">DRUŻYNA</span>
+          <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;color:#6b6862;padding:12px 4px;text-align:center">M</span>
+          <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;color:#6b6862;padding:12px 4px;text-align:center">Z</span>
+          <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;color:#6b6862;padding:12px 4px;text-align:center">R</span>
+          <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;color:#6b6862;padding:12px 4px;text-align:center">P</span>
+          <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;color:#6b6862;padding:12px 4px;text-align:center">BRAMKI</span>
+          <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;color:#6b6862;padding:12px 4px;text-align:center">+/-</span>
+          <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.12em;color:#6b6862;padding:12px 4px;text-align:center">PKT</span>
         </div>
         <sc-for list="{{ fullTable }}" as="r" hint-placeholder-count="0">
-          <div style="display:grid;grid-template-columns:48px 1fr 44px 44px 44px 44px 76px 56px 56px;border-bottom:1px solid rgba(246,243,236,.08);background:{{ r.bg }}">
+          <div style="display:grid;grid-template-columns:48px 1fr 44px 44px 44px 44px 76px 56px 56px;border-bottom:1px solid rgba(18,18,22,.09);background:{{ r.bg }}">
             <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:18px;padding:13px 8px;color:{{ r.dim }}">{{ r.pos }}</span>
             <span style="font-family:'Inter',sans-serif;font-weight:{{ r.weight }};font-size:14px;padding:13px 8px;color:{{ r.fg }}">{{ r.team }}</span>
             <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:14px;padding:13px 4px;text-align:center;color:{{ r.fg }}">{{ r.played }}</span>
@@ -1078,7 +1080,7 @@ a:hover{color:#cbb96b}
           <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px">
             <sc-for list="{{ g.preview }}" as="p" hint-placeholder-count="2">
               <div onClick="{{ p.onOpen }}" style="aspect-ratio:{{ g.tileRatio }};cursor:pointer;overflow:hidden;background:#1b1b21;position:relative">
-                <img src="{{ p.src }}" alt="{{ p.alt }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 22%;display:block">
+                <img src="{{ p.src }}" alt="{{ p.alt }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:{{ g.tilePos }};display:block">
                 <sc-if value="{{ p.isLast }}" hint-placeholder-val="{{ false }}">
                   <span style="position:absolute;inset:0;background:rgba(18,18,22,.62);display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:26px;color:#F6F3EC;letter-spacing:.04em">+{{ p.more }}</span>
                 </sc-if>
@@ -1105,7 +1107,7 @@ a:hover{color:#cbb96b}
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax({{ galMin }},1fr));gap:10px">
       <sc-for list="{{ album.photos }}" as="p" hint-placeholder-count="4">
         <div onClick="{{ p.onOpen }}" style="aspect-ratio:{{ album.tileRatio }};cursor:pointer;overflow:hidden;background:#1b1b21">
-          <img src="{{ p.src }}" alt="{{ p.alt }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center 22%;display:block">
+          <img src="{{ p.src }}" alt="{{ p.alt }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:{{ album.tilePos }};display:block">
         </div>
       </sc-for>
     </div>
@@ -1954,9 +1956,11 @@ class Component extends DCLogic {
       pos: r.pos,
       goals: r.gf + ':' + r.ga,
       gdStr: (r.gd > 0 ? '+' : '') + r.gd,
-      bg: r.isPolonia ? 'rgba(226,9,47,.16)' : 'transparent',
-      fg: r.isPolonia ? '#F6F3EC' : '#e6e3db',
-      dim: r.isPolonia ? '#F6F3EC' : '#c9c6bd',
+      // Tabela stoi na jasnej płycie (biel + piaskowy nagłówek), więc tekst
+      // jest ciemny; wiersz Polonii wyróżnia delikatna czerwień, nie inwersja.
+      bg: r.isPolonia ? 'rgba(226,9,47,.12)' : 'transparent',
+      fg: r.isPolonia ? '#121216' : '#23232a',
+      dim: r.isPolonia ? '#4a4843' : '#6b6862',
       weight: r.isPolonia ? 800 : 600,
       team: this.L.displayTeam(r.team),
     };
@@ -1989,7 +1993,7 @@ class Component extends DCLogic {
       /* hero */
       heroMinH: mob ? '380px' : 'clamp(460px,72vh,720px)',
       heroPad: mob ? '26px 18px 28px' : 'clamp(48px,9vw,96px) clamp(16px,4vw,48px)',
-      heroTitle: mob ? (small ? '40px' : '46px') : 'clamp(52px,10.5vw,132px)',
+      heroTitle: mob ? (small ? '40px' : '46px') : 'clamp(52px,8.5vw,104px)',
       heroLead: mob ? '15px' : 'clamp(16px,2vw,21px)',
       heroRule: mob ? '13px 0 12px' : '26px 0 22px',
       heroBtnDir: small ? 'column' : 'row',
@@ -1999,7 +2003,11 @@ class Component extends DCLogic {
       heroBtnFs: mob ? '18px' : '20px',
       // na telefonie gradient pionowy — tekst siedzi nisko, nie z lewej
       // na telefonie kadr trzymamy przy prawym zawodniku, tekst siedzi niżej
-      heroPos: mob ? '68% 28%' : 'center 30%',
+      heroPos: mob ? '62% 50%' : 'center 35%',
+      // Na szerokim ekranie tekst leży na lewym zawodniku — dlatego lewa
+      // strona kadru dostaje własne przyciemnienie. Na telefonie niepotrzebne.
+      heroSide: mob ? 'none'
+        : 'linear-gradient(90deg,rgba(18,18,22,.88) 0%,rgba(18,18,22,.6) 34%,rgba(18,18,22,.12) 60%,rgba(18,18,22,0) 78%)',
       heroGrad: mob
         ? 'linear-gradient(0deg,rgba(18,18,22,.97) 0%,rgba(18,18,22,.8) 45%,rgba(18,18,22,.35) 100%)'
         : 'linear-gradient(0deg,rgba(18,18,22,.96) 0%,rgba(18,18,22,.72) 42%,rgba(18,18,22,.18) 78%,rgba(18,18,22,.1) 100%)',
@@ -2140,7 +2148,11 @@ class Component extends DCLogic {
     // zostają, żeby panel redakcyjny nadal mógł nadpisać slot własnym zdjęciem.
     const newsVM = (n) => ({ ...n, dateStr: L.fmtShort(n.date), heroId: n.photoId + '-hero',
       g1: n.photoId + '-g1', g2: n.photoId + '-g2', g3: n.photoId + '-g3',
-      gs1: (n.gallery || [])[0] || '', gs2: (n.gallery || [])[1] || '', gs3: (n.gallery || [])[2] || '' });
+      gs1: (n.gallery || [])[0] || '', gs2: (n.gallery || [])[1] || '', gs3: (n.gallery || [])[2] || '',
+      // Zdjęcie główne wpisu może być plikiem z repozytorium (heroPhoto) albo
+      // uploadem z panelu (slot heroId). Kwadratowe grafiki podają własne
+      // proporcje i szerokość, żeby kadr 16:9 nie obcinał im napisów.
+      heroSrc: n.heroPhoto || '', heroRatio: n.heroRatio || '16/9', heroMaxW: n.heroMaxW || '100%' });
     const allNews = (this.A ? this.A.mergeNews(C.NEWS || []) : (C.NEWS || [])).map(newsVM);
     const newsList = s.newsCat === 'WSZYSTKIE' ? allNews : allNews.filter((n) => n.category === s.newsCat);
     const article = (route === 'aktualnosci' && s.param) ? (allNews.find((n) => n.slug === s.param) || null) : null;
@@ -2184,9 +2196,12 @@ class Component extends DCLogic {
       return {
         ...g,
         photos,
-        // Kafelek dopasowany do orientacji zdjęć w albumie: portretowym sesjom
-        // dajemy 3:4, żeby kadr nie ucinał głów. Domyślnie zostaje 4:3.
+        // Wszystkie albumy mają ten sam kafelek 4:3 — inaczej jedna sekcja
+        // rośnie i lista przestaje wyglądać jak jeden zestaw. Zdjęcia
+        // portretowe ratujemy nie proporcją, lecz punktem kadrowania:
+        // `tilePos` w content.js podnosi kadr, żeby nie ucinał głów.
         tileRatio: g.tile || '4/3',
+        tilePos: g.tilePos || 'center 22%',
         hasPhotos: photos.length > 0,
         noPhotos: photos.length === 0,
         slots: Array.from({ length: g.count }, (_, i) => ({ id: 'gal-' + g.key + '-' + i, placeholder: g.label })),
@@ -2404,36 +2419,53 @@ class Component extends DCLogic {
           hasVenue: Boolean(f.venue),
           // Zapis do kalendarza — tylko dla spotkań jeszcze nierozegranych.
           canAddToCal: f.status !== 'played',
+          // Zapis idzie plikiem .ics, a nie linkiem do Kalendarza Google:
+          // tylko plik potrafi przenieść własne przypomnienie (5 godzin przed
+          // pierwszym gwizdkiem). Telefon otwiera go w swoim kalendarzu —
+          // Google na Androidzie, Kalendarz na iPhonie. Gdyby pobieranie
+          // plików było zablokowane, wracamy do starego linku bez alarmu.
           onAddToCal: (e) => {
             if (e && e.stopPropagation) e.stopPropagation();
-            const pad = (n) => String(n).padStart(2, '0');
-            // Godzina z federacji jest czasem lokalnym Belgii — budujemy zakres
-            // bez konwersji na UTC, żeby 15:00 zostało 15:00 w kalendarzu.
-            let y, mo, d, hh, mi;
-            if (f.localDate) {
-              [y, mo, d] = f.localDate.split('-').map(Number);
-              [hh, mi] = (f.localTime || '15:00').split(':').map(Number);
-            } else {
-              const dt = new Date(f.kickoff);
-              y = dt.getFullYear(); mo = dt.getMonth() + 1; d = dt.getDate();
-              hh = dt.getHours(); mi = dt.getMinutes();
-            }
-            const stamp = (addH) => {
-              const t = new Date(y, mo - 1, d, hh + addH, mi);
-              return `${t.getFullYear()}${pad(t.getMonth() + 1)}${pad(t.getDate())}T${pad(t.getHours())}${pad(t.getMinutes())}00`;
-            };
             const home = L.displayTeam(f.home), away = L.displayTeam(f.away);
-            const url = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
-              + '&text=' + encodeURIComponent(home + ' — ' + away)
-              + '&dates=' + stamp(0) + '/' + stamp(2)          // mecz + doliczona przerwa
-              + '&ctz=' + encodeURIComponent('Europe/Brussels')
-              + '&location=' + encodeURIComponent(f.venue || 'Bruksela')
-              + '&details=' + encodeURIComponent(
-                  (f.competition || 'Mecz FC Polonia Bruksela')
-                  + (f.round ? ' · kolejka ' + f.round : '')
-                  + '\n' + (L.isPolonia(f.home) ? 'Mecz domowy' : 'Mecz wyjazdowy')
-                  + '\n\nTerminarz: https://polonia.aktualnosci.be/#/mecze');
-            window.open(url, '_blank', 'noopener');
+            try {
+              const ics = L.matchICS(f, { alarmHours: 5, pageUrl: location.origin + '/#/mecze' });
+              const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+              const href = URL.createObjectURL(blob);
+              const a = document.createElement('a');
+              a.href = href;
+              a.download = L.matchICSFilename(f);
+              a.rel = 'noopener';
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+              setTimeout(() => URL.revokeObjectURL(href), 4000);
+            } catch (err) {
+              const pad = (n) => String(n).padStart(2, '0');
+              let y, mo, d, hh, mi;
+              if (f.localDate) {
+                [y, mo, d] = f.localDate.split('-').map(Number);
+                [hh, mi] = (f.localTime || '15:00').split(':').map(Number);
+              } else {
+                const dt = new Date(f.kickoff);
+                y = dt.getFullYear(); mo = dt.getMonth() + 1; d = dt.getDate();
+                hh = dt.getHours(); mi = dt.getMinutes();
+              }
+              const stamp = (addH) => {
+                const t = new Date(y, mo - 1, d, hh + addH, mi);
+                return `${t.getFullYear()}${pad(t.getMonth() + 1)}${pad(t.getDate())}T${pad(t.getHours())}${pad(t.getMinutes())}00`;
+              };
+              const url = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
+                + '&text=' + encodeURIComponent(home + ' — ' + away)
+                + '&dates=' + stamp(0) + '/' + stamp(2)
+                + '&ctz=' + encodeURIComponent('Europe/Brussels')
+                + '&location=' + encodeURIComponent(f.venue || 'Bruksela')
+                + '&details=' + encodeURIComponent(
+                    (f.competition || 'Mecz FC Polonia Bruksela')
+                    + (f.round ? ' · kolejka ' + f.round : '')
+                    + '\n' + (L.isPolonia(f.home) ? 'Mecz domowy' : 'Mecz wyjazdowy')
+                    + '\n\nTerminarz: https://polonia.aktualnosci.be/#/mecze');
+              window.open(url, '_blank', 'noopener');
+            }
           },
           isUpcoming: !f.score,
           mapUrl: f.venue ? 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(f.venue) : '',
