@@ -80,7 +80,8 @@ const OVR_KEY = 'fcp.livedata.overrides.v1';
 export const DEFAULT_CONFIG = {
   proxy: '',        // np. https://twoj-serwer/api/fetch?url={url}
   icalUrl: '',      // .ics terminarza (Foot24 lub federacja)
-  tableUrl: '',     // JSON z tabelą (endpoint serwerowy w formacie LeagueTable)
+  // Tabela ligowa — nasz importer RBFA (netlify/functions/rbfa-standings.js).
+  tableUrl: '/.netlify/functions/rbfa-standings',
   // Domyślnie: nasz importer RBFA (netlify/functions/rbfa-calendar.js).
   // Po wdrożeniu na Netlify działa bez żadnej konfiguracji.
   fixturesUrl: '/.netlify/functions/rbfa-calendar',
@@ -134,7 +135,7 @@ export const displayTeam = (name) => {
 };
 
 /** Adres stadionu domowego — jedno miejsce dla całej strony. */
-export const HOME_VENUE = 'Chem. du Struykbeken, 1200 Woluwé-Saint-Lambert';
+export const HOME_VENUE = 'Chem. du Struykbeken 2, 1200 Woluwé-Saint-Lambert';
 
 /* ------------------------------------------------------- HERBY RYWALI --- */
 /* Pliki herbów przekazane przez klub, leżące w assets/crests/.
@@ -372,6 +373,16 @@ export async function loadSeedFixtures() {
     });
   }).filter(Boolean);
   return { fixtures: list.sort(sortByDate), meta: j };
+}
+
+/* ------------------------------------------------- TABELA ZAPASOWA ------ */
+/* Klasyfikacja przepisana ręcznie z rbfa.be — poziom 4, tak samo jak
+   seed-fixtures.js. Używana tylko wtedy, gdy importer nie odpowie. */
+
+export async function loadSeedStandings() {
+  const mod = await import('./seed-standings.js');
+  const j = mod.SEED_TABLE || mod.default || {};
+  return { table: normalizeTable(j.rows || []), meta: j };
 }
 
 /* --------------------------------------------- TABELA LICZONA Z MECZÓW --- */
@@ -670,20 +681,29 @@ export async function sync({ force = false } = {}) {
     } catch (e) { problems.push('Terminarz zapasowy: ' + e.message); }
   }
 
-  // Tabela: gdy źródło nie podało klasyfikacji, wyliczamy ją z terminarza.
+  // Tabela: gdy importer nie podał klasyfikacji, sięgamy po tabelę zapasową
+  // przepisaną z rbfa.be. NIE wyliczamy jej z terminarza — terminarz zawiera
+  // wyłącznie mecze Polonii, więc taka tabela pokazywałaby rywalom zera.
   let tableDerived = false;
-  if (!table.length && fixtures.length) {
-    const derived = tableFromFixtures(fixtures);
-    if (derived.length >= 6) { table = derived; tableDerived = true; }
+  let tableMeta = null;
+  if (!table.length) {
+    try {
+      const seedT = await loadSeedStandings();
+      if (seedT.table.length >= 6) {
+        table = seedT.table;
+        tableMeta = seedT.meta;
+        got = true;
+      }
+    } catch (e) { problems.push('Tabela zapasowa: ' + e.message); }
   }
 
   if (!got) return { ok: false, problems, state: getState() };
   const saved = saveSnapshot({
     table, fixtures, sourceId, sourceLabel,
     tableDerived,
-    competition: seedMeta?.competition || cached?.competition || '',
+    competition: seedMeta?.competition || tableMeta?.competition || cached?.competition || '',
     seedComplete: seedMeta ? seedMeta.complete !== false : undefined,
-    season: seedMeta?.season || cfg.season,
+    season: seedMeta?.season || tableMeta?.season || cfg.season,
   });
   if (!saved.ok) return { ok: false, problems: problems.concat(saved.errors), state: getState() };
   return { ok: true, problems, state: getState() };
@@ -840,7 +860,9 @@ export function tableWindow(table = [], span = 2) {
   if (!table.length) return [];
   const i = table.findIndex((r) => r.isPolonia);
   if (i < 0) return table.slice(0, 5);
-  if (i <= span) return table.slice(0, 5);
+  // Pozycje ex aequo: o czubku tabeli decyduje numer miejsca, nie indeks
+  // wiersza — przy czterech zespołach na miejscu 1. Polonia ma być w TOP5.
+  if (i <= span || (table[i].pos || i + 1) <= span + 1) return table.slice(0, 5);
   if (i >= table.length - span - 1) return table.slice(-5);
   return table.slice(i - span, i + span + 1);
 }

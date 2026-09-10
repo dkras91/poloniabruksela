@@ -260,10 +260,10 @@ export const LONGFORM = {
     'De gegevens van de uitgever zijn voorlopig en de tekst van de voorwaarden is een model dat vóór publicatie door een jurist moet worden nagekeken.',
     'The publisher details are provisional and the text of these terms is a template that must be checked by a lawyer before the site goes live.',
   ],
-  'Serwis prowadzi FC Polonia Bruxelles ASBL (AS': [
-    'Le site est édité par FC Polonia Bruxelles ASBL (ASBL / VZW — association sans but lucratif), dont le siège est établi Chem. du Struykbeken 2, 1200 Woluwe-Saint-Lambert, Belgique, numéro d’entreprise BE 0700.000.000. Contact : polonia@live.be.',
-    'De site wordt beheerd door FC Polonia Bruxelles ASBL (ASBL / VZW — vereniging zonder winstoogmerk), met zetel te Chem. du Struykbeken 2, 1200 Sint-Lambrechts-Woluwe, België, ondernemingsnummer BE 0700.000.000. Contact: polonia@live.be.',
-    'The site is operated by FC Polonia Bruxelles ASBL (ASBL / VZW — non-profit association), registered office at Chem. du Struykbeken 2, 1200 Woluwe-Saint-Lambert, Belgium, enterprise number BE 0700.000.000. Contact: polonia@live.be.',
+  'Serwis prowadzi FC Polonia ASBL (ASBL / VZW —': [
+    'Le site est édité par FC Polonia ASBL (ASBL / VZW — association sans but lucratif), dont le siège est établi Av. Houba de Strooper 156 bte 11, 1020 Bruxelles, Belgique, numéro d’entreprise BE 0552.829.526. Contact : ',
+    'De site wordt beheerd door FC Polonia ASBL (ASBL / VZW — vereniging zonder winstoogmerk), met zetel te Av. Houba de Strooper 156 bus 11, 1020 Brussel, België, ondernemingsnummer BE 0552.829.526. Contact: ',
+    'The site is operated by FC Polonia ASBL (ASBL / VZW — non-profit association), registered office at Av. Houba de Strooper 156 bte 11, 1020 Brussels, Belgium, enterprise number BE 0552.829.526. Contact: ',
   ],
   'Strona jest informacyjnym serwisem klubu piłk': [
     'Ce site est un service d’information d’un club de football. Nous n’y vendons rien, ne concluons pas de contrats à distance et n’exigeons pas la création d’un compte. L’utilisation du site est gratuite et ne nécessite aucune inscription.',

@@ -1,0 +1,17 @@
+# FC Polonia Bruksela — konfiguracja Netlify
+# Strona jest statyczna; jedyna logika serwerowa to importery danych z RBFA.
+
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+
+# Odświeżanie danych: przeglądarka 5 min, brzeg CDN 15 min (nagłówki ustawia
+# sama funkcja). Poniżej tylko bezpieczne nagłówki dla strony.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

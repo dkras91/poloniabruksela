@@ -1,0 +1,8 @@
+# Śmieci systemowe
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# UWAGA: .image-slots.state.json MUSI być wersjonowany — to sidecar ze
+# zdjęciami wgranymi przez panel redakcyjny. Nigdy go tu nie dopisuj.
+!.image-slots.state.json
