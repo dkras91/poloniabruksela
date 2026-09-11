@@ -2309,7 +2309,11 @@ class Component extends DCLogic {
       scoreStr: f.score ? f.score.h + ' : ' + f.score.a : '',
       venueStr: f.venue || 'Obiekt do potwierdzenia',
       compStr: f.competition || 'Rozgrywki',
-      roundStr: f.round ? 'Kolejka ' + f.round : (f.status === 'played' ? 'Zakończony' : 'Zaplanowany'),
+      roundStr: f.round
+        ? this._t('Kolejka ', 'Journée ', 'Speeldag ', 'Matchday ') + f.round
+        : (f.status === 'played'
+            ? this._t('Zakończony', 'Terminé', 'Gespeeld', 'Played')
+            : this._t('Zaplanowany', 'Programmé', 'Gepland', 'Scheduled')),
       isHomeLabel: isHome ? 'DOM' : 'WYJAZD',
       accent: isHome ? '#E2092F' : '#B7A85C',
       // wariant na jasnym tle — złoto daje tam kontrast poniżej 3:1
@@ -2862,10 +2866,18 @@ class Component extends DCLogic {
           catch (e) { box.scrollTop = top; }
         },
       })),
-      shortUpdate: live.fetchedAt ? 'Aktualizacja: ' + L.fmtShort(live.fetchedAt) : 'Dane wkrótce',
+      shortUpdate: live.fetchedAt
+        ? this._t('Aktualizacja: ', 'Mise à jour : ', 'Bijgewerkt: ', 'Updated: ') + L.fmtShort(live.fetchedAt)
+        : this._t('Dane wkrótce', 'Données bientôt', 'Gegevens volgen', 'Data coming soon'),
       updatedLabel: live.fetchedAt
-        ? 'Dane aktualizowane automatycznie · ostatnio ' + L.fmtStamp(live.fetchedAt)
-        : 'Dane zostaną uzupełnione wkrótce.',
+        ? this._t('Dane aktualizowane automatycznie · ostatnio ',
+                  'Données mises à jour automatiquement · dernière fois ',
+                  'Gegevens worden automatisch bijgewerkt · laatst ',
+                  'Data updated automatically · last ') + L.fmtStamp(live.fetchedAt)
+        : this._t('Dane zostaną uzupełnione wkrótce.',
+                  'Les données seront complétées prochainement.',
+                  'De gegevens worden binnenkort aangevuld.',
+                  'The data will be added shortly.'),
       hasTable: table.length > 0,
       hasFixtures: fixtures.length > 0,
       hasUpcoming: pFix.some((f) => f.status !== 'played'),

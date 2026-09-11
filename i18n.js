@@ -137,6 +137,93 @@ const T = {
     'Speler van FC Polonia Brussel met clubsjaal op de tribune',
     'FC Polonia Brussels player holding the club scarf in the stands',
   ],
+  /* --- stopka, adresy, źródła, polityka: druga tura uzupełnień --- */
+  'Wsparcie klubu': ['Soutenir le club', 'De club steunen', 'Support the club'],
+  'Sezon': ['Saison', 'Seizoen', 'Season'],
+  'TERMINARZ': ['CALENDRIER', 'KALENDER', 'FIXTURES'],
+  '← WSZYSTKIE ALBUMY': ['← TOUS LES ALBUMS', '← ALLE ALBUMS', '← ALL ALBUMS'],
+  'KONTAKT': ['CONTACT', 'CONTACT', 'CONTACT'],
+
+  /* adresy: tłumaczymy wyłącznie nazwę kraju, reszta to adres pocztowy */
+  'Chem. du Struykbeken 2, 1200 Woluwé-Saint-Lambert, Belgia': [
+    'Chem. du Struykbeken 2, 1200 Woluwe-Saint-Lambert, Belgique',
+    'Struykbeken 2, 1200 Sint-Lambrechts-Woluwe, België',
+    'Chem. du Struykbeken 2, 1200 Woluwe-Saint-Lambert, Belgium'],
+  'Av. Houba de Strooper 156 bte 11, 1020 Bruxelles, Belgia': [
+    'Av. Houba de Strooper 156 bte 11, 1020 Bruxelles, Belgique',
+    'Houba de Strooperlaan 156 bus 11, 1020 Brussel, België',
+    'Av. Houba de Strooper 156 bte 11, 1020 Brussels, Belgium'],
+  'Avenue Léopold Wiener 60, 1170 Watermael-Boitsfort, Belgia': [
+    'Avenue Léopold Wiener 60, 1170 Watermael-Boitsfort, Belgique',
+    'Léopold Wienerlaan 60, 1170 Watermaal-Bosvoorde, België',
+    'Avenue Léopold Wiener 60, 1170 Watermael-Boitsfort, Belgium'],
+  'Avenue des Sorbiers 120a, 1342 Limelette, Belgia': [
+    'Avenue des Sorbiers 120a, 1342 Limelette, Belgique',
+    'Avenue des Sorbiers 120a, 1342 Limelette, België',
+    'Avenue des Sorbiers 120a, 1342 Limelette, Belgium'],
+  'Obiekt historyczny — od 2015': ['Terrain historique — depuis 2015', 'Historisch terrein — sinds 2015', 'Historical ground — since 2015'],
+  'Obiekt historyczny — okres Limelette': ['Terrain historique — période de Limelette', 'Historisch terrein — periode Limelette', 'Historical ground — the Limelette years'],
+  'Maj 2015: matricule 09647': ['Mai 2015 : matricule 09647', 'Mei 2015: stamnummer 09647', 'May 2015: matricule 09647'],
+
+  /* rodzaje źródeł w archiwum */
+  'Federacja': ['Fédération', 'Bond', 'Federation'],
+  'Prasa': ['Presse', 'Pers', 'Press'],
+  'Agregator': ['Agrégateur', 'Aggregator', 'Aggregator'],
+  'Archiwum klubu': ['Archives du club', 'Clubarchief', 'Club archive'],
+  'Archiwalna strona klubu — poloniabruksela.futbolowo.pl': [
+    'Ancien site du club — poloniabruksela.futbolowo.pl',
+    'Vroegere clubwebsite — poloniabruksela.futbolowo.pl',
+    'Former club website — poloniabruksela.futbolowo.pl'],
+  'Archiwalna strona klubu — fcpolonia.be': [
+    'Ancien site du club — fcpolonia.be',
+    'Vroegere clubwebsite — fcpolonia.be',
+    'Former club website — fcpolonia.be'],
+  'RSSSF — tabele belgijskie 2016/17': ['RSSSF — classements belges 2016/17', 'RSSSF — Belgische klassementen 2016/17', 'RSSSF — Belgian tables 2016/17'],
+  'RSSSF — tabele belgijskie 2017/18': ['RSSSF — classements belges 2017/18', 'RSSSF — Belgische klassementen 2017/18', 'RSSSF — Belgian tables 2017/18'],
+  'RSSSF — tabele belgijskie 2018/19': ['RSSSF — classements belges 2018/19', 'RSSSF — Belgische klassementen 2018/19', 'RSSSF — Belgian tables 2018/19'],
+  'RSSSF — tabele belgijskie 2019/20': ['RSSSF — classements belges 2019/20', 'RSSSF — Belgische klassementen 2019/20', 'RSSSF — Belgian tables 2019/20'],
+
+  /* polityka prywatności — nagłówki i etykiety */
+  'Administrator danych': ['Responsable du traitement', 'Verwerkingsverantwoordelijke', 'Data controller'],
+  'NAZWA': ['NOM', 'NAAM', 'NAME'],
+  'FORMA PRAWNA': ['FORME JURIDIQUE', 'RECHTSVORM', 'LEGAL FORM'],
+  'NUMER PRZEDSIĘBIORSTWA': ['NUMÉRO D’ENTREPRISE', 'ONDERNEMINGSNUMMER', 'COMPANY NUMBER'],
+  'SIEDZIBA': ['SIÈGE', 'ZETEL', 'REGISTERED OFFICE'],
+  'ASBL / VZW — stowarzyszenie bez celu zarobkowego': [
+    'ASBL — association sans but lucratif',
+    'VZW — vereniging zonder winstoogmerk',
+    'ASBL / VZW — non-profit association'],
+  'Jakie dane zbieramy': ['Quelles données nous collectons', 'Welke gegevens we verzamelen', 'What data we collect'],
+  'Formularz kontaktowy': ['Formulaire de contact', 'Contactformulier', 'Contact form'],
+  'Pamięć Twojej przeglądarki': ['La mémoire de votre navigateur', 'Het geheugen van je browser', 'Your browser’s storage'],
+  'Dane techniczne serwera': ['Données techniques du serveur', 'Technische servergegevens', 'Technical server data'],
+  'Cele i podstawy prawne': ['Finalités et bases légales', 'Doeleinden en rechtsgronden', 'Purposes and legal bases'],
+  'Odpowiedź na wiadomość z formularza': ['Réponse à un message du formulaire', 'Antwoord op een bericht uit het formulier', 'Replying to a message from the form'],
+  'zgoda oraz nasz uzasadniony interes (art. 6 ust. 1 lit. a i f RODO)': [
+    'consentement et intérêt légitime (art. 6, § 1, a) et f) du RGPD)',
+    'toestemming en gerechtvaardigd belang (art. 6, lid 1, a en f AVG)',
+    'consent and legitimate interest (Art. 6(1)(a) and (f) GDPR)'],
+  'Zapamiętanie wyboru w oknie cookies': ['Mémoriser votre choix dans la fenêtre cookies', 'Je keuze in het cookievenster onthouden', 'Remembering your choice in the cookie window'],
+  'obowiązek prawny — musimy udokumentować Twój wybór': [
+    'obligation légale — nous devons documenter votre choix',
+    'wettelijke verplichting — we moeten je keuze documenteren',
+    'legal obligation — we must document your choice'],
+  'Pamięć funkcjonalna (terminarz, zdjęcia)': ['Mémoire fonctionnelle (calendrier, photos)', 'Functioneel geheugen (kalender, foto’s)', 'Functional storage (fixtures, photos)'],
+  'Twoja zgoda (art. 6 ust. 1 lit. a RODO)': ['votre consentement (art. 6, § 1, a) du RGPD)', 'jouw toestemming (art. 6, lid 1, a AVG)', 'your consent (Art. 6(1)(a) GDPR)'],
+  'Bezpieczeństwo i działanie serwisu': ['Sécurité et fonctionnement du site', 'Veiligheid en werking van de site', 'Security and operation of the site'],
+  'uzasadniony interes (art. 6 ust. 1 lit. f RODO)': ['intérêt légitime (art. 6, § 1, f) du RGPD)', 'gerechtvaardigd belang (art. 6, lid 1, f AVG)', 'legitimate interest (Art. 6(1)(f) GDPR)'],
+  'Czego używamy': ['Ce que nous utilisons', 'Wat we gebruiken', 'What we use'],
+  'Obecnie: brak.': ['Actuellement : aucun.', 'Momenteel: geen.', 'Currently: none.'],
+  'Jak długo przechowujemy dane': ['Combien de temps nous conservons les données', 'Hoelang we gegevens bewaren', 'How long we keep data'],
+  'Komu przekazujemy dane': ['À qui nous transmettons les données', 'Aan wie we gegevens doorgeven', 'Who we share data with'],
+  'Przekazywanie poza Europejski Obszar Gospodarczy': ['Transferts en dehors de l’Espace économique européen', 'Doorgifte buiten de Europese Economische Ruimte', 'Transfers outside the European Economic Area'],
+  'Bezpieczeństwo i osoby niepełnoletnie': ['Sécurité et mineurs', 'Veiligheid en minderjarigen', 'Security and minors'],
+  'Twoja zgoda': ['Votre consentement', 'Jouw toestemming', 'Your consent'],
+  'Twoje prawa': ['Vos droits', 'Jouw rechten', 'Your rights'],
+  'Zmiany polityki': ['Modifications de la politique', 'Wijzigingen van het beleid', 'Changes to this policy'],
+  'Ostatnia aktualizacja:': ['Dernière mise à jour :', 'Laatst bijgewerkt:', 'Last updated:'],
+  'polityka prywatności i cookies': ['politique de confidentialité et cookies', 'privacy- en cookiebeleid', 'privacy and cookie policy'],
+
   /* --- mapa dojazdu i zgoda na mapy Google --- */
   'MAPA DOJAZDU': ['PLAN D’ACCÈS', 'ROUTEKAART', 'HOW TO GET THERE'],
   'WCZYTAJ MAPĘ': ['CHARGER LA CARTE', 'KAART LADEN', 'LOAD THE MAP'],

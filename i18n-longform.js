@@ -342,4 +342,16 @@ export const LONGFORM = {
     '. In haar Poolstalige communicatie gebruikt de club consequent de vorm FC Polonia Bruksela, en dat is ook de hoofdnaam op deze site. De terugkeer naar de Brusselse identiteit is ook heel praktisch: Polonia speelt haar thuiswedstrijden vandaag op Stade Fallon aan de Struykbeken in Sint-Lambrechts-Woluwe, dus opnieuw binnen het Brussels Hoofdstedelijk Gewest.',
     '. In its Polish-language communication the club consistently uses the form FC Polonia Bruksela, and that is the primary name on this site. The return to a Brussels identity is also entirely practical: Polonia now plays its home matches at Stade Fallon on Chem. du Struykbeken in Woluwe-Saint-Lambert — once again inside the Brussels-Capital Region.',
   ],
+
+  /* ─── regulamin i polityka: fragmenty po odnośnikach ─── */
+  '. Wiadomości wysłane przez formularz kontakto': [
+    '. Les messages envoyés via le formulaire de contact ne servent qu’à vous répondre.',
+    '. Berichten die via het contactformulier worden verstuurd, gebruiken we uitsluitend om te antwoorden.',
+    '. Messages sent through the contact form are used only to reply to you.',
+  ],
+  '— odpowiadamy w rozsądnym terminie. W sprawac': [
+    '— nous répondons dans un délai raisonnable. Pour tout ce qui n’est pas réglé ici, le droit belge s’applique et les tribunaux belges compétents sont seuls habilités à trancher les litiges.',
+    '— we antwoorden binnen een redelijke termijn. Voor alles wat hier niet geregeld is, geldt het Belgisch recht en zijn de bevoegde Belgische rechtbanken bevoegd voor geschillen.',
+    '— we reply within a reasonable time. For anything not covered here, Belgian law applies and the competent Belgian courts settle any disputes.',
+  ],
 };
