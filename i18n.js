@@ -354,6 +354,10 @@ const T = {
     'Suivez-nous et vivez les matchs en direct !',
     'Volg ons en bekijk de verslagen van de wedstrijden!',
     'Follow us and watch the match coverage!'],
+  'Obserwuj relacje z meczu na naszym Facebooku': [
+    'Suivez les matchs en direct sur notre Facebook',
+    'Volg de wedstrijdverslagen op onze Facebook',
+    'Follow our match coverage on Facebook'],
   'Obserwuj': ['Suivre', 'Volgen', 'Follow'],
   'NIE TERAZ': ['PAS MAINTENANT', 'NIET NU', 'NOT NOW'],
   'Zamknij': ['Fermer', 'Sluiten', 'Close'],
