@@ -137,6 +137,29 @@ const T = {
     'Speler van FC Polonia Brussel met clubsjaal op de tribune',
     'FC Polonia Brussels player holding the club scarf in the stands',
   ],
+  /* --- sklep internetowy --- */
+  'Sklep': ['Boutique', 'Shop', 'Shop'],
+  'Sklep internetowy': ['Boutique en ligne', 'Webshop', 'Online shop'],
+  'W BUDOWIE': ['EN CONSTRUCTION', 'IN OPBOUW', 'UNDER CONSTRUCTION'],
+  'SKLEP RUSZY W SEZONIE 2026/2027': [
+    'LA BOUTIQUE OUVRIRA DURANT LA SAISON 2026/2027',
+    'DE WEBSHOP OPENT IN HET SEIZOEN 2026/2027',
+    'THE SHOP OPENS DURING THE 2026/2027 SEASON'],
+  'Pracujemy nad klubowym sklepem. Znajdą się w nim koszulki, szaliki i gadżety z herbem Polonii — te same, w których chodzą zawodnicy, sztab i kibice na trybunach.': [
+    'Nous préparons la boutique du club. On y trouvera les maillots, les écharpes et les accessoires au blason de Polonia — les mêmes que portent les joueurs, le staff et les supporters dans les tribunes.',
+    'We werken aan de clubshop. Je vindt er shirts, sjaals en gadgets met het embleem van Polonia — dezelfde die spelers, staf en supporters op de tribune dragen.',
+    'We are building the club shop. It will carry the shirts, scarves and accessories with the Polonia crest — the same ones worn by the players, the staff and the supporters in the stands.'],
+  'Zanim sklep ruszy, po koszulkę albo szalik można zgłosić się wprost do klubu. Napisz do nas albo złap nas na Facebooku — powiemy, co jest akurat dostępne i w jakich rozmiarach.': [
+    'En attendant l’ouverture, pour un maillot ou une écharpe, adressez-vous directement au club. Écrivez-nous ou contactez-nous sur Facebook — nous vous dirons ce qui est disponible et dans quelles tailles.',
+    'Tot de shop opent, kun je voor een shirt of sjaal rechtstreeks bij de club terecht. Schrijf ons of zoek ons op Facebook — we zeggen je wat er is en in welke maten.',
+    'Until the shop opens, ask the club directly for a shirt or a scarf. Write to us or catch us on Facebook — we will tell you what is in stock and in which sizes.'],
+  'Napisz do klubu': ['Écrire au club', 'Schrijf naar de club', 'Write to the club'],
+  'Napisz na Facebooku': ['Nous écrire sur Facebook', 'Schrijf ons op Facebook', 'Message us on Facebook'],
+  'Zawodnicy FC Polonia Bruksela w koszulkach POLONIA RAZEM! na trybunach stadionu': [
+    'Des joueurs du FC Polonia Bruxelles en maillots POLONIA RAZEM! dans les tribunes du stade',
+    'Spelers van FC Polonia Brussel in POLONIA RAZEM!-shirts op de tribune van het stadion',
+    'FC Polonia Brussels players in POLONIA RAZEM! shirts in the stadium stands'],
+
   /* --- stopka, adresy, źródła, polityka: druga tura uzupełnień --- */
   'Wsparcie klubu': ['Soutenir le club', 'De club steunen', 'Support the club'],
   'Sezon': ['Saison', 'Seizoen', 'Season'],

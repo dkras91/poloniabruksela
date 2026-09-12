@@ -166,6 +166,13 @@ i wyrównanie do prawej ucinały wtedy „Start" i „Aktualności" na każdej
 szerokości. Zmieniasz pozycje menu albo typografię linków? Zmień to samo w
 miarce, inaczej pomiar skłamie.
 
+## Sklep internetowy
+
+`#/sklep` to na razie strona zapowiedzi: informacja „w budowie", zdjęcie w
+koszulkach POLONIA RAZEM! i dwa odnośniki kontaktowe. Gdy sklep faktycznie
+ruszy, tę sekcję zastępujemy treścią właściwą — trasa i pozycja w menu już są,
+więc adres się nie zmieni.
+
 ## Mapy Google tylko po zgodzie
 
 `cookies.js` ma osobną kategorię `maps`. Osadzona mapa w szczegółach meczu

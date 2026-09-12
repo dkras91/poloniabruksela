@@ -207,7 +207,7 @@ a:hover{color:#cbb96b}
       <div aria-hidden="true" style="position:absolute;left:0;top:0;width:0;height:0;overflow:hidden;pointer-events:none">
       <div data-nav-probe="1" style="width:max-content;display:flex;align-items:center;gap:2px">
         <sc-for list="{{ menuItems }}" as="m" hint-placeholder-count="11">
-          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase;padding:11px 6px;white-space:nowrap">{{ m.label }}</span>
+          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;padding:11px 5px;white-space:nowrap">{{ m.label }}</span>
         </sc-for>
       </div>
       </div>
@@ -215,7 +215,7 @@ a:hover{color:#cbb96b}
       <sc-if value="{{ navBar }}" hint-placeholder-val="{{ true }}">
       <div data-nav-bar="1" style="flex:1;min-width:0;display:flex;align-items:center;gap:2px;justify-content:flex-end">
         <sc-for list="{{ menuItems }}" as="m" hint-placeholder-count="11">
-          <a href="{{ m.href }}" aria-current="{{ m.ariaCurrent }}" style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:{{ m.fg }};padding:11px 6px;white-space:nowrap;flex-shrink:0;border-bottom:2px solid {{ m.bd }}" style-hover="color:#B7A85C;border-bottom:2px solid #E2092F">{{ m.label }}</a>
+          <a href="{{ m.href }}" aria-current="{{ m.ariaCurrent }}" style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:{{ m.fg }};padding:11px 5px;white-space:nowrap;flex-shrink:0;border-bottom:2px solid {{ m.bd }}" style-hover="color:#B7A85C;border-bottom:2px solid #E2092F">{{ m.label }}</a>
         </sc-for>
       </div>
       </sc-if>
@@ -1216,6 +1216,37 @@ a:hover{color:#cbb96b}
   </div>
   </sc-if>
 
+  <!-- ══════════════════════════════════════════════════ SKLEP -->
+  <!-- Podstrona w budowie: te same proporcje i odstępy co pozostałe
+       (max-width 1000 px jak Sponsorzy i Kontakt, ten sam nagłówek, ta sama
+       złota linia). Zamiast pustej zapowiedzi pokazujemy, co będzie w sklepie,
+       i zostawiamy dwie realne drogi kontaktu — żeby kibic, który chce koszulkę
+       już dziś, nie odbił się od ściany. -->
+  <sc-if value="{{ isShop }}" hint-placeholder-val="{{ false }}">
+  <div style="max-width:1000px;margin:0 auto;padding:{{ secPadTop }}">
+    <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.18em;color:#E2092F;display:block" style-before="content:'';display:block;width:34px;height:4px;background:#E2092F;margin-bottom:12px">NOSISZ NASZE BARWY</span>
+    <h1 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:{{ pageTitle }};text-transform:uppercase;line-height:.9;margin:12px 0 0;letter-spacing:.01em">Sklep internetowy</h1>
+    <div style="height:5px;width:140px;background:#B7A85C;margin:24px 0 28px"></div>
+
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px">
+      <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.18em;background:#B7A85C;color:#121216;padding:7px 12px">W BUDOWIE</span>
+      <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:12px;letter-spacing:.12em;color:#8d8a83">SKLEP RUSZY W SEZONIE 2026/2027</span>
+    </div>
+
+    <p style="font-family:'Inter',sans-serif;font-weight:600;font-size:clamp(16px,2vw,20px);line-height:1.6;color:#F6F3EC;margin:0 0 18px;text-wrap:pretty">Pracujemy nad klubowym sklepem. Znajdą się w nim koszulki, szaliki i gadżety z herbem Polonii — te same, w których chodzą zawodnicy, sztab i kibice na trybunach.</p>
+    <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:16px;line-height:1.7;color:#c9c6bd;margin:0 0 28px;text-wrap:pretty">Zanim sklep ruszy, po koszulkę albo szalik można zgłosić się wprost do klubu. Napisz do nas albo złap nas na Facebooku — powiemy, co jest akurat dostępne i w jakich rozmiarach.</p>
+
+    <div style="position:relative;aspect-ratio:{{ shopPhotoRatio }};margin-bottom:28px;border:1px solid rgba(246,243,236,.14);overflow:hidden;background:#0f0f13">
+      <img src="assets/sklep/sklep-w-budowie.jpg" alt="Zawodnicy FC Polonia Bruksela w koszulkach POLONIA RAZEM! na trybunach stadionu" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:{{ shopPhotoPos }};display:block">
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:12px">
+      <a href="#/kontakt" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:19px;letter-spacing:.08em;text-transform:uppercase;background:#E2092F;color:#F6F3EC;padding:14px 24px;text-align:center;width:{{ btnW }};max-width:100%;box-sizing:border-box" style-hover="background:#a80725">Napisz do klubu</a>
+      <a href="https://www.facebook.com/fcpolonia.bruksela/" target="_blank" rel="noopener" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:19px;letter-spacing:.08em;text-transform:uppercase;border:2px solid rgba(246,243,236,.3);color:#F6F3EC;padding:13px 24px;text-align:center;width:{{ btnW }};max-width:100%;box-sizing:border-box" style-hover="border:2px solid #B7A85C;color:#B7A85C">Napisz na Facebooku</a>
+    </div>
+  </div>
+  </sc-if>
+
   <!-- ══════════════════════════════════════════════════ SPONSORZY -->
   <sc-if value="{{ isSponsors }}" hint-placeholder-val="{{ false }}">
   <div style="max-width:1000px;margin:0 auto;padding:{{ secPadTop }}">
@@ -2046,6 +2077,7 @@ class Component extends DCLogic {
       historia: ['Historia', 'Histoire', 'Geschiedenis', 'History'],
       archiwum: ['Archiwum sezonów', 'Archives des saisons', 'Seizoensarchief', 'Season archive'],
       galeria: ['Galeria', 'Galerie', 'Galerij', 'Gallery'],
+      sklep: ['Sklep internetowy', 'Boutique en ligne', 'Webshop', 'Online shop'],
       sponsorzy: ['Sponsorzy i partnerzy', 'Sponsors et partenaires', 'Sponsors en partners', 'Sponsors and partners'],
       kontakt: ['Kontakt', 'Contact', 'Contact', 'Contact'],
       prywatnosc: ['Polityka prywatności', 'Politique de confidentialité', 'Privacybeleid', 'Privacy policy'],
@@ -2412,6 +2444,10 @@ class Component extends DCLogic {
       heroBtnFs: mob ? '18px' : '20px',
       // na telefonie gradient pionowy — tekst siedzi nisko, nie z lewej
       // na telefonie kadr trzymamy przy prawym zawodniku, tekst siedzi niżej
+      /* sklep: zdjęcie szersze na komputerze, bliżej kwadratu na telefonie,
+         żeby obie postacie mieściły się w kadrze */
+      shopPhotoRatio: mob ? '4/3' : '16/9',
+      shopPhotoPos: mob ? '58% 30%' : 'center 32%',
       /* zaproszenie na Facebooka pod kartami meczowymi */
       fbCtaPad: mob ? '16px 18px' : '20px 28px',
       fbCtaFs: mob ? (small ? '19px' : '21px') : 'clamp(22px,2.6vw,30px)',
@@ -2554,6 +2590,7 @@ class Component extends DCLogic {
       isArchive: route === 'archiwum' && !s.param,
       isGallery: route === 'galeria' && !s.param, isSponsors: route === 'sponsorzy',
       isContact: route === 'kontakt',
+      isShop: route === 'sklep',
       isAdmin: route === 'admin',
       onSync: () => this._sync(),
       syncLabel: s.syncing ? 'SYNCHRONIZACJA…' : 'ODŚWIEŻ DANE',
@@ -3076,8 +3113,8 @@ class Component extends DCLogic {
         ['#/mecze', 'Mecze', 'mecze'], ['#/tabela', 'Tabela', 'tabela'],
         ['#/druzyna', 'Drużyna', 'druzyna'], ['#/klub', 'Klub', 'klub'],
         ['#/historia', 'Historia', 'historia'], ['#/archiwum', 'Archiwum', 'archiwum'],
-        ['#/galeria', 'Galeria', 'galeria'], ['#/sponsorzy', 'Sponsorzy', 'sponsorzy'],
-        ['#/kontakt', 'Kontakt', 'kontakt'],
+        ['#/galeria', 'Galeria', 'galeria'], ['#/sklep', 'Sklep', 'sklep'],
+        ['#/sponsorzy', 'Sponsorzy', 'sponsorzy'], ['#/kontakt', 'Kontakt', 'kontakt'],
       ].map(([href, label, key]) => ({
         href, label,
         isCurrent: route === key,
