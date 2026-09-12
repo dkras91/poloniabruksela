@@ -163,7 +163,7 @@ export const STAFF = [
   {
     role: 'Trener',
     first: 'Michał',
-    last: 'Łukasik',
+    last: 'Łukasiuk',
     photo: 'assets/board/lukasik-still.jpg',
     photoAction: 'assets/board/lukasik-action.jpg',
   },
