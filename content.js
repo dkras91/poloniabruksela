@@ -242,6 +242,133 @@ export const SPONSORS = [
 
 export const SPONSOR_TIERS = ['SPONSOR GŁÓWNY', 'SPONSORZY', 'PARTNERZY', 'PARTNER MEDIALNY'];
 
+/* -------------------------------------------------------------------- SKLEP */
+
+/* Wyłącznik sklepu. `false` = podstrona `#/sklep` pokazuje zapowiedź „w
+   budowie", dokładnie jak przed uruchomieniem sprzedaży. `true` = pokazuje
+   siatkę produktów z SHOP i formularz zamówienia.
+
+   NIE przestawiaj na `true`, dopóki każdy produkt nie ma ceny (`price`) i
+   zdjęcia w `assets/sklep/`. Sklep bez cen albo z pustymi ramkami wygląda
+   gorzej niż uczciwa zapowiedź. */
+export const SHOP_OPEN = false;
+
+/* Asortyment sklepu klubowego.
+
+   Pola jednego produktu:
+     id      — krótki, unikalny klucz; nie pokazuje się kibicowi
+     name    — nazwa na karcie i na liście w formularzu zamówienia
+     price   — liczba w euro, bez waluty; 0 = karta pokaże „Cena do ustalenia"
+     sizes   — lista rozmiarów; [] przy produkcie bez rozmiarów (szalik)
+     colors  — lista kolorów; [] gdy produkt jest w jednym kolorze
+     photo   — ścieżka do zdjęcia w assets/sklep/; '' = kafelek zastępczy
+     note    — jedno zdanie o produkcie (dopisz tłumaczenia w i18n.js)
+     badge   — plakietka na zdjęciu, np. 'NOWOŚĆ'; '' = brak
+     soldOut — true oznacza produkt jako niedostępny i chowa przycisk
+
+   Ceny są celowo puste (0) — wpisz rzeczywiste, zanim ustawisz SHOP_OPEN. */
+export const SHOP = [
+  {
+    id: 'szalik-40-lat',
+    name: 'Szalik 40 lat tradycji',
+    price: 0,
+    sizes: [],
+    colors: [],
+    photo: 'assets/sklep/szalik-40-lat.jpg',
+    note: 'Dziany szalik na czterdziestolecie klubu, z herbem na obu końcach i napisem POLONIA RAZEM!',
+    badge: '',
+    soldOut: false,
+  },
+  {
+    id: 'bluza-z-kapturem',
+    name: 'Bluza z kapturem',
+    price: 0,
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: [],
+    photo: 'assets/sklep/bluza-z-kapturem.jpg',
+    note: 'Czarna bluza z szarymi rękawami i biało-czerwoną opaską, z nadrukiem WE ARE POLONIA na plecach.',
+    badge: '',
+    soldOut: false,
+  },
+  {
+    id: 'polo-czerwone',
+    name: 'Koszulka polo z herbem',
+    price: 0,
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: [],
+    photo: 'assets/sklep/polo-czerwone.jpg',
+    note: 'Czerwone polo z białą lamówką i haftowanym herbem klubu na piersi.',
+    badge: '',
+    soldOut: false,
+  },
+  {
+    id: 'koszulka-polonia-razem',
+    name: 'Koszulka POLONIA RAZEM!',
+    price: 0,
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: ['czarna', 'biała'],
+    photo: 'assets/sklep/koszulka-polonia-razem.jpg',
+    note: 'Herb w wieńcu i hasło klubu w czerni i złocie. Do wyboru wersja czarna albo biała.',
+    badge: '',
+    soldOut: false,
+  },
+  {
+    id: 'koszulka-powstanie',
+    name: 'Koszulka Powstanie Warszawskie',
+    price: 0,
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: ['czarna', 'biała'],
+    photo: 'assets/sklep/koszulka-powstanie-warszawskie.jpg',
+    note: 'Nadruk pamiątkowy z powstańcem i herbem klubu, z dopiskiem CZEŚĆ I CHWAŁA BOHATEROM.',
+    badge: '',
+    soldOut: false,
+  },
+  {
+    id: 'koszulka-polonia-script',
+    name: 'Koszulka Polonia',
+    price: 0,
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: [],
+    photo: 'assets/sklep/koszulka-polonia-script.jpg',
+    note: 'Czarna koszulka z czerwonym napisem Polonia w stylu baseballowym i herbem w wieńcu.',
+    badge: '',
+    soldOut: false,
+  },
+  {
+    id: 'koszulka-trzy-paski',
+    name: 'Koszulka z pasami',
+    price: 0,
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: [],
+    photo: 'assets/sklep/koszulka-trzy-paski.jpg',
+    note: 'Czarna koszulka z biało-czerwonymi pasami, herbem na środku i polską flagą na rękawie.',
+    badge: '',
+    soldOut: false,
+  },
+  {
+    id: 'koszulka-extreme-life',
+    name: 'Koszulka Extreme Life',
+    price: 0,
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: [],
+    photo: 'assets/sklep/koszulka-extreme-life.jpg',
+    note: 'Czarna koszulka z godłem Polski obok herbu klubu i napisem Extreme Life.',
+    badge: '',
+    soldOut: false,
+  },
+  {
+    id: 'koszulka-tc-fanace',
+    name: 'Koszulka TC Fanace',
+    price: 0,
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: [],
+    photo: 'assets/sklep/koszulka-tc-fanace.jpg',
+    note: 'Czarna koszulka z kibicowskim nadrukiem i napisem Polonia Bruksela.',
+    badge: '',
+    soldOut: false,
+  },
+];
+
 /* ------------------------------------------------------------------ GALERIA */
 
 export const GALLERIES = [

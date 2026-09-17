@@ -3,6 +3,9 @@ Thumbs.db
 Desktop.ini
 .DS_Store
 
+# Lokalna konfiguracja narzędzi (podgląd na localhost) — nie wchodzi na produkcję
+.claude/
+
 # UWAGA: .image-slots.state.json MUSI być wersjonowany — to sidecar ze
 # zdjęciami wgranymi przez panel redakcyjny. Nigdy go tu nie dopisuj.
 !.image-slots.state.json

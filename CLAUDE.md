@@ -168,10 +168,35 @@ miarce, inaczej pomiar skłamie.
 
 ## Sklep internetowy
 
-`#/sklep` to na razie strona zapowiedzi: informacja „w budowie", zdjęcie w
-koszulkach POLONIA RAZEM! i dwa odnośniki kontaktowe. Gdy sklep faktycznie
-ruszy, tę sekcję zastępujemy treścią właściwą — trasa i pozycja w menu już są,
-więc adres się nie zmieni.
+`#/sklep` ma dwa stany i przełącza je sam, na podstawie `content.js`:
+
+- `SHOP_OPEN = false` (stan obecny) — zapowiedź „w budowie", zdjęcie w
+  koszulkach POLONIA RAZEM! i dwa odnośniki kontaktowe.
+- `SHOP_OPEN = true` przy niepustej tablicy `SHOP` — siatka produktów
+  (zdjęcie, nazwa, opis, cena, rozmiary, kolory) i formularz zamówienia.
+
+Asortyment siedzi w `SHOP` w `content.js`: dziewięć pozycji (szalik, bluza,
+polo, sześć koszulek). **Ceny są zerowe, a zdjęć jeszcze nie ma** — dlatego
+wyłącznik stoi na `false`. Zanim go przestawisz: wpisz rzeczywiste `price`
+i wgraj pliki do `assets/sklep/` pod nazwami z pola `photo`. Produkt z ceną 0
+pokazuje „Cena do ustalenia", a produkt bez zdjęcia — kafelek z herbem;
+oba stany są awaryjne, nie docelowe.
+
+Zamówienia idą **drugim formularzem Netlify**, `name="zamowienie"`, obok
+kontaktowego. Obowiązuje ta sama zasada co przy kontakcie: ukryta kopia
+formularza siedzi tuż po `<body>` i dokładasz do niej każde nowe pole,
+inaczej wartość nie dojdzie do klubu. Pola: `product`, `size`, `color`,
+`qty`, `name`, `email`, `phone`, `note`, `lang`, `bot-field`.
+
+**Krok do wykonania raz, w panelu Netlify**: Forms → zamowienie → Settings →
+Form notifications → powiadomienie na adres klubu. Limit darmowego planu to
+100 zgłoszeń miesięcznie **łącznie** z formularzem kontaktowym — przy żywym
+sklepie to jest realne ograniczenie, nie formalność.
+
+Formularz nie przyjmuje płatności i nigdzie tego nie obiecuje: kibic wysyła
+zgłoszenie, klub odpisuje mailem i dogaduje kwotę oraz odbiór. Wprowadzenie
+płatności online wymaga backendu i konta płatniczego — to nie jest zmiana
+w tym pliku.
 
 ## Mapy Google tylko po zgodzie
 

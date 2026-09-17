@@ -26,6 +26,24 @@
   <input type="text" name="bot-field">
 </form>
 
+<!-- To samo dla zamówień ze sklepu (#/sklep). Netlify liczy każdy formularz
+     osobno, więc zamówienia trafiają do własnej zakładki Forms i można im
+     ustawić inne powiadomienie niż wiadomościom kontaktowym. Dokładasz pole
+     w formularzu zamówienia? Dopisz je również tutaj, inaczej wartość nie
+     dojdzie do klubu. -->
+<form name="zamowienie" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input type="text" name="product">
+  <input type="text" name="size">
+  <input type="text" name="color">
+  <input type="text" name="qty">
+  <input type="text" name="name">
+  <input type="email" name="email">
+  <input type="text" name="phone">
+  <textarea name="note"></textarea>
+  <input type="text" name="lang">
+  <input type="text" name="bot-field">
+</form>
+
 <x-dc>
 <helmet>
 <title>FC Polonia Bruksela — oficjalna strona klubu | FC Polonia Bruxelles</title>
@@ -1217,33 +1235,204 @@ a:hover{color:#cbb96b}
   </sc-if>
 
   <!-- ══════════════════════════════════════════════════ SKLEP -->
-  <!-- Podstrona w budowie: te same proporcje i odstępy co pozostałe
-       (max-width 1000 px jak Sponsorzy i Kontakt, ten sam nagłówek, ta sama
-       złota linia). Zamiast pustej zapowiedzi pokazujemy, co będzie w sklepie,
-       i zostawiamy dwie realne drogi kontaktu — żeby kibic, który chce koszulkę
-       już dziś, nie odbił się od ściany. -->
+  <!-- Podstrona ma dwa stany i przełącza je sama, bez przebudowy szablonu:
+       SHOP_OPEN w content.js na `false` (albo pusta tablica SHOP) = zapowiedź
+       „w budowie"; `true` z produktami = siatka i formularz zamówienia.
+       Dzięki temu uruchomienie sprzedaży to zmiana w content.js, nie tutaj.
+       Te same proporcje i odstępy co pozostałe podstrony (max-width 1000 px
+       jak Sponsorzy i Kontakt, ten sam nagłówek, ta sama złota linia). -->
   <sc-if value="{{ isShop }}" hint-placeholder-val="{{ false }}">
   <div style="max-width:1000px;margin:0 auto;padding:{{ secPadTop }}">
     <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.18em;color:#E2092F;display:block" style-before="content:'';display:block;width:34px;height:4px;background:#E2092F;margin-bottom:12px">NOSISZ NASZE BARWY</span>
     <h1 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:{{ pageTitle }};text-transform:uppercase;line-height:.9;margin:12px 0 0;letter-spacing:.01em">Sklep internetowy</h1>
     <div style="height:5px;width:140px;background:#B7A85C;margin:24px 0 28px"></div>
 
-    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px">
-      <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.18em;background:#B7A85C;color:#121216;padding:7px 12px">W BUDOWIE</span>
-      <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:12px;letter-spacing:.12em;color:#8d8a83">SKLEP RUSZY W SEZONIE 2026/2027</span>
-    </div>
+    <!-- ─────────────────────────── stan 1: zapowiedź ───────────────────────
+         Zamiast pustej zapowiedzi pokazujemy, co będzie w sklepie, i
+         zostawiamy dwie realne drogi kontaktu — żeby kibic, który chce
+         koszulkę już dziś, nie odbił się od ściany. -->
+    <sc-if value="{{ shopSoon }}" hint-placeholder-val="{{ true }}">
+    <div>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px">
+        <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.18em;background:#B7A85C;color:#121216;padding:7px 12px">W BUDOWIE</span>
+        <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:12px;letter-spacing:.12em;color:#8d8a83">SKLEP RUSZY W SEZONIE 2026/2027</span>
+      </div>
 
-    <p style="font-family:'Inter',sans-serif;font-weight:600;font-size:clamp(16px,2vw,20px);line-height:1.6;color:#F6F3EC;margin:0 0 18px;text-wrap:pretty">Pracujemy nad klubowym sklepem. Znajdą się w nim koszulki, szaliki i gadżety z herbem Polonii — te same, w których chodzą zawodnicy, sztab i kibice na trybunach.</p>
-    <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:16px;line-height:1.7;color:#c9c6bd;margin:0 0 28px;text-wrap:pretty">Zanim sklep ruszy, po koszulkę albo szalik można zgłosić się wprost do klubu. Napisz do nas albo złap nas na Facebooku — powiemy, co jest akurat dostępne i w jakich rozmiarach.</p>
+      <p style="font-family:'Inter',sans-serif;font-weight:600;font-size:clamp(16px,2vw,20px);line-height:1.6;color:#F6F3EC;margin:0 0 18px;text-wrap:pretty">Pracujemy nad klubowym sklepem. Znajdą się w nim koszulki, szaliki i gadżety z herbem Polonii — te same, w których chodzą zawodnicy, sztab i kibice na trybunach.</p>
+      <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:16px;line-height:1.7;color:#c9c6bd;margin:0 0 28px;text-wrap:pretty">Zanim sklep ruszy, po koszulkę albo szalik można zgłosić się wprost do klubu. Napisz do nas albo złap nas na Facebooku — powiemy, co jest akurat dostępne i w jakich rozmiarach.</p>
 
-    <div style="position:relative;aspect-ratio:{{ shopPhotoRatio }};margin-bottom:28px;border:1px solid rgba(246,243,236,.14);overflow:hidden;background:#0f0f13">
-      <img src="assets/sklep/sklep-w-budowie.jpg" alt="Zawodnicy FC Polonia Bruksela w koszulkach POLONIA RAZEM! na trybunach stadionu" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:{{ shopPhotoPos }};display:block">
-    </div>
+      <div style="position:relative;aspect-ratio:{{ shopPhotoRatio }};margin-bottom:28px;border:1px solid rgba(246,243,236,.14);overflow:hidden;background:#0f0f13">
+        <img src="assets/sklep/sklep-w-budowie.jpg" alt="Zawodnicy FC Polonia Bruksela w koszulkach POLONIA RAZEM! na trybunach stadionu" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:{{ shopPhotoPos }};display:block">
+      </div>
 
-    <div style="display:flex;flex-wrap:wrap;gap:12px">
-      <a href="#/kontakt" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:19px;letter-spacing:.08em;text-transform:uppercase;background:#E2092F;color:#F6F3EC;padding:14px 24px;text-align:center;width:{{ btnW }};max-width:100%;box-sizing:border-box" style-hover="background:#a80725">Napisz do klubu</a>
-      <a href="https://www.facebook.com/fcpolonia.bruksela/" target="_blank" rel="noopener" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:19px;letter-spacing:.08em;text-transform:uppercase;border:2px solid rgba(246,243,236,.3);color:#F6F3EC;padding:13px 24px;text-align:center;width:{{ btnW }};max-width:100%;box-sizing:border-box" style-hover="border:2px solid #B7A85C;color:#B7A85C">Napisz na Facebooku</a>
+      <div style="display:flex;flex-wrap:wrap;gap:12px">
+        <a href="#/kontakt" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:19px;letter-spacing:.08em;text-transform:uppercase;background:#E2092F;color:#F6F3EC;padding:14px 24px;text-align:center;width:{{ btnW }};max-width:100%;box-sizing:border-box" style-hover="background:#a80725">Napisz do klubu</a>
+        <a href="https://www.facebook.com/fcpolonia.bruksela/" target="_blank" rel="noopener" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:19px;letter-spacing:.08em;text-transform:uppercase;border:2px solid rgba(246,243,236,.3);color:#F6F3EC;padding:13px 24px;text-align:center;width:{{ btnW }};max-width:100%;box-sizing:border-box" style-hover="border:2px solid #B7A85C;color:#B7A85C">Napisz na Facebooku</a>
+      </div>
     </div>
+    </sc-if>
+
+    <!-- ────────────────────────── stan 2: sklep działa ─────────────────── -->
+    <sc-if value="{{ shopOpen }}" hint-placeholder-val="{{ false }}">
+    <div>
+      <p style="font-family:'Inter',sans-serif;font-weight:600;font-size:clamp(16px,2vw,20px);line-height:1.6;color:#F6F3EC;margin:0 0 30px;text-wrap:pretty">Koszulki, bluzy i szaliki z herbem Polonii — te same, w których chodzą zawodnicy, sztab i kibice na trybunach. Wybierz produkt, a zamówienie złóż formularzem na dole strony.</p>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax({{ shopMin }},1fr));gap:clamp(14px,2.2vw,24px);margin-bottom:clamp(30px,4vw,52px)">
+        <sc-for list="{{ shopItems }}" as="p" hint-placeholder-count="6">
+          <div style="background:#1b1b21;border:1px solid rgba(246,243,236,.14);border-top:4px solid #E2092F;display:flex;flex-direction:column">
+            <div style="position:relative;aspect-ratio:3/4;overflow:hidden;background:#0f0f13">
+              <sc-if value="{{ p.hasPhoto }}" hint-placeholder-val="{{ true }}">
+                <img src="{{ p.photo }}" alt="{{ p.alt }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%;display:block">
+              </sc-if>
+              <!-- Produkt bez zdjęcia dostaje kafelek z herbem, nie pustą
+                   ramkę — dziura w siatce wygląda jak błąd strony. -->
+              <sc-if value="{{ p.noPhoto }}" hint-placeholder-val="{{ false }}">
+                <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:22px">
+                  <img src="assets/crest.png" alt="" loading="lazy" style="max-width:56%;max-height:56%;object-fit:contain;opacity:.32;display:block">
+                </div>
+              </sc-if>
+              <sc-if value="{{ p.hasBadge }}" hint-placeholder-val="{{ false }}">
+                <span style="position:absolute;top:0;left:0;font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.16em;background:#B7A85C;color:#121216;padding:7px 11px">{{ p.badge }}</span>
+              </sc-if>
+              <sc-if value="{{ p.soldOut }}" hint-placeholder-val="{{ false }}">
+                <span style="position:absolute;inset:0;background:rgba(18,18,22,.72);display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:22px;letter-spacing:.06em;text-transform:uppercase;color:#F6F3EC;text-align:center;padding:16px">Chwilowo niedostępne</span>
+              </sc-if>
+            </div>
+            <div style="padding:{{ shopCardPad }};display:flex;flex-direction:column;gap:11px;flex:1">
+              <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(20px,2.5vw,26px);text-transform:uppercase;line-height:1.05;margin:0">{{ p.name }}</h2>
+              <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:14px;line-height:1.6;color:#c9c6bd;margin:0;text-wrap:pretty">{{ p.note }}</p>
+              <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:26px;letter-spacing:.02em;color:#B7A85C;margin-top:auto">{{ p.priceLabel }}</span>
+              <sc-if value="{{ p.hasSizes }}" hint-placeholder-val="{{ true }}">
+                <div style="display:flex;flex-wrap:wrap;gap:6px">
+                  <sc-for list="{{ p.sizeChips }}" as="z" hint-placeholder-count="5">
+                    <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.1em;border:1px solid rgba(246,243,236,.24);color:#e6e3db;padding:5px 9px">{{ z.label }}</span>
+                  </sc-for>
+                </div>
+              </sc-if>
+              <sc-if value="{{ p.hasColors }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center">
+                  <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.16em;color:#8d8a83">KOLORY</span>
+                  <sc-for list="{{ p.colorChips }}" as="k" hint-placeholder-count="2">
+                    <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:12px;color:#e6e3db">{{ k.label }}</span>
+                  </sc-for>
+                </div>
+              </sc-if>
+              <sc-if value="{{ p.canOrder }}" hint-placeholder-val="{{ true }}">
+                <button onClick="{{ p.onOrder }}" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:18px;letter-spacing:.08em;text-transform:uppercase;background:#E2092F;color:#F6F3EC;border:0;padding:12px 20px;cursor:pointer;width:100%;box-sizing:border-box" style-hover="background:#a80725">Zamów</button>
+              </sc-if>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+
+      <!-- FORMULARZ ZAMÓWIENIA -->
+      <div id="zamowienie" style="background:#1b1b21;border:1px solid rgba(246,243,236,.14);border-top:4px solid #B7A85C;padding:{{ cardPad }}">
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(24px,3.4vw,38px);text-transform:uppercase;margin:0 0 10px">Złóż zamówienie</h2>
+        <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:15px;line-height:1.65;color:#c9c6bd;margin:0 0 24px;max-width:620px;text-wrap:pretty">Formularz nie jest płatnością. Po wysłaniu odezwiemy się mailem, żeby potwierdzić dostępność rozmiaru, kwotę i sposób odbioru.</p>
+
+        <sc-if value="{{ ordNotSent }}" hint-placeholder-val="{{ true }}">
+        <form onSubmit="{{ onOrdSend }}" style="display:flex;flex-direction:column;gap:16px">
+          <label style="display:flex;flex-direction:column;gap:7px">
+            <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.16em;color:#c9c6bd">PRODUKT</span>
+            <select value="{{ ordProduct }}" onChange="{{ onOrdProduct }}" style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;background:#121216;border:1px solid rgba(246,243,236,.2);color:#F6F3EC;padding:{{ inputPad }};width:100%;box-sizing:border-box">
+              <sc-for list="{{ ordProducts }}" as="t" hint-placeholder-count="6">
+                <option value="{{ t }}">{{ t }}</option>
+              </sc-for>
+            </select>
+          </label>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax({{ fieldCols2 }},1fr));gap:16px">
+            <!-- Rozmiar i kolor pokazujemy tylko wtedy, gdy wybrany produkt
+                 faktycznie je ma — szalik nie ma rozmiaru, a większość
+                 koszulek jest w jednym kolorze. -->
+            <sc-if value="{{ ordHasSizes }}" hint-placeholder-val="{{ true }}">
+              <label style="display:flex;flex-direction:column;gap:7px">
+                <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.16em;color:#c9c6bd">ROZMIAR</span>
+                <select value="{{ ordSize }}" onChange="{{ onOrdSize }}" style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;background:#121216;border:1px solid rgba(246,243,236,.2);color:#F6F3EC;padding:{{ inputPad }};width:100%;box-sizing:border-box">
+                  <sc-for list="{{ ordSizes }}" as="t" hint-placeholder-count="5">
+                    <option value="{{ t }}">{{ t }}</option>
+                  </sc-for>
+                </select>
+              </label>
+            </sc-if>
+            <sc-if value="{{ ordHasColors }}" hint-placeholder-val="{{ false }}">
+              <label style="display:flex;flex-direction:column;gap:7px">
+                <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.16em;color:#c9c6bd">KOLOR</span>
+                <select value="{{ ordColor }}" onChange="{{ onOrdColor }}" style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;background:#121216;border:1px solid rgba(246,243,236,.2);color:#F6F3EC;padding:{{ inputPad }};width:100%;box-sizing:border-box">
+                  <sc-for list="{{ ordColors }}" as="t" hint-placeholder-count="2">
+                    <option value="{{ t }}">{{ t }}</option>
+                  </sc-for>
+                </select>
+              </label>
+            </sc-if>
+            <label style="display:flex;flex-direction:column;gap:7px">
+              <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.16em;color:#c9c6bd">ILOŚĆ</span>
+              <select value="{{ ordQty }}" onChange="{{ onOrdQty }}" style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;background:#121216;border:1px solid rgba(246,243,236,.2);color:#F6F3EC;padding:{{ inputPad }};width:100%;box-sizing:border-box">
+                <sc-for list="{{ ordQtys }}" as="t" hint-placeholder-count="5">
+                  <option value="{{ t }}">{{ t }}</option>
+                </sc-for>
+              </select>
+            </label>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax({{ fieldCols2 }},1fr));gap:16px">
+            <label style="display:flex;flex-direction:column;gap:7px">
+              <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.16em;color:#c9c6bd">IMIĘ I NAZWISKO</span>
+              <input value="{{ ordName }}" onChange="{{ onOrdName }}" placeholder="Jan Kowalski" style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;background:#121216;border:1px solid rgba(246,243,236,.2);color:#F6F3EC;padding:{{ inputPad }};width:100%;box-sizing:border-box">
+            </label>
+            <label style="display:flex;flex-direction:column;gap:7px">
+              <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.16em;color:#c9c6bd">TWÓJ E-MAIL</span>
+              <input type="email" value="{{ ordEmail }}" onChange="{{ onOrdEmail }}" placeholder="jan@example.com" style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;background:#121216;border:1px solid rgba(246,243,236,.2);color:#F6F3EC;padding:{{ inputPad }};width:100%;box-sizing:border-box">
+            </label>
+          </div>
+          <label style="display:flex;flex-direction:column;gap:7px">
+            <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.16em;color:#c9c6bd">TELEFON — NIEOBOWIĄZKOWO</span>
+            <input value="{{ ordPhone }}" onChange="{{ onOrdPhone }}" placeholder="+32 470 00 00 00" style="font-family:'Inter',sans-serif;font-weight:600;font-size:15px;background:#121216;border:1px solid rgba(246,243,236,.2);color:#F6F3EC;padding:{{ inputPad }};width:100%;box-sizing:border-box">
+          </label>
+          <label style="display:flex;flex-direction:column;gap:7px">
+            <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.16em;color:#c9c6bd">UWAGI — NIEOBOWIĄZKOWO</span>
+            <textarea value="{{ ordNote }}" onChange="{{ onOrdNote }}" placeholder="Np. odbiór na meczu, inny rozmiar, kilka sztuk w różnych rozmiarach." style="font-family:'Inter',sans-serif;font-weight:500;font-size:15px;background:#121216;border:1px solid rgba(246,243,236,.2);color:#F6F3EC;padding:{{ inputPad }};width:100%;box-sizing:border-box;min-height:110px;resize:vertical;line-height:1.6"></textarea>
+          </label>
+          <sc-if value="{{ ordErr }}" hint-placeholder-val="{{ false }}">
+            <div style="border-left:3px solid #E2092F;background:#121216;padding:13px 17px;font-family:'Inter',sans-serif;font-weight:600;font-size:14px;color:#e6e3db">{{ ordErr }}</div>
+          </sc-if>
+          <button type="submit" disabled="{{ ordSending }}" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:21px;letter-spacing:.08em;text-transform:uppercase;background:#E2092F;color:#F6F3EC;border:0;padding:16px 30px;cursor:pointer;align-self:{{ btnAlign }};width:{{ btnW }};box-sizing:border-box" style-hover="background:#a80725">{{ ordSendLabel }}</button>
+          <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:12px;line-height:1.6;color:#8d8a83;margin:0;max-width:620px">Zamówienie wysyłamy prosto ze strony — nie musisz mieć skonfigurowanej poczty. Wolisz napisać bezpośrednio? <a href="mailto:polonia@live.be">polonia@live.be</a></p>
+        </form>
+        </sc-if>
+
+        <!-- Potwierdzenie zamówienia. Każdy napis to osobny, pełny węzeł
+             tekstu — warstwa tłumacząca podmienia całe zdania, więc nie
+             sklejamy ich z fragmentów. -->
+        <sc-if value="{{ ordSent }}" hint-placeholder-val="{{ false }}">
+        <div style="background:#121216;border:1px solid rgba(183,168,92,.35);border-top:4px solid #B7A85C;padding:{{ cardPad }};max-width:660px;display:flex;flex-direction:column;gap:22px">
+          <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+            <span style="width:48px;height:48px;border-radius:999px;background:#17853F;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+              <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#F6F3EC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </span>
+            <div style="min-width:0">
+              <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.18em;color:#B7A85C;display:block;margin-bottom:6px">FC POLONIA BRUKSELA</span>
+              <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(26px,3.4vw,34px);text-transform:uppercase;line-height:1;display:block">Zamówienie przyjęte</span>
+            </div>
+          </div>
+          <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:15px;line-height:1.7;color:#e6e3db;margin:0;text-wrap:pretty">Dziękujemy. Twoje zamówienie trafiło na skrzynkę klubu. Odezwiemy się mailem, żeby potwierdzić dostępność, kwotę i sposób odbioru. Zamówienia obsługują wolontariusze, więc odpowiedź może zająć dzień albo dwa.</p>
+          <div style="border-top:1px solid rgba(246,243,236,.14);padding-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px">
+            <div style="display:flex;flex-direction:column;gap:5px;min-width:0">
+              <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.16em;color:#8d8a83">ZAMÓWIONY PRODUKT</span>
+              <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:15px;color:#F6F3EC;overflow-wrap:anywhere">{{ ordSentProduct }}</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:5px;min-width:0">
+              <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.16em;color:#8d8a83">ODPOWIEMY NA ADRES</span>
+              <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:15px;color:#F6F3EC;overflow-wrap:anywhere">{{ ordSentEmail }}</span>
+            </div>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:10px">
+            <button onClick="{{ onOrdReset }}" style="font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.14em;background:transparent;color:#F6F3EC;border:1px solid rgba(246,243,236,.3);padding:12px 18px;cursor:pointer" style-hover="border:1px solid #B7A85C;color:#B7A85C">ZAMÓW COŚ JESZCZE</button>
+            <a href="#/" style="font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.14em;color:#F6F3EC;border:1px solid rgba(246,243,236,.3);padding:12px 18px;display:flex;align-items:center" style-hover="border:1px solid #B7A85C;color:#B7A85C">WRÓĆ NA STRONĘ GŁÓWNĄ</a>
+          </div>
+        </div>
+        </sc-if>
+      </div>
+    </div>
+    </sc-if>
   </div>
   </sc-if>
 
@@ -1983,6 +2172,9 @@ class Component extends DCLogic {
     sponsor: { name: '', url: '', tier: 'SPONSORZY' },
     ct: { name: '', email: '', topic: 'Chcę grać w Polonii', msg: '' }, ctErr: '', ctSent: false,
     ctSending: false, ctSentEmail: '', ctSentTopic: '',
+    // zamówienie ze sklepu; pusty `product` = gość nie wybrał jeszcze produktu
+    ord: { product: '', size: '', color: '', qty: '1', name: '', email: '', phone: '', note: '' },
+    ordErr: '', ordSent: false, ordSending: false, ordSentProduct: '', ordSentEmail: '',
     cookieOpen: false, cookieDetails: false, cookieChoices: { functional: false, maps: false, analytics: false, marketing: false },
     lang: 'pl',
     vw: typeof window !== 'undefined' ? window.innerWidth : 1280,
@@ -2448,6 +2640,10 @@ class Component extends DCLogic {
          żeby obie postacie mieściły się w kadrze */
       shopPhotoRatio: mob ? '4/3' : '16/9',
       shopPhotoPos: mob ? '58% 30%' : 'center 32%',
+      /* siatka produktów: telefon 2 kolumny (kafelek produktu czyta się dobrze
+         także w połowie szerokości), tablet i komputer 3–4 */
+      shopMin: mob ? (small ? '100%' : '150px') : '230px',
+      shopCardPad: mob ? '14px' : '18px',
       /* zaproszenie na Facebooka pod kartami meczowymi */
       fbCtaPad: mob ? '16px 18px' : '20px 28px',
       fbCtaFs: mob ? (small ? '19px' : '21px') : 'clamp(22px,2.6vw,30px)',
@@ -2602,7 +2798,10 @@ class Component extends DCLogic {
     };
 
     if (!L || !C) {
-      return { ...base, season: '2026/2027', updatedAt: '—', sourceLabel: 'oczekuje na synchronizację', noLive: false, noSource: false, noFixtures: false, noTable: false, loadingFixtures: true, loadFailed: false, hasTable: false, hasFixtures: false, hasUpcoming: false, nm: null, lm: null, lmScoreBg: '#23232a', article: null, seasonDetail: null };
+      // Zanim content.js się wczyta, sklep nie ma jeszcze żadnego stanu: nie
+      // pokazujemy ani zapowiedzi, ani siatki, żeby na działającym sklepie
+      // nie mrugnęło „w budowie" i odwrotnie.
+      return { ...base, season: '2026/2027', updatedAt: '—', sourceLabel: 'oczekuje na synchronizację', noLive: false, noSource: false, noFixtures: false, noTable: false, loadingFixtures: true, loadFailed: false, hasTable: false, hasFixtures: false, hasUpcoming: false, nm: null, lm: null, lmScoreBg: '#23232a', article: null, seasonDetail: null, shopOpen: false, shopSoon: false, shopItems: [], ordNotSent: true, ordSent: false, ordProducts: [], ordSizes: [], ordColors: [], ordQtys: [], ordHasSizes: false, ordHasColors: false };
     }
 
     const live = s.live || L.getState();
@@ -2825,6 +3024,47 @@ class Component extends DCLogic {
     }).filter((t) => t.hasItems);
     // Strona główna pokazuje ten sam zestaw, w kolejności kategorii.
     const homeSponsors = sponsorTiers.flatMap((t) => t.items);
+
+    /* ——— sklep ———
+       Siatka produktów pokazuje się wyłącznie wtedy, gdy content.js ma
+       SHOP_OPEN = true i niepustą tablicę SHOP; w każdym innym przypadku
+       zostaje zapowiedź „w budowie". Cena 0 znaczy „jeszcze nieustalona"
+       i wypisuje się słownie — „0 €" na stronie klubu wygląda jak błąd. */
+    const shopAll = (C.SHOP || []).filter((p) => p && p.name);
+    const shopOpen = Boolean(C.SHOP_OPEN) && shopAll.length > 0;
+    const shopItems = shopAll.map((p) => ({
+      ...p,
+      priceLabel: Number(p.price) > 0
+        ? String(p.price).replace('.', ',') + ' €'
+        : this._t('Cena do ustalenia', 'Prix à confirmer', 'Prijs nog te bepalen', 'Price to be confirmed'),
+      alt: p.name + ' — sklep FC Polonia Bruksela',
+      hasPhoto: Boolean(p.photo),
+      noPhoto: !p.photo,
+      hasBadge: Boolean(p.badge),
+      soldOut: Boolean(p.soldOut),
+      canOrder: !p.soldOut,
+      sizeChips: (p.sizes || []).map((label) => ({ label })),
+      hasSizes: (p.sizes || []).length > 0,
+      colorChips: (p.colors || []).map((label) => ({ label })),
+      hasColors: (p.colors || []).length > 0,
+      /* „Zamów" ustawia produkt w formularzu i przewija do niego. Bez tego
+         kibic musiałby sam znaleźć formularz na dole i jeszcze raz wybrać
+         to, co przed chwilą kliknął. */
+      onOrder: () => {
+        this.setState({
+          ord: { ...this.state.ord, product: p.name,
+                 size: (p.sizes || [])[0] || '', color: (p.colors || [])[0] || '' },
+          ordErr: '', ordSent: false,
+        });
+        setTimeout(() => {
+          const el = document.getElementById('zamowienie');
+          if (el && el.scrollIntoView) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 40);
+      },
+    }));
+    // Zachęta na pierwszej pozycji listy — nie jest produktem, walidacja ją odrzuca.
+    const ordHint = 'Wybierz produkt';
+    const ordPick = shopAll.find((p) => p.name === s.ord.product) || null;
 
     /* Przed startem sezonu nie pokazujemy pozycji: przy komplecie zer numer
        miejsca jest przypadkowy, a „1 miejsce" wprowadzałoby w błąd. */
@@ -3242,6 +3482,77 @@ class Component extends DCLogic {
         });
       },
       onCtReset: () => this.setState({ ct: { name: '', email: '', topic: 'Chcę grać w Polonii', msg: '' }, ctSent: false, ctErr: '', ctSending: false }),
+
+      /* ——— sklep i zamówienia ——— */
+      shopOpen, shopSoon: !shopOpen, shopItems,
+      ordProduct: s.ord.product || ordHint,
+      ordSize: s.ord.size, ordColor: s.ord.color, ordQty: s.ord.qty,
+      ordName: s.ord.name, ordEmail: s.ord.email, ordPhone: s.ord.phone, ordNote: s.ord.note,
+      ordErr: s.ordErr, ordSent: s.ordSent, ordNotSent: !s.ordSent,
+      ordSending: s.ordSending, ordSendLabel: s.ordSending ? 'Wysyłanie…' : 'Wyślij zamówienie',
+      ordSentProduct: s.ordSentProduct, ordSentEmail: s.ordSentEmail,
+      // Produkt oznaczony jako niedostępny nie trafia na listę do zamówienia.
+      ordProducts: [ordHint].concat(shopAll.filter((p) => !p.soldOut).map((p) => p.name)),
+      ordSizes: ordPick ? (ordPick.sizes || []) : [],
+      ordHasSizes: Boolean(ordPick && (ordPick.sizes || []).length > 0),
+      ordColors: ordPick ? (ordPick.colors || []) : [],
+      ordHasColors: Boolean(ordPick && (ordPick.colors || []).length > 0),
+      ordQtys: ['1', '2', '3', '4', '5'],
+      /* Zmiana produktu przestawia rozmiar i kolor na pierwsze dostępne dla
+         niego — inaczej po przeskoku z koszulki na szalik w zgłoszeniu
+         zostałby rozmiar, którego ten produkt w ogóle nie ma. */
+      onOrdProduct: (e) => {
+        const name = e.target.value;
+        const pick = (C.SHOP || []).find((x) => x.name === name) || null;
+        this.setState({
+          ord: { ...this.state.ord, product: name,
+                 size: pick ? ((pick.sizes || [])[0] || '') : '',
+                 color: pick ? ((pick.colors || [])[0] || '') : '' },
+          ordErr: '',
+        });
+      },
+      onOrdSize: (e) => this.setState({ ord: { ...this.state.ord, size: e.target.value } }),
+      onOrdColor: (e) => this.setState({ ord: { ...this.state.ord, color: e.target.value } }),
+      onOrdQty: (e) => this.setState({ ord: { ...this.state.ord, qty: e.target.value } }),
+      onOrdName: (e) => this.setState({ ord: { ...this.state.ord, name: e.target.value } }),
+      onOrdEmail: (e) => this.setState({ ord: { ...this.state.ord, email: e.target.value } }),
+      onOrdPhone: (e) => this.setState({ ord: { ...this.state.ord, phone: e.target.value } }),
+      onOrdNote: (e) => this.setState({ ord: { ...this.state.ord, note: e.target.value } }),
+      /* Wysyłka jak w formularzu kontaktowym: POST na adres strony z polem
+         `form-name`. Osobna nazwa („zamowienie") daje klubowi osobną
+         zakładkę Forms i osobne powiadomienie. */
+      onOrdSend: (e) => {
+        if (e && e.preventDefault) e.preventDefault();
+        if (this.state.ordSending) return;
+        const o = this.state.ord;
+        const product = (o.product || '').trim();
+        if (!product || product === ordHint) return this.setState({ ordErr: 'Wybierz produkt z listy.' });
+        if (!o.name.trim()) return this.setState({ ordErr: 'Podaj imię i nazwisko.' });
+        if (!/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(o.email.trim())) return this.setState({ ordErr: 'Podaj poprawny adres e-mail.' });
+        const lang = (this.I && this.I.getLang && this.I.getLang()) || this.state.lang || 'pl';
+        const data = new URLSearchParams({
+          'form-name': 'zamowienie',
+          'bot-field': '',
+          product, size: o.size || '—', color: o.color || '—', qty: o.qty,
+          name: o.name.trim(), email: o.email.trim(), phone: o.phone.trim(),
+          note: o.note.trim(), lang,
+        });
+        this.setState({ ordErr: '', ordSending: true });
+        fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: data.toString(),
+        }).then((r) => {
+          if (!r.ok) throw new Error('HTTP ' + r.status);
+          this.setState({ ordSending: false, ordSent: true, ordSentProduct: product, ordSentEmail: o.email.trim() });
+        }).catch(() => {
+          this.setState({ ordSending: false, ordErr: 'Nie udało się wysłać zamówienia. Sprawdź połączenie albo napisz bezpośrednio na polonia@live.be.' });
+        });
+      },
+      onOrdReset: () => this.setState({
+        ord: { product: '', size: '', color: '', qty: '1', name: '', email: '', phone: '', note: '' },
+        ordSent: false, ordErr: '', ordSending: false,
+      }),
       sName: s.sponsor.name, sUrl: s.sponsor.url, sTier: s.sponsor.tier,
       onSName: (e) => this.setState({ sponsor: { ...this.state.sponsor, name: e.target.value } }),
       onSUrl: (e) => this.setState({ sponsor: { ...this.state.sponsor, url: e.target.value } }),

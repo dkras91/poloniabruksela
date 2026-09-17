@@ -155,6 +155,100 @@ const T = {
     'Until the shop opens, ask the club directly for a shirt or a scarf. Write to us or catch us on Facebook — we will tell you what is in stock and in which sizes.'],
   'Napisz do klubu': ['Écrire au club', 'Schrijf naar de club', 'Write to the club'],
   'Napisz na Facebooku': ['Nous écrire sur Facebook', 'Schrijf ons op Facebook', 'Message us on Facebook'],
+
+  /* --- sklep: siatka produktów --- */
+  'Koszulki, bluzy i szaliki z herbem Polonii — te same, w których chodzą zawodnicy, sztab i kibice na trybunach. Wybierz produkt, a zamówienie złóż formularzem na dole strony.': [
+    'T-shirts, sweats et écharpes au blason de Polonia — les mêmes que portent les joueurs, le staff et les supporters dans les tribunes. Choisissez un article et passez commande avec le formulaire en bas de page.',
+    'Shirts, sweaters en sjaals met het embleem van Polonia — dezelfde die spelers, staf en supporters op de tribune dragen. Kies een artikel en bestel via het formulier onderaan de pagina.',
+    'Shirts, hoodies and scarves with the Polonia crest — the same ones worn by the players, the staff and the supporters in the stands. Pick an item and order through the form at the bottom of the page.'],
+  'Zamów': ['Commander', 'Bestellen', 'Order'],
+  'Chwilowo niedostępne': ['Momentanément indisponible', 'Tijdelijk niet beschikbaar', 'Temporarily unavailable'],
+  'Cena do ustalenia': ['Prix à confirmer', 'Prijs nog te bepalen', 'Price to be confirmed'],
+  'KOLORY': ['COULEURS', 'KLEUREN', 'COLOURS'],
+  'czarna': ['noir', 'zwart', 'black'],
+  'biała': ['blanc', 'wit', 'white'],
+
+  /* --- sklep: produkty --- */
+  'Szalik 40 lat tradycji': ['Écharpe 40 ans de tradition', 'Sjaal 40 jaar traditie', '40 years of tradition scarf'],
+  'Dziany szalik na czterdziestolecie klubu, z herbem na obu końcach i napisem POLONIA RAZEM!': [
+    'Écharpe tricotée pour les quarante ans du club, avec le blason aux deux extrémités et l’inscription POLONIA RAZEM!',
+    'Gebreide sjaal voor de veertigste verjaardag van de club, met het embleem aan beide uiteinden en het opschrift POLONIA RAZEM!',
+    'Knitted scarf for the club’s fortieth anniversary, with the crest at both ends and the POLONIA RAZEM! lettering.'],
+  'Bluza z kapturem': ['Sweat à capuche', 'Hoodie', 'Hooded sweatshirt'],
+  'Czarna bluza z szarymi rękawami i biało-czerwoną opaską, z nadrukiem WE ARE POLONIA na plecach.': [
+    'Sweat noir à manches grises et brassard blanc-rouge, avec l’impression WE ARE POLONIA dans le dos.',
+    'Zwarte hoodie met grijze mouwen en wit-rode armband, met de opdruk WE ARE POLONIA op de rug.',
+    'Black hoodie with grey sleeves and a white-and-red armband, with a WE ARE POLONIA print on the back.'],
+  'Koszulka polo z herbem': ['Polo au blason', 'Polo met embleem', 'Polo shirt with crest'],
+  'Czerwone polo z białą lamówką i haftowanym herbem klubu na piersi.': [
+    'Polo rouge à liseré blanc et blason du club brodé sur la poitrine.',
+    'Rode polo met witte bies en geborduurd clubembleem op de borst.',
+    'Red polo shirt with white piping and the club crest embroidered on the chest.'],
+  'Koszulka POLONIA RAZEM!': ['T-shirt POLONIA RAZEM!', 'Shirt POLONIA RAZEM!', 'POLONIA RAZEM! T-shirt'],
+  'Herb w wieńcu i hasło klubu w czerni i złocie. Do wyboru wersja czarna albo biała.': [
+    'Le blason dans sa couronne et la devise du club en noir et or. Au choix en noir ou en blanc.',
+    'Het embleem in de lauwerkrans en de clubleuze in zwart en goud. Te kiezen in zwart of wit.',
+    'The crest in its wreath and the club motto in black and gold. Available in black or white.'],
+  'Koszulka Powstanie Warszawskie': ['T-shirt Insurrection de Varsovie', 'Shirt Opstand van Warschau', 'Warsaw Uprising T-shirt'],
+  'Nadruk pamiątkowy z powstańcem i herbem klubu, z dopiskiem CZEŚĆ I CHWAŁA BOHATEROM.': [
+    'Impression commémorative représentant un insurgé et le blason du club, avec la mention CZEŚĆ I CHWAŁA BOHATEROM — honneur et gloire aux héros.',
+    'Herdenkingsopdruk met een opstandeling en het clubembleem, met het opschrift CZEŚĆ I CHWAŁA BOHATEROM — eer en glorie aan de helden.',
+    'Commemorative print of an insurgent and the club crest, with the words CZEŚĆ I CHWAŁA BOHATEROM — honour and glory to the heroes.'],
+  'Koszulka Polonia': ['T-shirt Polonia', 'Shirt Polonia', 'Polonia T-shirt'],
+  'Czarna koszulka z czerwonym napisem Polonia w stylu baseballowym i herbem w wieńcu.': [
+    'T-shirt noir avec l’inscription Polonia en rouge, façon baseball, et le blason dans sa couronne.',
+    'Zwart shirt met het rode opschrift Polonia in baseballstijl en het embleem in de lauwerkrans.',
+    'Black T-shirt with the Polonia lettering in red, baseball style, and the crest in its wreath.'],
+  'Koszulka z pasami': ['T-shirt à bandes', 'Shirt met strepen', 'Striped T-shirt'],
+  'Czarna koszulka z biało-czerwonymi pasami, herbem na środku i polską flagą na rękawie.': [
+    'T-shirt noir à bandes blanches et rouges, blason au centre et drapeau polonais sur la manche.',
+    'Zwart shirt met wit-rode strepen, embleem in het midden en de Poolse vlag op de mouw.',
+    'Black T-shirt with white and red stripes, the crest in the centre and the Polish flag on the sleeve.'],
+  'Koszulka Extreme Life': ['T-shirt Extreme Life', 'Shirt Extreme Life', 'Extreme Life T-shirt'],
+  'Czarna koszulka z godłem Polski obok herbu klubu i napisem Extreme Life.': [
+    'T-shirt noir avec les armoiries de la Pologne à côté du blason du club et l’inscription Extreme Life.',
+    'Zwart shirt met het Poolse wapen naast het clubembleem en het opschrift Extreme Life.',
+    'Black T-shirt with the Polish coat of arms beside the club crest and the Extreme Life lettering.'],
+  'Koszulka TC Fanace': ['T-shirt TC Fanace', 'Shirt TC Fanace', 'TC Fanace T-shirt'],
+  'Czarna koszulka z kibicowskim nadrukiem i napisem Polonia Bruksela.': [
+    'T-shirt noir avec une impression de supporters et l’inscription Polonia Bruxelles.',
+    'Zwart shirt met een supportersopdruk en het opschrift Polonia Brussel.',
+    'Black T-shirt with a supporters’ print and the Polonia Brussels lettering.'],
+
+  /* --- sklep: formularz zamówienia --- */
+  'Złóż zamówienie': ['Passer commande', 'Bestelling plaatsen', 'Place an order'],
+  'Formularz nie jest płatnością. Po wysłaniu odezwiemy się mailem, żeby potwierdzić dostępność rozmiaru, kwotę i sposób odbioru.': [
+    'Ce formulaire n’est pas un paiement. Après l’envoi, nous vous écrirons par e-mail pour confirmer la disponibilité de la taille, le montant et le mode de retrait.',
+    'Dit formulier is geen betaling. Na verzending mailen we je om de beschikbaarheid van de maat, het bedrag en de manier van afhalen te bevestigen.',
+    'This form is not a payment. After you send it we will e-mail you to confirm the size, the amount and how to collect the item.'],
+  'PRODUKT': ['ARTICLE', 'ARTIKEL', 'ITEM'],
+  'ROZMIAR': ['TAILLE', 'MAAT', 'SIZE'],
+  'KOLOR': ['COULEUR', 'KLEUR', 'COLOUR'],
+  'ILOŚĆ': ['QUANTITÉ', 'AANTAL', 'QUANTITY'],
+  'TELEFON — NIEOBOWIĄZKOWO': ['TÉLÉPHONE — FACULTATIF', 'TELEFOON — OPTIONEEL', 'PHONE — OPTIONAL'],
+  'UWAGI — NIEOBOWIĄZKOWO': ['REMARQUES — FACULTATIF', 'OPMERKINGEN — OPTIONEEL', 'NOTES — OPTIONAL'],
+  'Wybierz produkt': ['Choisissez un article', 'Kies een artikel', 'Choose an item'],
+  'Np. odbiór na meczu, inny rozmiar, kilka sztuk w różnych rozmiarach.': [
+    'Par ex. retrait au match, autre taille, plusieurs pièces en tailles différentes.',
+    'Bijv. afhalen op de wedstrijd, een andere maat, meerdere stuks in verschillende maten.',
+    'E.g. collection at a match, a different size, several items in different sizes.'],
+  'Wyślij zamówienie': ['Envoyer la commande', 'Bestelling versturen', 'Send the order'],
+  'Wybierz produkt z listy.': ['Choisissez un article dans la liste.', 'Kies een artikel uit de lijst.', 'Please choose an item from the list.'],
+  'Nie udało się wysłać zamówienia. Sprawdź połączenie albo napisz bezpośrednio na polonia@live.be.': [
+    'L’envoi de la commande a échoué. Vérifiez votre connexion ou écrivez directement à polonia@live.be.',
+    'De bestelling kon niet worden verzonden. Controleer je verbinding of schrijf rechtstreeks naar polonia@live.be.',
+    'The order could not be sent. Check your connection or write directly to polonia@live.be.'],
+  'Zamówienie wysyłamy prosto ze strony — nie musisz mieć skonfigurowanej poczty. Wolisz napisać bezpośrednio?': [
+    'La commande part directement du site — pas besoin d’une messagerie configurée. Vous préférez écrire directement ?',
+    'De bestelling vertrekt rechtstreeks vanaf de site — je hebt geen ingestelde mailclient nodig. Liever rechtstreeks schrijven?',
+    'The order is sent straight from the site — you do not need a mail client set up. Prefer to write directly?'],
+  'Zamówienie przyjęte': ['Commande reçue', 'Bestelling ontvangen', 'Order received'],
+  'Dziękujemy. Twoje zamówienie trafiło na skrzynkę klubu. Odezwiemy się mailem, żeby potwierdzić dostępność, kwotę i sposób odbioru. Zamówienia obsługują wolontariusze, więc odpowiedź może zająć dzień albo dwa.': [
+    'Merci. Votre commande est arrivée dans la boîte du club. Nous vous écrirons par e-mail pour confirmer la disponibilité, le montant et le mode de retrait. Ce sont des bénévoles qui s’en occupent, la réponse peut donc prendre un jour ou deux.',
+    'Bedankt. Je bestelling is in de mailbox van de club aangekomen. We mailen je om de beschikbaarheid, het bedrag en de manier van afhalen te bevestigen. Vrijwilligers doen dit werk, dus een antwoord kan een dag of twee duren.',
+    'Thank you. Your order has reached the club’s inbox. We will e-mail you to confirm availability, the amount and how to collect the item. Volunteers handle the orders, so a reply may take a day or two.'],
+  'ZAMÓWIONY PRODUKT': ['ARTICLE COMMANDÉ', 'BESTELD ARTIKEL', 'ITEM ORDERED'],
+  'ZAMÓW COŚ JESZCZE': ['COMMANDER AUTRE CHOSE', 'NOG IETS BESTELLEN', 'ORDER SOMETHING ELSE'],
   'Zawodnicy FC Polonia Bruksela w koszulkach POLONIA RAZEM! na trybunach stadionu': [
     'Des joueurs du FC Polonia Bruxelles en maillots POLONIA RAZEM! dans les tribunes du stade',
     'Spelers van FC Polonia Brussel in POLONIA RAZEM!-shirts op de tribune van het stadion',
