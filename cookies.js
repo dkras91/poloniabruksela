@@ -49,6 +49,13 @@ export const CATEGORIES = [
     used: 'Osadzone mapy Google w szczegółach meczu (wczytywane dopiero po zgodzie).',
   },
   {
+    id: 'video',
+    label: 'Filmy YouTube',
+    required: false,
+    desc: 'Pozwalają odtworzyć odcinki Backstage Polonia bez wychodzenia ze strony. Odtwarzacz pochodzi z serwerów YouTube (Google), które przy odtwarzaniu widzą Twój adres IP i mogą zapisać własne pliki. Bez zgody pokazujemy miniaturę i odnośnik do YouTube — materiał pozostaje dostępny.',
+    used: 'Osadzone odtwarzacze YouTube na podstronie Backstage Polonia (wczytywane dopiero po zgodzie). Same miniatury trzymamy na naszym serwerze, więc bez zgody nic nie idzie do Google.',
+  },
+  {
     id: 'analytics',
     label: 'Statystyczne',
     required: false,
@@ -64,7 +71,7 @@ export const CATEGORIES = [
   },
 ];
 
-const EMPTY = { necessary: true, functional: false, maps: false, analytics: false, marketing: false };
+const EMPTY = { necessary: true, functional: false, maps: false, video: false, analytics: false, marketing: false };
 
 const read = () => {
   try { return JSON.parse(localStorage.getItem(KEY) || 'null'); } catch { return null; }
@@ -105,8 +112,8 @@ export const allowed = (cat) => {
   return cat === 'necessary' ? true : Boolean(c && c.choices[cat]);
 };
 
-export const acceptAll = () => store({ functional: true, maps: true, analytics: true, marketing: true }, 'all');
-export const rejectAll = () => store({ functional: false, maps: false, analytics: false, marketing: false }, 'none');
+export const acceptAll = () => store({ functional: true, maps: true, video: true, analytics: true, marketing: true }, 'all');
+export const rejectAll = () => store({ functional: false, maps: false, video: false, analytics: false, marketing: false }, 'none');
 export const saveChoices = (choices) => store(choices, 'custom');
 export function withdraw() {
   try { localStorage.removeItem(KEY); } catch {}

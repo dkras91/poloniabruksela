@@ -1234,6 +1234,186 @@ a:hover{color:#cbb96b}
   </div>
   </sc-if>
 
+  <!-- ══════════════════════════════════════════ BACKSTAGE POLONIA -->
+  <!-- Klubowe centrum wideo. Trzy rzeczy, których nie wolno tu zepsuć:
+       1. Miniatury leżą w assets/backstage/ — NIE linkujemy ich z i.ytimg.com.
+          Dzięki temu podstrona nie wysyła nic do Google, dopóki gość sam nie
+          kliknie odtwarzania. Odtwarzacz wczytuje się dopiero po zgodzie
+          (kategoria „Filmy YouTube"), tak jak mapy — patrz CLAUDE.md.
+       2. Odcinki pochodzą z tablicy BACKSTAGE w content.js. Dodanie nowego to
+          wpis w tablicy i plik miniatury, nic tutaj.
+       3. Pierwszy wpis tablicy jest najnowszym odcinkiem i pokazuje się na
+          górze; reszta trafia do siatki. -->
+  <sc-if value="{{ isBackstage }}" hint-placeholder-val="{{ false }}">
+  <div>
+
+    <!-- ─────────────────────────────────────────────── HERO ───────── -->
+    <div style="background:#0f0f13;border-bottom:1px solid rgba(246,243,236,.1)">
+      <div style="max-width:1280px;margin:0 auto;padding:{{ secPadTop }};display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:clamp(22px,3.5vw,48px);align-items:center">
+        <div style="min-width:0">
+          <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.18em;color:#E2092F;display:block" style-before="content:'';display:block;width:34px;height:4px;background:#E2092F;margin-bottom:12px">KANAŁ WIDEO KLUBU</span>
+          <h1 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:{{ pageTitle }};text-transform:uppercase;line-height:.88;margin:12px 0 0;letter-spacing:.01em">Backstage Polonia</h1>
+          <div style="height:5px;width:140px;background:#B7A85C;margin:22px 0 24px"></div>
+          <p style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(20px,2.6vw,28px);line-height:1.15;color:#B7A85C;text-transform:uppercase;margin:0 0 16px">Zajrzyj za kulisy FC Polonia Bruksela.</p>
+          <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:clamp(15px,1.8vw,17px);line-height:1.7;color:#c9c6bd;margin:0 0 28px;max-width:620px;text-wrap:pretty">Backstage Polonia to mecze, emocje, szatnia, kibice i wszystko to, czego nie zobaczysz w samym wyniku spotkania. Pokazujemy Polonię od środka — przed meczem, podczas spotkania i po ostatnim gwizdku.</p>
+          <a href="{{ backstageChannel }}" target="_blank" rel="noopener" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:20px;letter-spacing:.08em;text-transform:uppercase;background:#E2092F;color:#F6F3EC;padding:15px 28px;display:inline-flex;align-items:center;gap:11px;width:{{ btnW }};justify-content:center;box-sizing:border-box" style-hover="background:#a80725">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+            Oglądaj na YouTube
+          </a>
+        </div>
+        <div style="display:flex;justify-content:center">
+          <img src="assets/backstage/backstage-polonia-logo.png" alt="Backstage Polonia — logo serii wideo FC Polonia Bruksela" style="width:{{ bsLogoW }};max-width:100%;height:auto;display:block" loading="eager">
+        </div>
+      </div>
+    </div>
+
+    <!-- ──────────────────────────────────── NAJNOWSZY ODCINEK ───────── -->
+    <sc-if value="{{ hasBackstage }}" hint-placeholder-val="{{ true }}">
+    <div style="max-width:1280px;margin:0 auto;padding:{{ secPadTop }}">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:22px">
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(24px,3.4vw,38px);text-transform:uppercase;margin:0;line-height:1">Najnowszy odcinek</h2>
+        <span style="flex:1;height:1px;background:rgba(246,243,236,.14)"></span>
+      </div>
+      <sc-for list="{{ backstageLatest }}" as="v" hint-placeholder-count="1">
+        <div style="display:grid;grid-template-columns:{{ bsHeroCols }};gap:clamp(18px,2.5vw,32px);align-items:start">
+
+          <div style="position:relative;aspect-ratio:16/9;background:#0f0f13;border:1px solid rgba(246,243,236,.14);overflow:hidden">
+            <sc-if value="{{ v.playing }}" hint-placeholder-val="{{ false }}">
+              <iframe src="{{ v.embed }}" title="{{ v.title }}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0;display:block"></iframe>
+            </sc-if>
+            <sc-if value="{{ v.idle }}" hint-placeholder-val="{{ true }}">
+              <img src="{{ v.thumb }}" alt="{{ v.alt }}" loading="eager" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
+              <button onClick="{{ v.onPlay }}" aria-label="Odtwórz odcinek" style="position:absolute;inset:0;width:100%;height:100%;border:0;background:linear-gradient(180deg,rgba(9,9,12,.1),rgba(9,9,12,.55));display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:linear-gradient(180deg,rgba(9,9,12,.25),rgba(9,9,12,.7))">
+                <span style="width:clamp(62px,9vw,86px);height:clamp(62px,9vw,86px);border-radius:999px;background:#E2092F;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 36px rgba(9,9,12,.55)">
+                  <svg viewBox="0 0 24 24" width="34" height="34" fill="#F6F3EC" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+                </span>
+              </button>
+            </sc-if>
+            <sc-if value="{{ v.asking }}" hint-placeholder-val="{{ false }}">
+              <div style="position:absolute;inset:0;background:#121216;padding:clamp(16px,3vw,28px);display:flex;flex-direction:column;justify-content:center;gap:14px">
+                <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.16em;color:#B7A85C">ODTWARZACZ YOUTUBE</span>
+                <span style="font-family:'Inter',sans-serif;font-weight:500;font-size:clamp(13px,1.6vw,15px);line-height:1.6;color:#e6e3db;max-width:520px">Odtwarzacz pochodzi z serwerów YouTube, dlatego nie wczytujemy go bez Twojej zgody. Kliknięcie włącza kategorię „Filmy YouTube" — możesz ją wyłączyć w ustawieniach prywatności w stopce.</span>
+                <div style="display:flex;flex-wrap:wrap;gap:10px">
+                  <button onClick="{{ onAllowVideo }}" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:18px;letter-spacing:.08em;text-transform:uppercase;background:#E2092F;color:#F6F3EC;border:0;padding:13px 22px;cursor:pointer" style-hover="background:#a80725">Włącz i odtwórz</button>
+                  <a href="{{ v.watchUrl }}" target="_blank" rel="noopener" style="font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.14em;border:1px solid rgba(246,243,236,.3);color:#F6F3EC;padding:13px 18px;display:flex;align-items:center" style-hover="border:1px solid #B7A85C;color:#B7A85C">OBEJRZYJ NA YOUTUBE</a>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+
+          <div style="background:#1b1b21;border:1px solid rgba(246,243,236,.14);border-top:4px solid #E2092F;padding:{{ cardPad }};display:flex;flex-direction:column;gap:14px">
+            <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+              <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.16em;background:#B7A85C;color:#121216;padding:5px 10px">{{ v.kindLabel }}</span>
+              <sc-if value="{{ v.hasRound }}" hint-placeholder-val="{{ true }}">
+                <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.16em;color:#8d8a83">{{ v.roundLabel }}</span>
+              </sc-if>
+            </div>
+            <h3 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(22px,2.8vw,30px);text-transform:uppercase;line-height:1.08;margin:0">{{ v.title }}</h3>
+            <sc-if value="{{ v.hasMatch }}" hint-placeholder-val="{{ true }}">
+              <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">
+                <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:24px;letter-spacing:.04em;background:{{ v.scoreBg }};color:#F6F3EC;padding:5px 14px">{{ v.score }}</span>
+                <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:14px;color:#e6e3db">{{ v.opponent }}</span>
+              </div>
+            </sc-if>
+            <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:15px;line-height:1.7;color:#c9c6bd;margin:0;text-wrap:pretty">{{ v.lead }}</p>
+            <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:12px;letter-spacing:.1em;color:#8d8a83;margin-top:auto">{{ v.dateStr }}</span>
+          </div>
+
+        </div>
+      </sc-for>
+    </div>
+    </sc-if>
+
+    <!-- ──────────────────────────────────── WSZYSTKIE ODCINKI ───────── -->
+    <sc-if value="{{ hasBackstageRest }}" hint-placeholder-val="{{ true }}">
+    <div style="max-width:1280px;margin:0 auto;padding:0 clamp(16px,4vw,48px) clamp(30px,5vw,64px)">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:22px">
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(24px,3.4vw,38px);text-transform:uppercase;margin:0;line-height:1">Wszystkie odcinki</h2>
+        <span style="flex:1;height:1px;background:rgba(246,243,236,.14)"></span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax({{ cardMin }},1fr));gap:clamp(14px,2.2vw,26px)">
+        <sc-for list="{{ backstageRest }}" as="v" hint-placeholder-count="6">
+          <div style="background:#1b1b21;border:1px solid rgba(246,243,236,.14);display:flex;flex-direction:column" style-hover="border:1px solid rgba(183,168,92,.55)">
+            <div style="position:relative;aspect-ratio:16/9;background:#0f0f13;overflow:hidden">
+              <sc-if value="{{ v.playing }}" hint-placeholder-val="{{ false }}">
+                <iframe src="{{ v.embed }}" title="{{ v.title }}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0;display:block"></iframe>
+              </sc-if>
+              <sc-if value="{{ v.idle }}" hint-placeholder-val="{{ true }}">
+                <img src="{{ v.thumb }}" alt="{{ v.alt }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
+                <button onClick="{{ v.onPlay }}" aria-label="Odtwórz odcinek" style="position:absolute;inset:0;width:100%;height:100%;border:0;background:linear-gradient(180deg,rgba(9,9,12,.05),rgba(9,9,12,.5));display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:linear-gradient(180deg,rgba(9,9,12,.25),rgba(9,9,12,.68))">
+                  <span style="width:54px;height:54px;border-radius:999px;background:#E2092F;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 26px rgba(9,9,12,.5)">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="#F6F3EC" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+                  </span>
+                </button>
+                <span style="position:absolute;top:0;left:0;font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.14em;background:rgba(18,18,22,.86);color:#B7A85C;padding:6px 10px">{{ v.kindLabel }}</span>
+              </sc-if>
+              <sc-if value="{{ v.asking }}" hint-placeholder-val="{{ false }}">
+                <div style="position:absolute;inset:0;background:#121216;padding:16px;display:flex;flex-direction:column;justify-content:center;gap:11px">
+                  <span style="font-family:'Inter',sans-serif;font-weight:500;font-size:12px;line-height:1.55;color:#e6e3db">Odtwarzacz pochodzi z serwerów YouTube. Włączyć go i odtworzyć odcinek?</span>
+                  <button onClick="{{ onAllowVideo }}" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:16px;letter-spacing:.08em;text-transform:uppercase;background:#E2092F;color:#F6F3EC;border:0;padding:11px 16px;cursor:pointer;align-self:flex-start" style-hover="background:#a80725">Włącz i odtwórz</button>
+                </div>
+              </sc-if>
+            </div>
+            <div style="padding:16px;display:flex;flex-direction:column;gap:10px;flex:1">
+              <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+                <sc-if value="{{ v.hasRound }}" hint-placeholder-val="{{ true }}">
+                  <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.14em;color:#B7A85C">{{ v.roundLabel }}</span>
+                </sc-if>
+                <sc-if value="{{ v.hasMatch }}" hint-placeholder-val="{{ true }}">
+                  <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:16px;letter-spacing:.03em;background:{{ v.scoreBg }};color:#F6F3EC;padding:2px 9px">{{ v.score }}</span>
+                </sc-if>
+              </div>
+              <sc-if value="{{ v.hasOpponent }}" hint-placeholder-val="{{ true }}">
+                <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:12px;color:#8d8a83">{{ v.opponent }}</span>
+              </sc-if>
+              <h3 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:19px;text-transform:uppercase;line-height:1.12;margin:0">{{ v.title }}</h3>
+              <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:13px;line-height:1.6;color:#c9c6bd;margin:0;text-wrap:pretty">{{ v.lead }}</p>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;padding-top:4px">
+                <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:11px;letter-spacing:.08em;color:#6b6862">{{ v.dateStr }}</span>
+                <sc-if value="{{ v.idle }}" hint-placeholder-val="{{ true }}">
+                  <button onClick="{{ v.onPlay }}" style="font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.14em;background:transparent;color:#F6F3EC;border:1px solid rgba(246,243,236,.3);padding:9px 15px;cursor:pointer;min-height:38px" style-hover="border:1px solid #E2092F;color:#E2092F">OGLĄDAJ</button>
+                </sc-if>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    </sc-if>
+
+    <!-- Kanał bez materiałów: lepiej powiedzieć wprost niż pokazać pustą siatkę. -->
+    <sc-if value="{{ noBackstage }}" hint-placeholder-val="{{ false }}">
+    <div style="max-width:1000px;margin:0 auto;padding:{{ secPadTop }}">
+      <div style="border-left:3px solid #B7A85C;background:#1b1b21;padding:20px 24px">
+        <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:15px;line-height:1.65;color:#e6e3db;margin:0">Pierwsze odcinki pojawią się wkrótce. Do tego czasu zajrzyj na nasz kanał na YouTube.</p>
+      </div>
+    </div>
+    </sc-if>
+
+    <!-- ──────────────────────── CZYM JEST BACKSTAGE POLONIA ─────────── -->
+    <div style="background:#0f0f13;border-top:1px solid rgba(246,243,236,.1);border-bottom:1px solid rgba(246,243,236,.1)">
+      <div style="max-width:1000px;margin:0 auto;padding:{{ secPadTop }}">
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(24px,3.4vw,38px);text-transform:uppercase;margin:0 0 20px;line-height:1">Czym jest Backstage Polonia?</h2>
+        <p style="font-family:'Inter',sans-serif;font-weight:600;font-size:clamp(16px,2vw,19px);line-height:1.65;color:#F6F3EC;margin:0 0 18px;text-wrap:pretty">Backstage Polonia zabiera Was tam, gdzie podczas meczu zazwyczaj nie docierają kibice. Kamera jest z drużyną przed spotkaniem, przy murawie, na trybunach i po ostatnim gwizdku.</p>
+        <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:16px;line-height:1.75;color:#c9c6bd;margin:0;text-wrap:pretty">Znajdziecie tutaj relacje z meczów FC Polonia Bruksela, najważniejsze akcje i bramki, reakcje zawodników i trenerów, rozmowy z kibicami, materiały zza kulis oraz wyjątkowe momenty z życia klubu.</p>
+      </div>
+    </div>
+
+    <!-- ──────────────────────────────────────── SUBSKRYPCJA ─────────── -->
+    <div style="max-width:1000px;margin:0 auto;padding:{{ secPadTop }}">
+      <div style="background:#1b1b21;border:1px solid rgba(246,243,236,.14);border-left:4px solid #E2092F;padding:{{ cardPad }}">
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(26px,3.6vw,42px);text-transform:uppercase;margin:0 0 14px;line-height:1">Nie przegap kolejnego odcinka</h2>
+        <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:16px;line-height:1.7;color:#c9c6bd;margin:0 0 24px;max-width:620px;text-wrap:pretty">Nowe mecze. Nowe emocje. Nowe historie. Subskrybuj kanał FC Polonia Bruksela na YouTube i bądź z nami także poza boiskiem.</p>
+        <a href="{{ backstageChannel }}" target="_blank" rel="noopener" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:20px;letter-spacing:.08em;text-transform:uppercase;background:#E2092F;color:#F6F3EC;padding:15px 28px;display:inline-flex;align-items:center;gap:11px;width:{{ btnW }};justify-content:center;box-sizing:border-box" style-hover="background:#a80725">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M23 12s0-3.9-.5-5.8a3 3 0 0 0-2.1-2.1C18.5 3.6 12 3.6 12 3.6s-6.5 0-8.4.5A3 3 0 0 0 1.5 6.2C1 8.1 1 12 1 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 8.4.5 8.4.5s6.5 0 8.4-.5a3 3 0 0 0 2.1-2.1C23 15.9 23 12 23 12ZM9.8 15.5v-7l6.1 3.5-6.1 3.5Z"/></svg>
+          Subskrybuj na YouTube
+        </a>
+      </div>
+    </div>
+
+  </div>
+  </sc-if>
+
   <!-- ══════════════════════════════════════════════════ SKLEP -->
   <!-- Podstrona ma dwa stany i przełącza je sama, bez przebudowy szablonu:
        SHOP_OPEN w content.js na `false` (albo pusta tablica SHOP) = zapowiedź
@@ -2175,10 +2355,12 @@ class Component extends DCLogic {
     // zamówienie ze sklepu; pusty `product` = gość nie wybrał jeszcze produktu
     ord: { product: '', size: '', color: '', qty: '1', name: '', email: '', phone: '', note: '' },
     ordErr: '', ordSent: false, ordSending: false, ordSentProduct: '', ordSentEmail: '',
-    cookieOpen: false, cookieDetails: false, cookieChoices: { functional: false, maps: false, analytics: false, marketing: false },
+    cookieOpen: false, cookieDetails: false, cookieChoices: { functional: false, maps: false, video: false, analytics: false, marketing: false },
     lang: 'pl',
     vw: typeof window !== 'undefined' ? window.innerWidth : 1280,
     menuOpen: false, hoveredPlayer: null, lightbox: null,
+    // Backstage: który odcinek gra, a który czeka na zgodę na odtwarzacz YouTube.
+    backstagePlaying: null, backstageAsk: null,
     fbOpen: false,
     // czy komplet pozycji menu mieści się w pasku (ustala pomiar po renderze)
     navFits: true,
@@ -2269,6 +2451,7 @@ class Component extends DCLogic {
       historia: ['Historia', 'Histoire', 'Geschiedenis', 'History'],
       archiwum: ['Archiwum sezonów', 'Archives des saisons', 'Seizoensarchief', 'Season archive'],
       galeria: ['Galeria', 'Galerie', 'Galerij', 'Gallery'],
+      backstage: ['Backstage Polonia', 'Backstage Polonia', 'Backstage Polonia', 'Backstage Polonia'],
       sklep: ['Sklep internetowy', 'Boutique en ligne', 'Webshop', 'Online shop'],
       sponsorzy: ['Sponsorzy i partnerzy', 'Sponsors et partenaires', 'Sponsors en partners', 'Sponsors and partners'],
       kontakt: ['Kontakt', 'Contact', 'Contact', 'Contact'],
@@ -2422,7 +2605,7 @@ class Component extends DCLogic {
       L.setLocale(lang);
       setTimeout(() => I.applyLang(lang), 60);
       this.C = C; this.L = L; this.A = A; this.K = K;
-      this.setState({ cookieOpen: !K.hasDecided(), cookieChoices: { functional: false, maps: false, analytics: false, marketing: false } });
+      this.setState({ cookieOpen: !K.hasDecided(), cookieChoices: { functional: false, maps: false, video: false, analytics: false, marketing: false } });
       this.setState({ logged: A.isLoggedIn() });
       this.setState({ ready: true, live: L.getState(), cfg: L.getConfig() });
       this._stop = L.startAutoSync((st, r) => this.setState({
@@ -2509,6 +2692,13 @@ class Component extends DCLogic {
      renderze — po zmianie w ustawieniach mapa znika lub wraca od razu. */
   _mapsAllowed() {
     try { return Boolean(this.K && this.K.allowed('maps')); } catch (e) { return false; }
+  }
+
+  /* To samo dla odtwarzaczy YouTube na podstronie Backstage. Miniatury leżą
+     na naszym serwerze, więc bez zgody do Google nie idzie nic — dopiero
+     kliknięcie odtwarzania wczytuje ramkę z ich serwerów. */
+  _videoAllowed() {
+    try { return Boolean(this.K && this.K.allowed('video')); } catch (e) { return false; }
   }
 
   _fixtureVM(f) {
@@ -2644,6 +2834,10 @@ class Component extends DCLogic {
          także w połowie szerokości), tablet i komputer 3–4 */
       shopMin: mob ? (small ? '100%' : '150px') : '230px',
       shopCardPad: mob ? '14px' : '18px',
+      /* Backstage: na komputerze odtwarzacz szerszy niż panel z opisem,
+         na telefonie jedno pod drugim. Logo serii mniejsze na telefonie. */
+      bsHeroCols: mob ? '1fr' : '1.7fr 1fr',
+      bsLogoW: mob ? (small ? '120px' : '150px') : '200px',
       /* zaproszenie na Facebooka pod kartami meczowymi */
       fbCtaPad: mob ? '16px 18px' : '20px 28px',
       fbCtaFs: mob ? (small ? '19px' : '21px') : 'clamp(22px,2.6vw,30px)',
@@ -2787,6 +2981,7 @@ class Component extends DCLogic {
       isGallery: route === 'galeria' && !s.param, isSponsors: route === 'sponsorzy',
       isContact: route === 'kontakt',
       isShop: route === 'sklep',
+      isBackstage: route === 'backstage',
       isAdmin: route === 'admin',
       onSync: () => this._sync(),
       syncLabel: s.syncing ? 'SYNCHRONIZACJA…' : 'ODŚWIEŻ DANE',
@@ -2801,7 +2996,7 @@ class Component extends DCLogic {
       // Zanim content.js się wczyta, sklep nie ma jeszcze żadnego stanu: nie
       // pokazujemy ani zapowiedzi, ani siatki, żeby na działającym sklepie
       // nie mrugnęło „w budowie" i odwrotnie.
-      return { ...base, season: '2026/2027', updatedAt: '—', sourceLabel: 'oczekuje na synchronizację', noLive: false, noSource: false, noFixtures: false, noTable: false, loadingFixtures: true, loadFailed: false, hasTable: false, hasFixtures: false, hasUpcoming: false, nm: null, lm: null, lmScoreBg: '#23232a', article: null, seasonDetail: null, shopOpen: false, shopSoon: false, shopItems: [], ordNotSent: true, ordSent: false, ordProducts: [], ordSizes: [], ordColors: [], ordQtys: [], ordHasSizes: false, ordHasColors: false };
+      return { ...base, season: '2026/2027', updatedAt: '—', sourceLabel: 'oczekuje na synchronizację', noLive: false, noSource: false, noFixtures: false, noTable: false, loadingFixtures: true, loadFailed: false, hasTable: false, hasFixtures: false, hasUpcoming: false, nm: null, lm: null, lmScoreBg: '#23232a', article: null, seasonDetail: null, shopOpen: false, shopSoon: false, shopItems: [], ordNotSent: true, ordSent: false, ordProducts: [], ordSizes: [], ordColors: [], ordQtys: [], ordHasSizes: false, ordHasColors: false, backstageLatest: [], backstageRest: [], hasBackstage: false, noBackstage: false, hasBackstageRest: false, backstageChannel: '' };
     }
 
     const live = s.live || L.getState();
@@ -3065,6 +3260,47 @@ class Component extends DCLogic {
     // Zachęta na pierwszej pozycji listy — nie jest produktem, walidacja ją odrzuca.
     const ordHint = 'Wybierz produkt';
     const ordPick = shopAll.find((p) => p.name === s.ord.product) || null;
+
+    /* ——— Backstage Polonia ———
+       Kafelek ma trzy stany: miniatura z przyciskiem odtwarzania, pytanie
+       o zgodę na odtwarzacz YouTube albo sam odtwarzacz. Miniatury leżą
+       u nas, więc dopóki gość nie kliknie, do Google nie idzie nic. */
+    const ETYKIETA_RODZAJU = { mecz: 'ZA KULISAMI', skrot: 'SKRÓT MECZU', klub: 'Z ŻYCIA KLUBU' };
+    const bsAll = (C.BACKSTAGE || []).filter((v) => v && v.id);
+    const backstage = bsAll.map((v, i) => ({
+      ...v,
+      // numer odcinka liczony od najstarszego, a lista jest od najnowszego
+      nr: bsAll.length - i,
+      dateStr: L.fmtShort(v.date),
+      thumb: 'assets/backstage/' + v.id + '.jpg',
+      /* youtube-nocookie.com zamiast youtube.com: ta domena nie zakłada
+         ciasteczek śledzących przed rozpoczęciem odtwarzania. */
+      embed: 'https://www.youtube-nocookie.com/embed/' + v.id + '?autoplay=1&rel=0&modestbranding=1',
+      watchUrl: 'https://www.youtube.com/watch?v=' + v.id,
+      alt: v.title + ' — Backstage Polonia, FC Polonia Bruksela',
+      kindLabel: ETYKIETA_RODZAJU[v.kind] || ETYKIETA_RODZAJU.klub,
+      hasMatch: Boolean(v.score),
+      hasRound: Boolean(v.round),
+      // Napis z liczbą — słownik w i18n.js dopasowuje całe zdania, więc
+      // tę etykietę składamy od razu w czterech językach.
+      roundLabel: v.round
+        ? this._t(v.round + '. KOLEJKA', 'JOURNÉE ' + v.round, 'SPEELDAG ' + v.round, 'MATCHDAY ' + v.round)
+        : '',
+      hasOpponent: Boolean(v.opponent),
+      // zielony przy wygranej, złoty przy remisie, bordowy przy porażce
+      scoreBg: v.outcome === 'W' ? '#17853F' : v.outcome === 'P' ? '#7d1f2b' : v.outcome === 'R' ? '#8f8248' : '#23232a',
+      playing: s.backstagePlaying === v.id,
+      asking: s.backstageAsk === v.id,
+      idle: s.backstagePlaying !== v.id && s.backstageAsk !== v.id,
+      onPlay: () => {
+        if (this._videoAllowed()) this.setState({ backstagePlaying: v.id, backstageAsk: null });
+        else this.setState({ backstageAsk: v.id, backstagePlaying: null });
+      },
+    }));
+    // Najnowszy odcinek jako jednoelementowa lista — pusta, gdy kanał jest pusty,
+    // więc sekcja znika sama zamiast pokazywać ramkę bez treści.
+    const backstageLatest = backstage.slice(0, 1);
+    const backstageRest = backstage.slice(1);
 
     /* Przed startem sezonu nie pokazujemy pozycji: przy komplecie zer numer
        miejsca jest przypadkowy, a „1 miejsce" wprowadzałoby w błąd. */
@@ -3353,7 +3589,8 @@ class Component extends DCLogic {
         ['#/mecze', 'Mecze', 'mecze'], ['#/tabela', 'Tabela', 'tabela'],
         ['#/druzyna', 'Drużyna', 'druzyna'], ['#/klub', 'Klub', 'klub'],
         ['#/historia', 'Historia', 'historia'], ['#/archiwum', 'Archiwum', 'archiwum'],
-        ['#/galeria', 'Galeria', 'galeria'], ['#/sklep', 'Sklep', 'sklep'],
+        ['#/galeria', 'Galeria', 'galeria'], ['#/backstage', 'Backstage', 'backstage'],
+        ['#/sklep', 'Sklep', 'sklep'],
         ['#/sponsorzy', 'Sponsorzy', 'sponsorzy'], ['#/kontakt', 'Kontakt', 'kontakt'],
       ].map(([href, label, key]) => ({
         href, label,
@@ -3420,7 +3657,7 @@ class Component extends DCLogic {
         const c = this.K.getConsent();
         this.setState({
           cookieOpen: true, cookieDetails: true,
-          cookieChoices: c ? { functional: c.choices.functional, maps: c.choices.maps, analytics: c.choices.analytics, marketing: c.choices.marketing }
+          cookieChoices: c ? { functional: c.choices.functional, maps: c.choices.maps, video: c.choices.video, analytics: c.choices.analytics, marketing: c.choices.marketing }
                            : { functional: false, analytics: false, marketing: false },
         });
       },
@@ -3431,9 +3668,23 @@ class Component extends DCLogic {
         const c = this.K ? this.K.getConsent() : null;
         const wybory = c ? { ...c.choices, maps: true } : { functional: false, maps: true, analytics: false, marketing: false };
         if (this.K) this.K.saveChoices(wybory);
-        this.setState({ cookieChoices: { functional: !!wybory.functional, maps: true, analytics: !!wybory.analytics, marketing: !!wybory.marketing } });
+        this.setState({ cookieChoices: { functional: !!wybory.functional, maps: true, video: !!wybory.video, analytics: !!wybory.analytics, marketing: !!wybory.marketing } });
       },
-      onCookieWithdraw: () => { this.K.withdraw(); this.setState({ cookieOpen: true, cookieDetails: true, cookieChoices: { functional: false, maps: false, analytics: false, marketing: false } }); },
+      /* „Włącz i odtwórz" przy odcinku Backstage = świadoma zgoda na osadzone
+         odtwarzacze YouTube. Zapisujemy ją jak każdą inną decyzję, zachowując
+         wcześniejsze wybory, i od razu uruchamiamy ten odcinek, o który gość
+         właśnie poprosił — żeby nie musiał klikać drugi raz. */
+      onAllowVideo: () => {
+        const c = this.K ? this.K.getConsent() : null;
+        const wybory = c ? { ...c.choices, video: true } : { functional: false, maps: false, video: true, analytics: false, marketing: false };
+        if (this.K) this.K.saveChoices(wybory);
+        this.setState({
+          cookieChoices: { functional: !!wybory.functional, maps: !!wybory.maps, video: true, analytics: !!wybory.analytics, marketing: !!wybory.marketing },
+          backstagePlaying: this.state.backstageAsk,
+          backstageAsk: null,
+        });
+      },
+      onCookieWithdraw: () => { this.K.withdraw(); this.setState({ cookieOpen: true, cookieDetails: true, cookieChoices: { functional: false, maps: false, video: false, analytics: false, marketing: false } }); },
       ctName: s.ct.name, ctEmail: s.ct.email, ctTopic: s.ct.topic, ctMsg: s.ct.msg,
       // Pływająca zachęta: nie wchodzi w drogę banerowi zgód ani podglądowi
       // zdjęć — te mają pierwszeństwo i własną warstwę.
@@ -3482,6 +3733,13 @@ class Component extends DCLogic {
         });
       },
       onCtReset: () => this.setState({ ct: { name: '', email: '', topic: 'Chcę grać w Polonii', msg: '' }, ctSent: false, ctErr: '', ctSending: false }),
+
+      /* ——— Backstage Polonia ——— */
+      backstageLatest, backstageRest,
+      hasBackstage: backstage.length > 0,
+      noBackstage: backstage.length === 0,
+      hasBackstageRest: backstageRest.length > 0,
+      backstageChannel: C.BACKSTAGE_CHANNEL || '',
 
       /* ——— sklep i zamówienia ——— */
       shopOpen, shopSoon: !shopOpen, shopItems,

@@ -247,6 +247,42 @@ zgłoszenie, klub odpisuje mailem i dogaduje kwotę oraz odbiór. Wprowadzenie
 płatności online wymaga backendu i konta płatniczego — to nie jest zmiana
 w tym pliku.
 
+## Backstage Polonia — podstrona wideo
+
+`#/backstage` to klubowe centrum wideo: hero z logo serii, najnowszy odcinek,
+siatka pozostałych, sekcja „Czym jest Backstage Polonia?" i zachęta do
+subskrypcji. Kanał: `BACKSTAGE_CHANNEL` w `content.js`.
+
+**Odcinki żyją w tablicy `BACKSTAGE` w `content.js`**, od najnowszego. Pierwszy
+wpis pokazuje się na górze jako najnowszy odcinek, reszta trafia do siatki.
+Dodanie materiału to trzy kroki, wszystkie poza `index.html`:
+
+1. identyfikator filmu z adresu YouTube,
+2. miniatura zapisana jako `assets/backstage/<ID>.jpg` (źródło
+   `https://i.ytimg.com/vi/<ID>/maxresdefault.jpg`, przeskalowana do ok. 854 px
+   szerokości — inaczej podstrona puchnie),
+3. wpis w tablicy + tłumaczenia tytułu i opisu w `i18n.js`.
+
+**Miniatury trzymamy u siebie, nie linkujemy ich z `i.ytimg.com`.** To nie jest
+drobiazg: gdyby ładowały się z serwerów Google, podstrona wysyłałaby tam adres
+IP każdego odwiedzającego, zanim ten cokolwiek kliknie.
+
+**Odtwarzacz wymaga zgody — tak samo jak mapy.** `cookies.js` ma osobną
+kategorię `video` („Filmy YouTube"). Kafelek ma trzy stany: miniatura
+z przyciskiem, pytanie o zgodę, odtwarzacz. Dopiero kliknięcie „Włącz
+i odtwórz" zapisuje zgodę i wczytuje ramkę z `youtube-nocookie.com`.
+`onAllowVideo` zachowuje pozostałe wybory gościa i od razu uruchamia ten
+odcinek, o który poprosił. **Nie wstawiaj `<iframe>` z YouTube poza tym
+mechanizmem** — obowiązuje ta sama reguła co przy mapach.
+
+Numer kolejki (`roundLabel`) składa się z liczby, więc słownik `i18n.js` go nie
+dopasuje — jest budowany przez `this._t()` od razu w czterech językach.
+
+Pole `kind` steruje wyłącznie etykietą na kafelku: `mecz` → ZA KULISAMI,
+`skrot` → SKRÓT MECZU, `klub` → Z ŻYCIA KLUBU. Wyniki i rywale w tablicy
+pochodzą z terminarza RBFA (`data/rbfa.json`), nie z samych tytułów filmów —
+przy dopisywaniu odcinka sprawdź je tam, nie zgaduj.
+
 ## Mapy Google tylko po zgodzie
 
 `cookies.js` ma osobną kategorię `maps`. Osadzona mapa w szczegółach meczu

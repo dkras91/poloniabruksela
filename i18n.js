@@ -137,6 +137,145 @@ const T = {
     'Speler van FC Polonia Brussel met clubsjaal op de tribune',
     'FC Polonia Brussels player holding the club scarf in the stands',
   ],
+  /* --- Backstage Polonia: podstrona wideo --- */
+  'Backstage': ['Backstage', 'Backstage', 'Backstage'],
+  'KANAŁ WIDEO KLUBU': ['LA CHAÎNE VIDÉO DU CLUB', 'HET VIDEOKANAAL VAN DE CLUB', 'THE CLUB VIDEO CHANNEL'],
+  'Zajrzyj za kulisy FC Polonia Bruksela.': [
+    'Passez dans les coulisses du FC Polonia Bruxelles.',
+    'Kijk achter de schermen bij FC Polonia Brussel.',
+    'Step behind the scenes at FC Polonia Brussels.'],
+  'Backstage Polonia to mecze, emocje, szatnia, kibice i wszystko to, czego nie zobaczysz w samym wyniku spotkania. Pokazujemy Polonię od środka — przed meczem, podczas spotkania i po ostatnim gwizdku.': [
+    'Backstage Polonia, ce sont les matchs, les émotions, le vestiaire, les supporters et tout ce que le score ne montre pas. Nous montrons Polonia de l’intérieur — avant le match, pendant la rencontre et après le coup de sifflet final.',
+    'Backstage Polonia, dat zijn de wedstrijden, de emoties, de kleedkamer, de supporters en alles wat je niet ziet in de uitslag. We tonen Polonia van binnenuit — voor de match, tijdens de wedstrijd en na het laatste fluitsignaal.',
+    'Backstage Polonia is the matches, the emotions, the dressing room, the supporters and everything the scoreline never shows. We show Polonia from the inside — before the match, during the game and after the final whistle.'],
+  'Oglądaj na YouTube': ['Regarder sur YouTube', 'Bekijk op YouTube', 'Watch on YouTube'],
+  'Backstage Polonia — logo serii wideo FC Polonia Bruksela': [
+    'Backstage Polonia — logo de la série vidéo du FC Polonia Bruxelles',
+    'Backstage Polonia — logo van de videoreeks van FC Polonia Brussel',
+    'Backstage Polonia — logo of the FC Polonia Brussels video series'],
+  'Najnowszy odcinek': ['Dernier épisode', 'Nieuwste aflevering', 'Latest episode'],
+  'Wszystkie odcinki': ['Tous les épisodes', 'Alle afleveringen', 'All episodes'],
+  'ZA KULISAMI': ['DANS LES COULISSES', 'ACHTER DE SCHERMEN', 'BEHIND THE SCENES'],
+  'SKRÓT MECZU': ['RÉSUMÉ DU MATCH', 'MATCHSAMENVATTING', 'MATCH HIGHLIGHTS'],
+  /* 'Z ŻYCIA KLUBU' jest już w słowniku niżej (kategoria wpisów) — ta sama
+     etykieta służy tu kafelkom Backstage, więc nie dublujemy klucza. */
+  'OGLĄDAJ': ['REGARDER', 'BEKIJKEN', 'WATCH'],
+  'Odtwórz odcinek': ['Lire l’épisode', 'Aflevering afspelen', 'Play episode'],
+  'ODTWARZACZ YOUTUBE': ['LECTEUR YOUTUBE', 'YOUTUBE-SPELER', 'YOUTUBE PLAYER'],
+  'Odtwarzacz pochodzi z serwerów YouTube, dlatego nie wczytujemy go bez Twojej zgody. Kliknięcie włącza kategorię „Filmy YouTube" — możesz ją wyłączyć w ustawieniach prywatności w stopce.': [
+    'Le lecteur provient des serveurs de YouTube, nous ne le chargeons donc pas sans votre accord. Un clic active la catégorie « Vidéos YouTube » — vous pouvez la désactiver dans les paramètres de confidentialité en bas de page.',
+    'De speler komt van de servers van YouTube, daarom laden we hem niet zonder jouw toestemming. Eén klik schakelt de categorie „YouTube-video’s" in — je kunt die uitzetten in de privacy-instellingen onderaan de pagina.',
+    'The player comes from YouTube’s servers, so we do not load it without your consent. One click enables the “YouTube videos” category — you can switch it off in the privacy settings in the footer.'],
+  'Odtwarzacz pochodzi z serwerów YouTube. Włączyć go i odtworzyć odcinek?': [
+    'Le lecteur provient des serveurs de YouTube. L’activer et lancer l’épisode ?',
+    'De speler komt van de servers van YouTube. Inschakelen en de aflevering afspelen?',
+    'The player comes from YouTube’s servers. Enable it and play the episode?'],
+  'Włącz i odtwórz': ['Activer et lire', 'Inschakelen en afspelen', 'Enable and play'],
+  'OBEJRZYJ NA YOUTUBE': ['VOIR SUR YOUTUBE', 'BEKIJK OP YOUTUBE', 'WATCH ON YOUTUBE'],
+  'Czym jest Backstage Polonia?': [
+    'Qu’est-ce que Backstage Polonia ?',
+    'Wat is Backstage Polonia?',
+    'What is Backstage Polonia?'],
+  'Backstage Polonia zabiera Was tam, gdzie podczas meczu zazwyczaj nie docierają kibice. Kamera jest z drużyną przed spotkaniem, przy murawie, na trybunach i po ostatnim gwizdku.': [
+    'Backstage Polonia vous emmène là où les supporters n’ont généralement pas accès pendant un match. La caméra suit l’équipe avant la rencontre, au bord du terrain, dans les tribunes et après le coup de sifflet final.',
+    'Backstage Polonia neemt je mee naar plekken waar supporters tijdens een wedstrijd meestal niet komen. De camera is bij de ploeg voor de match, langs het veld, op de tribune en na het laatste fluitsignaal.',
+    'Backstage Polonia takes you where supporters usually cannot go on a matchday. The camera is with the team before kick-off, on the touchline, in the stands and after the final whistle.'],
+  'Znajdziecie tutaj relacje z meczów FC Polonia Bruksela, najważniejsze akcje i bramki, reakcje zawodników i trenerów, rozmowy z kibicami, materiały zza kulis oraz wyjątkowe momenty z życia klubu.': [
+    'Vous y trouverez les comptes rendus des matchs du FC Polonia Bruxelles, les actions et les buts les plus marquants, les réactions des joueurs et des entraîneurs, des échanges avec les supporters, des images des coulisses et des moments à part dans la vie du club.',
+    'Je vindt er verslagen van de wedstrijden van FC Polonia Brussel, de belangrijkste acties en doelpunten, reacties van spelers en trainers, gesprekken met supporters, beelden van achter de schermen en bijzondere momenten uit het clubleven.',
+    'You will find reports from FC Polonia Brussels matches, the key moments and goals, reactions from players and coaches, conversations with supporters, behind-the-scenes footage and special moments from the life of the club.'],
+  'Nie przegap kolejnego odcinka': [
+    'Ne manquez pas le prochain épisode',
+    'Mis de volgende aflevering niet',
+    'Do not miss the next episode'],
+  'Nowe mecze. Nowe emocje. Nowe historie. Subskrybuj kanał FC Polonia Bruksela na YouTube i bądź z nami także poza boiskiem.': [
+    'De nouveaux matchs. De nouvelles émotions. De nouvelles histoires. Abonnez-vous à la chaîne YouTube du FC Polonia Bruxelles et suivez-nous aussi en dehors du terrain.',
+    'Nieuwe wedstrijden. Nieuwe emoties. Nieuwe verhalen. Abonneer je op het YouTube-kanaal van FC Polonia Brussel en blijf ook naast het veld bij ons.',
+    'New matches. New emotions. New stories. Subscribe to the FC Polonia Brussels channel on YouTube and stay with us off the pitch too.'],
+  'Subskrybuj na YouTube': ['S’abonner sur YouTube', 'Abonneer je op YouTube', 'Subscribe on YouTube'],
+  'Pierwsze odcinki pojawią się wkrótce. Do tego czasu zajrzyj na nasz kanał na YouTube.': [
+    'Les premiers épisodes arrivent bientôt. En attendant, rendez-vous sur notre chaîne YouTube.',
+    'De eerste afleveringen komen binnenkort. Kijk tot dan op ons YouTube-kanaal.',
+    'The first episodes are coming soon. Until then, have a look at our YouTube channel.'],
+
+  /* --- Backstage Polonia: tytuły i opisy odcinków --- */
+  'Połamany palec i walka do końca. Wygrywamy 2:1': [
+    'Un doigt cassé et la lutte jusqu’au bout. Nous gagnons 2:1',
+    'Een gebroken vinger en knokken tot het einde. We winnen met 2:1',
+    'A broken finger and a fight to the end. We win 2:1'],
+  'Piąta kolejka od środka: bramka Fryderyka Borowego w 9. minucie, wyrównanie rywali tuż przed przerwą i walka do ostatniego gwizdka.': [
+    'La cinquième journée de l’intérieur : le but de Fryderyk Borowy à la 9e minute, l’égalisation adverse juste avant la pause et la lutte jusqu’au coup de sifflet final.',
+    'De vijfde speeldag van binnenuit: het doelpunt van Fryderyk Borowy in de 9e minuut, de gelijkmaker van de tegenstander vlak voor rust en knokken tot het laatste fluitsignaal.',
+    'Matchday five from the inside: Fryderyk Borowy’s goal in the 9th minute, the opponents’ equaliser just before the break and a fight to the final whistle.'],
+  'Patryk Węgliński już w Brukseli. Dołącza do FC Polonia': [
+    'Patryk Węgliński est à Bruxelles. Il rejoint le FC Polonia',
+    'Patryk Węgliński is in Brussel. Hij komt bij FC Polonia',
+    'Patryk Węgliński is in Brussels. He joins FC Polonia'],
+  'Transfer sfinalizowany jeszcze w oknie transferowym, a na początku października Patryk przeprowadził się do Brukseli. Pierwsze dni nowego zawodnika w klubie.': [
+    'Le transfert a été finalisé pendant le mercato et, début octobre, Patryk s’est installé à Bruxelles. Les premiers jours du nouveau joueur au club.',
+    'De transfer werd nog tijdens de transferperiode afgerond en begin oktober verhuisde Patryk naar Brussel. De eerste dagen van de nieuwe speler bij de club.',
+    'The transfer was completed during the window, and in early October Patryk moved to Brussels. The new player’s first days at the club.'],
+  'FC Polonia Bruksela 2:1 RU Auderghem B — wszystkie bramki': [
+    'FC Polonia Bruxelles 2:1 RU Auderghem B — tous les buts',
+    'FC Polonia Brussel 2:1 RU Auderghem B — alle doelpunten',
+    'FC Polonia Brussels 2:1 RU Auderghem B — all the goals'],
+  'Skrót spotkania i wszystkie trzy bramki. Dla Polonii trafili Fryderyk Borowy i Artur Ciborowski.': [
+    'Le résumé de la rencontre et les trois buts. Pour Polonia, Fryderyk Borowy et Artur Ciborowski ont marqué.',
+    'De samenvatting van de wedstrijd en alle drie de doelpunten. Voor Polonia scoorden Fryderyk Borowy en Artur Ciborowski.',
+    'Match highlights and all three goals. Fryderyk Borowy and Artur Ciborowski scored for Polonia.'],
+  'Miało być 3:1, skończyło się 4:0': [
+    'On annonçait 3:1, cela s’est terminé 4:0',
+    'Het zou 3:1 worden, het werd 4:0',
+    'It was meant to be 3:1, it ended 4:0'],
+  'Czwarta kolejka za kulisami: szatnia przed pierwszym gwizdkiem, cztery bramki i rozmowy po meczu wygranym do zera.': [
+    'La quatrième journée dans les coulisses : le vestiaire avant le coup d’envoi, quatre buts et les réactions après une victoire sans encaisser.',
+    'De vierde speeldag achter de schermen: de kleedkamer voor het eerste fluitsignaal, vier doelpunten en gesprekken na een zege zonder tegendoelpunt.',
+    'Matchday four behind the scenes: the dressing room before kick-off, four goals and the talk after a clean-sheet win.'],
+  'A gdyby Polonia zagrała w Lidze Mistrzów?': [
+    'Et si Polonia jouait la Ligue des champions ?',
+    'En als Polonia in de Champions League speelde?',
+    'What if Polonia played in the Champions League?'],
+  'Wyjście na murawę z dziecięcą eskortą, przywitanie z sędziami i rywalem — zwykły mecz w niezwykłym, wielkim klimacie.': [
+    'L’entrée sur la pelouse avec une escorte d’enfants, le salut aux arbitres et à l’adversaire — un match ordinaire dans une ambiance de grand soir.',
+    'De opkomst op het veld met een kinderescorte, de begroeting van de scheidsrechters en de tegenstander — een gewone wedstrijd in een buitengewone sfeer.',
+    'Walking out with a children’s escort, greeting the referees and the opponents — an ordinary match with the feel of a big occasion.'],
+  '7 awansów do Jupiler Pro League? Gdzie gra FC Polonia Bruksela': [
+    '7 montées jusqu’à la Jupiler Pro League ? Où joue le FC Polonia Bruxelles',
+    '7 promoties tot de Jupiler Pro League? Waar speelt FC Polonia Brussel',
+    '7 promotions to the Jupiler Pro League? Where FC Polonia Brussels plays'],
+  'Ósmy poziom rozgrywek w Belgii, trzynaście drużyn, dwadzieścia cztery mecze i aż siedem szczebli dzielących Polonię od ekstraklasy.': [
+    'Le huitième niveau du football belge, treize équipes, vingt-quatre matchs et sept échelons entre Polonia et l’élite.',
+    'Het achtste niveau van het Belgische voetbal, dertien ploegen, vierentwintig wedstrijden en zeven treden tussen Polonia en de hoogste klasse.',
+    'The eighth tier of Belgian football, thirteen teams, twenty-four matches and seven steps between Polonia and the top flight.'],
+  'Belgijska piramida piłkarska wytłumaczona prosto — i miejsce, które zajmuje w niej nasz klub.': [
+    'La pyramide du football belge expliquée simplement — et la place qu’y occupe notre club.',
+    'De Belgische voetbalpiramide eenvoudig uitgelegd — en de plaats die onze club erin inneemt.',
+    'The Belgian football pyramid explained simply — and where our club sits in it.'],
+  'Kazik na podsłuchu. Rozgrzewka przed 3. kolejką': [
+    'Kazik sur écoute. L’échauffement avant la 3e journée',
+    'Kazik afgeluisterd. De opwarming voor de 3e speeldag',
+    'Kazik miked up. The warm-up before matchday 3'],
+  'Kazimierz Zieliński, asystent trenera, z mikrofonem podczas rozgrzewki. Przygotowania do meczu słyszane od środka.': [
+    'Kazimierz Zieliński, entraîneur adjoint, micro ouvert pendant l’échauffement. La préparation du match entendue de l’intérieur.',
+    'Kazimierz Zieliński, assistent-trainer, met een microfoon tijdens de opwarming. De voorbereiding op de match van binnenuit gehoord.',
+    'Assistant coach Kazimierz Zieliński wearing a microphone during the warm-up. Match preparation heard from the inside.'],
+  'Backstage Polonia to oficjalny kanał kulis FC Polonia Bruksela': [
+    'Backstage Polonia, la chaîne officielle des coulisses du FC Polonia Bruxelles',
+    'Backstage Polonia is het officiële kanaal achter de schermen van FC Polonia Brussel',
+    'Backstage Polonia is the official behind-the-scenes channel of FC Polonia Brussels'],
+  'Futbol od strony, której nie widać w skrótach: szatnia przed i po spotkaniu, droga na mecz, trybuny i rozmowy.': [
+    'Le football sous un angle que les résumés ne montrent pas : le vestiaire avant et après la rencontre, le trajet jusqu’au match, les tribunes et les discussions.',
+    'Voetbal van een kant die samenvattingen niet tonen: de kleedkamer voor en na de match, de weg naar de wedstrijd, de tribunes en de gesprekken.',
+    'Football from a side the highlights never show: the dressing room before and after, the journey to the match, the stands and the conversations.'],
+  'Rusza Backstage Polonia Bruksela': [
+    'Backstage Polonia Bruxelles démarre',
+    'Backstage Polonia Brussel gaat van start',
+    'Backstage Polonia Brussels is starting'],
+  'Zapowiedź kanału i tego, co będziemy pokazywać przez cały sezon.': [
+    'La présentation de la chaîne et de ce que nous montrerons tout au long de la saison.',
+    'De aankondiging van het kanaal en van wat we het hele seizoen zullen tonen.',
+    'An introduction to the channel and what we will be showing all season.'],
+
   /* --- sklep internetowy --- */
   'Sklep': ['Boutique', 'Shop', 'Shop'],
   'Sklep internetowy': ['Boutique en ligne', 'Webshop', 'Online shop'],

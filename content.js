@@ -369,6 +369,154 @@ export const SHOP = [
   },
 ];
 
+/* -------------------------------------------------------- BACKSTAGE POLONIA */
+
+/* Kanał wideo klubu. Adres używany w przyciskach „Oglądaj na YouTube"
+   i „Subskrybuj". */
+export const BACKSTAGE_CHANNEL = 'https://www.youtube.com/channel/UCpIJHhaDBMHfVxDackTLD1A';
+
+/* Odcinki Backstage Polonia — podstrona `#/backstage`.
+   Pierwszy wpis na liście jest tym, który pokazuje się jako NAJNOWSZY
+   ODCINEK na górze podstrony, więc nowe materiały dopisuj NA POCZĄTKU.
+
+   Jak dodać odcinek — trzy kroki:
+     1. weź identyfikator filmu z adresu YouTube
+        (youtube.com/watch?v=TO_JEST_ID),
+     2. pobierz miniaturę i zapisz ją jako assets/backstage/<ID>.jpg
+        (źródło: https://i.ytimg.com/vi/<ID>/maxresdefault.jpg; przeskaluj
+        do ok. 854 px szerokości, żeby podstrona nie puchła),
+     3. dopisz wpis poniżej.
+
+   Miniatury trzymamy U SIEBIE, nie linkujemy ich z serwerów Google. Dzięki
+   temu podstrona nie wysyła nic do Google, dopóki gość sam nie kliknie
+   odtwarzania — dopiero wtedy, po zgodzie, wczytuje się odtwarzacz.
+
+   Pola:
+     id       — identyfikator filmu na YouTube
+     title    — tytuł odcinka (dopisz tłumaczenia w i18n.js)
+     date     — data publikacji, RRRR-MM-DD
+     kind     — 'mecz' | 'skrot' | 'klub'; steruje tylko etykietą na kafelku
+     round    — numer kolejki albo null, gdy materiał nie dotyczy meczu
+     opponent — nazwa rywala albo ''
+     score    — wynik z perspektywy Polonii, np. '2:1', albo ''
+     outcome  — 'W' zwycięstwo | 'R' remis | 'P' porażka | '' gdy nie dotyczy
+     lead     — jedno-dwa zdania opisu (dopisz tłumaczenia w i18n.js)
+
+   Wyniki i rywale poniżej pochodzą z terminarza RBFA (data/rbfa.json),
+   nie z samych tytułów filmów. */
+export const BACKSTAGE = [
+  {
+    id: 'zrvy4gjmE24',
+    title: 'Połamany palec i walka do końca. Wygrywamy 2:1',
+    date: '2026-10-09',
+    kind: 'mecz',
+    round: 5,
+    opponent: 'RU Auderghem B',
+    score: '2:1',
+    outcome: 'W',
+    lead: 'Piąta kolejka od środka: bramka Fryderyka Borowego w 9. minucie, wyrównanie rywali tuż przed przerwą i walka do ostatniego gwizdka.',
+  },
+  {
+    id: 'gXkDM7Nb4Lw',
+    title: 'Patryk Węgliński już w Brukseli. Dołącza do FC Polonia',
+    date: '2026-10-08',
+    kind: 'klub',
+    round: null,
+    opponent: '',
+    score: '',
+    outcome: '',
+    lead: 'Transfer sfinalizowany jeszcze w oknie transferowym, a na początku października Patryk przeprowadził się do Brukseli. Pierwsze dni nowego zawodnika w klubie.',
+  },
+  {
+    id: 'zdm78l7stzM',
+    title: 'FC Polonia Bruksela 2:1 RU Auderghem B — wszystkie bramki',
+    date: '2026-10-04',
+    kind: 'skrot',
+    round: 5,
+    opponent: 'RU Auderghem B',
+    score: '2:1',
+    outcome: 'W',
+    lead: 'Skrót spotkania i wszystkie trzy bramki. Dla Polonii trafili Fryderyk Borowy i Artur Ciborowski.',
+  },
+  {
+    id: 'bxi8i1PWuV0',
+    title: 'Miało być 3:1, skończyło się 4:0',
+    date: '2026-09-30',
+    kind: 'mecz',
+    round: 4,
+    opponent: 'Black Star NOH FC B',
+    score: '4:0',
+    outcome: 'W',
+    lead: 'Czwarta kolejka za kulisami: szatnia przed pierwszym gwizdkiem, cztery bramki i rozmowy po meczu wygranym do zera.',
+  },
+  {
+    id: '7xlps1UBzZU',
+    title: 'A gdyby Polonia zagrała w Lidze Mistrzów?',
+    date: '2026-09-28',
+    kind: 'klub',
+    round: null,
+    opponent: '',
+    score: '',
+    outcome: '',
+    lead: 'Wyjście na murawę z dziecięcą eskortą, przywitanie z sędziami i rywalem — zwykły mecz w niezwykłym, wielkim klimacie.',
+  },
+  {
+    id: 'GJqsZoyZSYc',
+    title: '7 awansów do Jupiler Pro League? Gdzie gra FC Polonia Bruksela',
+    date: '2026-09-26',
+    kind: 'klub',
+    round: null,
+    opponent: '',
+    score: '',
+    outcome: '',
+    lead: 'Ósmy poziom rozgrywek w Belgii, trzynaście drużyn, dwadzieścia cztery mecze i aż siedem szczebli dzielących Polonię od ekstraklasy.',
+  },
+  {
+    id: 'ewnE3gfn1Y4',
+    title: '7 awansów do Jupiler Pro League? Gdzie gra FC Polonia Bruksela',
+    date: '2026-09-26',
+    kind: 'klub',
+    round: null,
+    opponent: '',
+    score: '',
+    outcome: '',
+    lead: 'Belgijska piramida piłkarska wytłumaczona prosto — i miejsce, które zajmuje w niej nasz klub.',
+  },
+  {
+    id: 'lRoh5bTlgnE',
+    title: 'Kazik na podsłuchu. Rozgrzewka przed 3. kolejką',
+    date: '2026-09-23',
+    kind: 'mecz',
+    round: 3,
+    opponent: 'FC Anderlecht Sport Milan A',
+    score: '1:3',
+    outcome: 'P',
+    lead: 'Kazimierz Zieliński, asystent trenera, z mikrofonem podczas rozgrzewki. Przygotowania do meczu słyszane od środka.',
+  },
+  {
+    id: 'EwIQL65sFuY',
+    title: 'Backstage Polonia to oficjalny kanał kulis FC Polonia Bruksela',
+    date: '2026-09-23',
+    kind: 'klub',
+    round: null,
+    opponent: '',
+    score: '',
+    outcome: '',
+    lead: 'Futbol od strony, której nie widać w skrótach: szatnia przed i po spotkaniu, droga na mecz, trybuny i rozmowy.',
+  },
+  {
+    id: '1hUhP8I1Exs',
+    title: 'Rusza Backstage Polonia Bruksela',
+    date: '2026-09-23',
+    kind: 'klub',
+    round: null,
+    opponent: '',
+    score: '',
+    outcome: '',
+    lead: 'Zapowiedź kanału i tego, co będziemy pokazywać przez cały sezon.',
+  },
+];
+
 /* ------------------------------------------------------------------ GALERIA */
 
 export const GALLERIES = [
