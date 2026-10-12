@@ -60,16 +60,45 @@
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <meta name="theme-color" content="#121216">
-<meta property="og:type" content="sports_team">
+<!-- ═══════════════════════ PODGLĄD PRZY UDOSTĘPNIANIU LINKU ═══════════════
+     Facebook, WhatsApp, Messenger, LinkedIn i X czytają te znaczniki, zanim
+     pokażą kartę z linkiem. Trzy rzeczy, których nie wolno tu zepsuć:
+
+     1. ADRESY MUSZĄ BYĆ PEŁNE (https://…). Ścieżka względna typu
+        „assets/crest.png" jest po cichu ignorowana i karta zostaje bez
+        grafiki — to był powód, dla którego wcześniej nic się nie pokazywało.
+     2. Grafika to assets/og-share.jpg, 1200×630. Składa ją szablon
+        .claude/og-card.html skryptem `node .claude/zrob-og.mjs` (wymaga
+        uruchomionego podglądu na porcie 8000). Zmieniasz napisy na karcie?
+        Popraw szablon i wygeneruj plik ponownie.
+     3. Strona ma routing po # (#/mecze, #/backstage). Ta część adresu NIE
+        dociera do serwera, więc każdy udostępniony link — niezależnie od
+        podstrony — pokaże tę samą kartę. Osobne karty dla podstron
+        wymagałyby prawdziwych ścieżek i prerenderingu.
+
+     Po zmianie znaczników Facebook trzyma stary podgląd w pamięci; odświeża
+     się go w Sharing Debugger (developers.facebook.com/tools/debug).
+     ═══════════════════════════════════════════════════════════════════════ -->
+<meta property="og:type" content="website">
 <meta property="og:site_name" content="FC Polonia Bruksela">
+<meta property="og:url" content="https://polonia.aktualnosci.be/">
 <meta property="og:title" content="FC Polonia Bruksela — oficjalna strona klubu">
-<meta property="og:description" content="Polski klub piłkarski w Brukseli od 1986 roku. Matricule 09647. Terminarz, wyniki, tabela i 40 lat historii.">
-<meta property="og:image" content="assets/crest.png">
+<meta property="og:description" content="Polski klub piłkarski w sercu Brukseli od 1986 roku. Terminarz, wyniki, tabela, drużyna i Backstage Polonia — kulisy klubu.">
+<meta property="og:image" content="https://polonia.aktualnosci.be/assets/og-share.jpg">
+<meta property="og:image:secure_url" content="https://polonia.aktualnosci.be/assets/og-share.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Herb FC Polonia Bruksela i kibic z klubowym szalikiem na trybunach">
 <meta property="og:locale" content="pl_PL">
+<meta property="og:locale:alternate" content="fr_BE">
+<meta property="og:locale:alternate" content="nl_BE">
+<meta property="og:locale:alternate" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="FC Polonia Bruksela — oficjalna strona klubu">
-<meta name="twitter:description" content="Polski klub piłkarski w Brukseli od 1986 roku. Matricule 09647.">
-<meta name="twitter:image" content="assets/crest.png">
+<meta name="twitter:description" content="Polski klub piłkarski w sercu Brukseli od 1986 roku. Terminarz, wyniki, tabela i kulisy drużyny.">
+<meta name="twitter:image" content="https://polonia.aktualnosci.be/assets/og-share.jpg">
+<meta name="twitter:image:alt" content="Herb FC Polonia Bruksela i kibic z klubowym szalikiem na trybunach">
 <link rel="stylesheet" href="_ds/fc-polonia-bruksela-design-system-8b288236-ab09-4f73-9b0b-02265ec9dea1/tokens/colors.css">
 <link rel="stylesheet" href="_ds/fc-polonia-bruksela-design-system-8b288236-ab09-4f73-9b0b-02265ec9dea1/tokens/typography.css">
 <link rel="stylesheet" href="_ds/fc-polonia-bruksela-design-system-8b288236-ab09-4f73-9b0b-02265ec9dea1/tokens/spacing.css">

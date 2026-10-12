@@ -283,6 +283,39 @@ Pole `kind` steruje wyłącznie etykietą na kafelku: `mecz` → ZA KULISAMI,
 pochodzą z terminarza RBFA (`data/rbfa.json`), nie z samych tytułów filmów —
 przy dopisywaniu odcinka sprawdź je tam, nie zgaduj.
 
+## Podgląd przy udostępnianiu linku (Open Graph)
+
+Grafika i teksty, które pokazują się, gdy ktoś wrzuci link do strony na
+Facebooka, WhatsAppa, Messengera, LinkedIna albo X. Znaczniki siedzą
+w `<head>` w `index.html`.
+
+**Adresy muszą być pełne** (`https://polonia.aktualnosci.be/...`). Ścieżka
+względna typu `assets/crest.png` jest przez te serwisy po cichu ignorowana
+i karta zostaje bez grafiki — tak właśnie było wcześniej.
+
+Grafika to `assets/og-share.jpg`, 1200×630. Nie rysuj jej ręcznie: składa ją
+prawdziwy Chrome z szablonu `.claude/og-card.html` poleceniem
+
+```
+node .claude/zrob-og.mjs
+```
+
+(wymaga uruchomionego podglądu na porcie 8000, bo szablon wczytuje herb
+i zdjęcie z `assets/`). Dzięki temu karta ma te same fonty i kolory co strona.
+Zmieniasz napisy na grafice? Popraw szablon i wygeneruj plik ponownie.
+Katalog `.claude/` jest w `.gitignore`, więc szablon i skrypt nie wchodzą na
+produkcję — na produkcję idzie sam gotowy plik JPEG.
+
+**Jedna karta dla całej strony.** Routing idzie po `#` (`#/mecze`,
+`#/backstage`), a ta część adresu nie dociera do serwera — robot social media
+nigdy jej nie widzi. Każdy udostępniony link pokaże więc ten sam podgląd.
+Osobne karty dla podstron wymagałyby prawdziwych ścieżek i prerenderingu, czyli
+przebudowy routingu; nie rób tego bez wyraźnej prośby właściciela.
+
+Po zmianie znaczników Facebook trzyma stary podgląd w pamięci. Odświeża się go
+w Sharing Debugger (`developers.facebook.com/tools/debug`) przyciskiem
+„Scrape Again".
+
 ## Mapy Google tylko po zgodzie
 
 `cookies.js` ma osobną kategorię `maps`. Osadzona mapa w szczegółach meczu
