@@ -2317,6 +2317,61 @@ a:hover{color:#cbb96b}
     </div>
   </div>
 
+  <!-- ═══════════════════════════════ OKIENKO: NAJBLIŻSZY MECZ -->
+  <!-- Wchodzi ~2 s po wejściu na stronę, raz na mecz: zamknięcie zapamiętuje
+       identyfikator spotkania, więc po kolejce okienko wróci z następnym.
+       Nie pokazuje się, gdy terminarza nie ma (brak danych z RBFA = brak
+       zapowiedzi, nigdy zaślepka), ani razem z banerem zgód lub podglądem
+       zdjęć. Na telefonie jest dolną szufladą, na komputerze oknem na środku. -->
+  <sc-if value="{{ matchPopupShow }}" hint-placeholder-val="{{ false }}">
+  <div role="dialog" aria-modal="true" aria-label="Najbliższy mecz" style="position:fixed;inset:0;z-index:170;background:rgba(9,9,12,.74);display:flex;align-items:{{ mpAlign }};justify-content:center;padding:{{ mpOuterPad }}">
+    <div onClick="{{ onMatchPopupClose }}" aria-hidden="true" style="position:absolute;inset:0;cursor:pointer"></div>
+    <div style="position:relative;width:{{ mpWidth }};max-width:100%;max-height:92vh;overflow:auto;background:#1b1b21;border:1px solid rgba(246,243,236,.16);border-top:4px solid #E2092F;padding:{{ mpPad }};box-shadow:0 22px 64px rgba(9,9,12,.62)">
+
+      <button onClick="{{ onMatchPopupClose }}" title="Zamknij" aria-label="Zamknij" style="position:absolute;top:4px;right:6px;background:transparent;border:0;color:#8d8a83;font-family:'Inter',sans-serif;font-size:26px;line-height:1;cursor:pointer;min-width:44px;min-height:44px" style-hover="color:#F6F3EC">×</button>
+
+      <div style="display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:18px;padding-right:44px">
+        <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.16em;background:#E2092F;color:#F6F3EC;padding:6px 11px">NAJBLIŻSZY MECZ</span>
+        <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.16em;color:{{ nm.accent }}">{{ nm.isHomeLabel }}</span>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:start;margin-bottom:18px">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:10px;min-width:0">
+          <!-- Herb skaluje się do rodzica (86%), więc kontener MUSI mieć stały
+               rozmiar; jasne tło jest konieczne, bo zastępcze inicjały rysują
+               się ciemnym tekstem. -->
+          <span style="width:{{ mpCrest }};height:{{ mpCrest }};flex-shrink:0;border-radius:999px;background:#F6F3EC;border:1px solid rgba(246,243,236,.28);display:flex;align-items:center;justify-content:center;overflow:hidden">{{ nm.homeCrest }}</span>
+          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:{{ mpTitle }};text-transform:uppercase;line-height:1.05;text-align:center;overflow-wrap:anywhere">{{ nm.homeName }}</span>
+        </div>
+        <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:16px;letter-spacing:.08em;color:#8d8a83;align-self:center">VS</span>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:10px;min-width:0">
+          <span style="width:{{ mpCrest }};height:{{ mpCrest }};flex-shrink:0;border-radius:999px;background:#F6F3EC;border:1px solid rgba(246,243,236,.28);display:flex;align-items:center;justify-content:center;overflow:hidden">{{ nm.awayCrest }}</span>
+          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:{{ mpTitle }};text-transform:uppercase;line-height:1.05;text-align:center;overflow-wrap:anywhere">{{ nm.awayName }}</span>
+        </div>
+      </div>
+
+      <div style="border-top:1px solid rgba(246,243,236,.12);padding-top:15px;display:flex;flex-direction:column;gap:9px;margin-bottom:20px">
+        <div style="display:flex;flex-direction:column;gap:3px">
+          <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:9px;letter-spacing:.16em;color:#8d8a83">KIEDY</span>
+          <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:15px;color:#F6F3EC;line-height:1.45">{{ nm.dateStr }}</span>
+          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:26px;letter-spacing:.03em;color:#B7A85C;line-height:1">{{ nm.timeStr }}</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:3px">
+          <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:9px;letter-spacing:.16em;color:#8d8a83">GDZIE</span>
+          <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:14px;color:#e6e3db;line-height:1.5;overflow-wrap:anywhere">{{ nm.venueStr }}</span>
+        </div>
+        <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:12px;letter-spacing:.06em;color:#8d8a83">{{ nm.compStr }}</span>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:9px">
+        <a href="#/mecze" onClick="{{ onMatchPopupClose }}" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:19px;letter-spacing:.08em;text-transform:uppercase;background:#E2092F;color:#F6F3EC;padding:15px 22px;text-align:center;min-height:50px;box-sizing:border-box" style-hover="background:#a80725">Szczegóły meczu</a>
+        <button onClick="{{ onMatchPopupClose }}" style="font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.14em;background:transparent;color:#c9c6bd;border:1px solid rgba(246,243,236,.26);padding:13px 20px;cursor:pointer;min-height:46px" style-hover="color:#F6F3EC;border:1px solid rgba(246,243,236,.5)">ZAMKNIJ</button>
+      </div>
+
+    </div>
+  </div>
+  </sc-if>
+
   <!-- ═════════════════════════════════════ PŁYWAJĄCA ZACHĘTA: FACEBOOK -->
   <!-- Pokazuje się kilka sekund po wejściu, nigdy jednocześnie z banerem
        zgód ani z podglądem zdjęć. Krzyżyk chowa ją na dwa miesiące w tej
@@ -2419,6 +2474,8 @@ class Component extends DCLogic {
     // Backstage: który odcinek gra, a który czeka na zgodę na odtwarzacz YouTube.
     backstagePlaying: null, backstageAsk: null,
     fbOpen: false,
+    // okienko z najbliższym meczem, pokazywane raz na mecz
+    matchPopupOpen: false,
     // czy komplet pozycji menu mieści się w pasku (ustala pomiar po renderze)
     navFits: true,
   };
@@ -2442,10 +2499,25 @@ class Component extends DCLogic {
     // czcionka Barlow Condensed dojeżdża po pierwszym malowaniu i zmienia
     // szerokość napisów — mierzymy jeszcze raz, gdy będzie gotowa
     try { document.fonts && document.fonts.ready.then(() => this._measureNav()); } catch (e) {}
+    /* Okienko z najbliższym meczem wchodzi pierwsze, bo niesie konkret:
+       kto, kiedy i gdzie. Zachęta do Facebooka dopiero po nim — oba naraz
+       zasłoniłyby pół ekranu. */
+    this._mpTimer = setTimeout(() => this.setState({ matchPopupOpen: true }), 2200);
     // Zachęta do Facebooka wjeżdża dopiero, gdy gość zdąży się rozejrzeć.
     this._fbTimer = setTimeout(() => {
       if (!this._fbMuted()) this.setState({ fbOpen: true });
-    }, 6000);
+    }, 9000);
+  }
+
+  /* Czy gość zamknął już okienko dla TEGO meczu? Zapamiętujemy identyfikator
+     spotkania, nie datę: po kolejce pojawi się następny mecz, czyli inny
+     identyfikator, i okienko pokaże się ponownie — raz na mecz, nie raz na
+     wejście. localStorage, nie cookie: to wygoda przeglądania, nie śledzenie,
+     więc nie wymaga zgody i nie wychodzi poza tę przeglądarkę. */
+  _matchPopupSeen(id) {
+    if (!id) return true;
+    try { return localStorage.getItem('fcp.match.popup.v1') === String(id); }
+    catch (e) { return false; }
   }
 
   /* Czy gość zamknął pływającą zachętę? Zapamiętujemy datę i milczymy przez
@@ -2701,6 +2773,7 @@ class Component extends DCLogic {
     }
     clearTimeout(this._revealSweepTimer);
     if (this._fbTimer) clearTimeout(this._fbTimer);
+    if (this._mpTimer) clearTimeout(this._mpTimer);
     if (this._stop) this._stop();
   }
 
@@ -2895,6 +2968,14 @@ class Component extends DCLogic {
          na telefonie jedno pod drugim. Logo serii mniejsze na telefonie. */
       bsHeroCols: mob ? '1fr' : '1.7fr 1fr',
       bsLogoW: mob ? (small ? '120px' : '150px') : '200px',
+      /* Okienko z meczem: na telefonie dolna szuflada na całą szerokość
+         (kciuk sięga dołu ekranu), na komputerze wyśrodkowane okno. */
+      mpAlign: mob ? 'flex-end' : 'center',
+      mpOuterPad: mob ? '0' : '24px',
+      mpWidth: mob ? '100%' : '470px',
+      mpPad: mob ? '20px 18px calc(20px + env(safe-area-inset-bottom))' : '26px',
+      mpTitle: mob ? (small ? '18px' : '20px') : '23px',
+      mpCrest: mob ? (small ? '54px' : '62px') : '72px',
       /* zaproszenie na Facebooka pod kartami meczowymi */
       fbCtaPad: mob ? '16px 18px' : '20px 28px',
       fbCtaFs: mob ? (small ? '19px' : '21px') : 'clamp(22px,2.6vw,30px)',
@@ -3053,7 +3134,7 @@ class Component extends DCLogic {
       // Zanim content.js się wczyta, sklep nie ma jeszcze żadnego stanu: nie
       // pokazujemy ani zapowiedzi, ani siatki, żeby na działającym sklepie
       // nie mrugnęło „w budowie" i odwrotnie.
-      return { ...base, season: '2026/2027', updatedAt: '—', sourceLabel: 'oczekuje na synchronizację', noLive: false, noSource: false, noFixtures: false, noTable: false, loadingFixtures: true, loadFailed: false, hasTable: false, hasFixtures: false, hasUpcoming: false, nm: null, lm: null, lmScoreBg: '#23232a', article: null, seasonDetail: null, shopOpen: false, shopSoon: false, shopItems: [], ordNotSent: true, ordSent: false, ordProducts: [], ordSizes: [], ordColors: [], ordQtys: [], ordHasSizes: false, ordHasColors: false, backstageLatest: [], backstageGroups: [], hasBackstage: false, noBackstage: false, backstageChannel: '' };
+      return { ...base, season: '2026/2027', updatedAt: '—', sourceLabel: 'oczekuje na synchronizację', noLive: false, noSource: false, noFixtures: false, noTable: false, loadingFixtures: true, loadFailed: false, hasTable: false, hasFixtures: false, hasUpcoming: false, nm: null, lm: null, lmScoreBg: '#23232a', article: null, seasonDetail: null, shopOpen: false, shopSoon: false, shopItems: [], ordNotSent: true, ordSent: false, ordProducts: [], ordSizes: [], ordColors: [], ordQtys: [], ordHasSizes: false, ordHasColors: false, backstageLatest: [], backstageGroups: [], hasBackstage: false, noBackstage: false, backstageChannel: '', matchPopupShow: false };
     }
 
     const live = s.live || L.getState();
@@ -3322,6 +3403,13 @@ class Component extends DCLogic {
        Kafelek ma trzy stany: miniatura z przyciskiem odtwarzania, pytanie
        o zgodę na odtwarzacz YouTube albo sam odtwarzacz. Miniatury leżą
        u nas, więc dopóki gość nie kliknie, do Google nie idzie nic. */
+    /* Okienko z najbliższym meczem. Pokazujemy je wyłącznie wtedy, gdy mecz
+       naprawdę jest — gdy RBFA nie odpowie, terminarz zostaje pusty i nie ma
+       czego zapowiadać (żadnych zaślepek). Ustępuje banerowi zgód i podglądowi
+       zdjęć, a ma pierwszeństwo przed zachętą do Facebooka. */
+    const pokazOkienkoMeczu = Boolean(nm) && s.matchPopupOpen
+      && !this._matchPopupSeen(nm.id) && !s.cookieOpen && !s.lightbox;
+
     const ETYKIETA_RODZAJU = { mecz: 'ZA KULISAMI', skrot: 'SKRÓT MECZU', klub: 'Z ŻYCIA KLUBU' };
     const bsAll = (C.BACKSTAGE || []).filter((v) => v && v.id);
     const backstage = bsAll.map((v, i) => ({
@@ -3756,7 +3844,14 @@ class Component extends DCLogic {
       ctName: s.ct.name, ctEmail: s.ct.email, ctTopic: s.ct.topic, ctMsg: s.ct.msg,
       // Pływająca zachęta: nie wchodzi w drogę banerowi zgód ani podglądowi
       // zdjęć — te mają pierwszeństwo i własną warstwę.
-      fbShow: s.fbOpen && !s.cookieOpen && !s.lightbox,
+      fbShow: s.fbOpen && !s.cookieOpen && !s.lightbox && !pokazOkienkoMeczu,
+      /* ——— okienko z najbliższym meczem ——— */
+      matchPopupShow: pokazOkienkoMeczu,
+      onMatchPopupClose: () => {
+        // zapamiętujemy identyfikator meczu: po kolejce okienko wróci z nowym
+        try { localStorage.setItem('fcp.match.popup.v1', String(nm && nm.id)); } catch (e) {}
+        this.setState({ matchPopupOpen: false });
+      },
       onFbClose: () => {
         try { localStorage.setItem('fcp.fb.muted.v1', String(Date.now())); } catch (e) {}
         this.setState({ fbOpen: false });
