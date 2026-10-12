@@ -155,6 +155,9 @@ const T = {
     'Backstage Polonia — logo of the FC Polonia Brussels video series'],
   'Najnowszy odcinek': ['Dernier épisode', 'Nieuwste aflevering', 'Latest episode'],
   'Wszystkie odcinki': ['Tous les épisodes', 'Alle afleveringen', 'All episodes'],
+  'Za kulisami meczu': ['Dans les coulisses du match', 'Achter de schermen van de match', 'Behind the scenes of the match'],
+  'Skróty i bramki': ['Résumés et buts', 'Samenvattingen en doelpunten', 'Highlights and goals'],
+  'Z życia klubu': ['La vie du club', 'Uit het clubleven', 'Club life'],
   'ZA KULISAMI': ['DANS LES COULISSES', 'ACHTER DE SCHERMEN', 'BEHIND THE SCENES'],
   'SKRÓT MECZU': ['RÉSUMÉ DU MATCH', 'MATCHSAMENVATTING', 'MATCH HIGHLIGHTS'],
   /* 'Z ŻYCIA KLUBU' jest już w słowniku niżej (kategoria wpisów) — ta sama
@@ -259,14 +262,6 @@ const T = {
     'Kazimierz Zieliński, entraîneur adjoint, micro ouvert pendant l’échauffement. La préparation du match entendue de l’intérieur.',
     'Kazimierz Zieliński, assistent-trainer, met een microfoon tijdens de opwarming. De voorbereiding op de match van binnenuit gehoord.',
     'Assistant coach Kazimierz Zieliński wearing a microphone during the warm-up. Match preparation heard from the inside.'],
-  'Backstage Polonia to oficjalny kanał kulis FC Polonia Bruksela': [
-    'Backstage Polonia, la chaîne officielle des coulisses du FC Polonia Bruxelles',
-    'Backstage Polonia is het officiële kanaal achter de schermen van FC Polonia Brussel',
-    'Backstage Polonia is the official behind-the-scenes channel of FC Polonia Brussels'],
-  'Futbol od strony, której nie widać w skrótach: szatnia przed i po spotkaniu, droga na mecz, trybuny i rozmowy.': [
-    'Le football sous un angle que les résumés ne montrent pas : le vestiaire avant et après la rencontre, le trajet jusqu’au match, les tribunes et les discussions.',
-    'Voetbal van een kant die samenvattingen niet tonen: de kleedkamer voor en na de match, de weg naar de wedstrijd, de tribunes en de gesprekken.',
-    'Football from a side the highlights never show: the dressing room before and after, the journey to the match, the stands and the conversations.'],
   'Rusza Backstage Polonia Bruksela': [
     'Backstage Polonia Bruxelles démarre',
     'Backstage Polonia Brussel gaat van start',
@@ -627,14 +622,14 @@ const T = {
   'Podaj imię i nazwisko.': ['Indiquez votre nom et prénom.', 'Vul je voor- en achternaam in.', 'Please enter your name.'],
   'Podaj poprawny adres e-mail.': ['Indiquez une adresse e-mail valide.', 'Vul een geldig e-mailadres in.', 'Please enter a valid e-mail address.'],
   'Napisz kilka słów więcej w wiadomości.': ['Écrivez quelques mots de plus.', 'Schrijf nog een paar woorden.', 'Please write a few more words.'],
-  'Nie udało się wysłać wiadomości. Sprawdź połączenie albo napisz bezpośrednio na polonia@live.be.': [
-    'L’envoi a échoué. Vérifiez votre connexion ou écrivez directement à polonia@live.be.',
-    'Verzenden is mislukt. Controleer je verbinding of mail rechtstreeks naar polonia@live.be.',
-    'Sending failed. Check your connection or write directly to polonia@live.be.'],
-  'Sprawa pilna? Napisz wprost na polonia@live.be albo złap nas na Facebooku.': [
-    'C’est urgent ? Écrivez directement à polonia@live.be ou contactez-nous sur Facebook.',
-    'Dringend? Mail rechtstreeks naar polonia@live.be of zoek ons op Facebook.',
-    'Urgent? Write straight to polonia@live.be or catch us on Facebook.'],
+  'Nie udało się wysłać wiadomości. Sprawdź połączenie albo napisz bezpośrednio na damian.kras@dkte.be.': [
+    'L’envoi a échoué. Vérifiez votre connexion ou écrivez directement à damian.kras@dkte.be.',
+    'Verzenden is mislukt. Controleer je verbinding of mail rechtstreeks naar damian.kras@dkte.be.',
+    'Sending failed. Check your connection or write directly to damian.kras@dkte.be.'],
+  'Sprawa pilna? Napisz wprost na damian.kras@dkte.be albo złap nas na Facebooku.': [
+    'C’est urgent ? Écrivez directement à damian.kras@dkte.be ou contactez-nous sur Facebook.',
+    'Dringend? Mail rechtstreeks naar damian.kras@dkte.be of zoek ons op Facebook.',
+    'Urgent? Write straight to damian.kras@dkte.be or catch us on Facebook.'],
   'Wiadomość wysyłamy prosto ze strony — nie musisz mieć skonfigurowanej poczty. Wolisz napisać bezpośrednio?': [
     'Le message part directement du site — pas besoin de logiciel de messagerie. Vous préférez écrire directement ?',
     'Het bericht wordt rechtstreeks vanaf de site verstuurd — je hebt geen mailprogramma nodig. Liever rechtstreeks schrijven?',

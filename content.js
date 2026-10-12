@@ -494,17 +494,6 @@ export const BACKSTAGE = [
     lead: 'Kazimierz Zieliński, asystent trenera, z mikrofonem podczas rozgrzewki. Przygotowania do meczu słyszane od środka.',
   },
   {
-    id: 'EwIQL65sFuY',
-    title: 'Backstage Polonia to oficjalny kanał kulis FC Polonia Bruksela',
-    date: '2026-09-23',
-    kind: 'klub',
-    round: null,
-    opponent: '',
-    score: '',
-    outcome: '',
-    lead: 'Futbol od strony, której nie widać w skrótach: szatnia przed i po spotkaniu, droga na mecz, trybuny i rozmowy.',
-  },
-  {
     id: '1hUhP8I1Exs',
     title: 'Rusza Backstage Polonia Bruksela',
     date: '2026-09-23',
