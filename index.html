@@ -512,6 +512,53 @@ a:hover{color:#cbb96b}
       </div>
     </div>
 
+    <!-- BACKSTAGE POLONIA — zajawka z najnowszym odcinkiem.
+         Ten sam mechanizm zgody co na podstronie: miniatura leży u nas,
+         odtwarzacz YouTube wczytuje się dopiero po kliknięciu i zgodzie.
+         Sekcja znika sama, gdy w BACKSTAGE nie ma jeszcze żadnego odcinka. -->
+    <sc-if value="{{ hasBackstage }}" hint-placeholder-val="{{ true }}">
+    <div style="background:#0f0f13;border-top:1px solid rgba(246,243,236,.1);border-bottom:1px solid rgba(246,243,236,.1);margin:clamp(28px,4vw,52px) 0">
+      <div style="max-width:1280px;margin:0 auto;padding:{{ secPad }}">
+        <sc-for list="{{ backstageLatest }}" as="v" hint-placeholder-count="1">
+          <div style="display:grid;grid-template-columns:{{ bsHeroCols }};gap:clamp(18px,3vw,40px);align-items:center">
+
+            <div style="position:relative;aspect-ratio:16/9;background:#121216;border:1px solid rgba(246,243,236,.14);overflow:hidden">
+              <sc-if value="{{ v.playing }}" hint-placeholder-val="{{ false }}">
+                <iframe src="{{ v.embed }}" title="{{ v.title }}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0;display:block"></iframe>
+              </sc-if>
+              <sc-if value="{{ v.idle }}" hint-placeholder-val="{{ true }}">
+                <img src="{{ v.thumb }}" alt="{{ v.alt }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
+                <button onClick="{{ v.onPlay }}" aria-label="Odtwórz odcinek" style="position:absolute;inset:0;width:100%;height:100%;border:0;background:linear-gradient(180deg,rgba(9,9,12,.1),rgba(9,9,12,.55));display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:linear-gradient(180deg,rgba(9,9,12,.25),rgba(9,9,12,.7))">
+                  <span style="width:clamp(58px,8vw,78px);height:clamp(58px,8vw,78px);border-radius:999px;background:#E2092F;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 32px rgba(9,9,12,.55)">
+                    <svg viewBox="0 0 24 24" width="30" height="30" fill="#F6F3EC" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+                  </span>
+                </button>
+              </sc-if>
+              <sc-if value="{{ v.asking }}" hint-placeholder-val="{{ false }}">
+                <div style="position:absolute;inset:0;background:#121216;padding:clamp(16px,3vw,26px);display:flex;flex-direction:column;justify-content:center;gap:13px">
+                  <span style="font-family:'Inter',sans-serif;font-weight:500;font-size:clamp(13px,1.6vw,15px);line-height:1.6;color:#e6e3db;max-width:480px">Odtwarzacz pochodzi z serwerów YouTube. Włączyć go i odtworzyć odcinek?</span>
+                  <button onClick="{{ onAllowVideo }}" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:18px;letter-spacing:.08em;text-transform:uppercase;background:#E2092F;color:#F6F3EC;border:0;padding:13px 22px;cursor:pointer;align-self:flex-start" style-hover="background:#a80725">Włącz i odtwórz</button>
+                </div>
+              </sc-if>
+            </div>
+
+            <div style="min-width:0;display:flex;flex-direction:column;gap:14px">
+              <img src="assets/backstage/backstage-polonia-logo.png" alt="Backstage Polonia — logo serii wideo FC Polonia Bruksela" loading="lazy" style="width:112px;height:auto;display:block">
+              <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(26px,3.4vw,40px);text-transform:uppercase;line-height:.95;margin:0">Backstage Polonia</h2>
+              <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:clamp(14px,1.7vw,16px);line-height:1.7;color:#c9c6bd;margin:0;max-width:520px;text-wrap:pretty">Kanał wideo klubu. Szatnia, trybuny i to, czego nie widać w samym wyniku — Polonia od środka.</p>
+              <div style="display:flex;flex-direction:column;gap:5px;border-left:3px solid #E2092F;padding-left:14px">
+                <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.16em;color:#B7A85C">NAJNOWSZY ODCINEK</span>
+                <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(18px,2.1vw,23px);text-transform:uppercase;line-height:1.12;color:#F6F3EC">{{ v.title }}</span>
+              </div>
+              <a href="#/backstage" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:19px;letter-spacing:.08em;text-transform:uppercase;background:#E2092F;color:#F6F3EC;padding:14px 24px;text-align:center;width:{{ btnW }};box-sizing:border-box;align-self:{{ btnAlign }}" style-hover="background:#a80725">Wszystkie odcinki</a>
+            </div>
+
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    </sc-if>
+
     <!-- DRUŻYNA / HISTORIA -->
     <div style="background:#F6F3EC;color:#121216;border-top:1px solid rgba(18,18,22,.1);border-bottom:1px solid rgba(18,18,22,.1)">
     <div style="max-width:1280px;margin:0 auto;padding:{{ secPad }};display:grid;grid-template-columns:repeat(auto-fit,minmax({{ cardMin }},1fr));gap:clamp(16px,2.5vw,28px)">
@@ -3606,12 +3653,12 @@ class Component extends DCLogic {
       ...this._responsive(),
       /* ---- pozycje menu (jedno źródło dla desktopu i hamburgera) ---- */
       menuItems: [
-        ['#/', 'Start', 'home'], ['#/aktualnosci', 'Aktualności', 'aktualnosci'],
+        ['#/', 'Start', 'home'], ['#/backstage', 'Backstage', 'backstage'],
+        ['#/aktualnosci', 'Aktualności', 'aktualnosci'],
         ['#/mecze', 'Mecze', 'mecze'], ['#/tabela', 'Tabela', 'tabela'],
         ['#/druzyna', 'Drużyna', 'druzyna'], ['#/klub', 'Klub', 'klub'],
         ['#/historia', 'Historia', 'historia'], ['#/archiwum', 'Archiwum', 'archiwum'],
-        ['#/galeria', 'Galeria', 'galeria'], ['#/backstage', 'Backstage', 'backstage'],
-        ['#/sklep', 'Sklep', 'sklep'],
+        ['#/galeria', 'Galeria', 'galeria'], ['#/sklep', 'Sklep', 'sklep'],
         ['#/sponsorzy', 'Sponsorzy', 'sponsorzy'], ['#/kontakt', 'Kontakt', 'kontakt'],
       ].map(([href, label, key]) => ({
         href, label,

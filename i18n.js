@@ -155,6 +155,11 @@ const T = {
     'Backstage Polonia — logo of the FC Polonia Brussels video series'],
   'Najnowszy odcinek': ['Dernier épisode', 'Nieuwste aflevering', 'Latest episode'],
   'Wszystkie odcinki': ['Tous les épisodes', 'Alle afleveringen', 'All episodes'],
+  'NAJNOWSZY ODCINEK': ['DERNIER ÉPISODE', 'NIEUWSTE AFLEVERING', 'LATEST EPISODE'],
+  'Kanał wideo klubu. Szatnia, trybuny i to, czego nie widać w samym wyniku — Polonia od środka.': [
+    'La chaîne vidéo du club. Le vestiaire, les tribunes et tout ce que le score ne montre pas — Polonia de l’intérieur.',
+    'Het videokanaal van de club. De kleedkamer, de tribunes en alles wat de uitslag niet toont — Polonia van binnenuit.',
+    'The club’s video channel. The dressing room, the stands and everything the scoreline hides — Polonia from the inside.'],
   'Za kulisami meczu': ['Dans les coulisses du match', 'Achter de schermen van de match', 'Behind the scenes of the match'],
   'Skróty i bramki': ['Résumés et buts', 'Samenvattingen en doelpunten', 'Highlights and goals'],
   'Z życia klubu': ['La vie du club', 'Uit het clubleven', 'Club life'],
