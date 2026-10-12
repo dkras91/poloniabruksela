@@ -33,18 +33,26 @@ const n = (v) => {
 
 /* ─────────────────────────────────────────────── seria z terminarza ────── */
 
-async function resolveSeries() {
-  const cal = await buildCalendarPayload();
-  const withSeries = cal.matches.filter((m) => m.competition && m.competition.id);
+/* Wybór serii z gotowego, znormalizowanego terminarza. Osobno od pobierania,
+   bo narzędzie synchronizujące ma już terminarz w ręku i nie może go pobrać
+   drugi raz (RBFA blokuje zapytania serwerowe — patrz CLAUDE.md).
+   Lokalna zmienna celowo NIE nazywa się `pick` — tak nazywa się pomocnicza
+   funkcja odczytu pól niżej w tym pliku. */
+export function pickSeriesFromMatches(matches) {
+  const withSeries = (matches || []).filter((m) => m.competition && m.competition.id);
   // preferujemy serię ostatniego rozegranego meczu, potem najbliższego
   const played = withSeries.filter((m) => m.status === 'played').pop();
   const next = withSeries.find((m) => m.status === 'scheduled');
-  const pick = played || next || withSeries[0];
+  const wybrany = played || next || withSeries[0];
   return {
-    seriesId: pick ? pick.competition.id : null,
-    seriesName: pick ? pick.competition.name : null,
-    calendar: cal,
+    seriesId: wybrany ? wybrany.competition.id : null,
+    seriesName: wybrany ? wybrany.competition.name : null,
   };
+}
+
+async function resolveSeries() {
+  const cal = await buildCalendarPayload();
+  return { ...pickSeriesFromMatches(cal.matches), calendar: cal };
 }
 
 /* ─────────────────────────────────────────────────────── GraphQL ───────── */
@@ -257,6 +265,32 @@ function normalizeRows(rows) {
 }
 
 /* ═════════════════════════════════════════════════════════════ PAYLOAD ══ */
+
+/* Złożenie tabeli z surowej odpowiedzi GraphQL. Używa tego narzędzie
+   synchronizujące, które pobiera dane przeglądarką; dzięki temu wybór
+   właściwej klasyfikacji (pickRanking) i nazwy pól są liczone w jednym
+   miejscu dla obu dróg. */
+export function normalizeStandings(data, seriesId, seriesName) {
+  const rows = pickRanking(data);
+  if (!rows) {
+    return {
+      ok: false,
+      error: 'Nie udało się odczytać klasyfikacji z RBFA.',
+      seriesId, seriesName,
+      updatedAt: new Date().toISOString(),
+      table: [],
+    };
+  }
+  return {
+    ok: true,
+    source: 'RBFA / Voetbal Vlaanderen',
+    via: 'graphql',
+    seriesId,
+    seriesName,
+    updatedAt: new Date().toISOString(),
+    table: normalizeRows(rows),
+  };
+}
 
 export async function buildStandingsPayload() {
   const { seriesId, seriesName } = await resolveSeries();

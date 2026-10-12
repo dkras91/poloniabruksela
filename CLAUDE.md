@@ -70,14 +70,63 @@ Treści redakcyjne zmieniaj w `content.js`, nie w `index.html`.
 
 ## Dane z RBFA
 
-Źródłem jest GraphQL federacji (`datalake-prod2018.rbfa.be/graphql`), nie
-scrapowanie strony. Konfiguracja w jednym miejscu — `RBFA_CONFIG` w
-`rbfa-calendar.js`: `clubId 6360`, `teamId 375016`, `matricule 09647`.
-Identyfikator ligi NIE jest wpisany na sztywno — wynika z ostatniego meczu,
-więc zmiana serii czy sezonu nie wymaga poprawek w kodzie.
+**Strona NIE pobiera już danych sama.** Od października 2026 federacja trzyma
+swoje API za ochroną Akamai, która odrzuca wszystkich klientów nieprzeglądarkowych:
+`curl`, `node fetch`, funkcje Netlify, Cloudflare Workers, GitHub Actions.
+Blokada idzie po odcisku połączenia TLS, nie po adresie IP — sprawdzone:
+przeglądarka i `curl` z tego samego adresu, przeglądarka przechodzi, `curl` nie.
+Żadna zmiana nagłówków tego nie obejdzie. Nie próbuj „naprawiać" importerów
+dokładaniem nagłówków; to było testowane i nie działa.
 
-Apollo po stronie RBFA odrzuca GET bez nagłówków `x-apollo-operation-name` i
-`apollo-require-preflight`. Nie usuwaj ich.
+Co gorsza, Akamai oddaje stronę „Access Denied" **z kodem HTTP 200**, więc samo
+sprawdzenie `res.ok` jej nie wykryje. Zawsze sprawdzaj też `content-type`.
+
+Nie ma źródła zapasowego: ACFF/FFA (`ffa.be`) chodzi po tym samym API, a Foot24
+porzucił piłkę amatorską. Sprawdzone w październiku 2026.
+
+### Jak dane trafiają na stronę teraz
+
+```
+Chrome na komputerze klubu → RBFA GraphQL → data/rbfa.json → commit → Netlify
+```
+
+Narzędzie `C:\Users\damia\polonia-rbfa-sync\` (POZA repozytorium, bo tu nie wolno
+package.json) uruchamia zwykły Chrome przez protokół CDP i wykonuje zapytanie
+z kontekstu strony `www.rbfa.be`. Niczego nie udaje: to prawdziwa przeglądarka
+z własnym User-Agentem. **Trybu headless użyć się nie da** — zdradza się w
+User-Agencie i Akamai go odrzuca.
+
+Z przeglądarki obowiązuje ODWROTNA zasada niż dawniej po stronie serwera:
+wysyłamy `POST` z `content-type: application/json`, a nagłówków
+`x-apollo-operation-name` i `apollo-require-preflight` **nie wysyłamy** —
+wymuszają preflight CORS, którego RBFA nie przepuszcza. Bez `content-type`
+Apollo odrzuca zapytanie jako CSRF.
+
+`data/rbfa.json` to JEDEN plik z polami `matches` i `table` naraz. Oba adresy
+w `DEFAULT_CONFIG` (`fixturesUrl`, `tableUrl`) wskazują na niego: `sync()`
+rozpoznaje terminarz po `matches`, a tabelę czyta z `table`. Dzięki temu jedno
+pobranie to jeden commit i jedna przebudowa, nie dwie.
+
+Normalizacja ma jedno źródło prawdy: `normalizeCalendar()` w `rbfa-calendar.js`
+oraz `pickSeriesFromMatches()` i `normalizeStandings()` w `rbfa-standings.js`.
+Narzędzie importuje je wprost z repozytorium — nie kopiuj tej logiki na drugą
+stronę, bo pola się rozjadą.
+
+`getConfig()` odrzuca zapisane w `localStorage` adresy `/.netlify/functions/rbfa-`.
+Bez tego odwiedzający ze starym wpisem z panelu dostawałby 404, strona po cichu
+zjechałaby na dane zapasowe i wyglądała poprawnie, pokazując wyniki sprzed
+miesięcy. Nie usuwaj tego filtra.
+
+Funkcje w `netlify/functions/` zostają na dysku, ale **są martwe** — nic ich nie
+woła. Trzymamy je dla normalizacji i na wypadek, gdyby federacja kiedyś odblokowała
+dostęp serwerowy.
+
+### Konfiguracja klubu
+
+`RBFA_CONFIG` w `rbfa-calendar.js`: `clubId 6360`, `teamId 375016`,
+`matricule 09647`. Identyfikator serii NIE jest wpisany na sztywno — wynika
+z ostatniego rozegranego meczu (`pickSeriesFromMatches`), więc zmiana ligi czy
+sezonu nie wymaga poprawek w kodzie. Sezon 2026/2027: `CHP_131936`, 3 Prov. B.
 
 Tabela ligowa NIE wymaga żadnej zmiennej środowiskowej. RBFA nie używa tu
 persisted queries — `rbfa-standings.js` wysyła pełną treść zapytania

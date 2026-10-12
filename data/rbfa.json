@@ -1,0 +1,921 @@
+{
+  "ok": true,
+  "source": "RBFA / Voetbal Vlaanderen",
+  "pobrano": "przeglądarka na komputerze klubu",
+  "updatedAt": "2026-10-12T18:38:03.198Z",
+  "clubId": "6360",
+  "teamId": "375016",
+  "teamName": "FC Polonia Bruksela",
+  "matricule": "09647",
+  "seriesId": "CHP_131936",
+  "seriesName": "3 Prov. B",
+  "count": 25,
+  "matches": [
+    {
+      "id": "7522858",
+      "startTime": "2026-08-02T16:00:00",
+      "date": "2026-08-02",
+      "time": "16:00",
+      "competition": {
+        "id": "CUP_3885",
+        "name": "Coupe Hommes BW-BXL"
+      },
+      "round": null,
+      "homeTeam": {
+        "id": "375016",
+        "name": "FC POLONIA BRUXELLES",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/09647.jpg"
+      },
+      "awayTeam": {
+        "id": "364258",
+        "name": "OTTIGNIES-LIMELETTE FC",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/09845.jpg"
+      },
+      "result": {
+        "home": 0,
+        "away": 5,
+        "homePenalties": null,
+        "awayPenalties": null
+      },
+      "status": "played",
+      "venue": null,
+      "isPoloniaHome": true,
+      "isPoloniaAway": false,
+      "side": "home",
+      "channel": "acff"
+    },
+    {
+      "id": "7547405",
+      "startTime": "2026-09-06T15:00:00",
+      "date": "2026-09-06",
+      "time": "15:00",
+      "competition": {
+        "id": "CHP_131936",
+        "name": "3 Prov. B"
+      },
+      "round": null,
+      "homeTeam": {
+        "id": "369803",
+        "name": "Ol. Anderlecht",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/08889.jpg"
+      },
+      "awayTeam": {
+        "id": "375016",
+        "name": "FC.Polonia Bruxelles",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/09647.jpg"
+      },
+      "result": {
+        "home": 2,
+        "away": 3,
+        "homePenalties": null,
+        "awayPenalties": null
+      },
+      "status": "played",
+      "venue": null,
+      "isPoloniaHome": false,
+      "isPoloniaAway": true,
+      "side": "away",
+      "channel": "acff"
+    },
+    {
+      "id": "7547415",
+      "startTime": "2026-09-13T15:00:00",
+      "date": "2026-09-13",
+      "time": "15:00",
+      "competition": {
+        "id": "CHP_131936",
+        "name": "3 Prov. B"
+      },
+      "round": null,
+      "homeTeam": {
+        "id": "375016",
+        "name": "FC.Polonia Bruxelles",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/09647.jpg"
+      },
+      "awayTeam": {
+        "id": "373555",
+        "name": "Olympique Club Forestois B",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/09632.jpg"
+      },
+      "result": {
+        "home": 1,
+        "away": 2,
+        "homePenalties": null,
+        "awayPenalties": null
+      },
+      "status": "played",
+      "venue": null,
+      "isPoloniaHome": true,
+      "isPoloniaAway": false,
+      "side": "home",
+      "channel": "acff"
+    },
+    {
+      "id": "7547421",
+      "startTime": "2026-09-19T20:00:00",
+      "date": "2026-09-19",
+      "time": "20:00",
+      "competition": {
+        "id": "CHP_131936",
+        "name": "3 Prov. B"
+      },
+      "round": null,
+      "homeTeam": {
+        "id": "374552",
+        "name": "FC.Anderlecht Sport Milan A",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/09439.jpg"
+      },
+      "awayTeam": {
+        "id": "375016",
+        "name": "FC.Polonia Bruxelles",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/09647.jpg"
+      },
+      "result": {
+        "home": 3,
+        "away": 1,
+        "homePenalties": null,
+        "awayPenalties": null
+      },
+      "status": "played",
+      "venue": null,
+      "isPoloniaHome": false,
+      "isPoloniaAway": true,
+      "side": "away",
+      "channel": "acff"
+    },
+    {
+      "id": "7547429",
+      "startTime": "2026-09-27T15:00:00",
+      "date": "2026-09-27",
+      "time": "15:00",
+      "competition": {
+        "id": "CHP_131936",
+        "name": "3 Prov. B"
+      },
+      "round": null,
+      "homeTeam": {
+        "id": "375016",
+        "name": "FC.Polonia Bruxelles",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/09647.jpg"
+      },
+      "awayTeam": {
+        "id": "373682",
+        "name": "Black Star NOH FC B",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/06632.jpg"
+      },
+      "result": {
+        "home": 4,
+        "away": 0,
+        "homePenalties": null,
+        "awayPenalties": null
+      },
+      "status": "played",
+      "venue": null,
+      "isPoloniaHome": true,
+      "isPoloniaAway": false,
+      "side": "home",
+      "channel": "acff"
+    },
+    {
+      "id": "7547436",
+      "startTime": "2026-10-04T15:00:00",
+      "date": "2026-10-04",
+      "time": "15:00",
+      "competition": {
+        "id": "CHP_131936",
+        "name": "3 Prov. B"
+      },
+      "round": null,
+      "homeTeam": {
+        "id": "375016",
+        "name": "FC.Polonia Bruxelles",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/09647.jpg"
+      },
+      "awayTeam": {
+        "id": "369043",
+        "name": "RU.Auderghem B",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/02152.jpg"
+      },
+      "result": {
+        "home": 2,
+        "away": 1,
+        "homePenalties": null,
+        "awayPenalties": null
+      },
+      "status": "played",
+      "venue": null,
+      "isPoloniaHome": true,
+      "isPoloniaAway": false,
+      "side": "home",
+      "channel": "acff"
+    },
+    {
+      "id": "7547445",
+      "startTime": "2026-10-10T20:00:00",
+      "date": "2026-10-10",
+      "time": "20:00",
+      "competition": {
+        "id": "CHP_131936",
+        "name": "3 Prov. B"
+      },
+      "round": null,
+      "homeTeam": {
+        "id": "368239",
+        "name": "ROFC.Stockel B",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/03031.jpg"
+      },
+      "awayTeam": {
+        "id": "375016",
+        "name": "FC.Polonia Bruxelles",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/09647.jpg"
+      },
+      "result": {
+        "home": 2,
+        "away": 2,
+        "homePenalties": null,
+        "awayPenalties": null
+      },
+      "status": "played",
+      "venue": null,
+      "isPoloniaHome": false,
+      "isPoloniaAway": true,
+      "side": "away",
+      "channel": "acff"
+    },
+    {
+      "id": "7547450",
+      "startTime": "2026-10-18T15:00:00",
+      "date": "2026-10-18",
+      "time": "15:00",
+      "competition": {
+        "id": "CHP_131936",
+        "name": "3 Prov. B"
+      },
+      "round": null,
+      "homeTeam": {
+        "id": "375016",
+        "name": "FC.Polonia Bruxelles",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/09647.jpg"
+      },
+      "awayTeam": {
+        "id": "368412",
+        "name": "RRC.Boitsfort B",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/00556.jpg"
+      },
+      "result": null,
+      "status": "scheduled",
+      "venue": null,
+      "isPoloniaHome": true,
+      "isPoloniaAway": false,
+      "side": "home",
+      "channel": "acff"
+    },
+    {
+      "id": "7547454",
+      "startTime": "2026-10-25T15:00:00",
+      "date": "2026-10-25",
+      "time": "15:00",
+      "competition": {
+        "id": "CHP_131936",
+        "name": "3 Prov. B"
+      },
+      "round": null,
+      "homeTeam": {
+        "id": "371485",
+        "name": "BX.Brussels B",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/09026.jpg"
+      },
+      "awayTeam": {
+        "id": "375016",
+        "name": "FC.Polonia Bruxelles",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/09647.jpg"
+      },
+      "result": null,
+      "status": "scheduled",
+      "venue": null,
+      "isPoloniaHome": false,
+      "isPoloniaAway": true,
+      "side": "away",
+      "channel": "acff"
+    },
+    {
+      "id": "7547464",
+      "startTime": "2026-11-01T15:00:00",
+      "date": "2026-11-01",
+      "time": "15:00",
+      "competition": {
+        "id": "CHP_131936",
+        "name": "3 Prov. B"
+      },
+      "round": null,
+      "homeTeam": {
+        "id": "375016",
+        "name": "FC.Polonia Bruxelles",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/09647.jpg"
+      },
+      "awayTeam": {
+        "id": "371273",
+        "name": "Racing Anderlecht",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/09723.jpg"
+      },
+      "result": null,
+      "status": "scheduled",
+      "venue": null,
+      "isPoloniaHome": true,
+      "isPoloniaAway": false,
+      "side": "home",
+      "channel": "acff"
+    },
+    {
+      "id": "7547470",
+      "startTime": "2026-11-08T15:00:00",
+      "date": "2026-11-08",
+      "time": "15:00",
+      "competition": {
+        "id": "CHP_131936",
+        "name": "3 Prov. B"
+      },
+      "round": null,
+      "homeTeam": {
+        "id": "374513",
+        "name": "OLYMPIC WOLVES BRUSSELS",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/09788.jpg"
+      },
+      "awayTeam": {
+        "id": "375016",
+        "name": "FC.Polonia Bruxelles",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/09647.jpg"
+      },
+      "result": null,
+      "status": "scheduled",
+      "venue": null,
+      "isPoloniaHome": false,
+      "isPoloniaAway": true,
+      "side": "away",
+      "channel": "acff"
+    },
+    {
+      "id": "7547478",
+      "startTime": "2026-11-15T15:00:00",
+      "date": "2026-11-15",
+      "time": "15:00",
+      "competition": {
+        "id": "CHP_131936",
+        "name": "3 Prov. B"
+      },
+      "round": null,
+      "homeTeam": {
+        "id": "375016",
+        "name": "FC.Polonia Bruxelles",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/09647.jpg"
+      },
+      "awayTeam": {
+        "id": "374655",
+        "name": "F.E.F.Anderlecht",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/09750.jpg"
+      },
+      "result": null,
+      "status": "scheduled",
+      "venue": null,
+      "isPoloniaHome": true,
+      "isPoloniaAway": false,
+      "side": "home",
+      "channel": "acff"
+    },
+    {
+      "id": "7547395",
+      "startTime": "2026-11-21T18:30:00",
+      "date": "2026-11-21",
+      "time": "18:30",
+      "competition": {
+        "id": "CHP_131936",
+        "name": "3 Prov. B"
+      },
+      "round": null,
+      "homeTeam": {
+        "id": "370978",
+        "name": "FC.M.Uccle B",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/09472.jpg"
+      },
+      "awayTeam": {
+        "id": "375016",
+        "name": "FC.Polonia Bruxelles",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/09647.jpg"
+      },
+      "result": null,
+      "status": "scheduled",
+      "venue": null,
+      "isPoloniaHome": false,
+      "isPoloniaAway": true,
+      "side": "away",
+      "channel": "acff"
+    },
+    {
+      "id": "7547486",
+      "startTime": "2026-12-06T15:00:00",
+      "date": "2026-12-06",
+      "time": "15:00",
+      "competition": {
+        "id": "CHP_131936",
+        "name": "3 Prov. B"
+      },
+      "round": null,
+      "homeTeam": {
+        "id": "375016",
+        "name": "FC.Polonia Bruxelles",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/09647.jpg"
+      },
+      "awayTeam": {
+        "id": "370978",
+        "name": "FC.M.Uccle B",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/09472.jpg"
+      },
+      "result": null,
+      "status": "scheduled",
+      "venue": null,
+      "isPoloniaHome": true,
+      "isPoloniaAway": false,
+      "side": "home",
+      "channel": "acff"
+    },
+    {
+      "id": "7547496",
+      "startTime": "2026-12-20T15:00:00",
+      "date": "2026-12-20",
+      "time": "15:00",
+      "competition": {
+        "id": "CHP_131936",
+        "name": "3 Prov. B"
+      },
+      "round": null,
+      "homeTeam": {
+        "id": "375016",
+        "name": "FC.Polonia Bruxelles",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/09647.jpg"
+      },
+      "awayTeam": {
+        "id": "369803",
+        "name": "Ol. Anderlecht",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/08889.jpg"
+      },
+      "result": null,
+      "status": "scheduled",
+      "venue": null,
+      "isPoloniaHome": true,
+      "isPoloniaAway": false,
+      "side": "home",
+      "channel": "acff"
+    },
+    {
+      "id": "7547506",
+      "startTime": "2027-01-16T20:00:00",
+      "date": "2027-01-16",
+      "time": "20:00",
+      "competition": {
+        "id": "CHP_131936",
+        "name": "3 Prov. B"
+      },
+      "round": null,
+      "homeTeam": {
+        "id": "373555",
+        "name": "Olympique Club Forestois B",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/09632.jpg"
+      },
+      "awayTeam": {
+        "id": "375016",
+        "name": "FC.Polonia Bruxelles",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/09647.jpg"
+      },
+      "result": null,
+      "status": "scheduled",
+      "venue": null,
+      "isPoloniaHome": false,
+      "isPoloniaAway": true,
+      "side": "away",
+      "channel": "acff"
+    },
+    {
+      "id": "7547512",
+      "startTime": "2027-01-24T15:00:00",
+      "date": "2027-01-24",
+      "time": "15:00",
+      "competition": {
+        "id": "CHP_131936",
+        "name": "3 Prov. B"
+      },
+      "round": null,
+      "homeTeam": {
+        "id": "375016",
+        "name": "FC.Polonia Bruxelles",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/09647.jpg"
+      },
+      "awayTeam": {
+        "id": "374552",
+        "name": "FC.Anderlecht Sport Milan A",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/09439.jpg"
+      },
+      "result": null,
+      "status": "scheduled",
+      "venue": null,
+      "isPoloniaHome": true,
+      "isPoloniaAway": false,
+      "side": "home",
+      "channel": "acff"
+    },
+    {
+      "id": "7547520",
+      "startTime": "2027-01-30T20:00:00",
+      "date": "2027-01-30",
+      "time": "20:00",
+      "competition": {
+        "id": "CHP_131936",
+        "name": "3 Prov. B"
+      },
+      "round": null,
+      "homeTeam": {
+        "id": "373682",
+        "name": "Black Star NOH FC B",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/06632.jpg"
+      },
+      "awayTeam": {
+        "id": "375016",
+        "name": "FC.Polonia Bruxelles",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/09647.jpg"
+      },
+      "result": null,
+      "status": "scheduled",
+      "venue": null,
+      "isPoloniaHome": false,
+      "isPoloniaAway": true,
+      "side": "away",
+      "channel": "acff"
+    },
+    {
+      "id": "7547527",
+      "startTime": "2027-02-14T15:00:00",
+      "date": "2027-02-14",
+      "time": "15:00",
+      "competition": {
+        "id": "CHP_131936",
+        "name": "3 Prov. B"
+      },
+      "round": null,
+      "homeTeam": {
+        "id": "369043",
+        "name": "RU.Auderghem B",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/02152.jpg"
+      },
+      "awayTeam": {
+        "id": "375016",
+        "name": "FC.Polonia Bruxelles",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/09647.jpg"
+      },
+      "result": null,
+      "status": "scheduled",
+      "venue": null,
+      "isPoloniaHome": false,
+      "isPoloniaAway": true,
+      "side": "away",
+      "channel": "acff"
+    },
+    {
+      "id": "7547536",
+      "startTime": "2027-02-21T15:00:00",
+      "date": "2027-02-21",
+      "time": "15:00",
+      "competition": {
+        "id": "CHP_131936",
+        "name": "3 Prov. B"
+      },
+      "round": null,
+      "homeTeam": {
+        "id": "375016",
+        "name": "FC.Polonia Bruxelles",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/09647.jpg"
+      },
+      "awayTeam": {
+        "id": "368239",
+        "name": "ROFC.Stockel B",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/03031.jpg"
+      },
+      "result": null,
+      "status": "scheduled",
+      "venue": null,
+      "isPoloniaHome": true,
+      "isPoloniaAway": false,
+      "side": "home",
+      "channel": "acff"
+    },
+    {
+      "id": "7547541",
+      "startTime": "2027-02-28T15:00:00",
+      "date": "2027-02-28",
+      "time": "15:00",
+      "competition": {
+        "id": "CHP_131936",
+        "name": "3 Prov. B"
+      },
+      "round": null,
+      "homeTeam": {
+        "id": "368412",
+        "name": "RRC.Boitsfort B",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/00556.jpg"
+      },
+      "awayTeam": {
+        "id": "375016",
+        "name": "FC.Polonia Bruxelles",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/09647.jpg"
+      },
+      "result": null,
+      "status": "scheduled",
+      "venue": null,
+      "isPoloniaHome": false,
+      "isPoloniaAway": true,
+      "side": "away",
+      "channel": "acff"
+    },
+    {
+      "id": "7547545",
+      "startTime": "2027-03-14T15:00:00",
+      "date": "2027-03-14",
+      "time": "15:00",
+      "competition": {
+        "id": "CHP_131936",
+        "name": "3 Prov. B"
+      },
+      "round": null,
+      "homeTeam": {
+        "id": "375016",
+        "name": "FC.Polonia Bruxelles",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/09647.jpg"
+      },
+      "awayTeam": {
+        "id": "371485",
+        "name": "BX.Brussels B",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/09026.jpg"
+      },
+      "result": null,
+      "status": "scheduled",
+      "venue": null,
+      "isPoloniaHome": true,
+      "isPoloniaAway": false,
+      "side": "home",
+      "channel": "acff"
+    },
+    {
+      "id": "7547555",
+      "startTime": "2027-03-21T15:00:00",
+      "date": "2027-03-21",
+      "time": "15:00",
+      "competition": {
+        "id": "CHP_131936",
+        "name": "3 Prov. B"
+      },
+      "round": null,
+      "homeTeam": {
+        "id": "371273",
+        "name": "Racing Anderlecht",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/09723.jpg"
+      },
+      "awayTeam": {
+        "id": "375016",
+        "name": "FC.Polonia Bruxelles",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/09647.jpg"
+      },
+      "result": null,
+      "status": "scheduled",
+      "venue": null,
+      "isPoloniaHome": false,
+      "isPoloniaAway": true,
+      "side": "away",
+      "channel": "acff"
+    },
+    {
+      "id": "7547561",
+      "startTime": "2027-04-04T15:00:00",
+      "date": "2027-04-04",
+      "time": "15:00",
+      "competition": {
+        "id": "CHP_131936",
+        "name": "3 Prov. B"
+      },
+      "round": null,
+      "homeTeam": {
+        "id": "375016",
+        "name": "FC.Polonia Bruxelles",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/09647.jpg"
+      },
+      "awayTeam": {
+        "id": "374513",
+        "name": "OLYMPIC WOLVES BRUSSELS",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/09788.jpg"
+      },
+      "result": null,
+      "status": "scheduled",
+      "venue": null,
+      "isPoloniaHome": true,
+      "isPoloniaAway": false,
+      "side": "home",
+      "channel": "acff"
+    },
+    {
+      "id": "7547569",
+      "startTime": "2027-04-11T15:00:00",
+      "date": "2027-04-11",
+      "time": "15:00",
+      "competition": {
+        "id": "CHP_131936",
+        "name": "3 Prov. B"
+      },
+      "round": null,
+      "homeTeam": {
+        "id": "374655",
+        "name": "F.E.F.Anderlecht",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/09750.jpg"
+      },
+      "awayTeam": {
+        "id": "375016",
+        "name": "FC.Polonia Bruxelles",
+        "logo": "https://belgianfootball.s3.eu-central-1.amazonaws.com/s3fs-public/rbfa/img/logos/clubs/09647.jpg"
+      },
+      "result": null,
+      "status": "scheduled",
+      "venue": null,
+      "isPoloniaHome": false,
+      "isPoloniaAway": true,
+      "side": "away",
+      "channel": "acff"
+    }
+  ],
+  "table": [
+    {
+      "pos": 1,
+      "team": "F.C. ANDERLECHT SPORT MILAN A",
+      "played": 6,
+      "won": 4,
+      "drawn": 2,
+      "lost": 0,
+      "gf": 18,
+      "ga": 10,
+      "gd": 8,
+      "points": 14,
+      "isPolonia": false
+    },
+    {
+      "pos": 2,
+      "team": "BX BRUSSELS B",
+      "played": 5,
+      "won": 4,
+      "drawn": 1,
+      "lost": 0,
+      "gf": 14,
+      "ga": 9,
+      "gd": 5,
+      "points": 13,
+      "isPolonia": false
+    },
+    {
+      "pos": 3,
+      "team": "R.R.C. DE BOITSFORT B",
+      "played": 5,
+      "won": 4,
+      "drawn": 0,
+      "lost": 1,
+      "gf": 22,
+      "ga": 8,
+      "gd": 14,
+      "points": 12,
+      "isPolonia": false
+    },
+    {
+      "pos": 4,
+      "team": "Olympic Wolves Brussels",
+      "played": 5,
+      "won": 3,
+      "drawn": 1,
+      "lost": 1,
+      "gf": 23,
+      "ga": 9,
+      "gd": 14,
+      "points": 10,
+      "isPolonia": false
+    },
+    {
+      "pos": 4,
+      "team": "FC POLONIA BRUXELLES",
+      "played": 6,
+      "won": 3,
+      "drawn": 1,
+      "lost": 2,
+      "gf": 13,
+      "ga": 10,
+      "gd": 3,
+      "points": 10,
+      "isPolonia": true
+    },
+    {
+      "pos": 4,
+      "team": "F.C. MOREDA UCCLE B",
+      "played": 6,
+      "won": 3,
+      "drawn": 1,
+      "lost": 2,
+      "gf": 15,
+      "ga": 16,
+      "gd": -1,
+      "points": 10,
+      "isPolonia": false
+    },
+    {
+      "pos": 7,
+      "team": "R. UN. AUDERGHEM B",
+      "played": 5,
+      "won": 2,
+      "drawn": 2,
+      "lost": 1,
+      "gf": 16,
+      "ga": 9,
+      "gd": 7,
+      "points": 8,
+      "isPolonia": false
+    },
+    {
+      "pos": 8,
+      "team": "BLACK STAR F.C. B",
+      "played": 6,
+      "won": 2,
+      "drawn": 1,
+      "lost": 3,
+      "gf": 17,
+      "ga": 15,
+      "gd": 2,
+      "points": 7,
+      "isPolonia": false
+    },
+    {
+      "pos": 9,
+      "team": "OLYMPIC ANDERLECHT A",
+      "played": 6,
+      "won": 2,
+      "drawn": 0,
+      "lost": 4,
+      "gf": 14,
+      "ga": 18,
+      "gd": -4,
+      "points": 6,
+      "isPolonia": false
+    },
+    {
+      "pos": 10,
+      "team": "R. OL. F.C. STOCKEL B",
+      "played": 5,
+      "won": 1,
+      "drawn": 2,
+      "lost": 2,
+      "gf": 8,
+      "ga": 10,
+      "gd": -2,
+      "points": 5,
+      "isPolonia": false
+    },
+    {
+      "pos": 11,
+      "team": "OLYMPIQUE CLUB FORESTOIS B",
+      "played": 6,
+      "won": 1,
+      "drawn": 1,
+      "lost": 4,
+      "gf": 10,
+      "ga": 16,
+      "gd": -6,
+      "points": 4,
+      "isPolonia": false
+    },
+    {
+      "pos": 12,
+      "team": "F.E.F. ANDERLECHT",
+      "played": 5,
+      "won": 0,
+      "drawn": 0,
+      "lost": 5,
+      "gf": 6,
+      "ga": 15,
+      "gd": -9,
+      "points": 0,
+      "isPolonia": false
+    },
+    {
+      "pos": 12,
+      "team": "RACING ANDERLECHT",
+      "played": 4,
+      "won": 0,
+      "drawn": 0,
+      "lost": 4,
+      "gf": 4,
+      "ga": 35,
+      "gd": -31,
+      "points": 0,
+      "isPolonia": false
+    }
+  ]
+}

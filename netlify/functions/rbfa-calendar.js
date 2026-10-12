@@ -150,12 +150,12 @@ function extractMatches(data) {
 
 /* ════════════════════════════════════════════════════════════ PAYLOAD ══ */
 
-export async function buildCalendarPayload() {
-  const data = await callRbfa(RBFA_CONFIG.operations.calendar, {
-    teamId: RBFA_CONFIG.teamId,
-    language: RBFA_CONFIG.language,
-  });
-
+/* Normalizacja jest oddzielona od pobierania, bo surowe dane mogą przyjść
+   dwiema drogami: z tej funkcji albo z narzędzia synchronizującego, które
+   pobiera je przez prawdziwą przeglądarkę (RBFA blokuje zapytania serwerowe —
+   patrz „Dane z RBFA" w CLAUDE.md). Obie drogi mają korzystać z TEJ SAMEJ
+   normalizacji, inaczej kształt pól rozjedzie się między nimi. */
+export function normalizeCalendar(data) {
   const raw = extractMatches(data);
   if (!Array.isArray(raw)) throw new Error('Nieprawidłowa odpowiedź RBFA: brak teamCalendar');
 
@@ -175,6 +175,14 @@ export async function buildCalendarPayload() {
     count: matches.length,
     matches,
   };
+}
+
+export async function buildCalendarPayload() {
+  const data = await callRbfa(RBFA_CONFIG.operations.calendar, {
+    teamId: RBFA_CONFIG.teamId,
+    language: RBFA_CONFIG.language,
+  });
+  return normalizeCalendar(data);
 }
 
 const CACHE_HEADER = `public, max-age=${RBFA_CONFIG.cache.browserSeconds}, s-maxage=${RBFA_CONFIG.cache.edgeSeconds}, stale-while-revalidate=${RBFA_CONFIG.cache.staleSeconds}`;

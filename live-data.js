@@ -80,11 +80,15 @@ const OVR_KEY = 'fcp.livedata.overrides.v1';
 export const DEFAULT_CONFIG = {
   proxy: '',        // np. https://twoj-serwer/api/fetch?url={url}
   icalUrl: '',      // .ics terminarza (Foot24 lub federacja)
-  // Tabela ligowa — nasz importer RBFA (netlify/functions/rbfa-standings.js).
-  tableUrl: '/.netlify/functions/rbfa-standings',
-  // Domyślnie: nasz importer RBFA (netlify/functions/rbfa-calendar.js).
-  // Po wdrożeniu na Netlify działa bez żadnej konfiguracji.
-  fixturesUrl: '/.netlify/functions/rbfa-calendar',
+  /* Terminarz i tabela pochodzą z JEDNEGO pliku `data/rbfa.json` w repozytorium.
+     Oba adresy celowo są takie same: `sync()` rozpoznaje terminarz po polu
+     `matches`, a tabelę czyta z pola `table`, więc jeden plik obsługuje oba
+     odczyty — i jedno pobranie danych oznacza jeden commit i jedną przebudowę.
+     Migawkę zapisuje narzędzie uruchamiane na komputerze klubu; federacja
+     blokuje zapytania serwerowe, więc funkcje Netlify nie mogą jej pobrać
+     (patrz „Dane z RBFA" w CLAUDE.md). */
+  tableUrl: '/data/rbfa.json',
+  fixturesUrl: '/data/rbfa.json',
   ttlMinutes: 45,   // nie odpytuj źródeł częściej niż co N minut
   season: '2026/2027',
 };
@@ -95,7 +99,22 @@ const read = (k, fb) => {
 };
 const write = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} };
 
-export const getConfig = () => ({ ...DEFAULT_CONFIG, ...read(CFG_KEY, {}) });
+/* Adresy zapisane kiedyś w przeglądarce (panel redakcyjny zapisuje je w
+   localStorage) mogą wskazywać na funkcje Netlify, które przestały działać.
+   Gdyby przeszły przez scalenie z domyślnymi, odwiedzający z takim wpisem
+   dostawałby 404, strona po cichu zjechałaby na dane zapasowe i wyglądała
+   poprawnie, pokazując wyniki sprzed miesięcy. Martwe adresy odrzucamy. */
+const MARTWY_ADRES = /\/\.netlify\/functions\/rbfa-/;
+
+export const getConfig = () => {
+  const zapisane = { ...read(CFG_KEY, {}) };
+  for (const klucz of ['tableUrl', 'fixturesUrl']) {
+    if (typeof zapisane[klucz] === 'string' && MARTWY_ADRES.test(zapisane[klucz])) {
+      delete zapisane[klucz];
+    }
+  }
+  return { ...DEFAULT_CONFIG, ...zapisane };
+};
 export const setConfig = (patch) => { write(CFG_KEY, { ...getConfig(), ...patch }); return getConfig(); };
 
 /* --------------------------------------------------------- MANUAL OVERRIDE */
