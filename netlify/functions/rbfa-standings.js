@@ -251,6 +251,11 @@ function normalizeRows(rows) {
     return {
       pos: n(pick(r, KEY.pos)) ?? i + 1,
       team: teamName(r),
+      /* Identyfikator drużyny z federacji. Jest ten sam w terminarzu i w
+         tabeli, więc pozwala połączyć mecz z wierszem klasyfikacji BEZ
+         zgadywania po nazwie — a nazwy się rozjeżdżają: „RRC.Boitsfort B"
+         w terminarzu to „R.R.C. DE BOITSFORT B" w tabeli. */
+      teamId: pick(r, /^teamid$/i) != null ? String(pick(r, /^teamid$/i)) : null,
       played: n(pick(r, KEY.played)),
       won: n(pick(r, KEY.won)),
       drawn: n(pick(r, KEY.drawn)),

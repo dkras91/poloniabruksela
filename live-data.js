@@ -244,6 +244,11 @@ export function normalizeFixture(raw, i = 0) {
     homeLogoUrl: raw.homeLogoUrl || null,
     awayLogoUrl: raw.awayLogoUrl || null,
     home, away,
+    /* Identyfikatory drużyn z federacji. Te same wartości wracają w tabeli
+       (`teamId`), więc po nich — a nie po nazwie — łączymy mecz z wierszem
+       klasyfikacji. Nazwy w obu źródłach się rozjeżdżają. */
+    homeTeamId: raw.homeTeamId != null ? String(raw.homeTeamId) : null,
+    awayTeamId: raw.awayTeamId != null ? String(raw.awayTeamId) : null,
     isHome: isPolonia(home, '', raw.homeTeamId),
     venue: ovr.venue[id] || raw.venue || venueFor(home, away),
     competition: raw.competition || '',
@@ -262,6 +267,11 @@ export function normalizeTable(rows = []) {
     return {
       pos: num(r.pos) ?? i + 1,
       team,
+      /* Identyfikator drużyny z federacji — ten sam w terminarzu i w tabeli.
+         Dzięki niemu łączymy mecz z wierszem klasyfikacji bez zgadywania po
+         nazwie; nazwy się rozjeżdżają („RRC.Boitsfort B" w terminarzu to
+         „R.R.C. DE BOITSFORT B" w tabeli). Nie usuwaj go przy normalizacji. */
+      teamId: r.teamId != null ? String(r.teamId) : null,
       played: num(r.played) ?? 0,
       won: num(r.won) ?? 0,
       drawn: num(r.drawn) ?? 0,

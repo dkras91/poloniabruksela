@@ -156,6 +156,7 @@ const T = {
   'Najnowszy odcinek': ['Dernier épisode', 'Nieuwste aflevering', 'Latest episode'],
   'Wszystkie odcinki': ['Tous les épisodes', 'Alle afleveringen', 'All episodes'],
   /* --- okienko z najbliższym meczem --- */
+  'RYWAL W TABELI': ['L’ADVERSAIRE AU CLASSEMENT', 'DE TEGENSTANDER IN HET KLASSEMENT', 'THE OPPONENT IN THE TABLE'],
   'KIEDY': ['QUAND', 'WANNEER', 'WHEN'],
   'GDZIE': ['OÙ', 'WAAR', 'WHERE'],
   'Szczegóły meczu': ['Détails du match', 'Matchdetails', 'Match details'],

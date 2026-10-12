@@ -2350,6 +2350,23 @@ a:hover{color:#cbb96b}
         </div>
       </div>
 
+      <!-- Miejsce rywala w tabeli. Wiersz łączony po identyfikatorze drużyny
+           z federacji, nie po nazwie. Znika przy pucharze i sparingach, bo
+           tam klasyfikacji nie ma. -->
+      <sc-if value="{{ hasRivalRow }}" hint-placeholder-val="{{ true }}">
+      <div style="background:#121216;border:1px solid rgba(246,243,236,.12);border-left:3px solid #B7A85C;padding:12px 14px;margin-bottom:18px;display:flex;align-items:center;gap:13px;flex-wrap:wrap">
+        <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:27px;line-height:1;color:#B7A85C;flex-shrink:0">{{ rivalPos }}</span>
+        <div style="display:flex;flex-direction:column;gap:3px;min-width:0">
+          <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:9px;letter-spacing:.16em;color:#8d8a83">RYWAL W TABELI</span>
+          <div style="display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline">
+            <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:14px;color:#F6F3EC">{{ rivalPts }}</span>
+            <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:12px;color:#8d8a83">PKT</span>
+            <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:12px;color:#c9c6bd">{{ rivalForm }}</span>
+          </div>
+        </div>
+      </div>
+      </sc-if>
+
       <div style="border-top:1px solid rgba(246,243,236,.12);padding-top:15px;display:flex;flex-direction:column;gap:9px;margin-bottom:20px">
         <div style="display:flex;flex-direction:column;gap:3px">
           <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:9px;letter-spacing:.16em;color:#8d8a83">KIEDY</span>
@@ -3134,7 +3151,7 @@ class Component extends DCLogic {
       // Zanim content.js się wczyta, sklep nie ma jeszcze żadnego stanu: nie
       // pokazujemy ani zapowiedzi, ani siatki, żeby na działającym sklepie
       // nie mrugnęło „w budowie" i odwrotnie.
-      return { ...base, season: '2026/2027', updatedAt: '—', sourceLabel: 'oczekuje na synchronizację', noLive: false, noSource: false, noFixtures: false, noTable: false, loadingFixtures: true, loadFailed: false, hasTable: false, hasFixtures: false, hasUpcoming: false, nm: null, lm: null, lmScoreBg: '#23232a', article: null, seasonDetail: null, shopOpen: false, shopSoon: false, shopItems: [], ordNotSent: true, ordSent: false, ordProducts: [], ordSizes: [], ordColors: [], ordQtys: [], ordHasSizes: false, ordHasColors: false, backstageLatest: [], backstageGroups: [], hasBackstage: false, noBackstage: false, backstageChannel: '', matchPopupShow: false };
+      return { ...base, season: '2026/2027', updatedAt: '—', sourceLabel: 'oczekuje na synchronizację', noLive: false, noSource: false, noFixtures: false, noTable: false, loadingFixtures: true, loadFailed: false, hasTable: false, hasFixtures: false, hasUpcoming: false, nm: null, lm: null, lmScoreBg: '#23232a', article: null, seasonDetail: null, shopOpen: false, shopSoon: false, shopItems: [], ordNotSent: true, ordSent: false, ordProducts: [], ordSizes: [], ordColors: [], ordQtys: [], ordHasSizes: false, ordHasColors: false, backstageLatest: [], backstageGroups: [], hasBackstage: false, noBackstage: false, backstageChannel: '', matchPopupShow: false, hasRivalRow: false, rivalPos: '', rivalPts: '', rivalPlayed: '', rivalForm: '' };
     }
 
     const live = s.live || L.getState();
@@ -3409,6 +3426,15 @@ class Component extends DCLogic {
        zdjęć, a ma pierwszeństwo przed zachętą do Facebooka. */
     const pokazOkienkoMeczu = Boolean(nm) && s.matchPopupOpen
       && !this._matchPopupSeen(nm.id) && !s.cookieOpen && !s.lightbox;
+
+    /* Miejsce rywala w tabeli. Łączymy po identyfikatorze drużyny z federacji,
+       nie po nazwie — te same kluby zapisane są inaczej w terminarzu i w
+       klasyfikacji („RRC.Boitsfort B" kontra „R.R.C. DE BOITSFORT B"), więc
+       dopasowanie po nazwie trafiało tylko w 5 z 13 przypadków.
+       Pokazujemy numer z NASZEJ tabeli (1…13), bo federacja przy równym
+       dorobku daje kilku zespołom ten sam — strona numeruje je kolejno. */
+    const rywalId = nm ? (nm.isHome ? nm.awayTeamId : nm.homeTeamId) : null;
+    const rywalWTabeli = rywalId ? table.find((r) => r.teamId === rywalId) : null;
 
     const ETYKIETA_RODZAJU = { mecz: 'ZA KULISAMI', skrot: 'SKRÓT MECZU', klub: 'Z ŻYCIA KLUBU' };
     const bsAll = (C.BACKSTAGE || []).filter((v) => v && v.id);
@@ -3847,6 +3873,22 @@ class Component extends DCLogic {
       fbShow: s.fbOpen && !s.cookieOpen && !s.lightbox && !pokazOkienkoMeczu,
       /* ——— okienko z najbliższym meczem ——— */
       matchPopupShow: pokazOkienkoMeczu,
+      // Wiersz rywala pokazujemy tylko, gdy naprawdę jest w klasyfikacji —
+      // puchar i sparingi nie mają tabeli, więc plakietka wtedy znika.
+      hasRivalRow: Boolean(rywalWTabeli),
+      rivalPos: rywalWTabeli ? rywalWTabeli.pos + '.' : '',
+      rivalPts: rywalWTabeli ? rywalWTabeli.points : '',
+      rivalPlayed: rywalWTabeli ? rywalWTabeli.played : '',
+      /* Skróty Z/R/P są językowe — po francusku V/N/D, po niderlandzku W/G/V,
+         po angielsku W/D/L. Napis zawiera liczby, więc słownik go nie
+         dopasuje; składamy go tutaj, tak jak podsumowanie pozycji w tabeli. */
+      rivalForm: rywalWTabeli
+        ? this._t(
+            rywalWTabeli.won + 'Z ' + rywalWTabeli.drawn + 'R ' + rywalWTabeli.lost + 'P',
+            rywalWTabeli.won + 'V ' + rywalWTabeli.drawn + 'N ' + rywalWTabeli.lost + 'D',
+            rywalWTabeli.won + 'W ' + rywalWTabeli.drawn + 'G ' + rywalWTabeli.lost + 'V',
+            rywalWTabeli.won + 'W ' + rywalWTabeli.drawn + 'D ' + rywalWTabeli.lost + 'L')
+        : '',
       onMatchPopupClose: () => {
         // zapamiętujemy identyfikator meczu: po kolejce okienko wróci z nowym
         try { localStorage.setItem('fcp.match.popup.v1', String(nm && nm.id)); } catch (e) {}
