@@ -318,9 +318,27 @@ Grafika i teksty, które pokazują się, gdy ktoś wrzuci link do strony na
 Facebooka, WhatsAppa, Messengera, LinkedIna albo X. Znaczniki siedzą
 w `<head>` w `index.html`.
 
-**Adresy muszą być pełne** (`https://polonia.aktualnosci.be/...`). Ścieżka
-względna typu `assets/crest.png` jest przez te serwisy po cichu ignorowana
-i karta zostaje bez grafiki — tak właśnie było wcześniej.
+**Adresy muszą być pełne.** Ścieżka względna typu `assets/crest.png` jest przez
+te serwisy po cichu ignorowana i karta zostaje bez grafiki — tak właśnie było
+wcześniej.
+
+**Którego adresu używać — stan na październik 2026.** Klub ma trzy adresy
+i tylko jeden nadaje się pod znaczniki:
+
+| Adres | Stan | Nadaje się? |
+|---|---|---|
+| `polonia.aktualnosci.be` | **martwy**, Cloudflare Error 1000 | nie |
+| `poloniabxl.be` | przekierowanie, ale **tylko korzeń** — `/assets/…` daje 404 | nie na pliki |
+| `poloniabruksela.netlify.app` | działa w całości | tak, obecnie używany |
+
+Dlatego `og:url`, `og:image` i `<link rel="canonical">` wskazują na adres
+Netlify: robot musi dostać plik, a nie 404. Na samej grafice widnieje
+`poloniabxl.be`, bo to adres, który klub promuje.
+
+**Docelowo**: dodać `poloniabxl.be` jako domenę własną w panelu Netlify
+(Domain management). Wtedy przestanie być przekierowaniem, podścieżki zaczną
+działać i wszystkie trzy znaczniki można przestawić na ten adres. Do tego
+czasu nie wpisuj tam `poloniabxl.be` — karta straci grafikę.
 
 Grafika to `assets/og-share.jpg`, 1200×630. Nie rysuj jej ręcznie: składa ją
 prawdziwy Chrome z szablonu `.claude/og-card.html` poleceniem
