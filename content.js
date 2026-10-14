@@ -406,6 +406,28 @@ export const BACKSTAGE_CHANNEL = 'https://www.youtube.com/channel/UCpIJHhaDBMHfV
    nie z samych tytułów filmów. */
 export const BACKSTAGE = [
   {
+    id: '_i0ehlfDtVY',
+    title: 'Gol dla ukochanej. Zwycięstwo uciekło w 91. minucie',
+    date: '2026-10-14',
+    kind: 'mecz',
+    round: 6,
+    opponent: 'ROFC Stockel B',
+    score: '2:2',
+    outcome: 'R',
+    lead: 'Pierwszy gol Michała Niewińskiego w sezonie i cieszynka dedykowana dziewczynie. Po bezbramkowej połowie gospodarze wyszli na prowadzenie, Polonia odwróciła wynik w pięć minut, a remis przypieczętowała 91. minuta.',
+  },
+  {
+    id: 'uGnKAQW9Rk4',
+    title: 'Rodzina Polonii rośnie. Wspólny grill, kibice i świetna atmosfera',
+    date: '2026-10-12',
+    kind: 'klub',
+    round: null,
+    opponent: '',
+    score: '',
+    outcome: '',
+    lead: 'Przy okazji meczu oldbojów klub zaprosił zawodników, rodziny i kibiców na wspólnego grilla. Tego dnia wynik był najmniej ważny — liczyły się rozmowy, dzieci i czas spędzony razem.',
+  },
+  {
     id: 'zrvy4gjmE24',
     title: 'Połamany palec i walka do końca. Wygrywamy 2:1',
     date: '2026-10-09',

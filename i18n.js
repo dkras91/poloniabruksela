@@ -214,6 +214,22 @@ const T = {
     'The first episodes are coming soon. Until then, have a look at our YouTube channel.'],
 
   /* --- Backstage Polonia: tytuły i opisy odcinków --- */
+  'Gol dla ukochanej. Zwycięstwo uciekło w 91. minucie': [
+    'Un but pour sa bien-aimée. La victoire s’est envolée à la 91e minute',
+    'Een goal voor zijn geliefde. De zege glipte weg in de 91e minuut',
+    'A goal for his girlfriend. The win slipped away in the 91st minute'],
+  'Pierwszy gol Michała Niewińskiego w sezonie i cieszynka dedykowana dziewczynie. Po bezbramkowej połowie gospodarze wyszli na prowadzenie, Polonia odwróciła wynik w pięć minut, a remis przypieczętowała 91. minuta.': [
+    'Le premier but de la saison de Michał Niewiński et une célébration dédiée à sa compagne. Après une première période sans but, les locaux ont ouvert le score, Polonia a renversé la rencontre en cinq minutes, et la 91e minute a scellé le partage.',
+    'Het eerste seizoensdoelpunt van Michał Niewiński en een viering opgedragen aan zijn vriendin. Na een doelpuntloze eerste helft kwamen de gastheren op voorsprong, Polonia draaide de wedstrijd om in vijf minuten, en de 91e minuut bezegelde het gelijkspel.',
+    'Michał Niewiński’s first goal of the season and a celebration dedicated to his girlfriend. After a goalless first half the hosts went ahead, Polonia turned the game around in five minutes, and the 91st minute sealed the draw.'],
+  'Rodzina Polonii rośnie. Wspólny grill, kibice i świetna atmosfera': [
+    'La famille de Polonia s’agrandit. Barbecue, supporters et belle ambiance',
+    'De familie van Polonia groeit. Samen barbecueën, supporters en een prima sfeer',
+    'The Polonia family is growing. A shared barbecue, supporters and a great atmosphere'],
+  'Przy okazji meczu oldbojów klub zaprosił zawodników, rodziny i kibiców na wspólnego grilla. Tego dnia wynik był najmniej ważny — liczyły się rozmowy, dzieci i czas spędzony razem.': [
+    'À l’occasion du match des vétérans, le club a invité joueurs, familles et supporters à un barbecue. Ce jour-là, le score comptait le moins : ce qui importait, c’étaient les discussions, les enfants et le temps passé ensemble.',
+    'Bij de wedstrijd van de oldtimers nodigde de club spelers, families en supporters uit voor een barbecue. Die dag deed de uitslag er het minst toe: het ging om de gesprekken, de kinderen en de tijd samen.',
+    'At the veterans’ match the club invited players, families and supporters to a barbecue. That day the score mattered least — what counted were the conversations, the children and the time spent together.'],
   'Połamany palec i walka do końca. Wygrywamy 2:1': [
     'Un doigt cassé et la lutte jusqu’au bout. Nous gagnons 2:1',
     'Een gebroken vinger en knokken tot het einde. We winnen met 2:1',
