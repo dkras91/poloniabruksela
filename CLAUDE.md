@@ -283,6 +283,35 @@ Pole `kind` steruje wyłącznie etykietą na kafelku: `mecz` → ZA KULISAMI,
 pochodzą z terminarza RBFA (`data/rbfa.json`), nie z samych tytułów filmów —
 przy dopisywaniu odcinka sprawdź je tam, nie zgaduj.
 
+### Wykrywanie nowych odcinków
+
+`C:\Users\damia\polonia-rbfa-sync\backstage.mjs` (poza repozytorium, obok
+narzędzia RBFA) czyta kanał YouTube przez RSS i wyłapuje filmy, których nie ma
+w `BACKSTAGE`. Dla każdego pobiera i przeskalowuje miniaturę oraz zapisuje
+gotowy szkic wpisu do `nowe-odcinki.txt`: datę, zgadnięty `kind`, a przy
+odcinkach meczowych numer kolejki, rywala i wynik zestawione z `data/rbfa.json`.
+Chodzi w tym samym zadaniu harmonogramu co synchronizacja RBFA; gdy coś
+znajdzie, `STAN.txt` mówi o tym wprost.
+
+**Narzędzie niczego nie publikuje i nie dotyka `content.js`.** Tytuły na
+YouTubie są pisane pod YouTube (emoji, hashtagi, „#KOLEJKA 5"), a strona
+potrzebuje redakcyjnego tytułu, leadu i tłumaczeń na trzy języki — tego nie da
+się wygenerować automatycznie bez spadku jakości, a reguła czterech języków
+jest twarda. Wpis zatwierdza człowiek.
+
+Kanał RSS jest zwykłym plikiem XML i nie ma nic wspólnego z blokadą Akamai na
+API federacji — `curl` pobiera go bez przeszkód.
+
+Film, który świadomie NIE ma być na stronie, wpisz do `pominiete.txt` w
+katalogu narzędzia. Bez tego wykrywacz zgłaszałby go jako nowy przy każdym
+uruchomieniu — tak było z drugim filmem wprowadzającym po jego usunięciu.
+
+Rodzaj materiału rozpoznajemy po znaczniku „KOLEJKA N" w tytule, a nie po samej
+nazwie serii: „Backstage Polonia" pojawia się także w filmach wizerunkowych,
+przez co zapowiedź kanału dostawała etykietę meczu i przyklejoną kolejkę.
+Z tego samego powodu dopasowanie po dacie publikacji stosujemy wyłącznie do
+skrótów meczowych.
+
 ## Podgląd przy udostępnianiu linku (Open Graph)
 
 Grafika i teksty, które pokazują się, gdy ktoś wrzuci link do strony na
