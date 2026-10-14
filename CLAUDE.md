@@ -322,23 +322,22 @@ w `<head>` w `index.html`.
 te serwisy po cichu ignorowana i karta zostaje bez grafiki — tak właśnie było
 wcześniej.
 
-**Którego adresu używać — stan na październik 2026.** Klub ma trzy adresy
-i tylko jeden nadaje się pod znaczniki:
+**Adres klubu to `poloniabxl.be`** — domena własna w Netlify, z certyfikatem
+Let's Encrypt obejmującym `poloniabxl.be` i `www.poloniabxl.be` (www
+przekierowuje na korzeń). `og:url`, `og:image` i `<link rel="canonical">`
+wskazują właśnie tam. Rekordy w GoDaddy: A `@` → `75.2.60.5`, CNAME `www` →
+`poloniabruksela.netlify.app`.
 
-| Adres | Stan | Nadaje się? |
-|---|---|---|
-| `polonia.aktualnosci.be` | **martwy**, Cloudflare Error 1000 | nie |
-| `poloniabxl.be` | przekierowanie, ale **tylko korzeń** — `/assets/…` daje 404 | nie na pliki |
-| `poloniabruksela.netlify.app` | działa w całości | tak, obecnie używany |
+Nie wpisuj tu `polonia.aktualnosci.be` — ta domena jest martwa (Cloudflare
+Error 1000) i klub z niej zrezygnował. `poloniabruksela.netlify.app` działa
+i nadaje się do testów, ale nie jest adresem publicznym.
 
-Dlatego `og:url`, `og:image` i `<link rel="canonical">` wskazują na adres
-Netlify: robot musi dostać plik, a nie 404. Na samej grafice widnieje
-`poloniabxl.be`, bo to adres, który klub promuje.
-
-**Docelowo**: dodać `poloniabxl.be` jako domenę własną w panelu Netlify
-(Domain management). Wtedy przestanie być przekierowaniem, podścieżki zaczną
-działać i wszystkie trzy znaczniki można przestawić na ten adres. Do tego
-czasu nie wpisuj tam `poloniabxl.be` — karta straci grafikę.
+Przy ustawianiu domeny w GoDaddy obowiązuje jedna pułapka, która kosztowała
+sporo czasu: dopóki włączona jest usługa **Forwarding**, GoDaddy sam tworzy
+i **blokuje** rekordy A na swoje serwery parkingowe (`15.197.*`, `3.33.*`).
+Nie da się ich wtedy usunąć ani zmienić, a domena rozkłada ruch między nimi
+a Netlify, przez co walidacja certyfikatu losowo pada. Najpierw usuń
+Forwarding, dopiero potem rekordy.
 
 Grafika to `assets/og-share.jpg`, 1200×630. Nie rysuj jej ręcznie: składa ją
 prawdziwy Chrome z szablonu `.claude/og-card.html` poleceniem
