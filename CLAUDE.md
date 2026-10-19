@@ -112,6 +112,17 @@ oraz `pickSeriesFromMatches()` i `normalizeStandings()` w `rbfa-standings.js`.
 Narzędzie importuje je wprost z repozytorium — nie kopiuj tej logiki na drugą
 stronę, bo pola się rozjadą.
 
+**Pierwsze pobranie po wejściu na stronę ignoruje TTL.** `startAutoSync()`
+woła `sync({ force: true })` przy starcie, a dopiero kolejne odświeżenia
+w długo otwartej karcie respektują `ttlMinutes` (45). Bez tego odwiedzający,
+który wszedł na stronę krótko przed opublikowaniem nowego wyniku, widział
+stare dane nawet przez 45 minut — i **nie pomagało przeładowanie ani
+Ctrl+Shift+R**, bo ten czyści pamięć przeglądarki, a nie naszą migawkę
+w `localStorage`. Wyglądało to jak „strona się nie aktualizuje", choć dane na
+serwerze były świeże. TTL miał sens, gdy źródłem był wolny importer RBFA;
+dziś dane to statyczny plik na naszym CDN, więc jedno zapytanie na wejście
+jest tanie. Nie przywracaj tu starego zachowania.
+
 `getConfig()` odrzuca zapisane w `localStorage` adresy `/.netlify/functions/rbfa-`.
 Bez tego odwiedzający ze starym wpisem z panelu dostawałby 404, strona po cichu
 zjechałaby na dane zapasowe i wyglądała poprawnie, pokazując wyniki sprzed

@@ -1150,9 +1150,20 @@ export function matchICSFilename(f) {
 /** Autostart: jedna próba synchronizacji po wejściu (respektuje TTL)
  *  + odświeżanie w tle co ttlMinutes, gdy karta pozostaje otwarta. */
 export function startAutoSync(onChange) {
-  const tick = async () => { const r = await sync(); onChange?.(getState(), r); };
-  tick();
+  /* PIERWSZE pobranie po wejściu na stronę ignoruje TTL (`force: true`).
+     Bez tego odwiedzający, który wszedł na stronę krótko przed opublikowaniem
+     nowego wyniku, widział stare dane nawet przez 45 minut — i nie pomagało
+     przeładowanie ani Ctrl+Shift+R, bo ten czyści pamięć przeglądarki, a nie
+     naszą migawkę w localStorage. Wyglądało to jak „strona się nie
+     aktualizuje", a dane na serwerze były świeże.
+
+     TTL miał sens, gdy źródłem był importer RBFA: wolny i limitowany. Dziś
+     dane leżą w statycznym pliku na naszym CDN (`data/rbfa.json`, ok. 25 kB,
+     `max-age=0, must-revalidate`), więc jedno zapytanie na wejście jest tanie.
+     Kolejne odświeżenia w długo otwartej karcie nadal respektują TTL. */
+  const tick = async (force = false) => { const r = await sync({ force }); onChange?.(getState(), r); };
+  tick(true);
   const cfg = getConfig();
-  const id = setInterval(tick, Math.max(15, cfg.ttlMinutes) * 60000);
+  const id = setInterval(() => tick(false), Math.max(15, cfg.ttlMinutes) * 60000);
   return () => clearInterval(id);
 }
