@@ -1,0 +1,27 @@
+/* Strony prawne aplikacji „Polonia Razem!” (polityka prywatności, usuwanie konta) — samodzielne pliki bez hash-routingu,
+   żeby Google Play i Apple czytały je pod stałym adresem. Kolory i fonty z design systemu klubu (_ds). */
+:root { color-scheme: dark; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--surface-dark); color: var(--text-on-dark); font-family: var(--font-body), system-ui, sans-serif; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+.bar { height: 6px; background: var(--color-red); box-shadow: 0 2px 0 var(--color-gold); }
+main { max-width: 760px; margin: 0 auto; padding: 32px 16px 64px; }
+header { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
+header img { width: 56px; height: 56px; }
+.kicker { margin: 0; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--color-gold); font-weight: 700; }
+h1 { font-family: var(--font-display), sans-serif; font-weight: 900; font-size: clamp(30px, 6vw, 44px); line-height: 1.05; margin: 4px 0 0; text-transform: uppercase; letter-spacing: .01em; }
+h2 { font-family: var(--font-display), sans-serif; font-weight: 800; font-size: 24px; text-transform: uppercase; margin: 36px 0 8px; color: var(--text-on-dark); }
+h3 { font-size: 17px; margin: 22px 0 6px; }
+p, li { color: var(--text-on-dark); }
+.muted { color: var(--text-muted-on-dark); font-size: 14px; }
+a { color: var(--link-color); }
+a:hover { color: var(--link-color-hover); }
+ul { padding-left: 20px; }
+.box { border: 1px solid var(--border-on-dark); border-left: 4px solid var(--color-red); border-radius: 0; padding: 14px 16px; margin: 18px 0; background: rgba(255,255,255,.03); }
+.lang { display: flex; gap: 8px; margin: 18px 0 8px; }
+.lang a { font-size: 12px; font-weight: 700; letter-spacing: .1em; padding: 5px 10px; border: 1px solid var(--border-on-dark); text-decoration: none; color: var(--text-on-dark); }
+table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 10px 0; }
+th, td { text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid var(--border-on-dark); }
+th { color: var(--color-gold); font-size: 13px; text-transform: uppercase; letter-spacing: .06em; }
+.table-wrap { overflow-x: auto; }
+hr { border: 0; border-top: 1px solid var(--border-on-dark); margin: 48px 0 8px; }
+footer { margin-top: 40px; font-size: 13px; color: var(--text-muted-on-dark); }
