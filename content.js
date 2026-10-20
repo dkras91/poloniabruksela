@@ -40,6 +40,7 @@ export const CLUB_INFO = {
   rbfaClub: '6360',
   email: 'polonia@live.be',
   facebook: 'https://www.facebook.com/fcpolonia.bruksela/',
+  instagram: 'https://www.instagram.com/fcpoloniabruksela/',
   tiktok: 'https://www.tiktok.com/@poloniabruksela',
   support: 'https://polonia.aktualnosci.be/',
   venues: [
