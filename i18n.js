@@ -214,6 +214,14 @@ const T = {
     'The first episodes are coming soon. Until then, have a look at our YouTube channel.'],
 
   /* --- Backstage Polonia: tytuły i opisy odcinków --- */
+  'Polonia Razem! Aplikacja klubu już wkrótce na Androida i iOS': [
+    'Polonia Razem ! L’application du club bientôt sur Android et iOS',
+    'Polonia Razem! De clubapp binnenkort op Android en iOS',
+    'Polonia Razem! The club app coming soon to Android and iOS'],
+  'Jedna aplikacja dla drużyny i dla kibiców: kalendarz treningów i meczów, powołania, wyniki na żywo, tabela, serduszka dla zawodników i typowanie kolejki. Backstage Polonia także w telefonie.': [
+    'Une seule application pour l’équipe et pour les supporters : calendrier des entraînements et des matchs, convocations, scores en direct, classement, cœurs pour les joueurs et pronostics de la journée. Backstage Polonia aussi sur le téléphone.',
+    'Eén app voor de ploeg en voor de supporters: kalender van trainingen en wedstrijden, selecties, livescores, klassement, hartjes voor de spelers en voorspellingen van de speeldag. Backstage Polonia ook op de telefoon.',
+    'One app for the team and for the supporters: training and match calendar, call-ups, live scores, the league table, hearts for the players and matchday predictions. Backstage Polonia on your phone too.'],
   'Gol dla ukochanej. Zwycięstwo uciekło w 91. minucie': [
     'Un but pour sa bien-aimée. La victoire s’est envolée à la 91e minute',
     'Een goal voor zijn geliefde. De zege glipte weg in de 91e minuut',

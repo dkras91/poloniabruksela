@@ -414,6 +414,17 @@ export const BACKSTAGE_CHANNEL = 'https://www.youtube.com/channel/UCpIJHhaDBMHfV
    nie z samych tytułów filmów. */
 export const BACKSTAGE = [
   {
+    id: '47WUd7-uakY',
+    title: 'Polonia Razem! Aplikacja klubu już wkrótce na Androida i iOS',
+    date: '2026-10-16',
+    kind: 'klub',
+    round: null,
+    opponent: '',
+    score: '',
+    outcome: '',
+    lead: 'Jedna aplikacja dla drużyny i dla kibiców: kalendarz treningów i meczów, powołania, wyniki na żywo, tabela, serduszka dla zawodników i typowanie kolejki. Backstage Polonia także w telefonie.',
+  },
+  {
     id: '_i0ehlfDtVY',
     title: 'Gol dla ukochanej. Zwycięstwo uciekło w 91. minucie',
     date: '2026-10-14',
