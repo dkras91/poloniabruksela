@@ -126,6 +126,8 @@ export const SQUAD = [
   { number: '', first: 'Sebastian', last: 'Steckiewicz', position: 'GK', photo: 'assets/kadra/gk-2-still.jpg', photoAction: 'assets/kadra/gk-2-action.jpg' },
   { number: '', first: 'Maxime', last: 'Kapczuk', position: 'GK', photo: 'assets/kadra/gk-3-still.jpg', photoAction: 'assets/kadra/gk-3-action.jpg' },
   { number: '', first: 'Marek', last: 'Truchel', position: 'GK', photo: 'assets/kadra/gk-1-still.jpg', photoAction: 'assets/kadra/gk-1-action.jpg' },
+  // Sylwetka zastępcza do czasu sesji zdjęciowej — ten sam plik posłuży każdemu nowemu zawodnikowi.
+  { number: '', first: 'Sebastian', last: 'Popławski', position: 'GK', photo: 'assets/kadra/brak-zdjecia.jpg' },
   { number: '', first: 'Karol', last: 'Maj', position: 'DF', photo: 'assets/kadra/df-maj-still.jpg', photoAction: 'assets/kadra/df-maj-action.jpg' },
   { number: '', first: 'Adrian', last: 'Trusiak', position: 'DF', photo: 'assets/kadra/df-trusiak-still.jpg', photoAction: 'assets/kadra/df-trusiak-action.jpg' },
   { number: '', first: 'Julian', last: 'Baworski', position: 'DF', photo: 'assets/kadra/df-baworski-action.jpg', photoAction: 'assets/kadra/df-baworski-still.jpg' },
