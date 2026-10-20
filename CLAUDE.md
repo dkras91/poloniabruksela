@@ -304,11 +304,23 @@ odcinkach meczowych numer kolejki, rywala i wynik zestawione z `data/rbfa.json`.
 Chodzi w tym samym zadaniu harmonogramu co synchronizacja RBFA; gdy coś
 znajdzie, `STAN.txt` mówi o tym wprost.
 
-**Narzędzie niczego nie publikuje i nie dotyka `content.js`.** Tytuły na
+Gdy nic nie czeka, `backstage.mjs` **kasuje** `nowe-odcinki.txt`. Obecność tego
+pliku zawsze znaczy „jest robota" — bez kasowania wczorajszy raport zostawałby
+na dysku i codzienny automat próbowałby w kółko dodawać odcinki, które już są.
+
+**Sam skrypt nadal niczego nie publikuje i nie dotyka `content.js`.** Tytuły na
 YouTubie są pisane pod YouTube (emoji, hashtagi, „#KOLEJKA 5"), a strona
-potrzebuje redakcyjnego tytułu, leadu i tłumaczeń na trzy języki — tego nie da
-się wygenerować automatycznie bez spadku jakości, a reguła czterech języków
-jest twarda. Wpis zatwierdza człowiek.
+potrzebuje redakcyjnego tytułu, leadu i tłumaczeń na trzy języki — tego nie
+wygeneruje `sed` ani szablon, a reguła czterech języków jest twarda.
+
+Publikuje za to **codzienne zadanie Claude `polonia-kontrola-danych`** (10:00,
+`~/.claude/scheduled-tasks/`): uruchamia synchronizację, a gdy raport istnieje,
+pisze polski tytuł i lead, dopisuje wpis do `BACKSTAGE`, dokłada FR/NL/EN
+w `i18n.js`, sprawdza kompletność tłumaczeń i wypycha zmianę. Redakcję robi
+więc model, nie skrypt — i dlatego w ogóle może być automatyczna. Zadanie
+działa wyłącznie przy otwartej aplikacji Claude; samo pobieranie danych RBFA
+ma działać niezależnie od tego, z zadania harmonogramu Windows
+(„Polonia Bruksela - dane RBFA").
 
 Kanał RSS jest zwykłym plikiem XML i nie ma nic wspólnego z blokadą Akamai na
 API federacji — `curl` pobiera go bez przeszkód.
