@@ -15,6 +15,15 @@ const BASE = new URL(self.registration.scope).pathname.replace(/\/$/, '');
 // Pola danych potrzebne do wyboru ekranu (routeForNotification w src/domain/notificationRoutes.ts).
 const ROUTE_FIELDS = ['type', 'category', 'event_id', 'news_id', 'conversation_id', 'snapshot_id', 'member_id', 'notification_id'];
 
+// Język tekstu powiadomienia (atrybut lang — czytnik ekranu, dzielenie wyrazów). Baza dopisuje data.lang tylko
+// powiadomieniom kibica w innym języku niż polski (plan tłumaczenia, sekcja 5); bez niego — polski jak dotąd.
+const LANG_TAGS = { pl: 'pl', fr: 'fr-BE', nl: 'nl-BE', en: 'en-GB' };
+
+function langOf(data) {
+  const code = data && typeof data.lang === 'string' ? data.lang : '';
+  return Object.prototype.hasOwnProperty.call(LANG_TAGS, code) ? LANG_TAGS[code] : 'pl';
+}
+
 self.addEventListener('install', () => self.skipWaiting());
 self.addEventListener('activate', (event) => event.waitUntil(self.clients.claim()));
 
@@ -31,7 +40,7 @@ self.addEventListener('push', (event) => {
     data: msg.data || {},
     icon: typeof msg.icon === 'string' && msg.icon.startsWith('https://') ? msg.icon : `${BASE}/pwa/icon-192.png`,
     badge: `${BASE}/pwa/badge-96.png`,
-    lang: 'pl',
+    lang: langOf(msg.data),
   };
   if (msg.tag) {
     options.tag = msg.tag;
