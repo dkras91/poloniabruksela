@@ -2,14 +2,18 @@
  * Polonia Razem! — service worker wersji w przeglądarce (https://poloniabxl.be/app/, prywatne/WERSJA-WEB.md).
  * Kopiuje go scripts/release/web-export.mjs do /app/sw.js (zakres /app/). Rejestruje go src/lib/notifications.web.ts.
  *
- * Robi TYLKO powiadomienia Web Push (push-dispatch → usługa push przeglądarki → tu):
- *  - „push”: pokazuje powiadomienie (tytuł, treść; tag = mecz — nowy wynik zastępuje poprzedni),
- *  - „notificationclick”: otwiera aplikację na meczu / newsie (otwarta karta dostaje wiadomość, zamknięta
- *    startuje z adresem /app/?pt_push=…).
+ * Robi TYLKO powiadomienia Web Push (push-dispatch → usługa push przeglądarki → tu) — dla członków drużyny i kibiców:
+ *  - „push”: pokazuje powiadomienie (tytuł, treść; tag = mecz / rozmowa — nowe zastępuje poprzednie; ikona = zdjęcie
+ *    nadawcy wiadomości, gdy jest),
+ *  - „notificationclick”: otwiera aplikację na właściwym ekranie (rozmowa, mecz, wydarzenie, raport, news…) — otwarta
+ *    karta dostaje wiadomość, zamknięta startuje z adresem /app/?pt_push=… (src/lib/notifications.web.ts).
  * Celowo BEZ obsługi „fetch” i bez pamięci podręcznej: nic nie trzyma starej wersji aplikacji — po publikacji
- * nowej wersji kibice dostają ją przy najbliższym otwarciu.
+ * nowej wersji wszyscy dostają ją przy najbliższym otwarciu.
  */
 const BASE = new URL(self.registration.scope).pathname.replace(/\/$/, '');
+
+// Pola danych potrzebne do wyboru ekranu (routeForNotification w src/domain/notificationRoutes.ts).
+const ROUTE_FIELDS = ['type', 'category', 'event_id', 'news_id', 'conversation_id', 'snapshot_id', 'member_id', 'notification_id'];
 
 self.addEventListener('install', () => self.skipWaiting());
 self.addEventListener('activate', (event) => event.waitUntil(self.clients.claim()));
@@ -25,7 +29,7 @@ self.addEventListener('push', (event) => {
   const options = {
     body: msg.body || '',
     data: msg.data || {},
-    icon: `${BASE}/pwa/icon-192.png`,
+    icon: typeof msg.icon === 'string' && msg.icon.startsWith('https://') ? msg.icon : `${BASE}/pwa/icon-192.png`,
     badge: `${BASE}/pwa/badge-96.png`,
     lang: 'pl',
   };
@@ -39,7 +43,10 @@ self.addEventListener('push', (event) => {
 self.addEventListener('notificationclick', (event) => {
   event.notification.close();
   const d = event.notification.data || {};
-  const data = { type: d.type, event_id: d.event_id, news_id: d.news_id, notification_id: d.notification_id };
+  const data = {};
+  for (const k of ROUTE_FIELDS) {
+    if (typeof d[k] === 'string' || typeof d[k] === 'number') data[k] = d[k];
+  }
   event.waitUntil((async () => {
     const windows = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
     const open = windows.find((c) => new URL(c.url).pathname.startsWith(`${BASE}/`));
