@@ -410,6 +410,38 @@ Po zmianie znaczników Facebook trzyma stary podgląd w pamięci. Odświeża si�
 w Sharing Debugger (`developers.facebook.com/tools/debug`) przyciskiem
 „Scrape Again".
 
+## Ikony strony (favicon i ekran główny)
+
+Cztery pliki w korzeniu repozytorium, podpięte w `<head>`: `favicon.ico`
+(kontener z 16, 32 i 48 px), `favicon-16x16.png`, `favicon-32x32.png`
+i `apple-touch-icon.png` (180 px, ekran główny telefonu).
+
+**Wszystkie mają kremowe tło `#F6F3EC`, nie przezroczyste.** To jest wybór
+właściciela i ma powód. Przezroczysta ikona pokazuje to, co pod nią: w ciemnym
+motywie przeglądarki herb siedział na niemal czarnym pasku kart i wyglądał jak
+wklejony w czarny kwadrat. Na iPhonie jest gorzej — iOS **zawsze zamalowuje
+przezroczystość na czarno** przy dodawaniu strony do ekranu głównego, więc samo
+wyczyszczenie kanału alfa niczego tam nie naprawia. Kremowy podkład to ten sam
+kolor jasnego tła co na stronie. Nie przywracaj tu przezroczystości.
+
+**Szesnastka to nie pomniejszony herb.** Cały herb w tej skali zlewa się
+w nieczytelną czerwoną plamę — kłosy, „1986" i napis „F.C. POLONIA" znikają.
+Dlatego `favicon-16x16.png` to płaska **sylwetka samej tarczy**: wnętrze
+w klubowej czerwieni `#E2092F`, rant złoty `#B7A85C`. Kształt nie jest rysowany
+od nowa — liczy go `.claude/zrob-ikony.html` z maski kanału alfa prawdziwego
+herbu (spójny obszar od środka, więc kłosy jako osobne wyspy odpadają; dziury
+po białych literach domykane od zewnątrz; rant przez erozję warstwami).
+Rozmiary 32, 48 i 180 px zostają pełnym herbem.
+
+Narzędzie chodzi w przeglądarce, bo Chrome dekoduje PNG z kanałem alfa bez
+żadnych bibliotek, a tu nie wolno `package.json` — ten sam powód co przy
+`.claude/zrob-og.mjs`. Wymaga uruchomionego podglądu, bo wczytuje
+`/assets/crest-full.png`. Kontrolka gotowych plików: `.claude/sprawdz-ikony.html`
+pokazuje je na makiecie paska kart w obu motywach. Oba pliki są w `.gitignore`.
+
+Źródłem jest zawsze `assets/crest-full.png` (4929×4641, z alfą), nigdy
+`assets/crest.png` — ten jest w palecie i przy skalowaniu gubi półtony.
+
 ## Mapy Google tylko po zgodzie
 
 `cookies.js` ma osobną kategorię `maps`. Osadzona mapa w szczegółach meczu
