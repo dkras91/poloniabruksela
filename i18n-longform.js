@@ -354,4 +354,56 @@ export const LONGFORM = {
     '— we antwoorden binnen een redelijke termijn. Voor alles wat hier niet geregeld is, geldt het Belgisch recht en zijn de bevoegde Belgische rechtbanken bevoegd voor geschillen.',
     '— we reply within a reasonable time. For anything not covered here, Belgian law applies and the competent Belgian courts settle any disputes.',
   ],
+  /* ══════════════════════════════════════ APLIKACJA POLONIA RAZEM! ══ */
+  /* Podstrona #/aplikacja i zajawka na stronie głównej. Zmieniasz akapit
+     o statusie (np. gdy aplikacja trafi do Google Play / App Store)?
+     Zmień też klucz poniżej — liczy się pierwsze 45 znaków. */
+
+  'Polonia Razem! to oficjalna aplikacja FC Polonia Bruksela — jedna dla kibiców i dla drużyny.': [
+    'Polonia Razem! est l’application officielle du FC Polonia Bruxelles — une seule appli pour les supporters et pour l’équipe. Résultats en direct, Ligue des pronostics, cœurs pour les joueurs, classement, actus et Backstage — et, pour les joueurs et le staff, calendrier, convocations et chat.',
+    'Polonia Razem! is de officiële app van FC Polonia Brussel — één app voor de supporters en voor de ploeg. Live uitslagen, pronostiekcompetitie, hartjes voor de spelers, klassement, nieuws en Backstage — en voor spelers en staf de kalender, selecties en chat.',
+    'Polonia Razem! is the official app of FC Polonia Brussels — one app for the fans and for the team. Live scores, the Prediction League, hearts for the players, the league table, news and Backstage — and, for players and staff, the calendar, call-ups and chat.',
+  ],
+
+  'Aplikacje na Android i iOS są w trakcie przygotowania': [
+    'Les applications Android et iOS sont en préparation — nous vous préviendrons dès qu’elles seront disponibles sur Google Play et l’App Store.',
+    'De apps voor Android en iOS zijn in voorbereiding — we laten het weten zodra ze in Google Play en de App Store staan.',
+    'The Android and iOS apps are in preparation — we’ll let you know as soon as they appear on Google Play and the App Store.',
+  ],
+
+  'Już teraz kibice mogą korzystać z wersji w przeglądarce.': [
+    'Les supporters peuvent déjà utiliser la version web. Elle fonctionne sur téléphone et peut être ajoutée à l’écran d’accueil — elle s’ouvre alors comme une application classique.',
+    'Supporters kunnen nu al de webversie gebruiken. Ze werkt op de telefoon en je kunt ze op je beginscherm zetten — dan opent ze als een gewone app.',
+    'Fans can already use the web version. It works on your phone and can be added to your home screen — it then opens just like a regular app.',
+  ],
+
+  'Po włączeniu powiadomień w aplikacji dostaniesz informację': [
+    'Une fois les notifications activées dans l’application, vous êtes prévenu d’un but de Polonia, du résultat de votre pronostic et des nouvelles du club.',
+    'Zet je meldingen aan in de app, dan krijg je bericht bij een doelpunt van Polonia, over het resultaat van je voorspelling en bij nieuws van de club.',
+    'Once you turn on notifications in the app, you’ll hear about every Polonia goal, the result of your prediction and new club news.',
+  ],
+
+  'Na iPhonie powiadomienia działają tylko w aplikacji otwartej z ikony': [
+    'Sur iPhone, les notifications ne fonctionnent que dans l’application ouverte depuis son icône sur l’écran d’accueil (iOS 16.4 ou plus récent).',
+    'Op een iPhone werken meldingen alleen in de app die je opent via het icoon op je beginscherm (iOS 16.4 of nieuwer).',
+    'On iPhone, notifications only work in the app opened from its icon on the home screen (iOS 16.4 or later).',
+  ],
+
+  'Konto kibica zakładasz w minutę. Potem wszystko, co dzieje się w klubie': [
+    'Votre compte supporter se crée en une minute. Ensuite, tout ce qui se passe au club est à portée de main — y compris le jour du match, au stade.',
+    'Je supportersaccount maak je in een minuut aan. Daarna heb je alles wat er in de club gebeurt bij de hand — ook op matchdag in het stadion.',
+    'Setting up a fan account takes a minute. After that, everything happening at the club is at your fingertips — including on matchday at the ground.',
+  ],
+
+  'Jakie dane zbiera aplikacja i do czego ich używamy, opisuje osobna polityka': [
+    'Les données collectées par l’application et leur usage sont décrits dans une politique de confidentialité distincte. Questions, remarques et signalements de bugs : écrivez à l’adresse du club.',
+    'Welke gegevens de app verzamelt en waarvoor we ze gebruiken, staat in een apart privacybeleid. Vragen, opmerkingen en foutmeldingen stuur je naar het adres van de club.',
+    'What data the app collects and how we use it is described in a separate privacy policy. Send questions, feedback and bug reports to the club’s address.',
+  ],
+
+  'Mecze na żywo, Liga Typerów, serduszka dla zawodników, tabela i Backstage w Twoim telefonie.': [
+    'Matchs en direct, Ligue des pronostics, cœurs pour les joueurs, classement et Backstage dans votre téléphone. La version web fonctionne déjà, Android et iOS arrivent bientôt.',
+    'Live wedstrijden, pronostiekcompetitie, hartjes voor de spelers, klassement en Backstage op je telefoon. De webversie werkt al, Android en iOS volgen binnenkort.',
+    'Live matches, the Prediction League, hearts for the players, the table and Backstage on your phone. The web version works now, Android and iOS are coming soon.',
+  ],
 };

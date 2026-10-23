@@ -588,6 +588,25 @@ a:hover{color:#cbb96b}
     </div>
     </sc-if>
 
+    <!-- APLIKACJA POLONIA RAZEM! — zajawka, prowadzi do #/aplikacja -->
+    <div style="background:linear-gradient(135deg,var(--color-red) 0%,var(--color-red-dim) 100%);color:var(--color-cream)">
+      <div style="max-width:1280px;margin:0 auto;padding:{{ secPad }};display:grid;grid-template-columns:{{ appHomeCols }};gap:clamp(22px,4vw,52px);align-items:center">
+        <div style="min-width:0;display:flex;flex-direction:column;gap:14px">
+          <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.18em;color:var(--color-cream);display:block" style-before="content:'';display:block;width:34px;height:4px;background:var(--color-cream);margin-bottom:12px">APLIKACJA KLUBU</span>
+          <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:{{ h2Size }};text-transform:uppercase;line-height:.94;margin:0;letter-spacing:.01em">Polonia Razem!</h2>
+          <p style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(19px,2.3vw,25px);line-height:1.15;text-transform:uppercase;margin:0">Bliżej drużyny. Bliżej Polonii.</p>
+          <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:clamp(14px,1.7vw,16px);line-height:1.7;color:rgba(246,243,236,.9);margin:0;max-width:520px;text-wrap:pretty">Mecze na żywo, Liga Typerów, serduszka dla zawodników, tabela i Backstage w Twoim telefonie. Wersja w przeglądarce działa już teraz, Android i iOS — wkrótce.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:6px">
+            <a href="#/aplikacja" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:19px;letter-spacing:.08em;text-transform:uppercase;background:var(--color-cream);color:var(--color-graphite);padding:14px 24px;text-align:center;width:{{ btnW }};box-sizing:border-box" style-hover="background:#FFFFFF">Poznaj aplikację</a>
+            <a href="{{ appWebUrl }}" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:19px;letter-spacing:.08em;text-transform:uppercase;border:2px solid rgba(246,243,236,.6);color:var(--color-cream);padding:12px 24px;text-align:center;width:{{ btnW }};box-sizing:border-box" style-hover="border:2px solid var(--color-cream);background:rgba(18,18,22,.15)">Otwórz w przeglądarce</a>
+          </div>
+        </div>
+        <a href="#/aplikacja" style="display:block;min-width:0" aria-label="Poznaj aplikację Polonia Razem!">
+          <img src="{{ appHeroSrc }}" srcset="{{ appHeroSrcset }}" sizes="(max-width: 767px) 100vw, 640px" width="1024" height="500" alt="Polonia Razem! — aplikacja FC Polonia Bruksela. Zawodnicy w czerwonych strojach klubu" loading="lazy" decoding="async" style="width:100%;height:auto;display:block;border:1px solid rgba(246,243,236,.35);box-shadow:0 18px 50px rgba(9,9,12,.4)">
+        </a>
+      </div>
+    </div>
+
     <!-- DRUŻYNA / HISTORIA -->
     <div style="background:#F6F3EC;color:#121216;border-top:1px solid rgba(18,18,22,.1);border-bottom:1px solid rgba(18,18,22,.1)">
     <div style="max-width:1280px;margin:0 auto;padding:{{ secPad }};display:grid;grid-template-columns:repeat(auto-fit,minmax({{ cardMin }},1fr));gap:clamp(16px,2.5vw,28px)">
@@ -1494,6 +1513,208 @@ a:hover{color:#cbb96b}
           <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M23 12s0-3.9-.5-5.8a3 3 0 0 0-2.1-2.1C18.5 3.6 12 3.6 12 3.6s-6.5 0-8.4.5A3 3 0 0 0 1.5 6.2C1 8.1 1 12 1 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 8.4.5 8.4.5s6.5 0 8.4-.5a3 3 0 0 0 2.1-2.1C23 15.9 23 12 23 12ZM9.8 15.5v-7l6.1 3.5-6.1 3.5Z"/></svg>
           Subskrybuj na YouTube
         </a>
+      </div>
+    </div>
+
+  </div>
+  </sc-if>
+
+  <!-- ══════════════════════════════════════ APLIKACJA POLONIA RAZEM! -->
+  <!-- Podstrona o aplikacji klubu. Dane (zrzuty, funkcje, sklepy) siedzą w
+       content.js (APP_*), tłumaczenia w i18n.js / i18n-longform.js.
+       - Gdy aplikacja trafi do Google Play / App Store, wpisz adres w
+         APP_STORES — kafelek „wkrótce" sam zamieni się w odnośnik. Zmień też
+         wtedy akapit o statusie poniżej (i jego tłumaczenia).
+       - Film: assets/aplikacja/polonia-razem-promo-720.mp4 (H.264, bez
+         dźwięku, ~5 MB). Startuje dopiero w kadrze — patrz _setupAppVideo().
+       - Zrzuty pokazują przykładowe dane i zawodników w białym obrysie
+         (zasada klubu dla wycinków). -->
+  <sc-if value="{{ isApp }}" hint-placeholder-val="{{ false }}">
+  <div>
+
+    <!-- ─────────────────────────────────────────────── HERO ───────── -->
+    <div style="background:#0f0f13;border-bottom:1px solid rgba(246,243,236,.1)">
+      <div style="max-width:1280px;margin:0 auto;padding:{{ secPadTop }};display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(24px,4vw,56px);align-items:center">
+        <div style="min-width:0">
+          <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.18em;color:var(--color-red);display:block" style-before="content:'';display:block;width:34px;height:4px;background:var(--color-red);margin-bottom:12px">APLIKACJA KLUBU</span>
+          <h1 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:{{ pageTitle }};text-transform:uppercase;line-height:.88;margin:12px 0 0;letter-spacing:.01em">Polonia Razem!</h1>
+          <div style="height:5px;width:140px;background:var(--color-gold);margin:22px 0 24px"></div>
+          <p style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(20px,2.6vw,28px);line-height:1.15;color:var(--color-gold);text-transform:uppercase;margin:0 0 16px">Bliżej drużyny. Bliżej Polonii.</p>
+          <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:clamp(15px,1.8vw,17px);line-height:1.7;color:var(--text-muted-on-dark);margin:0 0 28px;max-width:620px;text-wrap:pretty">Polonia Razem! to oficjalna aplikacja FC Polonia Bruksela — jedna dla kibiców i dla drużyny. Wyniki na żywo, Liga Typerów, serduszka dla zawodników, tabela, newsy i Backstage, a dla zawodników i sztabu kalendarz, powołania i czat.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:12px">
+            <a href="{{ appWebUrl }}" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:20px;letter-spacing:.08em;text-transform:uppercase;background:var(--color-red);color:var(--color-cream);padding:15px 28px;text-align:center;width:{{ btnW }};box-sizing:border-box" style-hover="background:var(--color-red-dim)">Otwórz wersję w przeglądarce</a>
+          </div>
+        </div>
+        <div style="min-width:0">
+          <img src="{{ appHeroSrc }}" srcset="{{ appHeroSrcset }}" sizes="(max-width: 767px) 100vw, 600px" width="1024" height="500" alt="Polonia Razem! — aplikacja FC Polonia Bruksela. Zawodnicy w czerwonych strojach klubu" loading="lazy" style="width:100%;height:auto;display:block;border:1px solid var(--border-on-dark);box-shadow:0 18px 50px rgba(0,0,0,.45)">
+        </div>
+      </div>
+    </div>
+
+    <!-- ───────────────────────────────────── STATUS / POBIERANIE ───── -->
+    <div style="max-width:1000px;margin:0 auto;padding:{{ secPadTop }}">
+      <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.18em;color:var(--color-red);display:block" style-before="content:'';display:block;width:34px;height:4px;background:var(--color-red);margin-bottom:12px">GDZIE POBRAĆ</span>
+      <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(26px,3.6vw,42px);text-transform:uppercase;margin:12px 0 18px;line-height:1">Android i iOS już wkrótce</h2>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px">
+        <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.18em;background:var(--color-gold);color:var(--color-graphite);padding:7px 12px">W PRZYGOTOWANIU</span>
+      </div>
+      <p style="font-family:'Inter',sans-serif;font-weight:600;font-size:clamp(16px,2vw,19px);line-height:1.6;color:var(--color-cream);margin:0 0 22px;text-wrap:pretty">Aplikacje na Android i iOS są w trakcie przygotowania — damy znać, gdy pojawią się w Google Play i App Store.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px;margin-bottom:30px">
+        <sc-for list="{{ appStores }}" as="st" hint-placeholder-count="2">
+          <sc-if value="{{ st.soon }}" hint-placeholder-val="{{ true }}">
+          <div style="background:#1b1b21;border:1px solid var(--border-on-dark);padding:14px 16px;display:flex;align-items:center;gap:14px">
+            <sc-if value="{{ st.isAndroid }}" hint-placeholder-val="{{ true }}">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true" style="flex-shrink:0;color:var(--text-muted-on-dark)"><path d="M3.6 2.2c-.3.3-.4.7-.4 1.2v17.2c0 .5.1.9.4 1.2l9.7-9.8-9.7-9.8Zm10.8 10.9 2.8 2.8-11.9 6.8c-.4.2-.8.3-1.1.2l10.2-9.8Zm0-2.2L4.2 1.1c.3-.1.7 0 1.1.2l11.9 6.8-2.8 2.8Zm3.9-1.5 3.1 1.8c.9.5.9 1.3 0 1.8l-3.1 1.8-3-3 3-2.4Z"/></svg>
+            </sc-if>
+            <sc-if value="{{ st.isIos }}" hint-placeholder-val="{{ false }}">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true" style="flex-shrink:0;color:var(--text-muted-on-dark)"><path d="M16.4 12.6c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.7-2-1.6-.2-3.1.9-3.9.9-.8 0-2-.9-3.4-.9-1.7 0-3.3 1-4.2 2.6-1.8 3.1-.5 7.7 1.3 10.2.8 1.2 1.8 2.6 3.1 2.5 1.3-.1 1.7-.8 3.2-.8s1.9.8 3.2.8c1.3 0 2.2-1.2 3-2.4.9-1.4 1.3-2.7 1.3-2.8 0 0-2.6-1-3.1-4.2ZM13.9 4.9c.7-.8 1.2-2 1-3.1-1 0-2.2.7-2.9 1.5-.6.7-1.2 1.9-1 3 1.1.1 2.2-.6 2.9-1.4Z"/></svg>
+            </sc-if>
+            <div style="display:flex;flex-direction:column;gap:3px;min-width:0">
+              <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:21px;text-transform:uppercase;line-height:1;color:var(--color-cream)">{{ st.label }}</span>
+              <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.16em;color:var(--color-gold)">WKRÓTCE</span>
+            </div>
+          </div>
+          </sc-if>
+          <sc-if value="{{ st.live }}" hint-placeholder-val="{{ false }}">
+          <a href="{{ st.url }}" target="_blank" rel="noopener" style="background:#1b1b21;border:1px solid var(--color-gold);padding:14px 16px;display:flex;align-items:center;gap:14px;color:var(--color-cream)" style-hover="border:1px solid var(--color-red)">
+            <div style="display:flex;flex-direction:column;gap:3px;min-width:0">
+              <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:21px;text-transform:uppercase;line-height:1">{{ st.label }}</span>
+              <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.16em;color:var(--color-gold)">POBIERZ</span>
+            </div>
+          </a>
+          </sc-if>
+        </sc-for>
+      </div>
+
+      <!-- wersja przeglądarkowa: działa już dziś -->
+      <div style="background:#1b1b21;border:1px solid var(--border-on-dark);border-left:4px solid var(--color-red);padding:{{ cardPad }}">
+        <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.16em;color:var(--color-gold);display:block;margin-bottom:10px">DOSTĘPNA JUŻ TERAZ</span>
+        <h3 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(24px,3vw,34px);text-transform:uppercase;margin:0 0 12px;line-height:1">Wersja w przeglądarce</h3>
+        <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:16px;line-height:1.7;color:var(--text-muted-on-dark);margin:0 0 20px;max-width:640px;text-wrap:pretty">Już teraz kibice mogą korzystać z wersji w przeglądarce. Działa na telefonie i można ją dodać do ekranu początkowego — wtedy otwiera się jak zwykła aplikacja.</p>
+        <a href="{{ appWebUrl }}" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(22px,3vw,28px);letter-spacing:.04em;color:var(--color-cream);display:inline-flex;align-items:center;gap:10px;border-bottom:3px solid var(--color-red);padding-bottom:4px" style-hover="color:var(--color-gold)">poloniabxl.be/app →</a>
+      </div>
+    </div>
+
+    <!-- ─────────────────────────────────────── JAK ZAINSTALOWAĆ ───── -->
+    <div style="background:#0f0f13;border-top:1px solid rgba(246,243,236,.1);border-bottom:1px solid rgba(246,243,236,.1)">
+      <div style="max-width:1000px;margin:0 auto;padding:{{ secPadTop }}">
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(24px,3.4vw,38px);text-transform:uppercase;margin:0 0 22px;line-height:1">Jak dodać aplikację do ekranu telefonu</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px;margin-bottom:18px">
+          <div style="background:#1b1b21;border:1px solid var(--border-on-dark);padding:{{ cardPad }}">
+            <h3 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:24px;text-transform:uppercase;margin:0 0 16px;line-height:1;color:var(--color-gold)">iPhone (Safari)</h3>
+            <ol style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px">
+              <li style="display:flex;gap:12px;align-items:flex-start"><span aria-hidden="true" style="flex-shrink:0;width:26px;height:26px;background:var(--color-red);color:var(--color-cream);font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:16px;display:flex;align-items:center;justify-content:center">1</span><span style="font-family:'Inter',sans-serif;font-weight:500;font-size:15px;line-height:1.55;color:#e6e3db">Otwórz poloniabxl.be/app w Safari.</span></li>
+              <li style="display:flex;gap:12px;align-items:flex-start"><span aria-hidden="true" style="flex-shrink:0;width:26px;height:26px;background:var(--color-red);color:var(--color-cream);font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:16px;display:flex;align-items:center;justify-content:center">2</span><span style="font-family:'Inter',sans-serif;font-weight:500;font-size:15px;line-height:1.55;color:#e6e3db">Stuknij „Udostępnij” (kwadrat ze strzałką w górę).</span></li>
+              <li style="display:flex;gap:12px;align-items:flex-start"><span aria-hidden="true" style="flex-shrink:0;width:26px;height:26px;background:var(--color-red);color:var(--color-cream);font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:16px;display:flex;align-items:center;justify-content:center">3</span><span style="font-family:'Inter',sans-serif;font-weight:500;font-size:15px;line-height:1.55;color:#e6e3db">Wybierz „Do ekranu początkowego” i potwierdź „Dodaj”.</span></li>
+            </ol>
+          </div>
+          <div style="background:#1b1b21;border:1px solid var(--border-on-dark);padding:{{ cardPad }}">
+            <h3 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:24px;text-transform:uppercase;margin:0 0 16px;line-height:1;color:var(--color-gold)">Android (Chrome)</h3>
+            <ol style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px">
+              <li style="display:flex;gap:12px;align-items:flex-start"><span aria-hidden="true" style="flex-shrink:0;width:26px;height:26px;background:var(--color-red);color:var(--color-cream);font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:16px;display:flex;align-items:center;justify-content:center">1</span><span style="font-family:'Inter',sans-serif;font-weight:500;font-size:15px;line-height:1.55;color:#e6e3db">Otwórz poloniabxl.be/app w Chrome.</span></li>
+              <li style="display:flex;gap:12px;align-items:flex-start"><span aria-hidden="true" style="flex-shrink:0;width:26px;height:26px;background:var(--color-red);color:var(--color-cream);font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:16px;display:flex;align-items:center;justify-content:center">2</span><span style="font-family:'Inter',sans-serif;font-weight:500;font-size:15px;line-height:1.55;color:#e6e3db">Stuknij menu ⋮ w prawym górnym rogu.</span></li>
+              <li style="display:flex;gap:12px;align-items:flex-start"><span aria-hidden="true" style="flex-shrink:0;width:26px;height:26px;background:var(--color-red);color:var(--color-cream);font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:16px;display:flex;align-items:center;justify-content:center">3</span><span style="font-family:'Inter',sans-serif;font-weight:500;font-size:15px;line-height:1.55;color:#e6e3db">Wybierz „Dodaj do ekranu głównego” albo „Zainstaluj aplikację”.</span></li>
+            </ol>
+          </div>
+        </div>
+        <div style="border-left:3px solid var(--color-gold);background:#1b1b21;padding:18px 22px;display:flex;gap:14px;align-items:flex-start">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true" style="flex-shrink:0;color:var(--color-gold);margin-top:2px"><path d="M12 22a2.5 2.5 0 0 0 2.45-2h-4.9A2.5 2.5 0 0 0 12 22Zm7-6V11a7 7 0 0 0-5.5-6.84V3a1.5 1.5 0 0 0-3 0v1.16A7 7 0 0 0 5 11v5l-2 2v1h18v-1l-2-2Z"/></svg>
+          <div style="display:flex;flex-direction:column;gap:8px;min-width:0">
+            <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:21px;text-transform:uppercase;line-height:1">Powiadomienia</span>
+            <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:15px;line-height:1.65;color:#e6e3db;margin:0;text-wrap:pretty">Po włączeniu powiadomień w aplikacji dostaniesz informację o golu Polonii, wyniku Twojego typu i nowych wiadomościach z klubu.</p>
+            <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:14px;line-height:1.6;color:var(--text-muted-on-dark);margin:0;text-wrap:pretty">Na iPhonie powiadomienia działają tylko w aplikacji otwartej z ikony na ekranie początkowym (iOS 16.4 lub nowszy).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ──────────────────────────────────────────── FILM ───────────── -->
+    <div style="max-width:1100px;margin:0 auto;padding:{{ secPadTop }}">
+      <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.18em;color:var(--color-red);display:block" style-before="content:'';display:block;width:34px;height:4px;background:var(--color-red);margin-bottom:12px">FILM</span>
+      <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(26px,3.6vw,42px);text-transform:uppercase;margin:12px 0 20px;line-height:1">Zobacz aplikację w akcji</h2>
+      <div style="position:relative;aspect-ratio:16/9;background:#F6F3EC;border:1px solid var(--border-on-dark);overflow:hidden">
+        <video data-app-promo="1" src="assets/aplikacja/polonia-razem-promo-720.mp4" poster="{{ appPoster }}" muted loop playsinline controls preload="none" width="1280" height="720" aria-label="Film promocyjny aplikacji Polonia Razem!" style="position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover"></video>
+      </div>
+      <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:13px;line-height:1.6;color:#8d8a83;margin:12px 0 0">Film bez dźwięku. Ekrany aplikacji pokazują przykładowe dane.</p>
+    </div>
+
+    <!-- ──────────────────────────────────────── DLA KIBICÓW ─────────── -->
+    <div style="background:#0f0f13;border-top:1px solid rgba(246,243,236,.1);border-bottom:1px solid rgba(246,243,236,.1)">
+      <div style="max-width:1100px;margin:0 auto;padding:{{ secPadTop }}">
+        <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.18em;color:var(--color-red);display:block" style-before="content:'';display:block;width:34px;height:4px;background:var(--color-red);margin-bottom:12px">DLA KIBICÓW</span>
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:{{ h2Size }};text-transform:uppercase;line-height:.94;margin:12px 0 14px;letter-spacing:.01em">Cała Polonia w telefonie</h2>
+        <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:16px;line-height:1.7;color:var(--text-muted-on-dark);margin:0 0 28px;max-width:640px;text-wrap:pretty">Konto kibica zakładasz w minutę. Potem wszystko, co dzieje się w klubie, masz pod ręką — także w dniu meczu na stadionie.</p>
+        <div style="display:grid;grid-template-columns:{{ appFanCols }};gap:clamp(12px,2vw,24px)">
+          <sc-for list="{{ appFan }}" as="f" hint-placeholder-count="6">
+            <div style="background:#1b1b21;border:1px solid var(--border-on-dark);display:flex;flex-direction:column;min-width:0">
+              <div style="aspect-ratio:9/16;background:var(--color-red);overflow:hidden">
+                <img src="{{ f.src }}" srcset="{{ f.srcset }}" sizes="(max-width: 767px) 50vw, 360px" width="540" height="960" alt="{{ f.alt }}" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block">
+              </div>
+              <div style="padding:clamp(12px,2vw,20px);display:flex;flex-direction:column;gap:8px">
+                <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:10px;letter-spacing:.16em;color:var(--color-gold)">{{ f.nr }}</span>
+                <h3 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(19px,2.2vw,25px);text-transform:uppercase;line-height:1.02;margin:0">{{ f.title }}</h3>
+                <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:clamp(13px,1.5vw,14px);line-height:1.55;color:var(--text-muted-on-dark);margin:0;text-wrap:pretty">{{ f.text }}</p>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(12px,2vw,24px);margin-top:clamp(12px,2vw,24px)">
+          <sc-for list="{{ appFanExtras }}" as="x" hint-placeholder-count="2">
+            <div style="background:#1b1b21;border:1px solid var(--border-on-dark);border-left:4px solid var(--color-red);padding:{{ cardPad }};display:flex;gap:16px;align-items:flex-start">
+              <span style="flex-shrink:0;width:48px;height:48px;background:var(--color-red);display:flex;align-items:center;justify-content:center">
+                <sc-if value="{{ x.isRanking }}" hint-placeholder-val="{{ true }}">
+                  <svg viewBox="0 0 24 24" width="26" height="26" fill="#F6F3EC" aria-hidden="true"><path d="M4 20h4v-8H4v8Zm6 0h4V4h-4v16Zm6 0h4v-12h-4v12Z"/></svg>
+                </sc-if>
+                <sc-if value="{{ x.isBell }}" hint-placeholder-val="{{ false }}">
+                  <svg viewBox="0 0 24 24" width="26" height="26" fill="#F6F3EC" aria-hidden="true"><path d="M12 22a2.5 2.5 0 0 0 2.45-2h-4.9A2.5 2.5 0 0 0 12 22Zm7-6V11a7 7 0 0 0-5.5-6.84V3a1.5 1.5 0 0 0-3 0v1.16A7 7 0 0 0 5 11v5l-2 2v1h18v-1l-2-2Z"/></svg>
+                </sc-if>
+              </span>
+              <div style="display:flex;flex-direction:column;gap:7px;min-width:0">
+                <h3 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(21px,2.4vw,26px);text-transform:uppercase;line-height:1;margin:0">{{ x.title }}</h3>
+                <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:14px;line-height:1.6;color:var(--text-muted-on-dark);margin:0;text-wrap:pretty">{{ x.text }}</p>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+    <!-- ──────────────────────────────────────── DLA DRUŻYNY ─────────── -->
+    <div style="background:var(--color-cream);color:var(--color-graphite)">
+      <div style="max-width:1100px;margin:0 auto;padding:{{ secPadTop }};display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(24px,4vw,52px);align-items:center">
+        <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px">
+          <sc-for list="{{ appTeamShots }}" as="t" hint-placeholder-count="2">
+            <div style="aspect-ratio:9/16;background:var(--color-red);overflow:hidden;border:1px solid rgba(18,18,22,.13)">
+              <img src="{{ t.src }}" srcset="{{ t.srcset }}" sizes="(max-width: 767px) 50vw, 260px" width="540" height="960" alt="{{ t.alt }}" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block">
+            </div>
+          </sc-for>
+        </div>
+        <div style="min-width:0">
+          <span style="font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.18em;color:var(--color-red);display:block" style-before="content:'';display:block;width:34px;height:4px;background:var(--color-red);margin-bottom:12px">DLA DRUŻYNY</span>
+          <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:{{ h2Size }};text-transform:uppercase;line-height:.94;margin:12px 0 14px;letter-spacing:.01em">Szatnia w jednym miejscu</h2>
+          <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:16px;line-height:1.7;color:#6b6862;margin:0 0 22px;text-wrap:pretty">Zawodnicy, trenerzy i zarząd mają w aplikacji osobną część drużynową.</p>
+          <div style="display:flex;flex-direction:column">
+            <sc-for list="{{ appTeam }}" as="t" hint-placeholder-count="6">
+              <div style="display:flex;flex-direction:column;gap:3px;padding:11px 0;border-top:1px solid rgba(18,18,22,.12)">
+                <span style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:20px;text-transform:uppercase;line-height:1.05;color:var(--color-graphite)">{{ t.title }}</span>
+                <span style="font-family:'Inter',sans-serif;font-weight:500;font-size:14px;line-height:1.55;color:#6b6862">{{ t.text }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ────────────────────────────────── PRYWATNOŚĆ I KONTAKT ────────── -->
+    <div style="max-width:1000px;margin:0 auto;padding:{{ secPadTop }}">
+      <div style="background:#1b1b21;border:1px solid var(--border-on-dark);border-left:4px solid var(--color-gold);padding:{{ cardPad }}">
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(24px,3.2vw,36px);text-transform:uppercase;margin:0 0 14px;line-height:1">Prywatność i kontakt</h2>
+        <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:16px;line-height:1.7;color:var(--text-muted-on-dark);margin:0 0 22px;max-width:640px;text-wrap:pretty">Jakie dane zbiera aplikacja i do czego ich używamy, opisuje osobna polityka prywatności. Pytania, uwagi i zgłoszenia błędów wyślij na adres klubu.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px">
+          <a href="aplikacja-prywatnosc.html" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:19px;letter-spacing:.08em;text-transform:uppercase;background:var(--color-red);color:var(--color-cream);padding:14px 24px;text-align:center;width:{{ btnW }};box-sizing:border-box" style-hover="background:var(--color-red-dim)">Polityka prywatności aplikacji</a>
+          <a href="mailto:polonia@live.be" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:19px;letter-spacing:.06em;border:2px solid rgba(246,243,236,.3);color:var(--color-cream);padding:13px 24px;text-align:center;width:{{ btnW }};box-sizing:border-box" style-hover="border:2px solid var(--color-gold);color:var(--color-gold)">polonia@live.be</a>
+        </div>
+        <a href="usun-konto.html" style="display:inline-block;margin-top:18px;font-family:'Inter',sans-serif;font-weight:700;font-size:12px;letter-spacing:.12em;color:#8d8a83" style-hover="color:var(--color-gold)">JAK USUNĄĆ KONTO W APLIKACJI →</a>
       </div>
     </div>
 
@@ -2544,6 +2765,7 @@ class Component extends DCLogic {
     window.addEventListener('keydown', this._onKey);
     this._route();
     this._loadModules();
+    this._setupAppVideo();
     this._setupReveal();
     this._measureNav();
     this._setTitle();
@@ -2582,6 +2804,7 @@ class Component extends DCLogic {
   }
 
   componentDidUpdate() {
+    this._setupAppVideo();
     this._setupReveal();
     this._measureNav();
     this._setTitle();
@@ -2632,6 +2855,7 @@ class Component extends DCLogic {
       archiwum: ['Archiwum sezonów', 'Archives des saisons', 'Seizoensarchief', 'Season archive'],
       galeria: ['Galeria', 'Galerie', 'Galerij', 'Gallery'],
       backstage: ['Backstage Polonia', 'Backstage Polonia', 'Backstage Polonia', 'Backstage Polonia'],
+      aplikacja: ['Aplikacja Polonia Razem!', 'Application Polonia Razem!', 'App Polonia Razem!', 'Polonia Razem! app'],
       sklep: ['Sklep internetowy', 'Boutique en ligne', 'Webshop', 'Online shop'],
       sponsorzy: ['Sponsorzy i partnerzy', 'Sponsors et partenaires', 'Sponsors en partners', 'Sponsors and partners'],
       kontakt: ['Kontakt', 'Contact', 'Contact', 'Contact'],
@@ -2878,6 +3102,60 @@ class Component extends DCLogic {
   /* To samo dla odtwarzaczy YouTube na podstronie Backstage. Miniatury leżą
      na naszym serwerze, więc bez zgody do Google nie idzie nic — dopiero
      kliknięcie odtwarzania wczytuje ramkę z ich serwerów. */
+  /* Podstrona #/aplikacja i zajawka na stronie głównej. Dane w content.js
+     (APP_*); zrzuty jako WebP 540/1080 px — przeglądarka sama wybiera
+     szerokość z srcset, a loading="lazy" w szablonie odkłada pobieranie. */
+  _appVals(C) {
+    const shot = (name) => ({
+      src: 'assets/aplikacja/' + name + '-540.webp',
+      srcset: 'assets/aplikacja/' + name + '-540.webp 540w, assets/aplikacja/' + name + '-1080.webp 1080w',
+    });
+    return {
+      appWebUrl: C.APP_WEB_URL || '/app/',
+      // plakat filmu i grafika promocyjna z wartości, nie wpisane w szablon: surowy szablon jest
+      // parsowany na każdej podstronie i ściągałby plik przy każdym wejściu
+      appPoster: 'assets/aplikacja/promo-poster-1280.webp', appHeroSrc: 'assets/aplikacja/polonia-razem-1024.webp', appHeroSrcset: 'assets/aplikacja/polonia-razem-640.webp 640w, assets/aplikacja/polonia-razem-1024.webp 1024w',
+      appStores: (C.APP_STORES || []).map((x) => ({
+        ...x, live: Boolean(x.url), soon: !x.url,
+        isAndroid: x.key === 'android', isIos: x.key === 'ios',
+      })),
+      appFan: (C.APP_FAN_FEATURES || []).map((f, i) => ({ ...f, ...shot(f.shot), nr: String(i + 1).padStart(2, '0') })),
+      appFanExtras: (C.APP_FAN_EXTRAS || []).map((f) => ({ ...f, isRanking: f.icon === 'ranking', isBell: f.icon !== 'ranking' })),
+      appTeamShots: (C.APP_TEAM_SHOTS || []).map((f) => ({ ...f, ...shot(f.shot) })),
+      appTeam: C.APP_TEAM_FEATURES || [],
+    };
+  }
+
+  /* Film promocyjny aplikacji: bez dźwięku, w pętli, startuje dopiero, gdy
+     wjedzie w kadr (preload="none" — telefon nie ściąga 5 MB, jeśli gość nie
+     przewinie do filmu), i pauzuje, gdy z niego wyjedzie. Przy systemowym
+     „ogranicz animacje" nie startuje sam — zostają kontrolki odtwarzacza.
+     `muted`, `loop` i `controls` ustawiamy też jako właściwości: silnik
+     szablonu gubi część atrybutów logicznych (`loop` nie dochodzi do DOM),
+     a Safari bez `muted` blokuje autoodtwarzanie. */
+  _setupAppVideo() {
+    const v = document.querySelector('video[data-app-promo]');
+    if (!v || v === this._appVideoEl) return;
+    if (this._appVideoObs) { this._appVideoObs.disconnect(); this._appVideoObs = null; }
+    this._appVideoEl = v;
+    v.muted = true;
+    v.defaultMuted = true;
+    v.loop = true;
+    v.controls = true;
+    v.setAttribute('muted', '');
+    v.setAttribute('playsinline', '');
+    let reduce = false;
+    try { reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+    if (reduce || typeof IntersectionObserver === 'undefined') return;
+    this._appVideoObs = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting) { const r = v.play(); if (r && r.catch) r.catch(() => {}); }
+        else if (!v.paused) v.pause();
+      }
+    }, { threshold: 0.35 });
+    this._appVideoObs.observe(v);
+  }
+
   _videoAllowed() {
     try { return Boolean(this.K && this.K.allowed('video')); } catch (e) { return false; }
   }
@@ -3018,6 +3296,10 @@ class Component extends DCLogic {
       /* Backstage: na komputerze odtwarzacz szerszy niż panel z opisem,
          na telefonie jedno pod drugim. Logo serii mniejsze na telefonie. */
       bsHeroCols: mob ? '1fr' : '1.7fr 1fr',
+      /* aplikacja Polonia Razem!: zrzuty 9:16 — dwa obok siebie na telefonie,
+         trzy w rzędzie wyżej (sześć kafelków = dwa pełne rzędy) */
+      appFanCols: mob ? 'repeat(2,minmax(0,1fr))' : 'repeat(3,minmax(0,1fr))',
+      appHomeCols: mob ? '1fr' : '1fr 1.15fr',
       bsLogoW: mob ? (small ? '120px' : '150px') : '200px',
       /* Okienko z meczem: na telefonie dolna szuflada na całą szerokość
          (kciuk sięga dołu ekranu), na komputerze wyśrodkowane okno. */
@@ -3171,6 +3453,7 @@ class Component extends DCLogic {
       isContact: route === 'kontakt',
       isShop: route === 'sklep',
       isBackstage: route === 'backstage',
+      isApp: route === 'aplikacja',
       isAdmin: route === 'admin',
       onSync: () => this._sync(),
       syncLabel: s.syncing ? 'SYNCHRONIZACJA…' : 'ODŚWIEŻ DANE',
@@ -3185,7 +3468,7 @@ class Component extends DCLogic {
       // Zanim content.js się wczyta, sklep nie ma jeszcze żadnego stanu: nie
       // pokazujemy ani zapowiedzi, ani siatki, żeby na działającym sklepie
       // nie mrugnęło „w budowie" i odwrotnie.
-      return { ...base, season: '2026/2027', updatedAt: '—', sourceLabel: 'oczekuje na synchronizację', noLive: false, noSource: false, noFixtures: false, noTable: false, loadingFixtures: true, loadFailed: false, hasTable: false, hasFixtures: false, hasUpcoming: false, nm: null, lm: null, lmScoreBg: '#23232a', article: null, seasonDetail: null, shopOpen: false, shopSoon: false, shopItems: [], ordNotSent: true, ordSent: false, ordProducts: [], ordSizes: [], ordColors: [], ordQtys: [], ordHasSizes: false, ordHasColors: false, backstageLatest: [], backstageGroups: [], hasBackstage: false, noBackstage: false, backstageChannel: '', matchPopupShow: false, hasRivalRow: false, rivalPos: '', rivalPts: '', rivalPlayed: '', rivalForm: '' };
+      return { ...base, season: '2026/2027', updatedAt: '—', sourceLabel: 'oczekuje na synchronizację', noLive: false, noSource: false, noFixtures: false, noTable: false, loadingFixtures: true, loadFailed: false, hasTable: false, hasFixtures: false, hasUpcoming: false, nm: null, lm: null, lmScoreBg: '#23232a', article: null, seasonDetail: null, shopOpen: false, shopSoon: false, shopItems: [], ordNotSent: true, ordSent: false, ordProducts: [], ordSizes: [], ordColors: [], ordQtys: [], ordHasSizes: false, ordHasColors: false, backstageLatest: [], backstageGroups: [], hasBackstage: false, noBackstage: false, backstageChannel: '', appWebUrl: '/app/', appPoster: 'assets/aplikacja/promo-poster-1280.webp', appHeroSrc: 'assets/aplikacja/polonia-razem-1024.webp', appHeroSrcset: 'assets/aplikacja/polonia-razem-640.webp 640w, assets/aplikacja/polonia-razem-1024.webp 1024w', appStores: [], appFan: [], appFanExtras: [], appTeamShots: [], appTeam: [], matchPopupShow: false, hasRivalRow: false, rivalPos: '', rivalPts: '', rivalPlayed: '', rivalForm: '' };
     }
 
     const live = s.live || L.getState();
@@ -3802,6 +4085,7 @@ class Component extends DCLogic {
       /* ---- pozycje menu (jedno źródło dla desktopu i hamburgera) ---- */
       menuItems: [
         ['#/', 'Start', 'home'], ['#/backstage', 'Backstage', 'backstage'],
+        ['#/aplikacja', 'Aplikacja', 'aplikacja'],
         ['#/aktualnosci', 'Aktualności', 'aktualnosci'],
         ['#/mecze', 'Mecze', 'mecze'], ['#/tabela', 'Tabela', 'tabela'],
         ['#/druzyna', 'Drużyna', 'druzyna'], ['#/klub', 'Klub', 'klub'],
@@ -3975,6 +4259,7 @@ class Component extends DCLogic {
 
       /* ——— Backstage Polonia ——— */
       backstageLatest, backstageGroups,
+      ...this._appVals(C),
       hasBackstage: backstage.length > 0,
       noBackstage: backstage.length === 0,
       backstageChannel: C.BACKSTAGE_CHANNEL || '',

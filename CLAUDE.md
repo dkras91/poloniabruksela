@@ -335,6 +335,31 @@ przez co zapowiedź kanału dostawała etykietę meczu i przyklejoną kolejkę.
 Z tego samego powodu dopasowanie po dacie publikacji stosujemy wyłącznie do
 skrótów meczowych.
 
+## Aplikacja Polonia Razem! — podstrona `#/aplikacja`
+
+Strona informacyjna o aplikacji klubu (pozycja „Aplikacja" w menu i czerwona
+zajawka na stronie głównej pod Backstage). Dane w `content.js`: `APP_WEB_URL`
+(wersja przeglądarkowa, `/app/` — katalog `app/` w repozytorium budowany
+osobno, tu go nie ruszamy), `APP_STORES`, `APP_FAN_FEATURES`,
+`APP_FAN_EXTRAS`, `APP_TEAM_SHOTS`, `APP_TEAM_FEATURES`.
+
+- **Gdy aplikacja trafi do sklepów:** wpisz adres w `url` w `APP_STORES` —
+  kafelek „WKRÓTCE" zmieni się w odnośnik „POBIERZ". Zmień też akapit o
+  statusie w `index.html` i jego tłumaczenie w `i18n-longform.js`.
+- Grafiki w `assets/aplikacja/`: zrzuty ze sklepu Google Play jako WebP
+  540/1080 px (źródło: repozytorium `polonia-team`,
+  `prywatne/google-play/zrzuty/`), grafika promocyjna 640/1024 i film
+  `polonia-razem-promo-720.mp4` (H.264, bez dźwięku, ~5 MB) z plakatem.
+  Zawodnicy na grafikach mają biały obrys — zasada klubu.
+- Film startuje dopiero w kadrze (`_setupAppVideo()`, `preload="none"`),
+  a przy „ogranicz animacje" nie startuje sam. Silnik szablonu gubi atrybut
+  `loop`, dlatego `muted`/`loop`/`controls` ustawia skrypt.
+- Plakat filmu i grafika promocyjna idą przez wartości (`appPoster`,
+  `appHeroSrc`), nie wprost w szablonie — surowy szablon parsuje się na
+  każdej podstronie i ściągałby te pliki przy każdym wejściu.
+- Alty obrazków tłumaczy tylko słownik `i18n.js` (atrybuty nie korzystają
+  z dopasowania po początku tekstu), więc każdy nowy `alt` musi tam trafić.
+
 ## Podgląd przy udostępnianiu linku (Open Graph)
 
 Grafika i teksty, które pokazują się, gdy ktoś wrzuci link do strony na

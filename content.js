@@ -547,6 +547,90 @@ export const BACKSTAGE = [
   },
 ];
 
+/* ------------------------------------------------- APLIKACJA POLONIA RAZEM! */
+/* Podstrona #/aplikacja i zajawka na stronie głównej.
+   - APP_WEB_URL: wersja przeglądarkowa (katalog app/ w tym repozytorium).
+   - APP_STORES: gdy aplikacja trafi do sklepu, wpisz pełny adres w `url`
+     — przycisk zamieni się wtedy z „wkrótce" w aktywny odnośnik.
+   - Zrzuty leżą w assets/aplikacja/ jako WebP w dwóch szerokościach
+     (<nazwa>-540.webp i <nazwa>-1080.webp); w `shot` wpisujemy samą nazwę.
+   Każdy tytuł, opis i alt musi mieć tłumaczenie fr/nl/en w i18n.js albo
+   i18n-longform.js — klucz to dokładnie ten polski tekst. */
+export const APP_WEB_URL = '/app/';
+export const APP_STORES = [
+  { key: 'android', label: 'Google Play', url: '' },
+  { key: 'ios', label: 'App Store', url: '' },
+];
+export const APP_FAN_FEATURES = [
+  {
+    shot: '01-mecze-na-zywo',
+    title: 'Mecze na żywo',
+    text: 'Wynik i minuta gry prosto ze stadionu, a po meczu pełna relacja.',
+    alt: 'Zrzut ekranu aplikacji Polonia Razem!: mecz Polonii na żywo z wynikiem i minutą gry',
+  },
+  {
+    shot: '02-jedenastka-i-przebieg',
+    title: 'Skład i przebieg meczu',
+    text: 'Wyjściowa jedenastka na boisku oraz bramki, kartki i zmiany minuta po minucie.',
+    alt: 'Zrzut ekranu aplikacji Polonia Razem!: wyjściowa jedenastka na boisku i przebieg meczu',
+  },
+  {
+    shot: '03-liga-typerow',
+    title: 'Liga Typerów',
+    text: 'Obstaw wynik meczu Polonii, zbieraj punkty i walcz o podium kibiców.',
+    alt: 'Zrzut ekranu aplikacji Polonia Razem!: Liga Typerów z typowaniem wyniku meczu',
+  },
+  {
+    shot: '04-serduszka',
+    title: 'Serduszka i Ulubieniec kibiców',
+    text: 'Będąc na meczu, przyznajesz serduszka piłkarzom i wybierasz Ulubieńca kibiców.',
+    alt: 'Zrzut ekranu aplikacji Polonia Razem!: serduszka dla zawodników i Ulubieniec kibiców',
+  },
+  {
+    shot: '05-tabela-i-terminarz',
+    title: 'Tabela i terminarz',
+    text: 'Tabela ligi i terminarz z herbami rywali — miejsca, punkty i najbliższe mecze.',
+    alt: 'Zrzut ekranu aplikacji Polonia Razem!: tabela ligi i terminarz z herbami drużyn',
+  },
+  {
+    shot: '06-newsy-i-backstage',
+    title: 'Newsy i Backstage',
+    text: 'Wiadomości z klubu i nowe odcinki Backstage Polonia w jednym miejscu.',
+    alt: 'Zrzut ekranu aplikacji Polonia Razem!: newsy klubu i odcinki Backstage Polonia',
+  },
+];
+/* Funkcje kibica bez osobnego zrzutu — kafelki z ikoną. */
+export const APP_FAN_EXTRAS = [
+  {
+    icon: 'ranking',
+    title: 'Rankingi',
+    text: 'Ranking typerów i ranking serduszek — sprawdź, kto prowadzi w sezonie.',
+  },
+  {
+    icon: 'bell',
+    title: 'Powiadomienia',
+    text: 'Gol Polonii, wynik Twojego typu i nowe wiadomości od razu na telefonie.',
+  },
+];
+export const APP_TEAM_SHOTS = [
+  {
+    shot: '07-dla-druzyny',
+    alt: 'Zrzut ekranu aplikacji Polonia Razem!: kalendarz drużyny z treningami i meczami',
+  },
+  {
+    shot: '08-tryb-meczowy',
+    alt: 'Zrzut ekranu aplikacji Polonia Razem!: tryb meczowy sztabu z przyciskami bramki, zmiany i kartki',
+  },
+];
+export const APP_TEAM_FEATURES = [
+  { title: 'Kalendarz', text: 'Treningi i mecze, a obecność potwierdzasz jednym dotknięciem.' },
+  { title: 'Powołania', text: 'Kadra na mecz ogłaszana przez sztab — każdy od razu wie, czy gra.' },
+  { title: 'Skład', text: 'Wyjściowa jedenastka i rezerwowi ustawiani przez trenera.' },
+  { title: 'Czat', text: 'Wiadomości drużyny i ogłoszenia sztabu zawsze pod ręką.' },
+  { title: 'Tryb meczowy', text: 'Bramki, zmiany i kartki zapisywane na żywo przy linii.' },
+  { title: 'Posty meczowe', text: 'Zapowiedź i wynik meczu publikowane na Facebooku i Instagramie klubu.' },
+];
+
 /* ------------------------------------------------------------------ GALERIA */
 
 export const GALLERIES = [
